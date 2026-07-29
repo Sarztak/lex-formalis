@@ -3,9 +3,11 @@ Bottom-up Catala formalization pipeline for 26 USC § 7701.
 """
 
 import json
+import subprocess
 import sys
 
 TREE_FILE = "7701_tree.json"
+PROMPT_FILE = "agent_prompt.md"
 
 
 # ── Tree data structure ────────────────────────────────────────────────────────
@@ -19,7 +21,7 @@ class Node:
         self.body = data["body"]
         self.parent = parent
         self.children = []      # list of Node
-        self.catala = None      # filled in after agent call
+        self.catala = None      # filled in after processing
 
     @property
     def is_leaf(self):
@@ -38,7 +40,7 @@ class Node:
 
 
 class Tree:
-    def __init__(self, path=TREE_FILE):
+    def __init__(self, path):
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
         self.root = self._build(data, parent=None)
@@ -51,7 +53,7 @@ class Tree:
         return node
 
     def walk(self, node=None):
-        """Yield all nodes depth-first (pre-order)."""
+        # the node = None case is so that tree.walk() can start walking from root by default
         if node is None:
             node = self.root
         yield node
@@ -67,12 +69,12 @@ def process(node, signals):
         node.catala = node.body
 
     if node.is_repealed:
-        signals.append(f"REPEALED: {node.id} — {node.header}")
+        signals.append({"type": "REPEALED", "id": node.id, "header": node.header})
         node.catala = f"REPEALED: {node.id} — {node.header}"
 
     if node.is_crossref:
         for child in node.children:
-            signals.append(f"EXTERNAL_DEPENDENCY: {child.id} {child.header}")
+            signals.append({"type": "EXTERNAL_DEPENDENCY", "term": child.header, "id": child.id})
         node.catala = f"Cross references: {node.id}"
 
     for child in node.children:
@@ -81,33 +83,102 @@ def process(node, signals):
     call_agent(node, signals)
 
 
+def build_user_message(node):
+    payload = {
+        "id": node.id,
+        "header": node.header,
+        "chapeau": node.chapeau,
+        "body": node.body,
+        "children": [
+            {
+                "id": child.id,
+                "header": child.header,
+                "result": child.catala or "",
+            }
+            for child in node.children
+        ],
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
 def call_agent(node, signals):
-    """Placeholder — sets node.catala. Replaced by Claude CLI dispatch."""
-    print(f"\n[AGENT CALL] {node.id} — {node.header}", file=sys.stderr)
-    for child in node.children:
-        preview = (child.catala or "")[:80].replace("\n", " ")
-        print(f"  child {child.id}: {preview!r}", file=sys.stderr)
-    node.catala = f"TODO: {node.id} — {node.header}"
+    system_prompt = open(PROMPT_FILE, encoding="utf-8").read()
+    user_message = build_user_message(node)
+    full_prompt = f"{system_prompt}\n\n---\n\nFormalize this node:\n\n{user_message}"
+
+    print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
+
+    result = subprocess.run(
+        ["claude", "-p", full_prompt, "--model", "claude-sonnet-4-6"],
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+
+    if result.returncode != 0:
+        print(f"  ERROR: {result.stderr[:200]}", file=sys.stderr)
+        node.catala = f"# ERROR: {node.id}"
+        return
+
+    raw = result.stdout.strip()
+    # model wraps output in ```json ... ``` despite being told not to
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1]
+    if raw.endswith("```"):
+        raw = raw.rsplit("```", 1)[0]
+    raw = raw.strip()
+    try:
+        # raw_decode instead of loads: model sometimes appends explanatory text
+        # after the closing } which causes "Extra data" error with loads
+        response, _ = json.JSONDecoder().raw_decode(raw)
+        node.catala = response["catala"]
+        signals.extend(response.get("signals", []))
+    except json.JSONDecodeError as e:
+        print(f"  JSON parse error: {e}", file=sys.stderr)
+        print(f"  raw: {raw[:200]}", file=sys.stderr)
+        node.catala = f"# PARSE ERROR: {node.id}"
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
+def find_node(tree, node_id):
+    for node in tree.walk(tree.root):
+        if node.id == node_id:
+            return node
+
+
 def main():
-    tree = Tree()
-    total = sum(1 for _ in tree.walk())
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--node", help="Process a single node by id, e.g. 7701(a)(1)")
+    args = parser.parse_args()
+
+    tree = Tree(TREE_FILE)
+    total = sum(1 for _ in tree.walk(tree.root))
     print(f"Loaded: {tree.root.id}, {total} nodes", file=sys.stderr)
 
     signals = []
-    for subsection in tree.root.children:
-        process(subsection, signals)
 
-    print("\n=== CATALA OUTPUT ===")
-    for subsection in tree.root.children:
-        print(subsection.catala or "")
+    if args.node:
+        node = find_node(tree, args.node)
+        if not node:
+            print(f"Node {args.node} not found", file=sys.stderr)
+            sys.exit(1)
+        process(node, signals)
+        print(node.catala)
+        print(json.dumps(signals, indent=2))
+    else:
+        for subsection in tree.root.children:
+            process(subsection, signals)
 
-    print("\n=== SIGNALS ===")
-    for s in signals:
-        print(s)
+        with open("7701.catala_en", "w", encoding="utf-8") as f:
+            for subsection in tree.root.children:
+                f.write((subsection.catala or "") + "\n\n")
+        print("Wrote 7701.catala_en", file=sys.stderr)
+
+        with open("7701_signals.json", "w", encoding="utf-8") as f:
+            json.dump(signals, f, indent=2, ensure_ascii=False)
+        print(f"Wrote 7701_signals.json ({len(signals)} signals)", file=sys.stderr)
 
 
 if __name__ == "__main__":

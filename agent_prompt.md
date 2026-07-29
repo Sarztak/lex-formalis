@@ -8,22 +8,20 @@ at a time. Each node has already had its children processed before you.
 
 ## Input you receive
 
-```
-NODE
-  id:      unique identifier, e.g. 7701(b)(3)
-  header:  the named label of this provision, e.g. "Substantial presence test"
-  chapeau: the opening sentence of this provision, e.g. "The term X means—"
-           empty when the provision has no opening sentence
-  body:    the full prose text of this provision
-           empty when this node has children (prose lives in the children)
-
-CHILDREN
-  For each child, in statute order:
-    id:     child identifier
-    header: child heading
-    result: raw prose if the child was a leaf node;
-            Catala code if the child had its own sub-children and was
-            already formalized before this call
+```json
+{
+  "id": "7701(b)(3)",
+  "header": "the named label of this provision",
+  "chapeau": "the opening sentence, e.g. 'The term X means—'; empty string if none",
+  "body": "full prose of this provision; empty string when children are present",
+  "children": [
+    {
+      "id": "7701(b)(3)(A)",
+      "header": "child heading",
+      "result": "raw prose if child was a leaf; Catala code if child was already formalized"
+    }
+  ]
+}
 ```
 
 ---
@@ -179,6 +177,16 @@ definition residency_treatment equals
 ```
 
 Pattern match must be exhaustive — every variant handled.
+
+### Declaration order
+
+Always write constructs in this order regardless of statute order:
+
+1. `declaration enumeration` and `declaration structure` (type declarations)
+2. `declaration scope` (scope interface — inputs, outputs, internals)
+3. `scope` rules blocks (definitions, exceptions)
+
+This ensures types are declared before they are referenced.
 
 ### Naming conventions
 

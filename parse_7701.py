@@ -1,79 +1,59 @@
 """
-Parse 26 USC § 7701 hierarchy.
-Capture all level nodes (heading + chapeau). No period filter.
-Output indented by level using original symbols: a, 1, A, i, I, aa, AA.
+Parse 26 USC § 7701 into a JSON tree.
+Each node: id, num, header, chapeau, body (div.content text), children.
 """
 
 import requests
 from bs4 import BeautifulSoup
 import re
+import json
 
 URL = "https://www.law.cornell.edu/uscode/text/26/7701"
-OUTPUT_FILE = "7701_parsed.txt"
-INDENT = "  "  # 2 spaces per level
+OUTPUT_FILE = "7701_tree.json"
 
-# CSS class → level index (0-based)
 LEVEL_CLASSES = [
-    "subsection",    # L1: a, b, c
-    "paragraph",     # L2: 1, 2, 3
-    "subparagraph",  # L3: A, B, C
-    "clause",        # L4: i, ii, iii
-    "subclause",     # L5: I, II, III
-    "item",          # L6: aa, bb, cc
-    "subitem",       # L7: AA, BB, CC
+    "subsection", "paragraph", "subparagraph",
+    "clause", "subclause", "item", "subitem",
 ]
 
 
 def clean(tag):
+    if tag is None:
+        return ""
     return re.sub(r"\s+", " ", tag.get_text()).strip()
 
 
-def process_node(node, depth, results):
-    """
-    depth: 0-based depth matching LEVEL_CLASSES index.
-    """
-    if not hasattr(node, "attrs"):
-        return
+def is_level_node(tag):
+    return hasattr(tag, "attrs") and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES)
 
-    classes = node.get("class", [])
-    matched_level_idx = None
-    for idx, lc in enumerate(LEVEL_CLASSES):
-        if lc in classes:
-            matched_level_idx = idx
-            break
 
-    if matched_level_idx is not None:
-        # Get num value from span.num (direct child)
-        num_val = ""
-        num_span = node.find("span", class_="num", recursive=False)
-        if num_span:
-            num_val = num_span.get("value", "").strip() or clean(num_span).strip("()")
+def build_node(div, parent_id="7701"):
+    num_span = div.find("span", class_="num", recursive=False)
+    num = ""
+    if num_span:
+        num = num_span.get("value", "").strip() or clean(num_span).strip("()")
 
-        # heading and chapeau — direct children only, no div.content p tags
-        heading_span = node.find("span", class_="heading", recursive=False)
-        chapeau_span = node.find("span", class_="chapeau", recursive=False)
+    node_id = f"{parent_id}({num})" if num else parent_id
+    header = clean(div.find("span", class_="heading", recursive=False))
+    chapeau = clean(div.find("span", class_="chapeau", recursive=False))
 
-        heading_text = clean(heading_span) if heading_span else ""
-        chapeau_text = clean(chapeau_span) if chapeau_span else ""
+    content_div = div.find("div", class_="content", recursive=False)
+    body = clean(content_div) if content_div else ""
 
-        combined = " ".join(filter(None, [heading_text, chapeau_text])).strip()
+    children = []
+    search_in = content_div if content_div else div
+    for child in search_in.children:
+        if is_level_node(child):
+            children.append(build_node(child, node_id))
 
-        indent = INDENT * matched_level_idx
-        line = f"{indent}({num_val})" + (f" {combined}" if combined else "")
-        results.append(line)
-
-        # Recurse into children (skip div.content entirely)
-        for child in node.children:
-            if hasattr(child, "attrs"):
-                child_classes = child.get("class", [])
-                if "content" in child_classes:
-                    continue  # skip div.content and its <p> children
-                process_node(child, matched_level_idx + 1, results)
-        return
-
-    # Not a level node — recurse at same depth
-    for child in node.children:
-        process_node(child, depth, results)
+    return {
+        "id": node_id,
+        "num": num,
+        "header": header,
+        "chapeau": chapeau,
+        "body": body,
+        "children": children,
+    }
 
 
 def main():
@@ -83,18 +63,33 @@ def main():
 
     statute_div = soup.find("div", class_="section")
     if not statute_div:
-        raise RuntimeError("Could not find div.section in page")
+        raise RuntimeError("Could not find div.section")
 
-    results = []
-    process_node(statute_div, 0, results)
+    tree = {
+        "id": "7701",
+        "header": "26 U.S.C. § 7701 — Definitions",
+        "chapeau": "",
+        "body": "",
+        "children": [],
+    }
 
-    output = "\n".join(results)
-    print(output)
+    for child in statute_div.children:
+        if is_level_node(child):
+            tree["children"].append(build_node(child, "7701"))
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(output + "\n")
+        json.dump(tree, f, indent=2, ensure_ascii=False)
 
-    print(f"\n--- saved to {OUTPUT_FILE} ---")
+    total = sum(1 for _ in walk_all(tree))
+    print(f"Saved to {OUTPUT_FILE}")
+    print(f"Top-level subsections: {len(tree['children'])}")
+    print(f"Total nodes: {total}")
+
+
+def walk_all(node):
+    yield node
+    for child in node.get("children", []):
+        yield from walk_all(child)
 
 
 if __name__ == "__main__":

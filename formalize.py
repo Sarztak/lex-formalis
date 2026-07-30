@@ -155,7 +155,7 @@ def call_agent(node, signals):
         ["claude", "-p", full_prompt, "--model", "claude-sonnet-4-6"],
         capture_output=True,
         text=True,
-        timeout=120,
+        timeout=300, # 5 mins
     )
 
     if result.returncode != 0:

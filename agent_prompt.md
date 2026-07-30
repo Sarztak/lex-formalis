@@ -44,7 +44,11 @@ Output exactly one JSON object, nothing else. No prose outside the JSON object. 
 }
 ```
 
-`signals` must always be present. Empty array means this node is fully resolved.
+`signals` must always be present. Empty array is only correct when every
+variable is declared, every dependency is internal, and nothing is
+ambiguous. If you used a variable not declared as a scope input, emit
+MISSING_INPUT — do not omit it. If you referenced a concept from another
+IRC section, emit EXTERNAL_DEPENDENCY — do not omit it.
 
 ---
 
@@ -193,6 +197,12 @@ This ensures types are declared before they are referenced.
 - Types and scopes: `CamelCase`
 - Variables and fields: `snake_case`
 - Enumeration variants: `CamelCase`
+
+Variable and variant names must be derived directly from the statutory
+language. If the statute uses the word "delegate", the variable must be
+`is_delegate` or `delegate`, not `is_personally_secretary` or any
+paraphrase. Do not invent terminology that does not appear in the source
+text.
 
 ---
 

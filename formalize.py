@@ -3,11 +3,14 @@ Bottom-up Catala formalization pipeline for 26 USC § 7701.
 """
 
 import json
+import os
 import subprocess
 import sys
+from datetime import datetime
 
 TREE_FILE = "7701_tree.json"
 PROMPT_FILE = "agent_prompt.md"
+LOG_DIR = "logs"
 
 
 # ── Tree data structure ────────────────────────────────────────────────────────
@@ -101,6 +104,46 @@ def build_user_message(node):
     return json.dumps(payload, indent=2, ensure_ascii=False)
 
 
+def reorder_catala(code):
+    """
+    Reorder catala blocks into dependency-safe order:
+    1. declaration enumeration / declaration structure
+    2. declaration scope
+    3. scope rules
+    Free text blocks kept in original relative position among non-code blocks.
+    """
+    blocks = [b.strip() for b in code.split("\n\n") if b.strip()]
+
+    def block_rank(b):
+        if b.startswith("declaration enumeration") or b.startswith("declaration structure"):
+            return 0
+        if b.startswith("declaration scope"):
+            return 1
+        if b.startswith("scope "):
+            return 2
+        return 3  # free text, comments
+
+    blocks.sort(key=block_rank)
+    return "\n\n".join(blocks)
+
+
+def write_log(node_id, prompt, raw_response, parsed, error=None):
+    os.makedirs(LOG_DIR, exist_ok=True)
+    safe_id = node_id.replace("(", "_").replace(")", "")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    path = os.path.join(LOG_DIR, f"{safe_id}_{timestamp}.json")
+    log = {
+        "node_id": node_id,
+        "timestamp": timestamp,
+        "prompt": prompt,
+        "raw_response": raw_response,
+        "parsed": parsed,
+        "error": error,
+    }
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(log, f, indent=2, ensure_ascii=False)
+
+
 def call_agent(node, signals):
     system_prompt = open(PROMPT_FILE, encoding="utf-8").read()
     user_message = build_user_message(node)
@@ -116,7 +159,9 @@ def call_agent(node, signals):
     )
 
     if result.returncode != 0:
-        print(f"  ERROR: {result.stderr[:200]}", file=sys.stderr)
+        err = result.stderr[:500]
+        print(f"  ERROR: {err}", file=sys.stderr)
+        write_log(node.id, full_prompt, result.stdout, None, error=err)
         node.catala = f"# ERROR: {node.id}"
         return
 
@@ -131,11 +176,15 @@ def call_agent(node, signals):
         # raw_decode instead of loads: model sometimes appends explanatory text
         # after the closing } which causes "Extra data" error with loads
         response, _ = json.JSONDecoder().raw_decode(raw)
-        node.catala = response["catala"]
-        signals.extend(response.get("signals", []))
+        node.catala = reorder_catala(response["catala"])
+        new_signals = response.get("signals", [])
+        signals.extend(new_signals)
+        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": new_signals})
     except json.JSONDecodeError as e:
-        print(f"  JSON parse error: {e}", file=sys.stderr)
+        err = str(e)
+        print(f"  JSON parse error: {err}", file=sys.stderr)
         print(f"  raw: {raw[:200]}", file=sys.stderr)
+        write_log(node.id, full_prompt, raw, None, error=f"JSONDecodeError: {err}")
         node.catala = f"# PARSE ERROR: {node.id}"
 
 

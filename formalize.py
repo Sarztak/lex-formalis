@@ -172,20 +172,55 @@ def call_agent(node, signals):
     if raw.endswith("```"):
         raw = raw.rsplit("```", 1)[0]
     raw = raw.strip()
+    parsed = parse_response(raw)
+    if parsed is None:
+        print(f"  parse failed, attempting fix-up call", file=sys.stderr)
+        write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up attempted")
+        raw = fixup_call(raw)
+        parsed = parse_response(raw)
+
+    if parsed is not None:
+        node.catala = reorder_catala(parsed["catala"])
+        new_signals = parsed.get("signals", [])
+        signals.extend(new_signals)
+        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": new_signals})
+    else:
+        print(f"  fix-up also failed", file=sys.stderr)
+        write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up failed")
+        node.catala = f"# PARSE ERROR: {node.id}"
+
+
+def parse_response(raw):
+    # model wraps output in ```json ... ``` despite being told not to
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1]
+    if raw.endswith("```"):
+        raw = raw.rsplit("```", 1)[0]
+    raw = raw.strip()
     try:
         # raw_decode instead of loads: model sometimes appends explanatory text
         # after the closing } which causes "Extra data" error with loads
         response, _ = json.JSONDecoder().raw_decode(raw)
-        node.catala = reorder_catala(response["catala"])
-        new_signals = response.get("signals", [])
-        signals.extend(new_signals)
-        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": new_signals})
-    except json.JSONDecodeError as e:
-        err = str(e)
-        print(f"  JSON parse error: {err}", file=sys.stderr)
-        print(f"  raw: {raw[:200]}", file=sys.stderr)
-        write_log(node.id, full_prompt, raw, None, error=f"JSONDecodeError: {err}")
-        node.catala = f"# PARSE ERROR: {node.id}"
+        return response
+    except json.JSONDecodeError:
+        return None
+
+
+def fixup_call(bad_output):
+    """Model reasoned correctly but output malformed JSON. Focused reformat call."""
+    fixup_prompt = (
+        "The following is a Catala formalization that was not output as valid JSON.\n"
+        "Reformat it into this exact structure. Raw JSON only, no markdown fences, no prose:\n\n"
+        '{"catala": "... catala code ...", "signals": [{"type": "...", ...}]}\n\n'
+        f"Content to reformat:\n\n{bad_output}"
+    )
+    result = subprocess.run(
+        ["claude", "-p", fixup_prompt, "--model", "claude-sonnet-4-6"],
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    return result.stdout.strip()
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────

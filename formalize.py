@@ -7,7 +7,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 TREE_FILE = "7701_tree.json"
 PROMPT_FILE = "agent_prompt.md"
@@ -96,7 +96,7 @@ def header_to_scope_name(header):
     return "".join(w.capitalize() for w in words)
 
 
-def build_user_message(node, child_signals):
+def build_user_message(node):
     payload = {
         "id": node.id,
         "scope_name": header_to_scope_name(node.header),
@@ -128,7 +128,7 @@ def reorder_catala(code):
     blocks = [b.strip() for b in code.split("\n\n") if b.strip()]
 
     def block_rank(b):
-        if b.startswith("declaration enumeration") or b.startswith("declaration structure"):
+        if b.startswith(("declaration enumeration", "declaration structure")):
             return 0
         if b.startswith("declaration scope"):
             return 1
@@ -140,10 +140,59 @@ def reorder_catala(code):
     return "\n\n".join(blocks)
 
 
+CLASSIFY_PROMPT = """\
+Look at the children of this statutory provision. Do the children together form \
+a set of mutually exclusive, distinct variants of the same concept — such that \
+exactly one applies in any given case?
+
+Answer with a JSON object only, no prose, no markdown fences:
+
+{{"construct": "enumeration", "reason": "..."}}
+  or
+{{"construct": "not", "reason": "..."}}
+
+Provision:
+header: {header}
+chapeau: {chapeau}
+body: {body}
+children:
+{children}
+"""
+
+
+def classify(node):
+    """Ask model: is this node an enumeration or not? Returns {"construct": ..., "reason": ...}."""
+    children_text = "\n".join(
+        f"  - {c.header or c.num}: {c.body or c.chapeau}"
+        for c in node.children
+    ) or "  (none)"
+    prompt = CLASSIFY_PROMPT.format(
+        header=node.header or "(none)",
+        chapeau=node.chapeau or "(none)",
+        body=node.body or "(none)",
+        children=children_text,
+    )
+    result = subprocess.run(
+        ["claude", "-p", prompt, "--model", "claude-sonnet-4-6"],
+        capture_output=True, text=True, timeout=60, check=False,
+    )
+    raw = result.stdout.strip()
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1]
+    if raw.endswith("```"):
+        raw = raw.rsplit("```", 1)[0]
+    raw = raw.strip()
+    try:
+        parsed, _ = json.JSONDecoder().raw_decode(raw)
+        return parsed
+    except json.JSONDecodeError:
+        return {"construct": "error", "reason": raw[:200]}
+
+
 def write_log(node_id, prompt, raw_response, parsed, error=None):
     os.makedirs(LOG_DIR, exist_ok=True)
     safe_id = node_id.replace("(", "_").replace(")", "")
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
     path = os.path.join(LOG_DIR, f"{safe_id}_{timestamp}.json")
     log = {
         "node_id": node_id,
@@ -158,9 +207,9 @@ def write_log(node_id, prompt, raw_response, parsed, error=None):
 
 
 def call_agent(node, signals):
-    system_prompt = open(PROMPT_FILE, encoding="utf-8").read()
-    child_signals = [s for child in node.children for s in child.signals]
-    user_message = build_user_message(node, child_signals)
+    with open(PROMPT_FILE, encoding="utf-8") as f:
+        system_prompt = f.read()
+    user_message = build_user_message(node)
     full_prompt = f"{system_prompt}\n\n---\n\nFormalize this node:\n\n{user_message}"
 
     print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
@@ -169,7 +218,8 @@ def call_agent(node, signals):
         ["claude", "-p", full_prompt, "--model", "claude-sonnet-4-6"],
         capture_output=True,
         text=True,
-        timeout=600, # 5 mins
+        timeout=600,
+        check=False,
     )
 
     if result.returncode != 0:
@@ -188,7 +238,7 @@ def call_agent(node, signals):
     raw = raw.strip()
     parsed = parse_response(raw)
     if parsed is None:
-        print(f"  parse failed, attempting fix-up call", file=sys.stderr)
+        print("  parse failed, attempting fix-up call", file=sys.stderr)
         write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up attempted")
         raw = fixup_call(raw)
         parsed = parse_response(raw)
@@ -199,7 +249,7 @@ def call_agent(node, signals):
         signals.extend(node.signals)
         write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": node.signals})
     else:
-        print(f"  fix-up also failed", file=sys.stderr)
+        print("  fix-up also failed", file=sys.stderr)
         write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up failed")
         node.catala = f"# PARSE ERROR: {node.id}"
 
@@ -233,6 +283,7 @@ def fixup_call(bad_output):
         capture_output=True,
         text=True,
         timeout=60,
+        check=False,
     )
     return result.stdout.strip()
 

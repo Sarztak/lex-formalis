@@ -25,6 +25,7 @@ class Node:
         self.parent = parent
         self.children = []      # list of Node
         self.catala = None      # filled in after processing
+        self.signals = []       # signals emitted for this node
 
     @property
     def is_leaf(self):
@@ -70,23 +71,20 @@ def process(node, signals):
     """Recursively formalize a node bottom-up. Sets node.catala."""
     if node.is_leaf:
         node.catala = node.body
-
-    if node.is_repealed:
+    elif node.is_repealed:
         signals.append({"type": "REPEALED", "id": node.id, "header": node.header})
         node.catala = f"REPEALED: {node.id} — {node.header}"
-
-    if node.is_crossref:
+    elif node.is_crossref:
         for child in node.children:
             signals.append({"type": "EXTERNAL_DEPENDENCY", "term": child.header, "id": child.id})
         node.catala = f"Cross references: {node.id}"
+    else:
+        for child in node.children:
+            process(child, signals)
+        call_agent(node, signals)
 
-    for child in node.children:
-        process(child, signals)
 
-    call_agent(node, signals)
-
-
-def build_user_message(node):
+def build_user_message(node, child_signals):
     payload = {
         "id": node.id,
         "header": node.header,
@@ -97,6 +95,7 @@ def build_user_message(node):
                 "id": child.id,
                 "header": child.header,
                 "result": child.catala or "",
+                "unresolved_signals": child.signals or [],
             }
             for child in node.children
         ],
@@ -146,7 +145,8 @@ def write_log(node_id, prompt, raw_response, parsed, error=None):
 
 def call_agent(node, signals):
     system_prompt = open(PROMPT_FILE, encoding="utf-8").read()
-    user_message = build_user_message(node)
+    child_signals = [s for child in node.children for s in child.signals]
+    user_message = build_user_message(node, child_signals)
     full_prompt = f"{system_prompt}\n\n---\n\nFormalize this node:\n\n{user_message}"
 
     print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
@@ -181,9 +181,9 @@ def call_agent(node, signals):
 
     if parsed is not None:
         node.catala = reorder_catala(parsed["catala"])
-        new_signals = parsed.get("signals", [])
-        signals.extend(new_signals)
-        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": new_signals})
+        node.signals = parsed.get("signals", [])
+        signals.extend(node.signals)
+        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": node.signals})
     else:
         print(f"  fix-up also failed", file=sys.stderr)
         write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up failed")

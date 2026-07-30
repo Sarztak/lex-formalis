@@ -18,7 +18,8 @@ at a time. Each node has already had its children processed before you.
     {
       "id": "7701(b)(3)(A)",
       "header": "child heading",
-      "result": "raw prose if child was a leaf; Catala code if child was already formalized"
+      "result": "raw prose if child was a leaf; Catala code if child was already formalized",
+      "unresolved_signals": "signals the child emitted that it could not resolve"
     }
   ]
 }
@@ -214,7 +215,18 @@ correct when classifying what something can be.
 
 ---
 
-## Step 3 — Emit signals
+## Step 3 — Resolve child signals
+
+Each child's `unresolved_signals` lists what that child could not resolve.
+You have broader context — your own statutory text plus all children's
+results. For each child signal:
+
+- If you can resolve it — wire it into your Catala construct and do not
+  propagate it.
+- If you cannot resolve it — include it in your own `signals` array so it
+  bubbles up further.
+
+## Step 4 — Emit signals
 
 Add to the `signals` array in the JSON output. Each signal is an object
 with a `type` field plus type-specific fields:
@@ -228,7 +240,7 @@ input; type cannot be determined from this node's text alone.
 **EXTERNAL_DEPENDENCY** — term defined in a different IRC section. Use the
 name in the Catala code as-is; do not invent its definition.
 ```json
-{"type": "EXTERNAL_DEPENDENCY", "term": "tax_home", "defined_in": "§ 911(d)(3)"}
+{"type": "EXTERNAL_DEPENDENCY", "term": "tax_home"}
 ```
 
 **INPUT_TRANSFORM** — exception whose subject is a raw fact ("shall not be

@@ -1,0 +1,1179 @@
+{
+  "counts": {
+    "scope": 60,
+    "enumeration": 61,
+    "definition": 18,
+    "exception": 5
+  },
+  "signal_counts": {
+    "default": 14,
+    "all 2 children are leaves": 29,
+    "child named 'In general'": 24,
+    "header is 'In general'": 18,
+    "all 11 children are leaves": 2,
+    "chapeau matches 'means—'": 7,
+    "all 3 children are leaves": 7,
+    "all 4 children are leaves": 4,
+    "chapeau/body: 'for purposes of'": 20,
+    "chapeau matches '\\bis—'": 3,
+    "header contains 'except/exception'": 5,
+    "all 5 children are leaves": 6,
+    "header contains 'test'": 1,
+    "header contains 'election'": 1,
+    "chapeau matches 'means any'": 3
+  },
+  "results": [
+    {
+      "id": "7701",
+      "header": "26 U.S.C. § 7701 — Definitions",
+      "chapeau": "",
+      "child_count": 16,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)",
+      "header": "",
+      "chapeau": "When used in this title, where not otherwise distinctly expressed or manifestly ",
+      "child_count": 52,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(11)",
+      "header": "Secretary of the Treasury and Secretary",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(12)",
+      "header": "Delegate",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(12)(A)",
+      "header": "In general",
+      "chapeau": "The term “or his delegate”—",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(19)",
+      "header": "Domestic building and loan association",
+      "chapeau": "The term “domestic building and loan association” means a domestic building and ",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(19)(C)",
+      "header": "",
+      "chapeau": "at least 60 percent of the amount of the total assets of which (at the close of ",
+      "child_count": 11,
+      "construct": "enumeration",
+      "signal": "all 11 children are leaves"
+    },
+    {
+      "id": "7701(a)(30)",
+      "header": "United States person",
+      "chapeau": "The term “United States person” means—",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(30)(E)",
+      "header": "",
+      "chapeau": "any trust if—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(31)",
+      "header": "Foreign estate or trust",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(32)",
+      "header": "Cooperative bank",
+      "chapeau": "The term “cooperative bank” means an institution without capital stock organized",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(33)",
+      "header": "Regulated public utility",
+      "chapeau": "The term “regulated public utility” means—",
+      "child_count": 8,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(33)(A)",
+      "header": "",
+      "chapeau": "A corporation engaged in the furnishing or sale of—",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(a)(36)",
+      "header": "Tax return preparer",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(36)(B)",
+      "header": "Exceptions",
+      "chapeau": "A person shall not be a “tax return preparer” merely because such person—",
+      "child_count": 4,
+      "construct": "enumeration",
+      "signal": "all 4 children are leaves"
+    },
+    {
+      "id": "7701(a)(37)",
+      "header": "Individual retirement plan",
+      "chapeau": "The term “individual retirement plan” means—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(39)",
+      "header": "Persons residing outside United States",
+      "chapeau": "If any citizen or resident of the United States does not reside in (and is not f",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(40)",
+      "header": "Indian tribal government",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(42)",
+      "header": "Substituted basis property",
+      "chapeau": "The term “substituted basis property” means property which is—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches '\\bis—'"
+    },
+    {
+      "id": "7701(a)(48)",
+      "header": "Off-highway vehicles",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(48)(A)",
+      "header": "Off-highway transportation vehicles",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(49)",
+      "header": "Qualified blood collector organization",
+      "chapeau": "The term “qualified blood collector organization” means an organization which is",
+      "child_count": 4,
+      "construct": "enumeration",
+      "signal": "chapeau matches '\\bis—'"
+    },
+    {
+      "id": "7701(a)(50)",
+      "header": "Termination of United States citizenship",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)",
+      "header": "Prohibited foreign entity",
+      "chapeau": "",
+      "child_count": 11,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(A)",
+      "header": "In general",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(A)(ii)",
+      "header": "Determination",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(B)",
+      "header": "Specified foreign entity",
+      "chapeau": "For purposes of this paragraph, the term “specified foreign entity” means—",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(C)",
+      "header": "Foreign-controlled entity",
+      "chapeau": "For purposes of subparagraph (B), the term “foreign-controlled entity” means—",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(D)",
+      "header": "Foreign-influenced entity",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(i)",
+      "header": "In general",
+      "chapeau": "For purposes of subparagraph (A), the term “foreign-influenced entity” means an ",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(i)(I)",
+      "header": "",
+      "chapeau": "with respect to which, during the taxable year—",
+      "child_count": 4,
+      "construct": "enumeration",
+      "signal": "all 4 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(D)(i)(II)",
+      "header": "",
+      "chapeau": "which, during the previous taxable year, made a payment to a specified foreign e",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(51)(D)(i)(II)(bb)",
+      "header": "",
+      "chapeau": "with respect to any eligible component produced by the taxpayer (or any person r",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)",
+      "header": "Effective control",
+      "chapeau": "",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)(I)",
+      "header": "In general",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)(II)",
+      "header": "Application of rules prior to issuance of guidance",
+      "chapeau": "During any period prior to the date that the guidance described in subclause (I)",
+      "child_count": 6,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)(III)",
+      "header": "Licensing and other agreements",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)(III)(aa)",
+      "header": "In general",
+      "chapeau": "In addition to subclause (II), for purposes of clause (i)(II), the term “effecti",
+      "child_count": 7,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(D)(ii)(III)(bb)",
+      "header": "Exception",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "exception",
+      "signal": "header contains 'except/exception'"
+    },
+    {
+      "id": "7701(a)(51)(E)",
+      "header": "Publicly traded entities",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(E)(i)",
+      "header": "In general",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(51)(E)(i)(I)",
+      "header": "Nonapplication of certain foreign-controlled entity rules",
+      "chapeau": "Subparagraph (C)(v) shall not apply in the case of any entity the securities of ",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(E)(i)(II)",
+      "header": "Nonapplication of certain foreign-influenced entity rules",
+      "chapeau": "Subparagraph (D)(i)(I) shall not apply in the case of any entity—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(E)(i)(III)",
+      "header": "Exclusion of exchanges or markets in covered nations",
+      "chapeau": "Subclause (I)(cc) shall not apply with respect to any exchange or market which—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(E)(ii)",
+      "header": "Additional foreign-controlled entity requirements for publicly traded companies",
+      "chapeau": "In the case of an entity described in clause (i)(I), such entity shall be deemed",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(E)(iii)",
+      "header": "Additional foreign-influenced entity requirements for publicly traded companies",
+      "chapeau": "In the case of an entity described in clause (i)(II), such entity shall be deeme",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(51)(E)(iii)(I)",
+      "header": "",
+      "chapeau": "during the taxable year—",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(a)(51)(F)",
+      "header": "Covered officer",
+      "chapeau": "For purposes of this paragraph, the term “covered officer” means, with respect t",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(G)",
+      "header": "Determination of control",
+      "chapeau": "For purposes of subparagraph (C)(v), the term “control” means—",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(I)",
+      "header": "Other definitions",
+      "chapeau": "For purposes of this paragraph—",
+      "child_count": 6,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(51)(I)(v)",
+      "header": "Qualified facility",
+      "chapeau": "The term “qualified facility” means—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(52)",
+      "header": "Material assistance from a prohibited foreign entity",
+      "chapeau": "",
+      "child_count": 7,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(A)",
+      "header": "In general",
+      "chapeau": "The term “material assistance from a prohibited foreign entity” means—",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(B)",
+      "header": "Threshold percentage for qualified facilities and energy storage technology",
+      "chapeau": "For purposes of subparagraph (A)(i), the threshold percentage shall be—",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(52)(B)(i)",
+      "header": "",
+      "chapeau": "in the case of a qualified facility the construction of which begins—",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(B)(ii)",
+      "header": "",
+      "chapeau": "in the case of energy storage technology the construction of which begins—",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)",
+      "header": "Threshold percentage for eligible components",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)",
+      "header": "In general",
+      "chapeau": "For purposes of subparagraph (A)(ii), the threshold percentage shall be—",
+      "child_count": 5,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)(I)",
+      "header": "",
+      "chapeau": "in the case of any solar energy component (as such term is defined in section 45",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)(II)",
+      "header": "",
+      "chapeau": "in the case of any wind energy component (as such term is defined in section 45X",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)(III)",
+      "header": "",
+      "chapeau": "in the case of any inverter described in subparagraphs (B) through (G) of sectio",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)(IV)",
+      "header": "",
+      "chapeau": "in the case of any qualifying battery component (as such term is defined in sect",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)(i)(V)",
+      "header": "",
+      "chapeau": "subject to clause (ii), in the case of any applicable critical mineral (as such ",
+      "child_count": 5,
+      "construct": "enumeration",
+      "signal": "all 5 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(C)(ii)",
+      "header": "Adjusted threshold percentage for applicable critical minerals",
+      "chapeau": "Not later than December 31, 2027, the Secretary shall issue threshold percentage",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(52)(C)(ii)(II)",
+      "header": "",
+      "chapeau": "equal or exceed the threshold percentage which would otherwise apply with respec",
+      "child_count": 4,
+      "construct": "enumeration",
+      "signal": "all 4 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)",
+      "header": "Material assistance cost ratio",
+      "chapeau": "",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(52)(D)(i)",
+      "header": "Qualified facilities and energy storage technology",
+      "chapeau": "For purposes of subparagraph (A)(i), the term “material assistance cost ratio” m",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(52)(D)(i)(I)",
+      "header": "",
+      "chapeau": "an amount equal to—",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(52)(D)(i)(I)(bb)",
+      "header": "",
+      "chapeau": "the total direct costs to the taxpayer attributable to all manufactured products",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(ii)",
+      "header": "Eligible components",
+      "chapeau": "For purposes of subparagraph (A)(ii), the term “material assistance cost ratio” ",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(52)(D)(ii)(I)",
+      "header": "",
+      "chapeau": "an amount equal to—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)",
+      "header": "Safe harbor tables",
+      "chapeau": "",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(I)",
+      "header": "In general",
+      "chapeau": "Not later than December 31, 2026, the Secretary shall issue safe harbor tables (",
+      "child_count": 3,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(II)",
+      "header": "Safe harbors prior to issuance",
+      "chapeau": "For purposes of this paragraph, prior to the date on which the Secretary issues ",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(II)(bb)",
+      "header": "",
+      "chapeau": "rely on a certification by the supplier of the manufactured product, eligible co",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(III)",
+      "header": "Exception",
+      "chapeau": "Notwithstanding subclauses (I) and (II)—",
+      "child_count": 2,
+      "construct": "exception",
+      "signal": "header contains 'except/exception'"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(IV)",
+      "header": "Certification requirement",
+      "chapeau": "In a manner consistent with Treasury Regulation section 1.45X–4(c)(4)(i) (as in ",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(IV)(aa)",
+      "header": "",
+      "chapeau": "include—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(iii)(IV)(dd)",
+      "header": "",
+      "chapeau": "be from the supplier from which the taxpayer purchased any manufactured product,",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(iv)",
+      "header": "Existing contract",
+      "chapeau": "Upon the election of the taxpayer (in such form and manner as the Secretary shal",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches '\\bis—'"
+    },
+    {
+      "id": "7701(a)(52)(D)(iv)(II)",
+      "header": "",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(D)(v)",
+      "header": "Anti-circumvention rules",
+      "chapeau": "The Secretary shall prescribe such regulations and guidance as may be necessary ",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(a)(52)(E)",
+      "header": "Other definitions",
+      "chapeau": "For purposes of this paragraph—",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(a)(52)(E)(i)",
+      "header": "Eligible component",
+      "chapeau": "The term “eligible component” means—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(52)(E)(iii)",
+      "header": "Manufactured product",
+      "chapeau": "The term “manufactured product” means—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(52)(E)(iv)",
+      "header": "Qualified facility",
+      "chapeau": "The term “qualified facility” means—",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means—'"
+    },
+    {
+      "id": "7701(a)(52)(G)",
+      "header": "Regulations and guidance",
+      "chapeau": "The Secretary may prescribe such regulations and guidance as may be necessary or",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)",
+      "header": "Definition of resident alien and nonresident alien",
+      "chapeau": "",
+      "child_count": 11,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(b)(1)",
+      "header": "In general",
+      "chapeau": "For purposes of this title (other than subtitle B)—",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(b)(1)(A)",
+      "header": "Resident alien",
+      "chapeau": "An alien individual shall be treated as a resident of the United States with res",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(b)(2)",
+      "header": "Special rules for first and last year of residency",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(b)(2)(A)",
+      "header": "First year of residency",
+      "chapeau": "",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(b)(2)(B)",
+      "header": "Last year of residency",
+      "chapeau": "An alien individual shall not be treated as a resident of the United States duri",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(b)(2)(C)",
+      "header": "Certain nominal presence disregarded",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(b)(3)",
+      "header": "Substantial presence test",
+      "chapeau": "",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "header contains 'test'"
+    },
+    {
+      "id": "7701(b)(3)(A)",
+      "header": "In general",
+      "chapeau": "Except as otherwise provided in this paragraph, an individual meets the substant",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(b)(3)(B)",
+      "header": "Exception where individual is present in the United States during less than one-half of current year and closer connection to foreign country is established",
+      "chapeau": "An individual shall not be treated as meeting the substantial presence test of t",
+      "child_count": 2,
+      "construct": "exception",
+      "signal": "header contains 'except/exception'"
+    },
+    {
+      "id": "7701(b)(3)(C)",
+      "header": "Subparagraph (B) not to apply in certain cases",
+      "chapeau": "Subparagraph (B) shall not apply to any individual with respect to any current y",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)(3)(D)",
+      "header": "Exception for exempt individuals or for certain medical conditions",
+      "chapeau": "An individual shall not be treated as being present in the United States on any ",
+      "child_count": 2,
+      "construct": "exception",
+      "signal": "header contains 'except/exception'"
+    },
+    {
+      "id": "7701(b)(4)",
+      "header": "First-year election",
+      "chapeau": "",
+      "child_count": 6,
+      "construct": "scope",
+      "signal": "header contains 'election'"
+    },
+    {
+      "id": "7701(b)(4)(A)",
+      "header": "",
+      "chapeau": "An alien individual shall be deemed to meet the requirements of this subparagrap",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(b)(4)(A)(iv)",
+      "header": "",
+      "chapeau": "is both—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)(5)",
+      "header": "Exempt individual defined",
+      "chapeau": "For purposes of this subsection—",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(b)(5)(A)",
+      "header": "In general",
+      "chapeau": "An individual is an exempt individual for any day if, for such day, such individ",
+      "child_count": 4,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(b)(5)(A)(iv)",
+      "header": "",
+      "chapeau": "a professional athlete who is temporarily in the United States to compete in a s",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "all 3 children are leaves"
+    },
+    {
+      "id": "7701(b)(5)(B)",
+      "header": "Foreign government-related individual",
+      "chapeau": "The term “foreign government-related individual” means any individual temporaril",
+      "child_count": 3,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means any'"
+    },
+    {
+      "id": "7701(b)(5)(C)",
+      "header": "Teacher or trainee",
+      "chapeau": "The term “teacher or trainee” means any individual—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means any'"
+    },
+    {
+      "id": "7701(b)(5)(D)",
+      "header": "Student",
+      "chapeau": "The term “student” means any individual—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "chapeau matches 'means any'"
+    },
+    {
+      "id": "7701(b)(5)(D)(i)",
+      "header": "",
+      "chapeau": "who is temporarily present in the United States—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)(5)(E)",
+      "header": "Special rules for teachers, trainees, and students",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)(6)",
+      "header": "Lawful permanent resident",
+      "chapeau": "For purposes of this subsection, an individual is a lawful permanent resident of",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(b)(7)",
+      "header": "Presence in the United States",
+      "chapeau": "For purposes of this subsection—",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(b)(9)",
+      "header": "Taxable year",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(b)(9)(B)",
+      "header": "Fiscal year taxpayer",
+      "chapeau": "If—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(b)(10)",
+      "header": "Coordination with section 877",
+      "chapeau": "If—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(e)",
+      "header": "Treatment of certain contracts for providing services, etc.",
+      "chapeau": "For purposes of chapter 1—",
+      "child_count": 6,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(e)(1)",
+      "header": "In general",
+      "chapeau": "A contract which purports to be a service contract shall be treated as a lease o",
+      "child_count": 6,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(e)(3)",
+      "header": "Special rules for contracts or arrangements involving solid waste disposal, energy, and clean water facilities",
+      "chapeau": "",
+      "child_count": 6,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(e)(3)(A)",
+      "header": "In general",
+      "chapeau": "Notwithstanding paragraphs (1) and (2), and except as provided in paragraph (4),",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(e)(3)(A)(i)",
+      "header": "",
+      "chapeau": "with respect to—",
+      "child_count": 4,
+      "construct": "enumeration",
+      "signal": "all 4 children are leaves"
+    },
+    {
+      "id": "7701(e)(4)",
+      "header": "Paragraph (3) not to apply in certain cases",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(e)(4)(A)",
+      "header": "In general",
+      "chapeau": "Paragraph (3) shall not apply to any qualified solid waste disposal facility, co",
+      "child_count": 4,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(e)(4)(B)",
+      "header": "Special rules for application of subparagraph (A) with respect to certain rights and allocations under the contract",
+      "chapeau": "For purposes of subparagraph (A), there shall not be taken into account—",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(e)(4)(C)",
+      "header": "Special rules for application of subparagraph (A) in the case of certain events",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(e)(5)",
+      "header": "Exception for certain low-income housing",
+      "chapeau": "This subsection shall not apply to any property described in clause (i), (ii), (",
+      "child_count": 2,
+      "construct": "exception",
+      "signal": "header contains 'except/exception'"
+    },
+    {
+      "id": "7701(f)",
+      "header": "Use of related persons or pass-thru entities",
+      "chapeau": "The Secretary shall prescribe such regulations as may be necessary or appropriat",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(h)",
+      "header": "Motor vehicle operating leases",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(h)(1)",
+      "header": "In general",
+      "chapeau": "For purposes of this title, in the case of a qualified motor vehicle operating a",
+      "child_count": 2,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(h)(2)",
+      "header": "Qualified motor vehicle operating agreement defined",
+      "chapeau": "For purposes of this subsection—",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(h)(2)(B)",
+      "header": "Minimum liability of lessor",
+      "chapeau": "An agreement meets the requirements of this subparagraph if under such agreement",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(h)(2)(C)",
+      "header": "Certification by lessee; notice of tax ownership",
+      "chapeau": "An agreement meets the requirements of this subparagraph if such agreement conta",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(h)(3)",
+      "header": "Terminal rental adjustment clause defined",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(i)",
+      "header": "Taxable mortgage pools",
+      "chapeau": "",
+      "child_count": 3,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(i)(2)",
+      "header": "Taxable mortgage pool defined",
+      "chapeau": "For purposes of this title—",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(i)(2)(A)",
+      "header": "In general",
+      "chapeau": "Except as otherwise provided in this paragraph, a taxable mortgage pool is any e",
+      "child_count": 3,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(i)(3)",
+      "header": "Treatment of certain REIT’s",
+      "chapeau": "If—",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(j)",
+      "header": "Tax treatment of Federal Thrift Savings Fund",
+      "chapeau": "",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(j)(1)",
+      "header": "In general",
+      "chapeau": "For purposes of this title—",
+      "child_count": 3,
+      "construct": "definition",
+      "signal": "header is 'In general'"
+    },
+    {
+      "id": "7701(k)",
+      "header": "Treatment of certain amounts paid to charity",
+      "chapeau": "In the case of any payment which, except for section 13143(b) of title 5, United",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(o)",
+      "header": "Clarification of economic substance doctrine",
+      "chapeau": "",
+      "child_count": 5,
+      "construct": "scope",
+      "signal": "default"
+    },
+    {
+      "id": "7701(o)(1)",
+      "header": "Application of doctrine",
+      "chapeau": "In the case of any transaction to which the economic substance doctrine is relev",
+      "child_count": 2,
+      "construct": "enumeration",
+      "signal": "all 2 children are leaves"
+    },
+    {
+      "id": "7701(o)(2)",
+      "header": "Special rule where taxpayer relies on profit potential",
+      "chapeau": "",
+      "child_count": 2,
+      "construct": "scope",
+      "signal": "child named 'In general'"
+    },
+    {
+      "id": "7701(o)(5)",
+      "header": "Definitions and special rules",
+      "chapeau": "For purposes of this subsection—",
+      "child_count": 4,
+      "construct": "scope",
+      "signal": "chapeau/body: 'for purposes of'"
+    },
+    {
+      "id": "7701(p)",
+      "header": "Cross references",
+      "chapeau": "",
+      "child_count": 11,
+      "construct": "enumeration",
+      "signal": "all 11 children are leaves"
+    }
+  ]
+}

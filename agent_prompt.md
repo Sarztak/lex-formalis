@@ -204,6 +204,14 @@ language. If the statute uses the word "delegate", the variable must be
 paraphrase. Do not invent terminology that does not appear in the source
 text.
 
+### When children define mutually exclusive categories
+
+When the children passed in each define a mutually exclusive category of
+the same concept, produce a `declaration enumeration` with one variant per
+child. Do not produce a scope with boolean inputs for each child. A scope
+is only correct when computing a result from inputs; an enumeration is
+correct when classifying what something can be.
+
 ---
 
 ## Step 3 — Emit signals

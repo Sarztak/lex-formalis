@@ -11,12 +11,14 @@ at a time. Each node has already had its children processed before you.
 ```json
 {
   "id": "7701(b)(3)",
+  "scope_name": "SubstantialPresenceTest",
   "header": "the named label of this provision",
   "chapeau": "the opening sentence, e.g. 'The term X means—'; empty string if none",
   "body": "full prose of this provision; empty string when children are present",
   "children": [
     {
       "id": "7701(b)(3)(A)",
+      "scope_name": "PresenceDayExclusion",
       "header": "child heading",
       "result": "raw prose if child was a leaf; Catala code if child was already formalized",
       "unresolved_signals": "signals the child emitted that it could not resolve"
@@ -24,6 +26,10 @@ at a time. Each node has already had its children processed before you.
   ]
 }
 ```
+
+`scope_name` is the canonical CamelCase name for this node derived from its header.
+Use `scope_name` exactly as given when declaring a scope or enumeration for this node.
+Use each child's `scope_name` exactly as given when referencing that child's declared type — do not invent alternative names.
 
 ---
 
@@ -36,7 +42,7 @@ Output exactly one JSON object, nothing else. No prose outside the JSON object. 
   "catala": "... your Catala code for this node as a string ...",
   "signals": [
     {"type": "MISSING_INPUT", "variable": "days_current_year", "catala_type": "integer"},
-    {"type": "EXTERNAL_DEPENDENCY", "term": "tax_home", "defined_in": "§ 911(d)(3)"},
+    {"type": "EXTERNAL_DEPENDENCY", "term": "tax_home"},
     {"type": "INPUT_TRANSFORM", "variable": "days_current_year", "condition": "...", "reduces_by": "..."},
     {"type": "OUTPUT_OVERRIDE", "variable": "meets_test", "condition": "..."},
     {"type": "OPEN_ENUMERATION", "enumeration": "ExemptCategory"},

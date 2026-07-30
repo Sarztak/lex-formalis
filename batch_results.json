@@ -4,68 +4,76 @@
     "signals": [
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "IndividualRetirementAccount",
-        "defined_in": "§ 408(a)"
+        "term": "individual retirement account described in section 408(a)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "IndividualRetirementAnnuity",
-        "defined_in": "§ 408(b)"
+        "term": "individual retirement annuity described in section 408(b)"
       }
     ]
   },
   "7701(a)(49)": {
-    "catala": "declaration scope QualifiedBloodCollectorOrganization:\n  input described_in_501c3_and_exempt_501a content boolean\n  input primarily_engaged_in_blood_collection content boolean\n  input registered_with_secretary_for_excise_tax_exemption content boolean\n  input registered_with_fda_to_collect_blood content boolean\n  output is_qualified_blood_collector_organization content boolean\n\nscope QualifiedBloodCollectorOrganization:\n\ndefinition is_qualified_blood_collector_organization equals\n    described_in_501c3_and_exempt_501a and\n    primarily_engaged_in_blood_collection and\n    registered_with_secretary_for_excise_tax_exemption and\n    registered_with_fda_to_collect_blood",
+    "catala": "declaration scope QualifiedBloodCollectorOrganization:\n  input described_under_501c3 content boolean\n  input exempt_under_501a content boolean\n  input primarily_engaged_blood_collection content boolean\n  input registered_with_secretary_excise_exemption content boolean\n  input registered_with_fda_to_collect_blood content boolean\n  output is_qualified_blood_collector_organization content boolean\n\nscope QualifiedBloodCollectorOrganization:\n  definition is_qualified_blood_collector_organization equals\n    described_under_501c3 and\n    exempt_under_501a and\n    primarily_engaged_blood_collection and\n    registered_with_secretary_excise_exemption and\n    registered_with_fda_to_collect_blood",
     "signals": [
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "described_in_501c3_and_exempt_501a",
-        "defined_in": "§ 501(c)(3) and § 501(a)"
+        "term": "section_501c3"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "section_501a"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "food_and_drug_administration_blood_registration"
+      }
+    ]
+  },
+  "7701(a)(32)": {
+    "catala": "declaration scope CooperativeBank:\n  input has_no_capital_stock content boolean\n  input organized_for_mutual_purposes content boolean\n  input operates_without_profit content boolean\n  input subject_to_supervision_and_examination content boolean\n  input meets_paragraph_19_b_c_requirements content boolean\n  output is_cooperative_bank content boolean\n\nscope CooperativeBank:\n\ndefinition is_cooperative_bank equals\n    has_no_capital_stock and\n    organized_for_mutual_purposes and\n    operates_without_profit and\n    subject_to_supervision_and_examination and\n    meets_paragraph_19_b_c_requirements",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "has_no_capital_stock",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "organized_for_mutual_purposes",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "operates_without_profit",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "subject_to_supervision_and_examination",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "meets_paragraph_19_b_c_requirements",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "paragraph (19)(B) and (C) requirements (domestic building and loan association definition)"
       }
     ]
   },
   "7701(a)(11)": {
-    "catala": "declaration enumeration TreasuryOfficial:\n  -- SecretaryPersonally\n  -- Delegate\n\ndeclaration scope SecretaryDefinitions:\n  input official content TreasuryOfficial\n  output is_secretary_of_treasury content boolean\n  output is_secretary content boolean\n\nscope SecretaryDefinitions:\n\ndefinition is_secretary_of_treasury equals\n    official = SecretaryPersonally\n\ndefinition is_secretary equals\n    official = SecretaryPersonally or\n    official = Delegate",
-    "signals": []
-  },
-  "7701(a)(32)": {
-    "catala": "declaration scope CooperativeBank:\n  input has_no_capital_stock content boolean\n  input organized_for_mutual_purposes content boolean\n  input operates_without_profit content boolean\n  input subject_to_supervision content boolean\n  input meets_paragraph_19_B_requirements content boolean\n  input meets_paragraph_19_C_requirements content boolean\n  output is_cooperative_bank content boolean\n\nscope CooperativeBank:\n\ndefinition is_cooperative_bank equals\n    has_no_capital_stock and\n    organized_for_mutual_purposes and\n    operates_without_profit and\n    subject_to_supervision and\n    meets_paragraph_19_B_requirements and\n    meets_paragraph_19_C_requirements",
+    "catala": "declaration enumeration SecretaryTreasurySecretary:\n  -- SecretaryOfTheTreasury\n  -- Secretary",
     "signals": [
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "meets_paragraph_19_B_requirements",
-        "defined_in": "§ 7701(a)(19)(B)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "meets_paragraph_19_C_requirements",
-        "defined_in": "§ 7701(a)(19)(C)"
-      }
-    ]
-  },
-  "7701(a)(31)": {
-    "catala": "declaration scope ForeignEstateTest:\n  input income_from_sources_without_us content boolean\n  input income_effectively_connected_with_us_trade_or_business content boolean\n  input income_includible_in_gross_income_under_subtitle_a content boolean\n  output is_foreign_estate content boolean\n\ndeclaration scope ForeignTrustTest:\n  input is_trust_described_in_paragraph_30_E content boolean\n  output is_foreign_trust content boolean\n\nscope ForeignEstateTest:\n  definition is_foreign_estate equals\n    income_from_sources_without_us and\n    not income_effectively_connected_with_us_trade_or_business and\n    not income_includible_in_gross_income_under_subtitle_a\n\nscope ForeignTrustTest:\n  definition is_foreign_trust equals\n    not is_trust_described_in_paragraph_30_E",
-    "signals": [
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "sources without the United States"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "effectively connected with the conduct of a trade or business within the United States"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "gross income under subtitle A"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "trust described in subparagraph (E) of paragraph (30)"
+        "term": "delegate"
       }
     ]
   },
   "7701(a)(33)(A)": {
-    "catala": "declaration enumeration SubparagraphAServiceType:\n  -- UtilityServices\n  -- RailroadTrolleyOrBusTransportation\n  -- MotorVehicleTransportation",
+    "catala": "declaration enumeration QualifyingServiceCategory:\n  -- UtilityService        # electric energy, gas, water, or sewerage disposal services\n  -- ElectricTransportation  # intrastate/suburban/municipal/interurban electric railroad, trackless trolley, or municipal/suburban bus; excludes subparagraph (C) transportation\n  -- MotorVehicleTransportation  # by motor vehicle; excludes clause (ii) transportation",
     "signals": [
       {
         "type": "EXTERNAL_DEPENDENCY",
@@ -73,18 +81,8 @@
       }
     ]
   },
-  "7701(a)(30)": {
-    "catala": "declaration enumeration UnitedStatesPerson:\n  -- CitizenOrResident\n  -- DomesticPartnership\n  -- DomesticCorporation\n  -- DomesticEstate\n  -- DomesticTrust\n\ndeclaration scope DomesticTrustTest:\n  input us_court_primary_supervision content boolean\n  input us_persons_control_substantial_decisions content boolean\n  output is_domestic_trust content boolean\n\nscope DomesticTrustTest:\n\ndefinition is_domestic_trust equals\n    us_court_primary_supervision and\n    us_persons_control_substantial_decisions",
-    "signals": [
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_estate",
-        "defined_in": "§ 7701(a)(31)"
-      }
-    ]
-  },
   "7701(a)(19)(C)": {
-    "catala": "declaration enumeration QualifyingAssetType:\n  -- Cash\n  -- GovernmentObligations\n  -- DepositCertificates\n  -- MemberShareLoans\n  -- ResidentialRealPropertyLoans\n  -- UrbanRenewalLoans\n  -- InstitutionalLoans\n  -- DefaultedLoanProperty\n  -- EducationLoans\n  -- BusinessProperty\n  -- RemicInterest\n\ndeclaration scope SixtyPercentAssetTest:\n  input total_assets content money\n  input non_remic_qualifying_assets content money\n  input remic_interest_amount content money\n  input remic_qualifying_asset_proportion content decimal\n  internal effective_remic_amount content money\n  output meets_test content boolean\n\nscope SixtyPercentAssetTest:\n\ndefinition effective_remic_amount equals\n    if remic_qualifying_asset_proportion >= 0.95\n    then remic_interest_amount\n    else remic_interest_amount * remic_qualifying_asset_proportion\n\ndefinition meets_test equals\n    non_remic_qualifying_assets + effective_remic_amount >= total_assets * 0.60",
+    "catala": "declaration enumeration QualifyingAssetCategory:\n  -- Cash\n  -- GovernmentObligations\n  -- CertificatesOfDeposit\n  -- MemberLoans\n  -- ResidentialRealPropertyLoans\n  -- UrbanRenewalLoans\n  -- InstitutionalLoans\n  -- DefaultedLoanProperty\n  -- EducationLoans\n  -- BusinessProperty\n  -- REMICInterest\n\ndeclaration scope QualifyingAssetTest:\n  input total_assets content money\n  input cash content money\n  input government_obligations_excluding_section_103 content money\n  input certificates_of_deposit content money\n  input member_loans content money\n  input residential_real_property_loans content money\n  input urban_renewal_loans content money\n  input institutional_loans content money\n  input defaulted_loan_property content money\n  input education_loans content money\n  input business_property content money\n  input remic_interests content money\n  input remic_qualifying_asset_fraction content decimal\n  internal qualifying_remic_amount content money\n  internal qualifying_asset_total content money\n  output meets_sixty_percent_test content boolean\n\nscope QualifyingAssetTest:\n\ndefinition qualifying_remic_amount equals\n    if remic_qualifying_asset_fraction >= 0.95\n    then remic_interests\n    else remic_interests * remic_qualifying_asset_fraction\n\ndefinition qualifying_asset_total equals\n    cash +\n    government_obligations_excluding_section_103 +\n    certificates_of_deposit +\n    member_loans +\n    residential_real_property_loans +\n    urban_renewal_loans +\n    institutional_loans +\n    defaulted_loan_property +\n    education_loans +\n    business_property +\n    qualifying_remic_amount\n\ndefinition meets_sixty_percent_test equals\n    qualifying_asset_total >= total_assets * 0.60",
     "signals": [
       {
         "type": "MISSING_INPUT",
@@ -93,12 +91,202 @@
       },
       {
         "type": "MISSING_INPUT",
-        "variable": "non_remic_qualifying_assets",
+        "variable": "cash",
         "catala_type": "money"
       },
       {
         "type": "MISSING_INPUT",
-        "variable": "remic_interest_amount",
+        "variable": "government_obligations_excluding_section_103",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "certificates_of_deposit",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "member_loans",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "residential_real_property_loans",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "urban_renewal_loans",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "institutional_loans",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "defaulted_loan_property",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "education_loans",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "business_property",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "remic_interests",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "remic_qualifying_asset_fraction",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "section_103_excludable_interest"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "redeemable_ground_rents_section_1055"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "REMIC"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "business_described_in_subparagraph_B"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Secretary_regulations_education_loans"
+      }
+    ]
+  },
+  "7701(a)(31)": {
+    "catala": "declaration enumeration ForeignEstateTrust:\n  -- ForeignEstate\n  -- ForeignTrust\n\ndeclaration scope ForeignEstate:\n  input foreign_source_non_effectively_connected_income_includible_in_gross_income content boolean\n  output is_foreign_estate content boolean\n\ndeclaration scope ForeignTrust:\n  input is_trust_described_in_paragraph_30_subparagraph_e content boolean\n  output is_foreign_trust content boolean\n\nscope ForeignEstate:\n  definition is_foreign_estate equals\n    not foreign_source_non_effectively_connected_income_includible_in_gross_income\n\nscope ForeignTrust:\n  definition is_foreign_trust equals\n    not is_trust_described_in_paragraph_30_subparagraph_e",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "sources_without_the_united_states"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "effectively_connected_with_trade_or_business_within_united_states"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "gross_income_under_subtitle_a"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "trust_described_in_paragraph_30_subparagraph_e"
+      }
+    ]
+  },
+  "7701(a)(51)(C)": {
+    "catala": "declaration enumeration ForeignControlledEntity:\n  -- CoveredNationGovernment\n  -- GovernmentAgencyOrInstrumentality\n  -- CoveredNationCitizenOrNational\n  -- CoveredNationEntity\n  -- ControlledEntity",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "covered_nation"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "qualified_business_unit"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "control_determination_subparagraph_G"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Clauses (i)-(v) are not strictly mutually exclusive — an entity incorporated in a covered nation (iv) may simultaneously be controlled by a covered-nation government (v). Enumeration assumes primary categorization. A scope with boolean output 'is_foreign_controlled_entity' defined as a disjunction of clause conditions may be more semantically accurate for the 'means—' framing.",
+        "option_a": "declaration enumeration ForeignControlledEntity with one variant per clause (i)-(v), assuming primary categorization suffices",
+        "option_b": "declaration scope ForeignControlledEntity with boolean output is_foreign_controlled_entity, defined as disjunction of clause (i)-(v) conditions, capturing inclusive membership semantics"
+      }
+    ]
+  },
+  "7701(a)(30)": {
+    "catala": "declaration enumeration UnitedStatesPerson:\n  -- CitizenOrResident\n  -- DomesticPartnership\n  -- DomesticCorporation\n  -- DomesticEstate\n  -- QualifyingTrust\n\ndeclaration scope USTrustTest:\n  input court_in_us_can_exercise_primary_supervision content boolean\n  input us_persons_control_all_substantial_decisions content boolean\n  output is_us_person_trust content boolean\n\nscope USTrustTest:\n\ndefinition is_us_person_trust equals\n    court_in_us_can_exercise_primary_supervision and\n    us_persons_control_all_substantial_decisions",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "United States person"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "substantial decisions"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "substantial decisions"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "foreign estate"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "resident"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "domestic partnership"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "domestic corporation"
+      }
+    ]
+  },
+  "7701(a)(12)": {
+    "catala": "declaration scope Delegate:\n  input is_officer_employee_or_agency content boolean\n  input is_duly_authorized_for_function content boolean\n  input is_performing_guam_american_samoa_functions content boolean\n  input is_officer_employee_other_us_department_or_agency content boolean\n  input is_authorized_by_secretary_for_guam_samoa content boolean\n  output is_delegate content boolean\n\nscope Delegate:\n\ndefinition is_delegate equals\n    (is_officer_employee_or_agency and\n     is_duly_authorized_for_function) or\n    (is_performing_guam_american_samoa_functions and\n     is_officer_employee_other_us_department_or_agency and\n     is_authorized_by_secretary_for_guam_samoa)",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_officer_employee_or_agency",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_duly_authorized_for_function",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Secretary"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "chapters 1, 2, and 21"
+      }
+    ]
+  },
+  "7701(a)(19)": {
+    "catala": "declaration enumeration QualifyingAssetType:\n  -- Cash\n  -- GovernmentObligations\n  -- DepositInsuranceCorporateObligations\n  -- MemberDepositSecuredLoans\n  -- ResidentialRealPropertyLoans\n  -- UrbanRenewalRealPropertyLoans\n  -- InstitutionSecuredLoans\n  -- AcquiredDefaultedLoanProperty\n  -- EducationLoans\n  -- AssociationBusinessProperty\n  -- REMICInterest\n\ndeclaration enumeration BuildingLoanEntityType:\n  -- DomesticBuildingAndLoanAssociation\n  -- DomesticSavingsAndLoanAssociation\n  -- FederalSavingsAndLoanAssociation\n\ndeclaration scope QualifyingAssetCompositionTest:\n  input total_assets content money\n  input qualifying_assets_non_remic content money\n  input remic_interest_value content money\n  input remic_qualifying_asset_proportion content decimal\n  internal effective_remic_qualifying content money\n  output meets_sixty_percent_test content boolean\n\ndeclaration scope DomesticBuildingLoanAssociation:\n  input entity_type content BuildingLoanEntityType\n  input is_supervised content boolean\n  input business_principally_acquiring_savings_and_investing content boolean\n  input total_assets content money\n  input qualifying_assets_non_remic content money\n  input remic_interest_value content money\n  input remic_qualifying_asset_proportion content decimal\n  scope qualifying_asset_test scope QualifyingAssetCompositionTest\n  output qualifies content boolean\n\nscope QualifyingAssetCompositionTest:\n\nscope DomesticBuildingLoanAssociation:\n\ndefinition effective_remic_qualifying equals\n    if remic_qualifying_asset_proportion >= 0.95\n    then remic_interest_value\n    else remic_interest_value * remic_qualifying_asset_proportion\n\ndefinition meets_sixty_percent_test equals\n    (qualifying_assets_non_remic + effective_remic_qualifying) / total_assets >= 0.60\n\ndefinition qualifying_asset_test.total_assets equals total_assets\n  definition qualifying_asset_test.qualifying_assets_non_remic equals qualifying_assets_non_remic\n  definition qualifying_asset_test.remic_interest_value equals remic_interest_value\n  definition qualifying_asset_test.remic_qualifying_asset_proportion equals remic_qualifying_asset_proportion\n\ndefinition qualifies equals\n    is_supervised and\n    business_principally_acquiring_savings_and_investing and\n    qualifying_asset_test.meets_sixty_percent_test",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "total_assets",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "qualifying_assets_non_remic",
+        "catala_type": "money"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "remic_interest_value",
         "catala_type": "money"
       },
       {
@@ -108,301 +296,301 @@
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "section_103_excludable_interest",
-        "defined_in": "§ 103"
+        "term": "section 103 (interest excludable from gross income — carves out subset of GovernmentObligations)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "redeemable_ground_rents",
-        "defined_in": "§ 1055"
+        "term": "section 1055 (redeemable ground rents — expands collateral definition under ResidentialRealPropertyLoans)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "business_described_in_subparagraph_B",
-        "defined_in": "§ 7701(a)(19)(B)"
+        "term": "REMIC (real estate mortgage investment conduit — defined in IRC § 860D)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "urban_renewal_plan_approval",
-        "defined_in": "Housing Act of 1949 title I parts A and B"
+        "term": "subparagraph_B (business of the association — referenced by AssociationBusinessProperty variant, sibling provision 7701(a)(19)(B))"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "eligible_demonstration_cities_program",
-        "defined_in": "Demonstration Cities and Metropolitan Development Act of 1966 § 103"
-      }
-    ]
-  },
-  "7701(a)(51)(C)": {
-    "catala": "declaration enumeration ForeignControlledEntityType:\n  -- CoveredNationGovernment\n  -- GovernmentAgencyOrInstrumentality\n  -- CoveredNationCitizenOrNational\n  -- CoveredNationEntityOrQbu\n  -- ControlledByForeignControlledEntity",
-    "signals": [
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_nation",
-        "defined_in": "§ 7701(a)(51)(A)"
+        "term": "Secretary regulations (prescribed for EducationLoans under clause (ix))"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "qualified_business_unit",
-        "defined_in": "§ 989(a)"
+        "term": "Housing Act of 1949 part A and part B of title I (urban renewal plan approval — referenced in UrbanRenewalRealPropertyLoans)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "controlled",
-        "defined_in": "§ 7701(a)(51)(G)"
-      }
-    ]
-  },
-  "7701(a)(12)": {
-    "catala": "declaration enumeration AuthorizingOfficial:\n  -- SecretaryOfTreasury\n  -- OtherFederalOfficial\n\ndeclaration scope OrHisDelegate:\n  input authorizing_official content AuthorizingOfficial\n  input is_directly_authorized content boolean\n  input is_authorized_by_redelegation content boolean\n  input performs_relevant_function content boolean\n  input is_officer_or_employee_other_dept content boolean\n  input is_performing_in_guam_or_american_samoa content boolean\n  input is_for_chapters_1_2_21 content boolean\n  internal is_duly_authorized content boolean\n  output qualifies_as_delegate content boolean\n\nscope OrHisDelegate:\n  definition is_duly_authorized equals\n    is_directly_authorized or is_authorized_by_redelegation\n\ndefinition qualifies_as_delegate equals\n    is_duly_authorized and performs_relevant_function\n\nexception definition qualifies_as_delegate\n    under condition\n      is_officer_or_employee_other_dept and\n      is_performing_in_guam_or_american_samoa and\n      is_for_chapters_1_2_21 and\n      authorizing_official = SecretaryOfTreasury and\n      (is_directly_authorized or is_authorized_by_redelegation)\n    consequence equals true",
-    "signals": [
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "chapter_1_taxes",
-        "defined_in": "26 USC Chapter 1"
+        "term": "Demonstration Cities and Metropolitan Development Act of 1966 section 103 (area coverage — referenced in UrbanRenewalRealPropertyLoans)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "chapter_2_taxes",
-        "defined_in": "26 USC Chapter 2"
+        "term": "section 103 (interest excludable from gross income — carves out subset of GovernmentObligations)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "chapter_21_taxes",
-        "defined_in": "26 USC Chapter 21"
+        "term": "section 1055 (redeemable ground rents — expands collateral definition under ResidentialRealPropertyLoans)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "REMIC (real estate mortgage investment conduit — defined in IRC § 860D)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Secretary regulations (prescribed for EducationLoans under clause (ix))"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Housing Act of 1949 part A and part B of title I (urban renewal plan approval — referenced in UrbanRenewalRealPropertyLoans)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Demonstration Cities and Metropolitan Development Act of 1966 section 103 (area coverage — referenced in UrbanRenewalRealPropertyLoans)"
       }
     ]
   },
   "7701(a)(36)": {
-    "catala": "declaration enumeration TaxReturnPreparerExceptionBasis:\n  -- MechanicalAssistance\n  -- EmployerReturnPreparation\n  -- FiduciaryReturnPreparation\n  -- AuditResponseRefundClaim\n\ndeclaration scope TaxReturnPreparer:\n  input prepares_for_compensation content boolean\n  input prepares_substantial_portion_for_compensation content boolean\n  input employs_preparers_for_compensation content boolean\n  input solely_performs_exception_activity content boolean\n  output is_tax_return_preparer content boolean\n\nscope TaxReturnPreparer:\n\ndefinition is_tax_return_preparer equals\n    (prepares_for_compensation or\n     prepares_substantial_portion_for_compensation) or\n    employs_preparers_for_compensation\n\nexception definition is_tax_return_preparer\n    under condition solely_performs_exception_activity\n    consequence equals false",
+    "catala": "declaration scope Exceptions:\n  input furnishes_mechanical_assistance content boolean\n  input prepares_employer_return content boolean\n  input is_regularly_continuously_employed_by_employer content boolean\n  input prepares_as_fiduciary content boolean\n  input responds_to_notice_of_deficiency content boolean\n  input responds_to_waiver_after_taxpayer_audit content boolean\n  input responds_to_waiver_after_other_taxpayer_audit content boolean\n  input other_taxpayer_audit_directly_or_indirectly_affects_tax_liability content boolean\n  internal exception_iv_applies content boolean\n  output exception_applies content boolean\n\ndeclaration scope TaxReturnPreparer:\n  input prepares_return_for_compensation content boolean\n  input prepares_substantial_portion_for_compensation content boolean\n  input employs_preparer_for_compensation content boolean\n  input furnishes_mechanical_assistance content boolean\n  input prepares_employer_return content boolean\n  input is_regularly_continuously_employed_by_employer content boolean\n  input prepares_as_fiduciary content boolean\n  input responds_to_notice_of_deficiency content boolean\n  input responds_to_waiver_after_taxpayer_audit content boolean\n  input responds_to_waiver_after_other_taxpayer_audit content boolean\n  input other_taxpayer_audit_directly_or_indirectly_affects_tax_liability content boolean\n  exceptions scope Exceptions\n  internal qualifies_as_preparer content boolean\n  output is_tax_return_preparer content boolean\n\nscope Exceptions:\n  definition exception_iv_applies equals\n    responds_to_notice_of_deficiency or\n    responds_to_waiver_after_taxpayer_audit or\n    (responds_to_waiver_after_other_taxpayer_audit and\n     other_taxpayer_audit_directly_or_indirectly_affects_tax_liability)\n\nscope TaxReturnPreparer:\n  definition exceptions.furnishes_mechanical_assistance equals\n    furnishes_mechanical_assistance\n  definition exceptions.prepares_employer_return equals\n    prepares_employer_return\n  definition exceptions.is_regularly_continuously_employed_by_employer equals\n    is_regularly_continuously_employed_by_employer\n  definition exceptions.prepares_as_fiduciary equals\n    prepares_as_fiduciary\n  definition exceptions.responds_to_notice_of_deficiency equals\n    responds_to_notice_of_deficiency\n  definition exceptions.responds_to_waiver_after_taxpayer_audit equals\n    responds_to_waiver_after_taxpayer_audit\n  definition exceptions.responds_to_waiver_after_other_taxpayer_audit equals\n    responds_to_waiver_after_other_taxpayer_audit\n  definition exceptions.other_taxpayer_audit_directly_or_indirectly_affects_tax_liability equals\n    other_taxpayer_audit_directly_or_indirectly_affects_tax_liability\n\ndefinition exception_applies equals\n    furnishes_mechanical_assistance or\n    (prepares_employer_return and\n     is_regularly_continuously_employed_by_employer) or\n    prepares_as_fiduciary or\n    exception_iv_applies\n\ndefinition qualifies_as_preparer equals\n    prepares_return_for_compensation or\n    prepares_substantial_portion_for_compensation or\n    employs_preparer_for_compensation\n\ndefinition is_tax_return_preparer equals\n    qualifies_as_preparer\n\nexception definition is_tax_return_preparer\n    under condition exceptions.exception_applies\n    consequence equals false",
     "signals": [
       {
         "type": "OUTPUT_OVERRIDE",
         "variable": "is_tax_return_preparer",
-        "condition": "person solely performs one of the four listed exception activities: mechanical assistance only, employer return preparation, fiduciary return preparation, or audit-response refund claim"
+        "condition": "Exceptions.exception_applies is true — person shall not be a tax return preparer merely because they perform any of the four enumerated activities"
       },
       {
-        "type": "MISSING_INPUT",
-        "variable": "solely_performs_exception_activity",
-        "catala_type": "boolean"
+        "type": "INPUT_TRANSFORM",
+        "variable": "prepares_return_for_compensation",
+        "condition": "individual prepares a substantial portion of a return or claim for refund for compensation",
+        "reduces_by": "statute deems substantial-portion preparation equivalent to full preparation; modeled as separate input prepares_substantial_portion_for_compensation that independently satisfies qualifies_as_preparer"
       },
       {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "substantial_portion"
-      }
-    ]
-  },
-  "7701(a)(19)": {
-    "catala": "declaration enumeration AssociationType:\n  -- DomesticBuildingAndLoan\n  -- DomesticSavingsAndLoan\n  -- FederalSavingsAndLoan\n\ndeclaration scope DomesticBuildingAndLoanAssociationTest:\n  input association_type content AssociationType\n  input is_subject_to_supervision_and_examination content boolean\n  input business_consists_principally_of_acquiring_savings_and_investing content boolean\n  input total_assets_amount content money\n  input nonremic_qualifying_assets_amount content money\n  input remic_interest_holding content RemicInterestHolding\n  internal asset_test scope SixtyPercentAssetTest\n  output qualifies content boolean\n\nscope DomesticBuildingAndLoanAssociationTest:\n\ndefinition asset_test.total_assets_amount equals total_assets_amount\n  definition asset_test.nonremic_qualifying_assets_amount equals nonremic_qualifying_assets_amount\n  definition asset_test.remic_interest_holding equals remic_interest_holding\n\ndefinition qualifies equals\n    is_subject_to_supervision_and_examination and\n    business_consists_principally_of_acquiring_savings_and_investing and\n    asset_test.meets_60_percent_test",
-    "signals": [
-      {
-        "type": "MISSING_INPUT",
-        "variable": "total_assets_amount",
-        "catala_type": "money"
-      },
-      {
-        "type": "MISSING_INPUT",
-        "variable": "nonremic_qualifying_assets_amount",
-        "catala_type": "money"
-      },
-      {
-        "type": "MISSING_INPUT",
-        "variable": "remic_interest_holding",
-        "catala_type": "RemicInterestHolding"
+        "type": "AMBIGUOUS",
+        "description": "The statute says a person is not a tax return preparer 'merely because' they perform an excepted activity. This means the exception applies only when the excepted activity is the sole basis for qualification — if the person also independently prepares returns for compensation, they remain a tax return preparer. The child modeled exceptions as a flat OUTPUT_OVERRIDE, which would incorrectly disqualify a person who both performs an excepted activity and has independent qualifying activity.",
+        "option_a": "Keep exception as OUTPUT_OVERRIDE: exceptions.exception_applies sets is_tax_return_preparer = false regardless of other independent qualifying activity",
+        "option_b": "Treat exceptions as INPUT_TRANSFORMs: excepted activities are excluded from the scope of what counts as preparation; person qualifies only via non-excepted activity — requires splitting qualifying inputs into excepted and non-excepted pools"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "section_103_tax_exempt_interest",
-        "defined_in": "§ 103"
+        "term": "return_of_tax_imposed_by_this_title"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "redeemable_ground_rents",
-        "defined_in": "§ 1055"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "REMIC",
-        "defined_in": "§ 860D"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "subparagraph_B_business",
-        "defined_in": "§ 7701(a)(19)(B)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "section_103_tax_exempt_interest",
-        "defined_in": "§ 103"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "redeemable_ground_rents",
-        "defined_in": "§ 1055"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "REMIC",
-        "defined_in": "§ 860D"
-      }
-    ]
-  },
-  "7701(a)(51)(D)(i)": {
-    "catala": "declaration scope ForeignInfluencedEntity:\n  scope condition_i scope ForeignEntityInfluenceConditionI\n  scope condition_ii scope PaymentConferringEffectiveControl\n  input can_appoint_covered_officer content boolean\n  input maximum_single_entity_ownership_percentage content decimal\n  input aggregate_entity_ownership_percentage content decimal\n  input debt_percentage_held_by_specified_foreign_entities content decimal\n  input made_payment_to_specified_foreign_entity content boolean\n  input payment_pursuant_to_contract_or_arrangement content boolean\n  input entitles_effective_control_over_qualified_facility_or_energy_storage content boolean\n  input entitles_effective_control_over_eligible_component_activity content boolean\n  output is_foreign_influenced_entity content boolean\n\nscope ForeignInfluencedEntity:\n\ndefinition condition_i.can_appoint_covered_officer equals\n    can_appoint_covered_officer\n\ndefinition condition_i.maximum_single_entity_ownership_percentage equals\n    maximum_single_entity_ownership_percentage\n\ndefinition condition_i.aggregate_entity_ownership_percentage equals\n    aggregate_entity_ownership_percentage\n\ndefinition condition_i.debt_percentage_held_by_specified_foreign_entities equals\n    debt_percentage_held_by_specified_foreign_entities\n\ndefinition condition_ii.made_payment_to_specified_foreign_entity equals\n    made_payment_to_specified_foreign_entity\n\ndefinition condition_ii.payment_pursuant_to_contract_or_arrangement equals\n    payment_pursuant_to_contract_or_arrangement\n\ndefinition condition_ii.entitles_effective_control_over_qualified_facility_or_energy_storage equals\n    entitles_effective_control_over_qualified_facility_or_energy_storage\n\ndefinition condition_ii.entitles_effective_control_over_eligible_component_activity equals\n    entitles_effective_control_over_eligible_component_activity\n\ndefinition is_foreign_influenced_entity equals\n    condition_i.condition_met or condition_ii.meets_condition",
-    "signals": [
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity",
-        "defined_in": "§ 7701(a)(51)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_officer",
-        "defined_in": "§ 7701(a)(51)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "eligible_component"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "applicable_critical_mineral"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "related"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "qualified_facility"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "energy_storage_technology"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "eligible_component"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "applicable_critical_mineral"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "related"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity",
-        "defined_in": "§ 7701(a)(51)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_officer",
-        "defined_in": "§ 7701(a)(51)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "qualified_facility"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "energy_storage_technology"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "eligible_component"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "applicable_critical_mineral"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "related"
+        "term": "claim_for_refund_of_tax_imposed_by_this_title"
       }
     ]
   },
   "7701(a)(33)": {
-    "catala": "declaration enumeration RailroadOrPipelineType:\n  -- RailroadSubjectToSTB\n  -- OilPipelineSubjectToFERCOrStateCommission\n\ndeclaration enumeration RegulatedPublicUtilityBasis:\n  -- ServiceProviderUnderA content ServiceType_33_A\n  -- GasPipelineCommonCarrierUnderB\n  -- RailroadOrOilPipelineUnderC content RailroadOrPipelineType\n  -- TelephoneTelegraphUnderD\n  -- AirTransportationUnderE\n  -- WaterCarrierUnderF\n  -- LeasingRailCarrierUnderG\n  -- CommonParentRailCarrierUnderH\n  -- NotARegulatedPublicUtility\n\ndeclaration scope SubparagraphGTest:\n  input substantially_all_properties_leased content boolean\n  input lease_date content date\n  input effective_lease_term content duration\n  input gross_income_from_leases_and_af_sources content money\n  input total_gross_income_excluding_dividends_and_capital_gains content money\n  output meets_subparagraph_g content boolean\n\ndeclaration scope SubparagraphHTest:\n  input gross_income_from_af_sources content money\n  input total_gross_income_excluding_capital_gains content money\n  input is_in_affiliated_group_with_regulated_utility content boolean\n  input dividends_interest_and_g_lease_income_from_regulated_utility content money\n  internal effective_af_source_income content money\n  output meets_subparagraph_h content boolean\n\nscope SubparagraphGTest:\n  definition meets_subparagraph_g equals\n    substantially_all_properties_leased and\n    lease_date < |1954-01-01| and\n    effective_lease_term > 20 year and\n    gross_income_from_leases_and_af_sources >=\n      total_gross_income_excluding_dividends_and_capital_gains * 0.80\n\nscope SubparagraphHTest:\n  definition effective_af_source_income equals\n    if is_in_affiliated_group_with_regulated_utility\n    then gross_income_from_af_sources +\n         dividends_interest_and_g_lease_income_from_regulated_utility\n    else gross_income_from_af_sources\n\ndefinition meets_subparagraph_h equals\n    effective_af_source_income >=\n      total_gross_income_excluding_capital_gains * 0.80",
+    "catala": "declaration scope RegulatedPublicUtility:\n  input primary_service content QualifyingServiceA\n  input rates_regulated_by_government content boolean\n  input is_gas_pipeline_common_carrier content boolean\n  input gas_pipeline_subject_to_ferc content boolean\n  input is_railroad_common_carrier content boolean\n  input railroad_subject_to_surface_transportation_board content boolean\n  input is_oil_pipeline_common_carrier content boolean\n  input oil_pipeline_subject_to_ferc content boolean\n  input oil_pipeline_rates_subject_to_state_commission content boolean\n  input is_telephone_or_telegraph_provider content boolean\n  input is_air_common_carrier content boolean\n  input air_carrier_subject_to_secretary_of_transportation content boolean\n  input is_water_carrier content boolean\n  input water_carrier_subject_to_chapter_135_subchapter_ii content boolean\n  input is_rail_carrier_subtitle_iv_part_a content boolean\n  input substantially_all_properties_leased_to_railroad content boolean\n  input leases_entered_before_1954_01_01 content boolean\n  input each_lease_term_exceeds_20_years content boolean\n  input gross_income_fraction_g content decimal\n  input is_common_parent_railroad_carrier content boolean\n  input gross_income_fraction_h content decimal\n  internal qualifies_under_a content boolean\n  internal qualifies_under_b content boolean\n  internal qualifies_under_c content boolean\n  internal qualifies_under_d content boolean\n  internal qualifies_under_e content boolean\n  internal qualifies_under_f content boolean\n  internal qualifies_under_g content boolean\n  internal qualifies_under_h content boolean\n  output is_regulated_public_utility content boolean\n\nscope RegulatedPublicUtility:\n\ndefinition qualifies_under_a equals\n    match primary_service with pattern\n    -- UtilityService : rates_regulated_by_government\n    -- ElectricTransit : rates_regulated_by_government\n    -- MotorVehicleTransportation : rates_regulated_by_government\n    -- Other : false\n\ndefinition qualifies_under_b equals\n    is_gas_pipeline_common_carrier and\n    gas_pipeline_subject_to_ferc\n\ndefinition qualifies_under_c equals\n    (is_railroad_common_carrier and railroad_subject_to_surface_transportation_board) or\n    (is_oil_pipeline_common_carrier and\n      (oil_pipeline_subject_to_ferc or oil_pipeline_rates_subject_to_state_commission))\n\ndefinition qualifies_under_d equals\n    is_telephone_or_telegraph_provider and\n    rates_regulated_by_government\n\ndefinition qualifies_under_e equals\n    is_air_common_carrier and\n    air_carrier_subject_to_secretary_of_transportation\n\ndefinition qualifies_under_f equals\n    is_water_carrier and\n    water_carrier_subject_to_chapter_135_subchapter_ii\n\ndefinition qualifies_under_g equals\n    is_rail_carrier_subtitle_iv_part_a and\n    substantially_all_properties_leased_to_railroad and\n    leases_entered_before_1954_01_01 and\n    each_lease_term_exceeds_20_years and\n    gross_income_fraction_g >= 0.80\n\ndefinition qualifies_under_h equals\n    is_common_parent_railroad_carrier and\n    gross_income_fraction_h >= 0.80\n\ndefinition is_regulated_public_utility equals\n    qualifies_under_a or\n    qualifies_under_b or\n    qualifies_under_c or\n    qualifies_under_d or\n    qualifies_under_e or\n    qualifies_under_f or\n    qualifies_under_g or\n    qualifies_under_h",
     "signals": [
       {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "subparagraph_C_transportation",
-        "defined_in": "§ 7701(a)(33)(C)"
-      },
-      {
-        "type": "AMBIGUOUS",
-        "description": "Subparagraph G requires 'substantially all' railroad properties to be leased but provides no numerical threshold for 'substantially all'.",
-        "option_a": "Treat as a factual boolean determination (substantially_all_properties_leased) supplied by the caller.",
-        "option_b": "Adopt an 80% threshold by analogy to the gross income tests in G and H."
-      },
-      {
-        "type": "AMBIGUOUS",
-        "description": "Subparagraph D conditions its rate requirement on meeting 'the requirements of subparagraph (A)', but child A's formalization (ServiceType_33_A) captured only service type categories, not A's rate regulation conditions.",
-        "option_a": "Formalize A's rate regulation requirements as a separate scope and reference it from the D classification path.",
-        "option_b": "Treat D's rate condition as a boolean input rates_meet_subparagraph_a_requirements supplied by the caller."
-      },
-      {
-        "type": "INPUT_TRANSFORM",
-        "variable": "effective_lease_term",
-        "condition": "lease agreement entered before January 1, 1954 contains renewal or continuation provisions",
-        "reduces_by": "term is extended (not reduced) to include the maximum renewal and continuation periods available under agreement terms; any such renewal or continuation is deemed part of the original pre-1954 lease"
+        "type": "OPEN_ENUMERATION",
+        "enumeration": "QualifyingServiceA"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "affiliated_group",
-        "defined_in": "§ 1504"
+        "term": "transportation_included_in_subparagraph_C"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "No scope_name or header provided for this node; enumeration name QualifyingServiceA derived from node position 7701(a)(33)(A) and chapeau text. Parent node for 7701(a)(33) must decide whether to keep QualifyingServiceA as a standalone type or absorb its variants directly into the parent-level enumeration.",
+        "option_a": "QualifyingServiceA is a standalone named enumeration referenced as a variant in the parent 7701(a)(33) type",
+        "option_b": "UtilityService, ElectricTransit, MotorVehicleTransportation fold directly as variants into the parent 7701(a)(33) enumeration with no intermediate A-level type"
+      },
+      {
+        "type": "OPEN_ENUMERATION",
+        "enumeration": "QualifyingServiceA"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "federal_energy_regulatory_commission"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "surface_transportation_board"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "secretary_of_transportation"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subchapter_ii_chapter_135_title_49"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subtitle_iv_part_a_title_49"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "affiliated_group_section_1504"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Child 7701(a)(33)(A) formalized service types into QualifyingServiceA enumeration but did not capture rate requirements. Subparagraph (D) cross-references 'requirements of subparagraph (A)' for rates. Variable rates_regulated_by_government is used as approximation for both (A) and (D) rate conditions.",
+        "option_a": "rates_regulated_by_government fully captures subparagraph (A) rate requirements and reuse for (D) is correct",
+        "option_b": "Subparagraph (A) has distinct rate requirements not recoverable from child A's enumeration result; (D) cross-reference requires a separate scope for (A) that exposes its rate conditions explicitly"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Subparagraph (H) 80% gross income test allows dividends and interest received from a regulated public utility in the same affiliated group (section 1504) to count as A-F source income, creating potential circularity: whether the payor is a regulated public utility is the output of this same scope.",
+        "option_a": "gross_income_fraction_h is pre-computed by caller with affiliated-group cross-qualification resolved externally",
+        "option_b": "This scope requires a recursive or fixed-point computation to resolve the affiliated group cross-qualification for the (H) 80% test"
+      }
+    ]
+  },
+  "7701(a)(51)(D)(i)": {
+    "catala": "declaration enumeration EligibleComponentActivity:\n  -- ExtractionProcessingOrRecyclingOfApplicableCriticalMineral\n  -- ProductionOfNonCriticalMineralEligibleComponent\n\ndeclaration enumeration ControlledSubject:\n  -- QualifiedFacilityOrEnergyStorageTechnology\n  -- EligibleComponentActivityControl content EligibleComponentActivity\n\ndeclaration scope General:\n  input has_appointment_authority_of_specified_foreign_entity content boolean\n  input max_ownership_by_single_specified_foreign_entity content decimal\n  input aggregate_ownership_by_specified_foreign_entities content decimal\n  input aggregate_debt_issued_to_specified_foreign_entities content decimal\n  input made_payment_to_specified_foreign_entity_in_previous_taxable_year content boolean\n  input payment_entitles_effective_control_over content ControlledSubject\n  internal condition_i_met content boolean\n  internal condition_ii_met content boolean\n  output is_foreign_influenced_entity content boolean\n\nscope General:\n\ndefinition condition_i_met equals\n    has_appointment_authority_of_specified_foreign_entity or\n    (max_ownership_by_single_specified_foreign_entity >= 25%) or\n    (aggregate_ownership_by_specified_foreign_entities >= 40%) or\n    (aggregate_debt_issued_to_specified_foreign_entities >= 15%)\n\ndefinition condition_ii_met equals\n    made_payment_to_specified_foreign_entity_in_previous_taxable_year\n\ndefinition is_foreign_influenced_entity equals\n    condition_i_met or condition_ii_met",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "has_appointment_authority_of_specified_foreign_entity",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "max_ownership_by_single_specified_foreign_entity",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "aggregate_ownership_by_specified_foreign_entities",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "aggregate_debt_issued_to_specified_foreign_entities",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "specified_foreign_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "covered_officer"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "eligible_component"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "applicable_critical_mineral"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "related_person"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "made_payment_to_specified_foreign_entity_in_previous_taxable_year",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "payment_entitles_effective_control_over",
+        "catala_type": "ControlledSubject"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "specified_foreign_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "qualified_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "energy_storage_technology"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "eligible_component"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "applicable_critical_mineral"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "related_person"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "specified_foreign_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "covered_officer"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "qualified_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "energy_storage_technology"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "eligible_component"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "applicable_critical_mineral"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "related_person"
       }
     ]
   },
   "7701(a)(51)(E)": {
-    "catala": "declaration scope PubliclyTradedEntityRules:\n  foreign_controlled_entity_rules scope ForeignControlledEntityRules\n  foreign_influenced_nonapplication scope ForeignInfluencedEntityNonapplication\n  additional_foreign_controlled scope AdditionalForeignControlledEntityTest\n  additional_foreign_influenced scope AdditionalPubliclyTradedForeignInfluencedRequirements\n  input securities_regularly_traded content boolean\n  input exchange content QualifyingExchange\n  input is_incorporated_or_organized_under_covered_nation_laws content boolean\n  input has_principal_place_of_business_in_covered_nation content boolean\n  input equity_pct_owned_by_aa_entity content decimal\n  input controlled_by_specified_foreign_entities_with_reporting content boolean\n  input controlled_by_foreign_controlled_entities_with_reporting content boolean\n  input specified_foreign_entity_has_appointment_authority content boolean\n  input single_reporting_entity_ownership_percentage content decimal\n  input aggregate_reporting_entities_ownership_percentage content decimal\n  input specified_foreign_entity_original_issuance_debt_percentage content decimal\n  output subparagraph_c_v_applies content boolean\n  output qualifies_for_foreign_influenced_nonapplication content boolean\n  output is_deemed_foreign_controlled_entity content boolean\n  output is_foreign_influenced_entity content boolean\n\nscope PubliclyTradedEntityRules:\n\ndefinition foreign_controlled_entity_rules.securities_regularly_traded equals\n    securities_regularly_traded\n\ndefinition foreign_controlled_entity_rules.exchange equals\n    exchange\n\ndefinition foreign_controlled_entity_rules.is_incorporated_or_organized_under_covered_nation_laws equals\n    is_incorporated_or_organized_under_covered_nation_laws\n\ndefinition foreign_controlled_entity_rules.has_principal_place_of_business_in_covered_nation equals\n    has_principal_place_of_business_in_covered_nation\n\ndefinition foreign_influenced_nonapplication.securities_regularly_traded equals\n    securities_regularly_traded\n\ndefinition foreign_influenced_nonapplication.equity_pct_owned_by_aa_entity equals\n    equity_pct_owned_by_aa_entity\n\ndefinition additional_foreign_controlled.is_entity_described_in_clause_i_I equals\n    securities_regularly_traded and\n    (match exchange with pattern\n     -- RegisteredNationalSecuritiesExchange : true\n     -- NationalMarketSystem : true\n     -- SecretaryApprovedExchange : false)\n\ndefinition additional_foreign_controlled.controlled_by_specified_foreign_entities_with_reporting equals\n    controlled_by_specified_foreign_entities_with_reporting\n\ndefinition additional_foreign_controlled.controlled_by_foreign_controlled_entities_with_reporting equals\n    controlled_by_foreign_controlled_entities_with_reporting\n\ndefinition additional_foreign_influenced.specified_foreign_entity_has_appointment_authority equals\n    specified_foreign_entity_has_appointment_authority\n\ndefinition additional_foreign_influenced.single_reporting_entity_ownership_percentage equals\n    single_reporting_entity_ownership_percentage\n\ndefinition additional_foreign_influenced.aggregate_reporting_entities_ownership_percentage equals\n    aggregate_reporting_entities_ownership_percentage\n\ndefinition additional_foreign_influenced.specified_foreign_entity_original_issuance_debt_percentage equals\n    specified_foreign_entity_original_issuance_debt_percentage\n\ndefinition subparagraph_c_v_applies equals\n    foreign_controlled_entity_rules.subparagraph_c_v_applies\n\ndefinition qualifies_for_foreign_influenced_nonapplication equals\n    foreign_influenced_nonapplication.qualifies_for_nonapplication\n\ndefinition is_deemed_foreign_controlled_entity equals\n    additional_foreign_controlled.is_deemed_foreign_controlled_entity\n\ndefinition is_foreign_influenced_entity equals\n    additional_foreign_influenced.is_foreign_influenced_entity",
+    "catala": "declaration scope PubliclyTradedEntities:\n  general scope General\n  fce_requirements scope AdditionalForeignControlledEntityRequirementsPubliclyTradedCompanies\n  fie_requirements scope AdditionalForeignInfluencedEntityRequirementsPubliclyTradedCompanies\n  input securities_regularly_traded_on_qualifying_exchange content boolean\n  input securities_regularly_traded content boolean\n  input equity_ownership_percentage content decimal\n  input owner_is_regularly_traded content boolean\n  input incorporated_under_covered_nation_laws content boolean\n  input principal_place_of_business_in_covered_nation content boolean\n  input is_entity_described_in_clause_i_I content boolean\n  input is_controlled_under_subparagraph_G content boolean\n  input controlled_by_specified_foreign_entities_with_reporting content boolean\n  input controlled_by_foreign_controlled_entities_with_reporting content boolean\n  input is_entity_described_in_clause_i_II content boolean\n  input has_authority_to_appoint_covered_officer content boolean\n  input single_reporting_entity_ownership_fraction content decimal\n  input aggregate_reporting_entities_ownership_fraction content decimal\n  input original_issuance_debt_fraction_to_specified_foreign_entities content decimal\n  output subparagraph_c_v_does_not_apply content boolean\n  output nonapplication_applies content boolean\n  output exclusion_from_subclause_i_cc_applies content boolean\n  output is_deemed_foreign_controlled_entity content boolean\n  output is_deemed_foreign_influenced_entity content boolean\n\nscope PubliclyTradedEntities:\n\ndefinition general.securities_regularly_traded_on_qualifying_exchange equals\n    securities_regularly_traded_on_qualifying_exchange\n\ndefinition general.securities_regularly_traded equals\n    securities_regularly_traded\n\ndefinition general.equity_ownership_percentage equals\n    equity_ownership_percentage\n\ndefinition general.owner_is_regularly_traded equals\n    owner_is_regularly_traded\n\ndefinition general.incorporated_under_covered_nation_laws equals\n    incorporated_under_covered_nation_laws\n\ndefinition general.principal_place_of_business_in_covered_nation equals\n    principal_place_of_business_in_covered_nation\n\ndefinition fce_requirements.is_entity_described_in_clause_i_I equals\n    is_entity_described_in_clause_i_I\n\ndefinition fce_requirements.is_controlled_under_subparagraph_G equals\n    is_controlled_under_subparagraph_G\n\ndefinition fce_requirements.controlled_by_specified_foreign_entities_with_reporting equals\n    controlled_by_specified_foreign_entities_with_reporting\n\ndefinition fce_requirements.controlled_by_foreign_controlled_entities_with_reporting equals\n    controlled_by_foreign_controlled_entities_with_reporting\n\ndefinition fie_requirements.is_entity_described_in_clause_i_II equals\n    is_entity_described_in_clause_i_II\n\ndefinition fie_requirements.has_authority_to_appoint_covered_officer equals\n    has_authority_to_appoint_covered_officer\n\ndefinition fie_requirements.single_reporting_entity_ownership_fraction equals\n    single_reporting_entity_ownership_fraction\n\ndefinition fie_requirements.aggregate_reporting_entities_ownership_fraction equals\n    aggregate_reporting_entities_ownership_fraction\n\ndefinition fie_requirements.original_issuance_debt_fraction_to_specified_foreign_entities equals\n    original_issuance_debt_fraction_to_specified_foreign_entities\n\ndefinition subparagraph_c_v_does_not_apply equals\n    general.subparagraph_c_v_does_not_apply\n\ndefinition nonapplication_applies equals\n    general.nonapplication_applies\n\ndefinition exclusion_from_subclause_i_cc_applies equals\n    general.exclusion_from_subclause_i_cc_applies\n\ndefinition is_deemed_foreign_controlled_entity equals\n    fce_requirements.is_deemed_foreign_controlled_entity\n\ndefinition is_deemed_foreign_influenced_entity equals\n    fie_requirements.is_deemed_foreign_influenced_entity",
     "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "registered_national_securities_exchange"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "national_market_system_securities_exchange_act_1934_section_11A"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "secretary_guidance_section_1296_e_1_A_ii"
+      },
       {
         "type": "OUTPUT_OVERRIDE",
         "variable": "subparagraph_c_v_applies",
-        "condition": "securities of entity regularly traded on qualifying exchange (registered national securities exchange, national market system, or Secretary-approved exchange under § 1296(e)(1)(A)(ii))"
+        "condition": "entity securities are regularly traded on a QualifyingExchange"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "securities_regularly_traded",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "equity_ownership_percentage",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "owner_is_regularly_traded",
+        "catala_type": "boolean"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "national_market_system",
-        "defined_in": "Securities Exchange Act of 1934 § 11A"
+        "term": "subparagraph (D)(i)(I)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "secretary_approved_exchange_determination",
-        "defined_in": "§ 1296(e)(1)(A)(ii)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "securities_regularly_traded",
-        "defined_in": "§ 7701(a)(51)(E)(i)(I)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_influenced_entity_rule_applies",
-        "defined_in": "§ 7701(a)(51)(D)(i)(I)"
+        "term": "subclause (I) trading manner"
       },
       {
         "type": "OUTPUT_OVERRIDE",
-        "variable": "foreign_influenced_entity_rule_applies",
-        "condition": "entity qualifies under (aa) — securities regularly traded as described in subclause (I) — or under (bb) — not less than 80 percent of equity securities owned directly or indirectly by an entity meeting (aa)"
-      },
-      {
-        "type": "MISSING_INPUT",
-        "variable": "is_incorporated_or_organized_under_covered_nation_laws",
-        "catala_type": "boolean"
-      },
-      {
-        "type": "MISSING_INPUT",
-        "variable": "has_principal_place_of_business_in_covered_nation",
-        "catala_type": "boolean"
+        "variable": "applies",
+        "condition": "entity securities are regularly traded in manner of subclause (I), or not less than 80 percent of equity securities owned directly or indirectly by an entity whose securities are so traded"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
@@ -410,34 +598,141 @@
       },
       {
         "type": "OUTPUT_OVERRIDE",
+        "variable": "subclause_i_cc_applies",
+        "condition": "exchange or market is incorporated or organized under laws of a covered nation, or has its principal place of business in a covered nation"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "registered_national_securities_exchange"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "national_market_system_securities_exchange_act_1934_section_11A"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "secretary_guidance_section_1296_e_1_A_ii"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
         "variable": "subparagraph_c_v_applies",
-        "condition": "exchange qualifies only as SecretaryApprovedExchange (subclause (I)(cc)) and is incorporated or organized under covered nation laws or has principal place of business in a covered nation — subparagraph_c_v_applies reverts to true, so entity remains subject to subparagraph (C)(v)"
+        "condition": "entity securities are regularly traded on a QualifyingExchange"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subparagraph_D_i_I"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subclause_I_trading_manner"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "applies",
+        "condition": "entity securities are regularly traded in manner of subclause (I), or not less than 80 percent of equity securities owned directly or indirectly by an entity whose securities are so traded"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "covered_nation"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "subclause_i_cc_applies",
+        "condition": "exchange or market is incorporated or organized under laws of a covered nation, or has its principal place of business in a covered nation"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "entity described in clause (i)(I)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "controlled as determined under subparagraph (G)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "specified foreign entity as determined without regard to subparagraph (B)(v)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "foreign-controlled entity as determined without regard to subparagraph (C)(v)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "rule described in clause (iii)(I)(bb)"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "is_foreign_controlled_entity",
+        "condition": "entity described in clause (i)(I) is controlled under subparagraph (G) by one or more specified foreign entities (without regard to subparagraph (B)(v)) or one or more foreign-controlled entities (without regard to subparagraph (C)(v)), each required to report beneficial ownership under clause (iii)(I)(bb)"
       },
       {
         "type": "AMBIGUOUS",
-        "description": "exception-to-exception requires the (E)(i)(I) exception on subparagraph_c_v_applies to carry label exception_from_subclause_i, but that node's Catala does not include the label — parent node (E)(i) must reconcile by inserting the label before the (I) exception",
-        "option_a": "parent (E)(i) inserts 'label exception_from_subclause_i' before the (E)(i)(I) exception and merges this node's exception-to-exception into one scope block",
-        "option_b": "restructure (E)(i)(I) to emit a separate exception only for SecretaryApprovedExchange, making this node's override directly referenceable without a label"
+        "description": "Node 7701(a)(51)(E)(iii)(I) has no scope_name or header; scope name ForeignEntityControlDuringTaxableYear was synthesized from chapeau and child content.",
+        "option_a": "Standalone scope ForeignEntityControlDuringTaxableYear called from parent (E)(iii)",
+        "option_b": "Inline boolean condition within parent (E)(iii) scope, no separate scope declaration"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "national_market_system",
-        "defined_in": "Securities Exchange Act of 1934 § 11A"
+        "term": "covered_officer"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "secretary_approved_exchange_determination",
-        "defined_in": "§ 1296(e)(1)(A)(ii)"
+        "term": "specified_foreign_entity"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_influenced_entity_rule_applies",
-        "defined_in": "§ 7701(a)(51)(D)(i)(I)"
+        "term": "Rule 13d-3 of the Securities and Exchange Act of 1934"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "covered_officer"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "specified_foreign_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Rule 13d-3 of the Securities and Exchange Act of 1934"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "clause_i_II_publicly_traded_entity"
       },
       {
         "type": "OUTPUT_OVERRIDE",
-        "variable": "foreign_influenced_entity_rule_applies",
-        "condition": "entity qualifies under (aa) — securities regularly traded as described in subclause (I) — or under (bb) — not less than 80 percent of equity securities owned directly or indirectly by an entity meeting (aa)"
+        "variable": "is_foreign_influenced_entity",
+        "condition": "entity described in clause (i)(II) satisfies ForeignEntityControlDuringTaxableYear.condition_met or has issued original-issuance debt exceeding 15 percent of its publicly-traded debt to one or more specified foreign entities"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "registered_national_securities_exchange"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "national_market_system_securities_exchange_act_1934_section_11A"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "secretary_guidance_section_1296_e_1_A_ii"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "subparagraph_c_v_applies",
+        "condition": "entity securities are regularly traded on a QualifyingExchange"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subparagraph_D_i_I"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subclause_I_trading_manner"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "applies",
+        "condition": "entity securities are regularly traded in manner of subclause (I), or not less than 80 percent of equity securities owned directly or indirectly by an entity whose securities are so traded"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
@@ -445,110 +740,33 @@
       },
       {
         "type": "OUTPUT_OVERRIDE",
-        "variable": "is_foreign_controlled_entity",
-        "condition": "entity described in clause (i)(I) is controlled under subparagraph (G) by 1+ specified foreign entities without regard to (B)(v) each reporting per clause (iii)(I)(bb), or by 1+ foreign-controlled entities without regard to (C)(v) each reporting per such clause"
+        "variable": "subclause_i_cc_applies",
+        "condition": "exchange or market is incorporated or organized under laws of a covered nation, or has its principal place of business in a covered nation"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "entity_described_in_clause_i_I",
-        "defined_in": "§ 7701(a)(51)(E)(i)(I)"
+        "term": "entity_described_in_clause_i_I"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "controlled",
-        "defined_in": "§ 7701(a)(51)(G)"
+        "term": "controlled_as_determined_under_subparagraph_G"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity_without_B_v",
-        "defined_in": "§ 7701(a)(51)(B) excluding (B)(v)"
+        "term": "specified_foreign_entity_without_regard_to_subparagraph_B_v"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_controlled_entity_without_C_v",
-        "defined_in": "§ 7701(a)(51)(C) excluding (C)(v)"
+        "term": "foreign_controlled_entity_without_regard_to_subparagraph_C_v"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "rule_described_in_clause_iii_I_bb",
-        "defined_in": "§ 7701(a)(51)(E)(iii)(I)(bb)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_officer"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "rule_13d_3_reporting_requirement"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_officer"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "rule_13d_3_reporting_requirement"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "national_market_system",
-        "defined_in": "Securities Exchange Act of 1934 § 11A"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "secretary_approved_exchange_determination",
-        "defined_in": "§ 1296(e)(1)(A)(ii)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_influenced_entity_rule_applies",
-        "defined_in": "§ 7701(a)(51)(D)(i)"
-      },
-      {
-        "type": "OUTPUT_OVERRIDE",
-        "variable": "foreign_influenced_entity_rule_applies",
-        "condition": "entity qualifies under (aa) — securities regularly traded as described in subclause (I) — or under (bb) — not less than 80 percent of equity securities owned directly or indirectly by an entity meeting (aa)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "covered_nation"
+        "term": "rule_described_in_clause_iii_I_bb"
       },
       {
         "type": "OUTPUT_OVERRIDE",
         "variable": "is_foreign_controlled_entity",
-        "condition": "entity described in clause (i)(I) is controlled under subparagraph (G) by 1+ specified foreign entities without regard to (B)(v) each reporting per clause (iii)(I)(bb), or by 1+ foreign-controlled entities without regard to (C)(v) each reporting per such clause"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "controlled",
-        "defined_in": "§ 7701(a)(51)(G)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity_without_B_v",
-        "defined_in": "§ 7701(a)(51)(B) excluding (B)(v)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "foreign_controlled_entity_without_C_v",
-        "defined_in": "§ 7701(a)(51)(C) excluding (C)(v)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "rule_described_in_clause_iii_I_bb",
-        "defined_in": "§ 7701(a)(51)(E)(iii)(I)(bb)"
-      },
-      {
-        "type": "EXTERNAL_DEPENDENCY",
-        "term": "specified_foreign_entity"
+        "condition": "entity described in clause (i)(I) is controlled under subparagraph (G) by one or more specified foreign entities (without regard to subparagraph (B)(v)) or one or more foreign-controlled entities (without regard to subparagraph (C)(v)), each required to report beneficial ownership under clause (iii)(I)(bb)"
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
@@ -556,7 +774,20 @@
       },
       {
         "type": "EXTERNAL_DEPENDENCY",
-        "term": "rule_13d_3_reporting_requirement"
+        "term": "specified_foreign_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "rule_13d_3_securities_exchange_act_1934"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "clause_i_II_publicly_traded_entity"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "is_foreign_influenced_entity",
+        "condition": "entity described in clause (i)(II) satisfies ForeignEntityControlDuringTaxableYear.condition_met or has issued original-issuance debt exceeding 15 percent of its publicly-traded debt to one or more specified foreign entities"
       }
     ]
   }

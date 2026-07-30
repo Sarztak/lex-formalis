@@ -4,6 +4,7 @@ Bottom-up Catala formalization pipeline for 26 USC § 7701.
 
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -76,7 +77,8 @@ def process(node, signals):
         node.catala = f"REPEALED: {node.id} — {node.header}"
     elif node.is_crossref:
         for child in node.children:
-            signals.append({"type": "EXTERNAL_DEPENDENCY", "term": child.header, "id": child.id})
+            term = child.header or child.body or child.id
+            signals.append({"type": "EXTERNAL_DEPENDENCY", "term": term, "id": child.id})
         node.catala = f"Cross references: {node.id}"
     else:
         for child in node.children:
@@ -84,15 +86,27 @@ def process(node, signals):
         call_agent(node, signals)
 
 
+_STOP_WORDS = {"a", "an", "the", "of", "or", "and", "in", "for", "to", "as", "by", "with", "is", "are"}
+
+def header_to_scope_name(header):
+    header = re.sub(r"\(§[^)]*\)", "", header)        # strip section refs
+    header = re.sub(r"[^a-zA-Z\s]", " ", header)      # strip non-alpha
+    words = header.split()
+    words = [w for w in words if w.lower() not in _STOP_WORDS] or words
+    return "".join(w.capitalize() for w in words)
+
+
 def build_user_message(node, child_signals):
     payload = {
         "id": node.id,
+        "scope_name": header_to_scope_name(node.header),
         "header": node.header,
         "chapeau": node.chapeau,
         "body": node.body,
         "children": [
             {
                 "id": child.id,
+                "scope_name": header_to_scope_name(child.header),
                 "header": child.header,
                 "result": child.catala or "",
                 "unresolved_signals": child.signals or [],
@@ -155,7 +169,7 @@ def call_agent(node, signals):
         ["claude", "-p", full_prompt, "--model", "claude-sonnet-4-6"],
         capture_output=True,
         text=True,
-        timeout=300, # 5 mins
+        timeout=600, # 5 mins
     )
 
     if result.returncode != 0:
@@ -234,7 +248,7 @@ def find_node(tree, node_id):
 def main():
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--node", help="Process a single node by id, e.g. 7701(a)(1)")
+    parser.add_argument("--node", help="Process a single node by id")
     args = parser.parse_args()
 
     tree = Tree(TREE_FILE)

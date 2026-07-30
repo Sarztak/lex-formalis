@@ -1,0 +1,525 @@
+{
+  "7701(p)": {
+    "catala": "Cross references: 7701(p)",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Other definitions",
+        "id": "7701(p)(1)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "Effect of cross references",
+        "id": "7701(p)(2)"
+      }
+    ]
+  },
+  "7701(b)(5)(B)": {
+    "catala": "declaration enumeration ForeignGovernmentRelatedBasis:\n  -- DiplomaticStatus\n  -- InternationalOrganizationEmployee\n  -- ImmediateFamilyMember\n\ndeclaration scope ForeignGovernmentRelatedIndividual:\n  input is_temporarily_present_in_us content boolean\n  input basis content ForeignGovernmentRelatedBasis\n  input principal_has_diplomatic_or_io_status content boolean\n  output is_foreign_government_related_individual content boolean\n\nscope ForeignGovernmentRelatedIndividual:\n  definition is_foreign_government_related_individual equals\n    is_temporarily_present_in_us and\n    match basis with pattern\n    -- DiplomaticStatus : true\n    -- InternationalOrganizationEmployee : true\n    -- ImmediateFamilyMember : principal_has_diplomatic_or_io_status",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "diplomatic_status"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "international_organization"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "immediate_family"
+      }
+    ]
+  },
+  "7701(b)(5)(E)": {
+    "catala": "declaration scope TeacherTraineeStudentLimitations:\n  input years_exempt_clause_ii_or_iii_in_preceding_6 content integer\n  input all_compensation_described_in_section_872b3 content boolean\n  input total_years_exempt_clause_ii_or_iii content integer\n  input does_not_intend_permanent_residence_in_us content boolean\n  input meets_subparagraph_D_ii content boolean\n  internal teacher_trainee_exempt_year_threshold content integer\n  output teacher_trainee_exemption_disallowed content boolean\n  output student_exemption_disallowed content boolean\n\nscope TeacherTraineeStudentLimitations:\n\ndefinition teacher_trainee_exempt_year_threshold equals\n    if all_compensation_described_in_section_872b3 then 4 else 2\n\ndefinition teacher_trainee_exemption_disallowed equals\n    years_exempt_clause_ii_or_iii_in_preceding_6 >= teacher_trainee_exempt_year_threshold\n\ndefinition student_exemption_disallowed equals\n    total_years_exempt_clause_ii_or_iii > 5\n\nexception definition student_exemption_disallowed\n    under condition\n      does_not_intend_permanent_residence_in_us and\n      meets_subparagraph_D_ii\n    consequence equals false",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "all_compensation_described_in_section_872b3",
+        "defined_in": "§ 872(b)(3)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "meets_subparagraph_D_ii",
+        "defined_in": "§ 7701(b)(5)(D)(ii)"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "student_exemption_disallowed",
+        "condition": "individual does not intend to permanently reside in US and meets subparagraph (D)(ii) requirements"
+      }
+    ]
+  },
+  "7701(b)(10)": {
+    "catala": "declaration scope Section877CoordinationTest:\n  input is_alien_individual content boolean\n  input initial_residency_period_consecutive_years content integer\n  input ceased_to_be_resident content boolean\n  input subsequently_became_resident content boolean\n  input date_reacquired_residency content date\n  input close_of_third_calendar_year_after_initial_period content date\n  internal has_initial_residency_period content boolean\n  output coordination_with_section_877_applies content boolean\n\nscope Section877CoordinationTest:\n\ndefinition has_initial_residency_period equals\n    is_alien_individual and\n    initial_residency_period_consecutive_years >= 3\n\ndefinition coordination_with_section_877_applies equals\n    has_initial_residency_period and\n    ceased_to_be_resident and\n    subsequently_became_resident and\n    date_reacquired_residency < close_of_third_calendar_year_after_initial_period",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "section_877",
+        "defined_in": "§ 877"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Node body is empty; the 'then' consequence of the If-(A)-(B) conditional is absent from node data. Header implies taxability under § 877 when conditions met, but no such rule text is present. Scope models only the condition test; the § 877 tax consequence must be wired at parent.",
+        "option_a": "Extend this scope to invoke a Section877 scope when coordination_with_section_877_applies is true",
+        "option_b": "Leave coordination_with_section_877_applies as a boolean output consumed by the parent scope that applies § 877 rules"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "close_of_third_calendar_year_after_initial_period",
+        "catala_type": "date",
+        "note": "Requires external date computation: December 31 of (year(initial_residency_period_close) + 3). Catala has no built-in calendar-year-end function; parent or caller must derive and supply this value."
+      }
+    ]
+  },
+  "7701(b)(5)(A)": {
+    "catala": "declaration enumeration ExemptIndividualCategory:\n  -- ForeignGovernmentRelated\n  -- TeacherOrTrainee\n  -- Student\n  -- ProfessionalAthlete\n\ndeclaration scope ProfessionalAthleteCharitySportsEventExemption:\n  input is_professional_athlete content boolean\n  input is_temporarily_in_united_states content boolean\n  input event_organized_for_primary_purpose_of_benefiting_501c3_organization content boolean\n  input all_net_proceeds_contributed_to_qualifying_organization content boolean\n  input utilizes_volunteers_for_substantially_all_work content boolean\n  output individual_is_exempt content boolean\n\nscope ProfessionalAthleteCharitySportsEventExemption:\n  definition individual_is_exempt equals\n    is_professional_athlete and\n    is_temporarily_in_united_states and\n    event_organized_for_primary_purpose_of_benefiting_501c3_organization and\n    all_net_proceeds_contributed_to_qualifying_organization and\n    utilizes_volunteers_for_substantially_all_work",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "section_501c3_organization",
+        "defined_in": "§ 501(c)(3)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "section_501a_exempt",
+        "defined_in": "§ 501(a)"
+      }
+    ]
+  },
+  "7701(h)(2)": {
+    "catala": "declaration scope QualifiedMotorVehicleOperatingAgreement:\n  minimum_liability scope MinimumLiabilityOfLessor\n  lessee_certification scope LesseeCertificationRequirement\n  input amount_personally_liable_to_repay content money\n  input net_fair_market_value_of_pledged_security content money\n  input minimum_required_amount content money\n  input has_lessee_signed_statement content boolean\n  input statement_certifies_majority_trade_or_business_use content boolean\n  input statement_advises_lessee_of_non_owner_tax_status content boolean\n  input lessor_knows_certification_is_false content boolean\n  output is_qualified_motor_vehicle_operating_agreement content boolean\n\nscope QualifiedMotorVehicleOperatingAgreement:\n  definition minimum_liability.amount_personally_liable_to_repay equals\n    amount_personally_liable_to_repay\n  definition minimum_liability.net_fair_market_value_of_pledged_security equals\n    net_fair_market_value_of_pledged_security\n  definition minimum_liability.minimum_required_amount equals\n    minimum_required_amount\n  definition lessee_certification.has_lessee_signed_statement equals\n    has_lessee_signed_statement\n  definition lessee_certification.statement_certifies_majority_trade_or_business_use equals\n    statement_certifies_majority_trade_or_business_use\n  definition lessee_certification.statement_advises_lessee_of_non_owner_tax_status equals\n    statement_advises_lessee_of_non_owner_tax_status\n  definition is_qualified_motor_vehicle_operating_agreement equals\n    minimum_liability.meets_requirements and\n    lessee_certification.meets_requirements and\n    not lessor_knows_certification_is_false",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "minimum_required_amount",
+        "catala_type": "money"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "trade_or_business"
+      }
+    ]
+  },
+  "7701(b)(1)": {
+    "catala": "declaration enumeration AlienStatus:\n  -- ResidentAlien content ResidentAlienBasis\n  -- NonresidentAlien\n\ndeclaration scope AlienStatusDetermination:\n  input is_citizen_of_united_states content boolean\n  input resident_alien_basis content ResidentAlienBasis\n  output alien_status content AlienStatus\n\nscope AlienStatusDetermination:\n\ndefinition alien_status equals\n    match resident_alien_basis with pattern\n    -- LawfulPermanentResident : ResidentAlien content LawfulPermanentResident\n    -- SubstantialPresence : ResidentAlien content SubstantialPresence\n    -- FirstYearElection : ResidentAlien content FirstYearElection\n    -- NonResident : NonresidentAlien",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "lawful_permanent_resident"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "§ 7701(b)(1)(B) requires the individual to be 'neither a citizen of the United States nor a resident' to qualify as a nonresident alien. AlienStatus carries no citizen variant, so the NonResident branch maps to NonresidentAlien regardless of is_citizen_of_united_states — incorrect when a US citizen fails all three tests in (A). The input is declared but cannot be wired into a correct rule body until the enum is extended or the scope is restricted to non-citizens.",
+        "option_a": "Extend AlienStatus with a Citizen variant; wire is_citizen_of_united_states into the NonResident branch so citizens produce Citizen rather than NonresidentAlien.",
+        "option_b": "Treat AlienStatusDetermination as applicable only to non-citizens (enforce is_citizen_of_united_states = false as a precondition at the calling scope); citizen classification resolved upstream before this scope is invoked."
+      }
+    ]
+  },
+  "7701(b)(4)": {
+    "catala": "declaration scope FirstYearElection:\n  scope FirstYearElectionEligibility eligibility\n  input is_resident_election_year content boolean\n  input is_resident_preceding_year content boolean\n  input is_resident_following_year_under_clause_ii content boolean\n  input has_31_consecutive_days_in_election_year content boolean\n  input days_in_testing_period content integer\n  input days_present_in_testing_period content integer\n  input days_absent_treated_as_present content integer\n  input has_elected content boolean\n  input election_filed_on_tax_return_for_election_year content boolean\n  input meets_substantial_presence_test_following_year content boolean\n  input election_revoked_with_consent_of_secretary content boolean\n  input first_day_of_earliest_qualifying_testing_period content date\n  output election_valid content boolean\n  output treated_as_resident_election_year content boolean\n  output residency_start_date content date\n\nscope FirstYearElection:\n\ndefinition eligibility.is_resident_election_year equals\n    is_resident_election_year\n\ndefinition eligibility.is_resident_preceding_year equals\n    is_resident_preceding_year\n\ndefinition eligibility.is_resident_following_year_under_clause_ii equals\n    is_resident_following_year_under_clause_ii\n\ndefinition eligibility.has_31_consecutive_days_in_election_year equals\n    has_31_consecutive_days_in_election_year\n\ndefinition eligibility.days_in_testing_period equals\n    days_in_testing_period\n\ndefinition eligibility.days_present_in_testing_period equals\n    days_present_in_testing_period\n\ndefinition eligibility.days_absent_treated_as_present equals\n    days_absent_treated_as_present\n\ndefinition election_valid equals\n    has_elected and\n    election_filed_on_tax_return_for_election_year and\n    meets_substantial_presence_test_following_year and\n    not election_revoked_with_consent_of_secretary\n\ndefinition treated_as_resident_election_year equals\n    eligibility.meets_requirements and\n    election_valid\n\ndefinition residency_start_date equals\n    first_day_of_earliest_qualifying_testing_period",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "has_31_consecutive_days_in_election_year",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "days_in_testing_period",
+        "catala_type": "integer"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "days_present_in_testing_period",
+        "catala_type": "integer"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "days_absent_treated_as_present",
+        "catala_type": "integer"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_present_in_testing_period",
+        "condition": "individual is absent from the United States during the testing period for days not exceeding 5 in the aggregate",
+        "reduces_by": "absent days up to 5 are treated as days present; caller must cap days_absent_treated_as_present at 5"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_resident_election_year",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_resident_preceding_year",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_resident_following_year_under_clause_ii",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_absent_treated_as_present",
+        "condition": "individual is absent from the United States during the testing period for days not exceeding 5 in the aggregate",
+        "reduces_by": "absent days up to 5 are treated as days present; caller must cap days_absent_treated_as_present at 5"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "presence_day_counting_rules",
+        "defined_in": "§ 7701(b)(3)(D)(i)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "substantial_presence_test",
+        "defined_in": "§ 7701(b)(3)"
+      }
+    ]
+  },
+  "7701(b)(9)": {
+    "catala": "declaration enumeration TaxableYearType:\n  -- CalendarYear\n  -- FiscalYearResidencyBased\n\ndeclaration scope AlienTaxableYear:\n  input has_established_taxable_year_for_prior_period content boolean\n  input fiscal_year_rule_applies content boolean\n  input first_day_treated_as_us_resident content date\n  input last_day_of_fiscal_year content date\n  input calendar_year_start content date\n  input calendar_year_end content date\n  output taxable_year_type content TaxableYearType\n  output taxable_year_start content date\n  output taxable_year_end content date\n\nscope AlienTaxableYear:\n\ndefinition taxable_year_type\n    under condition not has_established_taxable_year_for_prior_period\n    consequence equals CalendarYear\n\nexception definition taxable_year_type\n    under condition fiscal_year_rule_applies\n    consequence equals FiscalYearResidencyBased\n\ndefinition taxable_year_start\n    under condition taxable_year_type = CalendarYear\n    consequence equals calendar_year_start\n\ndefinition taxable_year_start\n    under condition taxable_year_type = FiscalYearResidencyBased\n    consequence equals first_day_treated_as_us_resident\n\ndefinition taxable_year_end\n    under condition taxable_year_type = CalendarYear\n    consequence equals calendar_year_end\n\ndefinition taxable_year_end\n    under condition taxable_year_type = FiscalYearResidencyBased\n    consequence equals last_day_of_fiscal_year",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "is_treated_as_us_resident_for_calendar_year",
+        "defined_in": "§ 7701(b)(1)"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Consequence clause absent from provided node data. Statute text 'such individual's taxable year shall be treated as beginning on the first day such individual is so treated as a resident of the United States and ending on the last day of such taxable year' is not represented in any child. fiscal_year_rule_applies has no downstream rule to trigger.",
+        "option_a": "Add outputs taxable_year_start content date and taxable_year_end content date to FiscalYearTaxpayer; define them under condition fiscal_year_rule_applies using first-day-of-residency and last-day-of-taxable-year inputs.",
+        "option_b": "Define the consequence as an exception definition at parent scope § 7701(b)(9) that overrides the calendar year taxable year from subparagraph (A) when fiscal_year_rule_applies is true."
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "calendar_year_start",
+        "catala_type": "date"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "calendar_year_end",
+        "catala_type": "date"
+      }
+    ]
+  },
+  "7701(b)(3)": {
+    "catala": "declaration scope PresenceDayExclusion:\n  input is_exempt_individual content boolean\n  input medically_unable_to_leave content boolean\n  input medical_condition_arose_in_united_states content boolean\n  output day_excluded_from_presence_count content boolean\n\ndeclaration scope SubstantialPresenceTest:\n  input days_current_year content integer\n  input days_first_preceding_year content integer\n  input days_second_preceding_year content integer\n  input excluded_days_current_year content integer\n  input excluded_days_first_preceding_year content integer\n  input excluded_days_second_preceding_year content integer\n  input has_tax_home_in_foreign_country content boolean\n  input closer_connection_to_foreign_country content boolean\n  input had_application_for_adjustment_of_status_pending content boolean\n  input took_steps_to_apply_for_lawful_permanent_resident_status content boolean\n  internal effective_days_current_year content integer\n  internal effective_days_first_preceding_year content integer\n  internal effective_days_second_preceding_year content integer\n  internal weighted_days content decimal\n  internal closer_connection_exception_applies content boolean\n  output meets_test content boolean\n\nscope PresenceDayExclusion:\n  definition day_excluded_from_presence_count equals\n    is_exempt_individual or\n    (medically_unable_to_leave and\n     medical_condition_arose_in_united_states)\n\nscope SubstantialPresenceTest:\n\ndefinition effective_days_current_year equals\n    days_current_year - excluded_days_current_year\n\ndefinition effective_days_first_preceding_year equals\n    days_first_preceding_year - excluded_days_first_preceding_year\n\ndefinition effective_days_second_preceding_year equals\n    days_second_preceding_year - excluded_days_second_preceding_year\n\ndefinition weighted_days equals\n    decimal of effective_days_current_year +\n    (decimal of effective_days_first_preceding_year) / 3. +\n    (decimal of effective_days_second_preceding_year) / 6.\n\ndefinition meets_test equals\n    effective_days_current_year >= 31 and\n    weighted_days >= 183.\n\ndefinition closer_connection_exception_applies equals\n    effective_days_current_year < 183 and\n    has_tax_home_in_foreign_country and\n    closer_connection_to_foreign_country\n\nexception definition closer_connection_exception_applies\n    under condition\n      had_application_for_adjustment_of_status_pending or\n      took_steps_to_apply_for_lawful_permanent_resident_status\n    consequence equals false\n\nexception definition meets_test\n    under condition closer_connection_exception_applies\n    consequence equals false",
+    "signals": [
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "meets_test",
+        "condition": "individual present fewer than 183 days in current year, has tax home in foreign country under § 911(d)(3), and has closer connection to that foreign country than to United States"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "has_tax_home_in_foreign_country",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "closer_connection_to_foreign_country",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "tax_home",
+        "defined_in": "§ 911(d)(3)"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "had_application_for_adjustment_of_status_pending",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "took_steps_to_apply_for_lawful_permanent_resident_status",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "closer_connection_exception_applies",
+        "condition": "individual had application for adjustment of status pending, or took other steps to apply for status as lawful permanent resident of the United States, at any time during the current year"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_current_year",
+        "condition": "day_excluded_from_presence_count is true under PresenceDayExclusion for a given day in the current year",
+        "reduces_by": "count of days in the current year for which day_excluded_from_presence_count is true"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_first_preceding_year",
+        "condition": "day_excluded_from_presence_count is true under PresenceDayExclusion for a given day in the first preceding year",
+        "reduces_by": "count of days in the first preceding year for which day_excluded_from_presence_count is true"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_second_preceding_year",
+        "condition": "day_excluded_from_presence_count is true under PresenceDayExclusion for a given day in the second preceding year",
+        "reduces_by": "count of days in the second preceding year for which day_excluded_from_presence_count is true"
+      }
+    ]
+  },
+  "7701(b)(2)": {
+    "catala": "declaration scope FirstYearResidency:\n  input residency_basis content ResidencyBasis\n  input is_resident_under_paragraph_1_A content boolean\n  input was_resident_preceding_year content boolean\n  input first_day_present_as_lpr content date\n  input first_day_present_in_us content date\n  input first_day_treated_resident_under_paragraph_4 content date\n  output residency_starting_date content date\n\ndeclaration scope LastYearOfResidency:\n  input is_lawful_permanent_resident content boolean\n  input last_day_present_in_us content date\n  input last_day_described_as_lpr content date\n  input has_closer_connection_to_foreign_country content boolean\n  input is_resident_next_calendar_year content boolean\n  output residency_termination_date content date\n  output qualifies_for_exception content boolean\n\ndeclaration scope NominalPresenceDisregarded:\n  input days_present_with_closer_connection content integer\n  output disregarded_days content integer\n\nscope FirstYearResidency:\n\nscope LastYearOfResidency:\n\nscope NominalPresenceDisregarded:\n\ndefinition residency_starting_date\n      under condition\n        is_resident_under_paragraph_1_A and not was_resident_preceding_year\n      consequence equals\n        match residency_basis with pattern\n        -- LawfulPermanentResident : first_day_present_as_lpr\n        -- SubstantialPresence : first_day_present_in_us\n        -- FirstYearElection : first_day_treated_resident_under_paragraph_4\n\ndefinition residency_termination_date equals\n      if is_lawful_permanent_resident\n      then last_day_described_as_lpr\n      else last_day_present_in_us\n\ndefinition qualifies_for_exception equals\n      has_closer_connection_to_foreign_country and\n      not is_resident_next_calendar_year\n\ndefinition disregarded_days equals\n      days_present_with_closer_connection\n\nexception definition disregarded_days\n      under condition\n        days_present_with_closer_connection > 10\n      consequence equals 10",
+    "signals": [
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_lawful_permanent_resident",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "last_day_present_in_us",
+        "catala_type": "date"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "last_day_described_as_lpr",
+        "catala_type": "date"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "has_closer_connection_to_foreign_country",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_resident_next_calendar_year",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "closer_connection_to_foreign_country",
+        "defined_in": "§ 7701(b)(3)(B)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "lawful_permanent_resident",
+        "defined_in": "§ 7701(b)(1)(A)(i)"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "treated_as_resident",
+        "condition": "qualifies_for_exception is true and calendar date falls within portion after residency_termination_date through end of calendar year"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "days_counted_as_present",
+        "condition": "individual establishes closer connection to foreign country than to United States, for purposes of 7701(b)(2)(A)(iii) and (B)",
+        "reduces_by": "disregarded_days from NominalPresenceDisregarded scope, capped at 10"
+      }
+    ]
+  },
+  "7701(o)": {
+    "catala": "declaration scope EconomicSubstanceProvision:\n  input is_individual content boolean\n  input connected_to_trade_or_business content boolean\n  input engaged_for_production_of_income content boolean\n  input changes_economic_position content boolean\n  input has_substantial_purpose content boolean\n  input financial_accounting_benefit_present content boolean\n  input financial_accounting_benefit_origin_is_federal_tax_reduction content boolean\n  internal effective_has_substantial_purpose content boolean\n  internal economic_substance_doctrine_relevant content boolean\n  output has_economic_substance content boolean\n  output tax_benefits_allowable content boolean\n\nscope EconomicSubstanceProvision:\n\ndefinition effective_has_substantial_purpose equals\n    has_substantial_purpose\n\nexception definition effective_has_substantial_purpose\n    under condition\n      financial_accounting_benefit_present and\n      financial_accounting_benefit_origin_is_federal_tax_reduction\n    consequence equals false\n\ndefinition economic_substance_doctrine_relevant equals\n    not is_individual or\n    connected_to_trade_or_business or\n    engaged_for_production_of_income\n\ndefinition has_economic_substance equals\n    changes_economic_position and effective_has_substantial_purpose\n\ndefinition tax_benefits_allowable equals\n    not economic_substance_doctrine_relevant or has_economic_substance",
+    "signals": [
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "economic_substance_doctrine_relevant",
+        "defined_in": "§ 7701(o)(5)(C)"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Statute requires pretax profit be 'substantial in relation to' present value of expected net tax benefits but does not quantify the threshold; modeled as >= (one-to-one ratio) pending regulatory or judicial clarification",
+        "option_a": "Keep present_value_pretax_profit >= present_value_expected_net_tax_benefits as ratio floor",
+        "option_b": "Replace with MISSING_INPUT boolean pretax_profit_is_substantial_relative_to_net_tax_benefits resolved by regulations or case law"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subparagraphs_A_and_B_of_paragraph_1",
+        "defined_in": "§ 7701(o)(1)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "foreign_taxes_treated_as_expenses",
+        "defined_in": "Secretary regulations mandated by § 7701(o)(2)(B)"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "7701(o)(5)(C) states determination of whether the economic substance doctrine is relevant shall be made as if this subsection had never been enacted. This is a meta-interpretive rule about preserving pre-enactment common law relevance standards; it has no computable reduction and is omitted from the scope.",
+        "option_a": "Treat as non-computable procedural rule and omit entirely",
+        "option_b": "Model as a flag input `pre_enactment_relevance_standard content boolean` passed through unchanged, surfacing the condition to the parent scope"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "has_substantial_purpose",
+        "condition": "state or local income tax effect is related to a federal income tax effect",
+        "reduces_by": "§ 7701(o)(3) requires such state or local income tax effect be treated as a federal income tax effect for paragraph (1); has_substantial_purpose must reflect this equivalence before being supplied as input to EconomicSubstanceProvision"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "§ 7701(o)(5)(C) states determination of whether the economic substance doctrine is relevant shall be made as if this subsection had never been enacted — meta-interpretive rule preserving pre-enactment common law relevance standards; economic_substance_doctrine_relevant in EconomicSubstanceProvision encodes the statutory text of § 7701(o)(5)(B) but cannot enforce the pre-enactment baseline without external fact-finding",
+        "option_a": "Treat § 7701(o)(5)(C) as non-computable procedural rule and omit from EconomicSubstanceProvision",
+        "option_b": "Add input pre_enactment_relevance_standard content boolean to EconomicSubstanceProvision and gate economic_substance_doctrine_relevant on it"
+      }
+    ]
+  },
+  "7701(e)": {
+    "catala": "declaration enumeration ShutDownReason:\n  -- Repairs\n  -- Maintenance\n  -- CapitalImprovements\n  -- Other\n\ndeclaration enumeration FinancialDifficultyType:\n  -- Bankruptcy\n  -- SimilarFinancialDifficulty\n  -- Other\n\ndeclaration enumeration PaymentDecreaseReason:\n  -- IncreasedProductionOrEfficiency\n  -- EnergyOrOtherProductRecovery\n  -- Other\n\ndeclaration enumeration QualifiedFacilityType:\n  -- QualifiedSolidWasteDisposalFacility\n  -- CogenerationOrAlternativeEnergyFacility\n  -- WaterTreatmentWorksFacility\n  -- StorageFacility\n\ndeclaration scope Section7701e:\n  internal para_1_test scope ServiceContractLeaseTest\n  internal para_3_test scope Paragraph3AContractTest\n  internal para_4_exception scope Paragraph4Exception\n\nscope Section7701e:\n\ninput factors content ServiceContractLeaseFactors\n  input activity content QualifiedActivity\n  input purports_to_be_service_contract content boolean\n  input facility_type content QualifiedFacilityType\n  input used_under_contract_or_arrangement content boolean\n  input service_recipient_or_related_entity_operates_facility content boolean\n  input service_recipient_or_related_entity_bears_significant_financial_burden_if_nonperformance content boolean\n  input nonperformance_beyond_provider_control content boolean\n  input service_recipient_or_related_entity_receives_significant_financial_benefit_if_cost_savings content boolean\n  input service_recipient_or_related_entity_has_purchase_option content boolean\n  input service_recipient_or_related_entity_may_be_required_to_purchase content boolean\n  input purchase_price_fixed_and_determinable content boolean\n  input purchase_price_is_fair_market_value content boolean\n  input operates_based_solely_on_right_to_inspect content boolean\n  input operates_based_solely_on_sovereign_power content boolean\n  input burden_based_solely_on_breach_remedy content boolean\n  input purchase_price_based_solely_on_law_change_allocation content boolean\n  input is_temporary_shut_down content boolean\n  input shut_down_reason content ShutDownReason\n  input is_financial_difficulty_of_service_provider content boolean\n  input financial_difficulty_type content FinancialDifficultyType\n  input payment_decrease_reason content PaymentDecreaseReason\n  input is_section_1250_a_1_B_property content boolean\n  input is_operated_by_section_501c_organization content boolean\n  input low_income_tenant_unit_percentage content decimal\n\noutput treated_as_lease content boolean\n  output subsection_e_applies content boolean\n\ndefinition para_1_test.factors equals factors\n\ndefinition para_3_test.activity equals activity\n  definition para_3_test.purports_to_be_service_contract equals purports_to_be_service_contract\n\ndefinition para_4_exception.facility_type equals facility_type\n  definition para_4_exception.used_under_contract_or_arrangement equals used_under_contract_or_arrangement\n  definition para_4_exception.service_recipient_or_related_entity_operates_facility equals\n    service_recipient_or_related_entity_operates_facility\n  definition para_4_exception.service_recipient_or_related_entity_bears_significant_financial_burden_if_nonperformance equals\n    service_recipient_or_related_entity_bears_significant_financial_burden_if_nonperformance\n  definition para_4_exception.nonperformance_beyond_provider_control equals\n    nonperformance_beyond_provider_control\n  definition para_4_exception.service_recipient_or_related_entity_receives_significant_financial_benefit_if_cost_savings equals\n    service_recipient_or_related_entity_receives_significant_financial_benefit_if_cost_savings\n  definition para_4_exception.service_recipient_or_related_entity_has_purchase_option equals\n    service_recipient_or_related_entity_has_purchase_option\n  definition para_4_exception.service_recipient_or_related_entity_may_be_required_to_purchase equals\n    service_recipient_or_related_entity_may_be_required_to_purchase\n  definition para_4_exception.purchase_price_fixed_and_determinable equals\n    purchase_price_fixed_and_determinable\n  definition para_4_exception.purchase_price_is_fair_market_value equals\n    purchase_price_is_fair_market_value\n  definition para_4_exception.operates_based_solely_on_right_to_inspect equals\n    operates_based_solely_on_right_to_inspect\n  definition para_4_exception.operates_based_solely_on_sovereign_power equals\n    operates_based_solely_on_sovereign_power\n  definition para_4_exception.burden_based_solely_on_breach_remedy equals\n    burden_based_solely_on_breach_remedy\n  definition para_4_exception.purchase_price_based_solely_on_law_change_allocation equals\n    purchase_price_based_solely_on_law_change_allocation\n  definition para_4_exception.is_temporary_shut_down equals is_temporary_shut_down\n  definition para_4_exception.shut_down_reason equals shut_down_reason\n  definition para_4_exception.is_financial_difficulty_of_service_provider equals\n    is_financial_difficulty_of_service_provider\n  definition para_4_exception.financial_difficulty_type equals financial_difficulty_type\n  definition para_4_exception.payment_decrease_reason equals payment_decrease_reason\n\ndefinition treated_as_lease equals para_1_test.treated_as_lease\n\nexception definition treated_as_lease\n    under condition\n      para_3_test.subject_to_paragraph_3_a and\n      not para_4_exception.paragraph_3_does_not_apply\n    consequence equals true\n\ndefinition subsection_e_applies equals true\n\nexception definition subsection_e_applies\n    under condition\n      is_section_1250_a_1_B_property and\n      is_operated_by_section_501c_organization and\n      low_income_tenant_unit_percentage >= 0.80\n    consequence equals false",
+    "signals": [
+      {
+        "type": "AMBIGUOUS",
+        "description": "The statute uses 'taking into account all relevant factors including whether or not' — the six factors are explicitly non-exhaustive, and the operative standard is 'properly treated as a lease,' a totality-of-circumstances test. The AND encoding above treats all six listed factors as jointly necessary and sufficient, which is one plausible reading. The alternative reading is a weighted balancing test where no single factor is dispositive and unlisted factors may also count.",
+        "option_a": "treated_as_lease is true iff all six listed factors hold (AND of A–F, as encoded).",
+        "option_b": "treated_as_lease is a totality-of-circumstances judgment over an open-ended factor set; the six listed factors are indicative but neither necessary nor sufficient individually."
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Consequence of the notwithstanding rule is absent from children — only conditions (i) and (ii) are present. The 'shall be treated as' clause that completes the rule must come from a parent or unprocessed sibling of 7701(e)(3)(A).",
+        "option_a": "Contract is treated as a lease — parent supplies this as exception to paragraphs (1) and (2) treatment",
+        "option_b": "Consequence lives in another child of 7701(e)(3)(A) not provided in this input"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "subject_to_paragraph_3_a",
+        "condition": "activity is QualifiedActivity and purports_to_be_service_contract is true, notwithstanding paragraphs (1) and (2); parent scope must wire this as exception definition on its paragraph-(1)-(2) conclusion variable; paragraph (4) supplies a further exception to this override"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "treatment_works",
+        "defined_in": "§ 212(2) of the Federal Water Pollution Control Act"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "energy_storage_technology",
+        "defined_in": "§ 48(c)(6)"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "treated_as_lease",
+        "condition": "Paragraph3AContractTest.treated_as_lease is true, notwithstanding paragraphs (1) and (2); parent scope at 7701(e) must wire as exception definition on its paragraph-(1)-(2) conclusion variable; paragraph (4) supplies a further exception to this override"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "related_entity"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "qualified_solid_waste_disposal_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "cogeneration_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "alternative_energy_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "water_treatment_works_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "storage_facility"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "subparagraph_a_analysis",
+        "defined_in": "§ 7701(e)(4)(A)"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Cannot write the 'shall not be taken into account' exception rule without knowing which variable or factor collection in § 7701(e)(4)(A) these terms are excluded from. DisregardedContractTerm enumeration is declared; exception definition requires parent scope internals.",
+        "option_a": "Parent scope has a collection/list of contract rights that is filtered — DisregardedContractTerm variants are excluded from that collection before evaluation.",
+        "option_b": "Parent scope has boolean flags per factor — each DisregardedContractTerm variant maps to an exception definition that forces the corresponding flag to false."
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "clause_ii_factor",
+        "condition": "temporary shut-down of the facility for repairs, maintenance, or capital improvements",
+        "reduces_by": "duration or impact of such temporary shut-down"
+      },
+      {
+        "type": "INPUT_TRANSFORM",
+        "variable": "significant_financial_benefit",
+        "condition": "payments decreased merely by reason of increased production or efficiency or recovery of energy or other products",
+        "reduces_by": "amount of such payment decrease"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "clause_ii_of_subparagraph_A"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "clause_iii_of_subparagraph_A"
+      },
+      {
+        "type": "OPEN_ENUMERATION",
+        "enumeration": "FinancialDifficultyType"
+      },
+      {
+        "type": "OPEN_ENUMERATION",
+        "enumeration": "PaymentDecreaseReason"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "paragraph_3",
+        "defined_in": "§ 7701(e)(3)"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Mapping of DisregardedContractTerm variants to specific Paragraph4Exception factor flags is inferred from statutory structure, not stated in child (B) text. RightToInspectFacility and RightToExerciseSovereignPower mapped to operates_facility factor via operates_based_solely_on_right_to_inspect and operates_based_solely_on_sovereign_power; RightToActOnBreachByServiceProvider mapped to bears_burden factor via burden_based_solely_on_breach_remedy; AllocationOnLawChange mapped to purchase_price factor via purchase_price_based_solely_on_law_change_allocation.",
+        "option_a": "Mapping as inferred: inspect/sovereign power disregarded for operates_facility; breach remedy disregarded for bears_burden; law-change allocation disregarded for purchase_price.",
+        "option_b": "Actual statutory text of § 7701(e)(4)(B) may assign different variant-to-factor mappings than inferred here; correct mapping requires reading the full (B) prose."
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_section_1250_a_1_B_property",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "is_operated_by_section_501c_organization",
+        "catala_type": "boolean"
+      },
+      {
+        "type": "MISSING_INPUT",
+        "variable": "low_income_tenant_unit_percentage",
+        "catala_type": "decimal"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "is_section_1250_a_1_B_property",
+        "defined_in": "§ 1250(a)(1)(B)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "is_operated_by_section_501c_organization",
+        "defined_in": "§ 501(c)(3), (4)"
+      },
+      {
+        "type": "EXTERNAL_DEPENDENCY",
+        "term": "low_income_tenants",
+        "defined_in": "§ 167(k)(3)(B)"
+      },
+      {
+        "type": "OUTPUT_OVERRIDE",
+        "variable": "subsection_e_applies",
+        "condition": "property described in § 1250(a)(1)(B)(i)-(iv), operated by or for § 501(c)(3) or (4) organization, and at least 80 percent of units leased to low-income tenants within meaning of § 167(k)(3)(B) as in effect before enactment of Revenue Reconciliation Act of 1990"
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "ServiceContractLeaseTest (paragraph 1): statute uses 'taking into account all relevant factors including whether or not' — the six factors are explicitly non-exhaustive. The AND encoding treats all six as jointly necessary and sufficient; the alternative reading is a totality-of-circumstances test where no single factor is dispositive.",
+        "option_a": "treated_as_lease is true iff all six listed factors hold (AND of A–F, as encoded in ServiceContractLeaseTest).",
+        "option_b": "treated_as_lease is a totality-of-circumstances judgment over an open-ended factor set; the six listed factors are indicative but neither necessary nor sufficient individually."
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Paragraph (2) 'other arrangements' (including partnerships and pass-thru entities not described in paragraph (1)) shall be treated as a lease if 'properly treated as a lease, taking into account all relevant factors including factors similar to those set forth in paragraph (1).' This is a residual totality-of-circumstances test with no fixed factor weights; it cannot be encoded as a deterministic boolean rule. The Section7701e scope as formalized applies only para_1_test as the base rule; paragraph (2) arrangements are not independently modeled.",
+        "option_a": "Extend Section7701e with a second sub-scope mirroring ServiceContractLeaseTest for paragraph (2) arrangements, using the same six factors as a proxy.",
+        "option_b": "Leave paragraph (2) as an unformalized residual rule requiring judicial or regulatory interpretation; flag arrangement inputs not satisfying paragraph (1) for external review."
+      },
+      {
+        "type": "AMBIGUOUS",
+        "description": "Paragraph (4)(B): mapping of disregarded contract terms to specific Paragraph4Exception factor flags is inferred from statutory structure, not stated in child text. RightToInspectFacility and RightToExerciseSovereignPower mapped to operates_facility factor; RightToActOnBreachByServiceProvider mapped to bears_burden factor; AllocationOnLawChange mapped to purchase_price factor.",
+        "option_a": "Mapping as inferred: inspect/sovereign power disregarded for operates_facility; breach remedy disregarded for bears_burden; law-change allocation disregarded for purchase_price.",
+        "option_b": "Actual statutory text of § 7701(e)(4)(B) may assign different variant-to-factor mappings; correct mapping requires reading the full (B) prose."
+      }
+    ]
+  }
+}

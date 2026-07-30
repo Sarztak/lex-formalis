@@ -3,10 +3,11 @@ Parse 26 USC § 7701 into a JSON tree.
 Each node: id, num, header, chapeau, body (div.content text), children.
 """
 
+import json
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
-import json
 
 URL = "https://www.law.cornell.edu/uscode/text/26/7701"
 OUTPUT_FILE = "7701_tree.json"
@@ -20,7 +21,10 @@ LEVEL_CLASSES = [
 def clean(tag):
     if tag is None:
         return ""
-    return re.sub(r"\s+", " ", tag.get_text()).strip()
+    text = tag.get_text()
+    text = text.replace("“", '"').replace("”", '"')  # smart quotes → ASCII
+    text = text.replace("‘", "'").replace("’", "'")  # smart apostrophes → ASCII
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def is_level_node(tag):
@@ -46,12 +50,16 @@ def build_node(div, parent_id="7701"):
         if is_level_node(child):
             children.append(build_node(child, node_id))
 
+    continuation_div = div.find("div", class_="continuation", recursive=False)
+    continuation = clean(continuation_div) if continuation_div else ""
+
     return {
         "id": node_id,
         "num": num,
         "header": header,
         "chapeau": chapeau,
         "body": body,
+        "continuation": continuation,
         "children": children,
     }
 

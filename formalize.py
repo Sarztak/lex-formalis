@@ -7,7 +7,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 TREE_FILE = "7701_tree.json"
 PROMPT_FILE = "agent_prompt.md"
@@ -86,70 +86,22 @@ def process(node, signals):
         call_agent(node, signals)
 
 
-_STOP_WORDS = {"a", "an", "the", "of", "or", "and", "in", "for", "to", "as", "by", "with", "is", "are",
-               "not", "any", "such", "which", "where", "when", "if", "at", "be", "that", "this"}
-
-# matches "The term "X"" in chapeau — no verb required (chapeau may just intro children)
-_CHAPEAU_TERM_PATTERN = re.compile(r'[Tt]he terms?\s+"([^"]+)"', re.IGNORECASE)
-
-# matches "The term "X" means/includes/shall" in body
-_BODY_TERM_PATTERN = re.compile(r'[Tt]he terms?\s+"([^"]+)"\s*(means?|includes?|shall)', re.IGNORECASE)
-
-
-def _text_to_camel(text, max_words=None):
-    text = re.sub(r"\(§[^)]*\)", "", text)
-    text = re.sub(r"[^a-zA-Z\s]", " ", text)
-    words = text.split()
-    words = [w for w in words if w.lower() not in _STOP_WORDS] or words
-    if max_words:
-        words = words[:max_words]
-    return "".join(w.capitalize() for w in words)
-
-
 def _id_to_name(node_id):
     parts = re.findall(r"[^()]+", node_id)
-    return "Sec" + "".join(p.capitalize() for p in parts)
-
-
-def node_to_name(node_id, header, chapeau="", body=""):
-    chapeau = chapeau or ""
-    body = body or ""
-
-    # chapeau: extract quoted defined term first
-    m = _CHAPEAU_TERM_PATTERN.search(chapeau)
-    if m:
-        return _text_to_camel(m.group(1))
-
-    # chapeau: significant words (up to 5) when no term pattern
-    if chapeau.strip():
-        name = _text_to_camel(chapeau, max_words=5)
-        if name:
-            return name
-
-    # header fallback
-    if header and header.strip():
-        return _text_to_camel(header)
-
-    # body: extract quoted defined term
-    m = _BODY_TERM_PATTERN.search(body)
-    if m:
-        return _text_to_camel(m.group(1))
-
-    # ID fallback
-    return _id_to_name(node_id)
+    return "Sec" + "_".join(parts)
 
 
 def build_user_message(node):
     payload = {
         "id": node.id,
-        "scope_name": node_to_name(node.id, node.header, node.chapeau, node.body),
+        "scope_name": _id_to_name(node.id),
         "header": node.header,
         "chapeau": node.chapeau,
         "body": node.body,
         "children": [
             {
                 "id": child.id,
-                "scope_name": node_to_name(child.id, child.header, child.chapeau, child.body),
+                "scope_name": _id_to_name(child.id),
                 "header": child.header,
                 "result": child.catala or "",
                 "unresolved_signals": child.signals or [],
@@ -235,7 +187,7 @@ def classify(node):
 def write_log(node_id, prompt, raw_response, parsed, error=None):
     os.makedirs(LOG_DIR, exist_ok=True)
     safe_id = node_id.replace("(", "_").replace(")", "")
-    timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
     path = os.path.join(LOG_DIR, f"{safe_id}_{timestamp}.json")
     log = {
         "node_id": node_id,

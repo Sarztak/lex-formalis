@@ -126,14 +126,20 @@ def _structure_tags(chapeau_l, has_children):
         return [("structure", "chapeau: 'consisting of / shall include'")]
     return []
 
-def _multi_def_tags(classified_children):
-    if classified_children and all(
-        any(t["construct"] == "leaf" for t in c["tags"])
-        and any(t["construct"] == "definition" for t in c["tags"])
+
+def _has_def_child_tags(classified_children):
+    if classified_children and any(
+        any(t["construct"] == "definition" for t in c["tags"])
         for c in classified_children
     ):
-        return [("multi_def", "all children are leaf+definition: independent term definitions")]
+        return [
+            (
+                "has_def_child",
+                "at least one child has definition tag: parent is grouping wrapper",
+            )
+        ]
     return []
+
 
 def classify_node(node):
     """
@@ -171,7 +177,7 @@ def classify_node(node):
     )
     tags.extend(_structure_tags(chapeau_l, bool(raw_children)))
 
-    tags.extend(_multi_def_tags(classified_children))
+    tags.extend(_has_def_child_tags(classified_children))
     return _result(node, classified_children, tags)
 
 

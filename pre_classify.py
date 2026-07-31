@@ -12,11 +12,31 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify_rules_20260731_193101.json"
+CLASSIFY_LOG = "logs/classify_rules_20260731_194902.json"
 TREE_FILE = "7701_tree.json"
 
-# individual tags sufficient to skip agent classification
-SKIP_TAGS = {"leaf", "scope_rule", "scope_def", "multi_def"}
+# Tags that make classification deterministic — skip agent for these.
+#
+# leaf       : no children, no Catala construct needed beyond prose
+# scope_rule : child named "In general" / "General rule" — structurally a scope
+# scope_def  : "for purposes of" in chapeau/body with children — structurally a scope
+#
+# has_def_child : at least one child carries the `definition` tag ("The term X means…").
+#   Reasoning: the four Catala constructs are enumeration, structure, scope, other.
+#   - scope      requires children to be computation rules / conditions. A child that
+#                defines a term is not a rule — it is a standalone definition. So the
+#                parent cannot be a scope.
+#   - enumeration requires children to be mutually exclusive cases of ONE named concept.
+#                A child that defines its own named term ("The term X means…") is an
+#                independent concept, not a case of the parent's concept. So the parent
+#                cannot be an enumeration.
+#   - structure  requires children to be conjunctive criteria of ONE thing. A child that
+#                defines a term is not a criterion — it is self-contained. So the parent
+#                cannot be a structure.
+#   - other      is the only remaining option: the parent is a grouping wrapper for
+#                independent definitions, no Catala construct needed.
+#   Conclusion: if any child has definition tag → parent is deterministically `other`.
+SKIP_TAGS = {"leaf", "scope_rule", "scope_def", "has_def_child"}
 
 PROMPT_TMPL = """\
 Read the following provision of US tax law and determine its logical structure.

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "7701",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "26 U.S.C. § 7701 — Definitions",
+    "result": {
+      "construct": "none",
+      "reason": "Section 7701 is a definitions wrapper organizing diverse subsections; each child has its own construct."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "none",
+      "reason": "Grouping wrapper containing multiple unrelated term definitions for use throughout the tax code; each definition handled separately."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(1)",
+    "tags": [
+      "definition",
+      "leaf"
+    ],
+    "header": "Person",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Lists mutually exclusive, exhaustive alternatives (individual, trust, estate, partnership, association, company, corporation) defining what constitutes a person."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(2)",
+    "tags": [
+      "definition",
+      "leaf"
+    ],
+    "header": "Partnership and partner",
+    "result": {
+      "construct": "scope",
+      "reason": "Establishes membership conditions (unincorporated, carries on business, excludes trusts/estates/corporations) to determine if an entity qualifies as partnership; computational rule with inputs and output."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(3)",
+    "tags": [
+      "definition",
+      "leaf"
+    ],
+    "header": "Corporation",
+    "result": {
+      "construct": "none",
+      "reason": "Non-exhaustive definitional statement ('includes' does not enumerate all corporations); requires computational context in parent scope to formalize as a classification rule."
+    },
+    "error": null
+  }
+]

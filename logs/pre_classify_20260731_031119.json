@@ -1,0 +1,379 @@
+[
+  {
+    "id": "7701(a)(52)(D)(iii)(II)",
+    "tags": [
+      "container_intro",
+      "scope_def"
+    ],
+    "header": "Safe harbors prior to issuance",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Chapeau presents mutually exclusive alternatives (aa or bb) that a taxpayer may elect between under the safe harbor conditions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Material assistance cost ratio",
+    "result": {
+      "construct": "structure",
+      "reason": "Children specify different named aspects (qualified facilities, eligible components, calculation methods, special cases, anti-circumvention rules) that together define the material assistance cost ratio concept."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(i)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Children are mutually exclusive visa categories (F/M vs. J/Q) that exhaustively define which immigration visa holders are temporarily present in the United States."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(h)(2)(B)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "Minimum liability of lessor",
+    "result": {
+      "construct": "structure",
+      "reason": "Defines minimum liability as sum of two required conjunctive components: personal liability amount and fair market value of lessor's interest."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(33)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Regulated public utility",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Definition enumerates mutually exclusive corporation types (A-H) that qualify as a regulated public utility."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(D)(i)",
+    "tags": [
+      "container_intro",
+      "definition",
+      "scope_def"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Definition branches into mutually exclusive conditions (I and II) that independently satisfy the foreign-influenced entity qualification."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(B)(ii)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Children are mutually exclusive alternatives based on construction start year, exhaustive through 2026–2029 and after, each mapping to a different percentage rate."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(F)",
+    "tags": [
+      "container_intro",
+      "definition",
+      "scope_def"
+    ],
+    "header": "Covered officer",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Three mutually exclusive alternatives (board member, executive-level officer, or person with similar powers) define the complete set of covered officers."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(B)",
+    "tags": [
+      "container_intro",
+      "scope_def"
+    ],
+    "header": "Threshold percentage for qualified facilities and energy storage technology",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Two mutually exclusive, exhaustive cases define threshold percentage: one for qualified facilities, one for energy storage technology."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iii)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Manufactured product",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Two mutually exclusive alternatives exhaustively define what qualifies as a manufactured product."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(4)(C)",
+    "tags": [
+      "container_bare",
+      "exception"
+    ],
+    "header": "Special rules for application of subparagraph (A) in the case of certain events",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Children represent mutually exclusive event types (temporary shut-downs vs. reduced costs) that determine when the special rules in subparagraph (A) apply."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(IV)(dd)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Node contains conditional logic determining statement requirements based on tax section context (for purposes of 45X, 45Y, 48E) with child outputs."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(4)(A)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "Chapeau states conditional rule: paragraph 3 doesn't apply IF conditions met. Children are conjunctive criteria enabling/disabling the exception—computational determination, not passive data structure."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(48)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Off-highway vehicles",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Off-highway vehicles splits into two mutually exclusive alternatives: transportation vehicles (A) and nontransportation trailers (B)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(10)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "Coordination with section 877",
+    "result": {
+      "construct": "none",
+      "reason": "Chapeau 'If—' with no body frames two conditional alternatives that are incomplete clauses; this is a grouping wrapper awaiting consequential computational rules."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)",
+    "tags": [
+      "container_intro",
+      "exception"
+    ],
+    "header": "Exception where individual is present in the United States during less than one-half of current year and closer connection to foreign country is established",
+    "result": {
+      "construct": "none",
+      "reason": "Provision introduces the exception condition (if—) but specifies no standalone criteria; substantive conditions are delegated entirely to children (i) and (ii)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(C)(i)(I)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Time-dependent computational rule with year of sale as input condition and percentage as output; children represent conditional branches for different calendar periods."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(k)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "Treatment of certain amounts paid to charity",
+    "result": {
+      "construct": "scope",
+      "reason": "Computational rule with condition (chapeau) specifying how to treat payments meeting the criteria, with two conjunctive tax consequences in children."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Two mutually exclusive alternatives (Secretary of the Treasury or Secretary) that are exhaustive options for which official applies in the given context."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)",
+    "tags": [
+      "container_intro",
+      "exception"
+    ],
+    "header": "Exception for exempt individuals or for certain medical conditions",
+    "result": {
+      "construct": "scope",
+      "reason": "Conditional rule with inputs (individual, day), disjunctive conditions (exempt or unable to leave), and output (not treated as present in US)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(D)(i)(I)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Children are alternative conditions (aa–dd) describing different control scenarios for specified foreign entities, structured as mutually exclusive ways the chapeau condition can be satisfied."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "Rule determining whether individual meets substantial presence test based on presence and day-count conditions applied to inputs (individual, calendar year)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(A)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "none",
+      "reason": "Parent node with no body text; children (Definition and Determination) provide substantive content; node functions as grouping wrapper."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(E)(i)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "none",
+      "reason": "Organizational header 'In general' with no chapeau or body text; three substantively distinct children (foreign-controlled rules, foreign-influenced rules, exchanges/markets) grouped under a generic grouping wrapper."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(o)(5)",
+    "tags": [
+      "container_intro",
+      "exception",
+      "scope_def"
+    ],
+    "header": "Definitions and special rules",
+    "result": {
+      "construct": "none",
+      "reason": "Chapeau introduces a definitional scope ('For purposes of this subsection'); children are heterogeneous definitions and rules that apply conjunctively, not a standalone computational construct or schema."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(i)(3)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "Treatment of certain REIT's",
+    "result": {
+      "construct": "scope",
+      "reason": "Conditional rule structure: 'If—' chapeau with alternative conditions (A or B) that determine when treatment applies to a REIT."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Teacher or trainee",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Two mutually exclusive alternative conditions for qualifying as a teacher or trainee individual: either temporarily present under subpar (i) or substantially complying with requirements (ii)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "structure",
+      "reason": "Three conjunctive criteria that collectively define a qualifying sports event—all must be satisfied simultaneously."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)",
+    "tags": [
+      "container_intro",
+      "scope_def"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Resident and nonresident alien are mutually exclusive, exhaustive categories for classifying individuals under tax law."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(G)",
+    "tags": [
+      "container_intro",
+      "definition",
+      "scope_def"
+    ],
+    "header": "Determination of control",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Control is defined as one of three mutually exclusive, exhaustive alternatives determined by entity type (corporation, partnership, other)."
+    },
+    "error": null
+  }
+]

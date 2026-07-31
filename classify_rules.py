@@ -118,6 +118,22 @@ def _structure_tags(chapeau_l):
     return []
 
 
+def _conditional_tags(body, chapeau, raw_children):
+    tags = []
+    # Pattern 2: inline "The term X when used in [context] means/includes"
+    if re.search(r'the terms?\s+["\'].+?["\']\s+when used\b', body, re.IGNORECASE) or \
+       re.search(r'the terms?\s+["\'].+?["\']\s+when used\b', chapeau, re.IGNORECASE):
+        tags.append(("conditional_term", "body/chapeau: 'The term X when used in context means'"))
+    # Pattern 3: 2+ children whose bodies start with "when used with reference to"
+    ref_children = [
+        c for c in raw_children
+        if re.match(r"\s*when used with reference to", c.get("body", ""), re.IGNORECASE)
+    ]
+    if len(ref_children) >= 2:
+        tags.append(("conditional_def", f"{len(ref_children)} children define same term under different reference conditions"))
+    return tags
+
+
 def classify_node(node):
     """
     Recursively classify node bottom-up.
@@ -147,6 +163,7 @@ def classify_node(node):
     tags.extend(_scope_tags(header_l, chapeau_l, body_l, has_in_general_child, bool(raw_children)))
     tags.extend(_container_tags(raw_children, has_in_general_child, node["body"], node["chapeau"]))
     tags.extend(_structure_tags(chapeau_l))
+    tags.extend(_conditional_tags(node["body"], node["chapeau"], raw_children))
 
     # Deduplicates by construct type, keeping only the first signal that fired for each construct. If exception fires twice (header match + body match), tag_map["exception"] keeps the first one. Then the priority loop picks which construct wins.
     return _result(node, classified_children, tags)

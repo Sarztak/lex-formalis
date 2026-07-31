@@ -1,0 +1,15 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "Same term 'or his delegate' defined conditionally: different meaning depending on whether it references Secretary of Treasury versus other officials."
+    },
+    "error": null
+  }
+]

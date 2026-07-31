@@ -1,0 +1,14 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "none",
+      "reason": "Parent node groups two separate definitional provisions with no chapeau, body, or computational logic of its own."
+    },
+    "error": null
+  }
+]

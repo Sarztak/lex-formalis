@@ -1,0 +1,110 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "other",
+      "reason": "Two separate terms each get own independent definition, not attributes of one thing nor alternatives of single named concept nor conditional scope.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "meaning of \"or his delegate\" changes depending on which official is referenced, Secretary of Treasury vs any other official",
+      "inputs": "the official referenced by the provision (Secretary of Treasury or other US official)",
+      "condition": "whether referenced official is Secretary of Treasury or some other official",
+      "output": "definition of \"or his delegate\" as authorized officer/employee/agency for that referenced official"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "Three bullets state independent qualifying attributes (supervision, business purpose, asset composition) that must all hold together for entity to count as domestic building and loan association.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "enumeration",
+      "reason": "list (i)-(xi) enumerate qualifying categories of assets that make up the 'total assets' consisting of cash, obligations, loans, etc. for the 60 percent test",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(30)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "United States person",
+    "result": {
+      "construct": "enumeration",
+      "reason": "List gives mutually exclusive exhaustive categories that qualify as a \"United States person\".",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(30)(E)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Trust qualifies (as domestic trust) only if both conditions hold, so provision needs condition plus classification output to be meaningful.",
+      "inputs": "the trust in question",
+      "condition": "a US court has primary supervision over trust administration AND one or more US persons control all substantial decisions of the trust",
+      "output": "trust classified as meeting the requirement (both prongs satisfied)"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(31)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Foreign estate or trust",
+    "result": {
+      "construct": "other",
+      "reason": "sub-provisions define two distinct terms, foreign estate and foreign trust, independently rather than modifying a single concept, listing attributes of one thing, or giving alternatives of one named concept",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  }
+]

@@ -17,7 +17,7 @@ Construct taxonomy:
 import json
 import os
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 TREE_FILE = "7701_tree.json"
 LOG_DIR = "logs"
@@ -35,21 +35,14 @@ Reasoning behind ordering:
 - structure before scope — structural grouping is more specific than the generic fallback
 - scope last — default fallback for anything that has children but matched nothing specific
 """
-_PRIORITY = [
-    "exception",
-    "definition",
-    "leaf",
-    "container",
-    "legal_concept",
-    "structure",
-    "scope",
-]
 
 
 def _exception_tags(header_l, chapeau_l, body_l, has_children):
     tags = []
     if re.search(r"\bexceptions?\b|\bspecial rules?\b", header_l):
-        tags.append(("exception", "header contains 'Exception(s)' or 'Special rule(s)'"))
+        tags.append(
+            ("exception", "header contains 'Exception(s)' or 'Special rule(s)'")
+        )
     if re.search(r"\bexceptions?\b", chapeau_l):
         tags.append(("exception", "chapeau contains 'Exception(s)'"))
     # body patterns only meaningful on non-leaf nodes: on leaves, exclusionary
@@ -61,10 +54,11 @@ def _exception_tags(header_l, chapeau_l, body_l, has_children):
     return tags
 
 
-def _scope_tags(header_l, chapeau_l, body_l, has_in_general_child, has_children):
+def _scope_tags(chapeau_l, body_l, has_in_general_child, has_children):
     tags = []
     if has_children and (
-        re.search(r"for purposes of", chapeau_l) or re.search(r"for purposes of", body_l)
+        re.search(r"for purposes of", chapeau_l)
+        or re.search(r"for purposes of", body_l)
     ):
         tags.append(("scope_def", "chapeau/body: 'for purposes of'"))
     if has_in_general_child:
@@ -76,20 +70,33 @@ def _container_tags(raw_children, has_in_general_child, body, chapeau):
     tags = []
     _SPAN_ENDINGS = ("—", ":")
     if raw_children and (
-        body.rstrip().endswith(_SPAN_ENDINGS) or chapeau.rstrip().endswith(_SPAN_ENDINGS)
+        body.rstrip().endswith(_SPAN_ENDINGS)
+        or chapeau.rstrip().endswith(_SPAN_ENDINGS)
     ):
-        tags.append(("container_intro", "body/chapeau ends '—'/';': introduces children"))
+        tags.append(
+            ("container_intro", "body/chapeau ends '—'/';': introduces children")
+        )
     is_bare = raw_children and not body.strip() and not chapeau.strip()
     if is_bare:
         tags.append(("container_bare", "no body/chapeau, structure in children"))
-    has_dash = body.rstrip().endswith(("—", ":")) or chapeau.rstrip().endswith(("—", ":"))
-    if not is_bare and not has_dash and len(raw_children) >= 2 and not has_in_general_child:
+    has_dash = body.rstrip().endswith(("—", ":")) or chapeau.rstrip().endswith(
+        ("—", ":")
+    )
+    if (
+        not is_bare
+        and not has_dash
+        and len(raw_children) >= 2
+        and not has_in_general_child
+    ):
         all_self_defining = all(
-            _TERM_OPENER.match(rc.get("body", "")) or _TERM_OPENER.match(rc.get("chapeau", ""))
+            _TERM_OPENER.match(rc.get("body", ""))
+            or _TERM_OPENER.match(rc.get("chapeau", ""))
             for rc in raw_children
         )
         if all_self_defining:
-            tags.append(("container_bare", "all children self-defining ('The term X means')"))
+            tags.append(
+                ("container_bare", "all children self-defining ('The term X means')")
+            )
     return tags
 
 
@@ -112,27 +119,21 @@ def _definition_tags(body, chapeau):
     return []
 
 
-def _structure_tags(chapeau_l):
-    if re.search(r"consisting of|shall include the following|composed of", chapeau_l):
+def _structure_tags(chapeau_l, has_children):
+    if has_children and re.search(
+        r"consisting of|shall include the following|composed of", chapeau_l
+    ):
         return [("structure", "chapeau: 'consisting of / shall include'")]
     return []
 
-
-def _conditional_tags(body, chapeau, raw_children):
-    tags = []
-    # Pattern 2: inline "The term X when used in [context] means/includes"
-    if re.search(r'the terms?\s+["\'].+?["\']\s+when used\b', body, re.IGNORECASE) or \
-       re.search(r'the terms?\s+["\'].+?["\']\s+when used\b', chapeau, re.IGNORECASE):
-        tags.append(("conditional_term", "body/chapeau: 'The term X when used in context means'"))
-    # Pattern 3: 2+ children whose bodies start with "when used with reference to"
-    ref_children = [
-        c for c in raw_children
-        if re.match(r"\s*when used with reference to", c.get("body", ""), re.IGNORECASE)
-    ]
-    if len(ref_children) >= 2:
-        tags.append(("conditional_def", f"{len(ref_children)} children define same term under different reference conditions"))
-    return tags
-
+def _multi_def_tags(classified_children):
+    if classified_children and all(
+        any(t["construct"] == "leaf" for t in c["tags"])
+        and any(t["construct"] == "definition" for t in c["tags"])
+        for c in classified_children
+    ):
+        return [("multi_def", "all children are leaf+definition: independent term definitions")]
+    return []
 
 def classify_node(node):
     """
@@ -160,12 +161,17 @@ def classify_node(node):
 
     tags.extend(_exception_tags(header_l, chapeau_l, body_l, bool(raw_children)))
     tags.extend(_definition_tags(node["body"], node["chapeau"]))
-    tags.extend(_scope_tags(header_l, chapeau_l, body_l, has_in_general_child, bool(raw_children)))
-    tags.extend(_container_tags(raw_children, has_in_general_child, node["body"], node["chapeau"]))
-    tags.extend(_structure_tags(chapeau_l))
-    tags.extend(_conditional_tags(node["body"], node["chapeau"], raw_children))
+    tags.extend(
+        _scope_tags(chapeau_l, body_l, has_in_general_child, bool(raw_children))
+    )
+    tags.extend(
+        _container_tags(
+            raw_children, has_in_general_child, node["body"], node["chapeau"]
+        )
+    )
+    tags.extend(_structure_tags(chapeau_l, bool(raw_children)))
 
-    # Deduplicates by construct type, keeping only the first signal that fired for each construct. If exception fires twice (header match + body match), tag_map["exception"] keeps the first one. Then the priority loop picks which construct wins.
+    tags.extend(_multi_def_tags(classified_children))
     return _result(node, classified_children, tags)
 
 
@@ -202,7 +208,7 @@ def main():
         all_results.append(flat)
 
     os.makedirs(LOG_DIR, exist_ok=True)
-    timestamp = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
 
     json_path = os.path.join(LOG_DIR, f"classify_rules_{timestamp}.json")
     with open(json_path, "w", encoding="utf-8") as f:

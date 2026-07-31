@@ -1,0 +1,99 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "other",
+      "reason": "Two children each define separate distinct term (\"Secretary of the Treasury\" vs \"Secretary\"), not conditional scope, not one shared concept, not exhaustive cases of single named concept — just grouped under common header."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "Meaning of \"or his delegate\" change based on context: who official referenced (Secretary of Treasury vs other official) determine which delegate definition apply."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "Three conditions jointly must hold to qualify as domestic building and loan association, all describing single thing: qualification of the association."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": null,
+    "error": "{\"construct\": \"scope\", \"reason\": \"Provision is percentage test: input is total asset composition across enumerated categories (i)-(x)/(xi) (cash, obligations, certificates, loans, REMIC interests, etc.), condition is whether those assets equal at least 60% of total assets at year end, output is whet"
+  },
+  {
+    "id": "7701(a)(30)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "United States person",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Sub-provisions list mutually exclusive alternative categories (citizen/resident, domestic partnership, domestic corporation, estate, trust) that each independently satisfy the named concept \"United States person\"."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(30)(E)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "structure",
+      "reason": "Both sub-provisions (court supervision and US person control) must hold together to define single concept: trust qualifies under this test."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(31)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Foreign estate or trust",
+    "result": {
+      "construct": "other",
+      "reason": "Sub-provisions define two separate distinct terms (\"foreign estate\", \"foreign trust\") independently, not conditional modifications, simultaneous conditions, or exclusive cases of one named concept — they just share parent heading."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(32)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Cooperative bank",
+    "result": {
+      "construct": "structure",
+      "reason": "Both sub-provisions must hold together to complete definition of 'cooperative bank' — supervision requirement and building/loan association requirements are cumulative, not alternatives or conditions."
+    },
+    "error": null
+  }
+]

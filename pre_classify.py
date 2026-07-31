@@ -12,19 +12,11 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify_rules_20260730_215825.json"
+CLASSIFY_LOG = "logs/classify_rules_20260731_193101.json"
 TREE_FILE = "7701_tree.json"
 
-# tag combos deterministic enough to skip agent classification
-SKIP_COMBOS = {
-    frozenset(["leaf"]),
-    frozenset(["definition", "leaf"]),
-    frozenset(["exception", "leaf"]),
-    frozenset(["definition", "exception", "leaf"]),
-    frozenset(["container_bare", "scope_rule"]),
-    frozenset(["container_intro", "scope_def", "scope_rule"]),
-    frozenset(["container_bare", "exception", "scope_rule"]),
-}
+# individual tags sufficient to skip agent classification
+SKIP_TAGS = {"leaf", "scope_rule", "scope_def", "multi_def"}
 
 PROMPT_TMPL = """\
 Read the following provision of US tax law and determine its logical structure.
@@ -34,13 +26,12 @@ Read the following provision of US tax law and determine its logical structure.
 Answer the following questions in order and stop at the first that applies:
 
 1. Do the sub-provisions conditionally define or modify the concept in the main provision — that is, does the meaning or application of the provision change depending on a condition, context, or reference? Or would this provision be incomplete without a computation — does it require specifying inputs, a condition, and an output to be meaningful? If either applies: "scope". Also identify what the inputs, condition, and output are.
-2. Does this provision only make complete sense when all sub-provisions are simultaneously satisfied? If yes: "structure".
+2. Does this provision only make complete sense when all sub-provisions are simultaneously satisfied? To verify: identify what single thing the sub-provisions are all describing. If no such single identifiable thing exists in the provision text, it is not a structure. If yes: "structure".
 3. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of a single named concept stated in the provision? To verify: identify what that named concept (the object being enumerated) is. If no such named concept exists in the provision text, it is not an enumeration. If yes: "enumeration".
 4. If none of the above: "other".
 
 Respond with JSON only, no prose, no markdown fences:
-{{"construct": "enumeration"|"scope"|"structure"|"other", "reason": "one sentence", "inputs": null, "condition": null, "output": null}}
-(set inputs/condition/output only when construct is "scope", otherwise null)
+{{"construct": "enumeration"|"scope"|"structure"|"other", "reason": "one sentence"}}
 """
 
 
@@ -76,7 +67,10 @@ def call_agent(node_id, header, chapeau, body, children):
     prompt = PROMPT_TMPL.format(provision_text=format_provision(node, children))
     result = subprocess.run(
         ["claude", "-p", prompt, "--model", "claude-sonnet-5"],
-        capture_output=True, text=True, timeout=60, check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
     )
     raw = result.stdout.strip()
     if raw.startswith("```"):
@@ -98,7 +92,9 @@ def call_agent(node_id, header, chapeau, body, children):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
-    parser.add_argument("--nodes", nargs="+", default=None, help="run only these node IDs")
+    parser.add_argument(
+        "--nodes", nargs="+", default=None, help="run only these node IDs"
+    )
     args = parser.parse_args()
 
     with open(CLASSIFY_LOG) as f:
@@ -112,10 +108,10 @@ def main():
     # collect ambiguous nodes
     candidates = []
     for entry in classify_data["results"]:
-        tags = frozenset(t["construct"] for t in entry.get("tags", []))
-        if tags in SKIP_COMBOS:
-            continue
+        tags = sorted({t["construct"] for t in entry.get("tags", [])})
         if not tags:
+            continue
+        if SKIP_TAGS & set(tags):
             continue
         candidates.append((entry["id"], tags))
 
@@ -124,7 +120,10 @@ def main():
     else:
         random.shuffle(candidates)
         subset = candidates if args.limit is None else candidates[: args.limit]
-    print(f"Ambiguous nodes total: {len(candidates)}, running: {len(subset)}", file=sys.stderr)
+    print(
+        f"Ambiguous nodes total: {len(candidates)}, running: {len(subset)}",
+        file=sys.stderr,
+    )
 
     results = []
     for node_id, tags in subset:
@@ -145,7 +144,9 @@ def main():
         }
         results.append(row)
         construct = parsed.get("construct", "ERROR") if parsed else "ERROR"
-        reason = parsed.get("reason", error or "")[:80] if parsed else (error or "")[:80]
+        reason = (
+            parsed.get("reason", error or "")[:80] if parsed else (error or "")[:80]
+        )
         print(f"  {node_id:25s} tags={sorted(tags)} → {construct}")
         print(f"    {reason}")
 

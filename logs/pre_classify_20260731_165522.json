@@ -1,0 +1,17 @@
+[
+  {
+    "id": "7701(a)(30)(E)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "structure",
+      "reason": "Trust qualify only if court supervision condition AND US person control condition both hold same time.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  }
+]

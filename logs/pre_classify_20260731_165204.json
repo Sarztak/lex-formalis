@@ -1,0 +1,17 @@
+[
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Provision defines a 60% asset composition test, needing total assets, list of qualifying categories, and timing as inputs to produce a threshold determination.",
+      "inputs": "total assets of the entity; enumerated qualifying asset categories (cash, government obligations, deposits, specified loan types, REMIC interests, etc.)",
+      "condition": "measured at the close of the taxable year",
+      "output": "whether at least 60 percent of total assets consists of the enumerated qualifying assets"
+    },
+    "error": null
+  }
+]

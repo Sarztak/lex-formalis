@@ -35,7 +35,7 @@ Answer the following questions in order and stop at the first that applies:
 
 1. Do the sub-provisions conditionally define or modify the concept in the main provision — that is, does the meaning or application of the provision change depending on a condition, context, or reference? Or would this provision be incomplete without a computation — does it require specifying inputs, a condition, and an output to be meaningful? If either applies: "scope". Also identify what the inputs, condition, and output are.
 2. Does this provision only make complete sense when all sub-provisions are simultaneously satisfied? If yes: "structure".
-3. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of the concept stated above? If yes: "enumeration".
+3. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of a single named concept stated in the provision? To verify: identify what that named concept (the object being enumerated) is. If no such named concept exists in the provision text, it is not an enumeration. If yes: "enumeration".
 4. If none of the above: "other".
 
 Respond with JSON only, no prose, no markdown fences:
@@ -84,6 +84,10 @@ def call_agent(node_id, header, chapeau, body, children):
     if raw.endswith("```"):
         raw = raw.rsplit("```", 1)[0]
     raw = raw.strip()
+    # find first { in case model prefixes prose before JSON
+    brace = raw.find("{")
+    if brace > 0:
+        raw = raw[brace:]
     try:
         parsed, _ = json.JSONDecoder().raw_decode(raw)
         return parsed, None

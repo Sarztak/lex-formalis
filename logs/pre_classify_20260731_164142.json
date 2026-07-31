@@ -1,0 +1,64 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "structure",
+      "reason": "Both definitions must be understood together to establish the regulatory distinction between which persons may act as Secretary versus Secretary of the Treasury in applicable provisions.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "enumeration",
+      "reason": "The provision enumerates mutually exclusive and exhaustive interpretations of the term based on whether it refers to the Secretary of Treasury or another official.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "All three sub-provisions must be simultaneously satisfied for an entity to qualify as a domestic building and loan association.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Defines inputs (total assets), condition (60% threshold at year-end), and output (qualification for asset composition test), requiring computation to apply.",
+      "inputs": "total assets of association at close of taxable year; asset composition by type",
+      "condition": "assets must be of enumerated types and constitute at least 60% of total",
+      "output": "whether entity meets qualifying asset percentage test"
+    },
+    "error": null
+  }
+]

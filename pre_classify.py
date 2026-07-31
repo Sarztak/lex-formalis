@@ -27,26 +27,20 @@ SKIP_COMBOS = {
 }
 
 PROMPT_TMPL = """\
-You are classifying a provision of US tax law for formalization in Catala.
+Read the following provision of US tax law and determine its logical structure.
 
-Given the provision below, decide which Catala construct best represents it:
+{provision_text}
 
-- enumeration : children are mutually exclusive, exhaustive alternatives of one concept
-- structure   : children are named fields / conjunctive criteria of one concept
-- scope       : a computational rule with inputs, conditions, and an output; also applies when the same term is defined differently depending on a condition (same output variable, multiple conditional definitions)
-- none        : this node is a grouping wrapper; no standalone construct needed
+Answer the following questions in order and stop at the first that applies:
+
+1. Do the sub-provisions conditionally define or modify the concept in the main provision — that is, does the meaning or application of the provision change depending on a condition, context, or reference? Or would this provision be incomplete without a computation — does it require specifying inputs, a condition, and an output to be meaningful? If either applies: "scope". Also identify what the inputs, condition, and output are.
+2. Does this provision only make complete sense when all sub-provisions are simultaneously satisfied? If yes: "structure".
+3. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of the concept stated above? If yes: "enumeration".
+4. If none of the above: "other".
 
 Respond with JSON only, no prose, no markdown fences:
-{{"construct": "enumeration"|"structure"|"scope"|"none", "reason": "one sentence"}}
-
-Provision:
-id: {node_id}
-header: {header}
-chapeau: {chapeau}
-body: {body}
-
-Children:
-{children}
+{{"construct": "enumeration"|"scope"|"structure"|"other", "reason": "one sentence", "inputs": null, "condition": null, "output": null}}
+(set inputs/condition/output only when construct is "scope", otherwise null)
 """
 
 
@@ -56,30 +50,32 @@ def walk(node):
         yield from walk(c)
 
 
-def child_summary(children):
-    lines = []
+def provision_text(node):
+    parts = []
+    if node.get("header"):
+        parts.append(node["header"])
+    if node.get("chapeau"):
+        parts.append(node["chapeau"])
+    if node.get("body"):
+        parts.append(node["body"])
+    return " ".join(parts).strip()
+
+
+def format_provision(node, children):
+    text = provision_text(node)
+    lines = [text] if text else []
     for c in children:
-        parts = [f"[{c['id']}]"]
-        if c.get("header"):
-            parts.append(f"header: {c['header']}")
-        if c.get("chapeau"):
-            parts.append(f"chapeau: {c['chapeau']}")
-        if c.get("body"):
-            parts.append(f"body: {c['body']}")
-        lines.append("  - " + " | ".join(parts))
-    return "\n".join(lines) or "  (none)"
+        sub = provision_text(c)
+        if sub:
+            lines.append(f"  - {sub}")
+    return "\n".join(lines) or "(no text)"
 
 
 def call_agent(node_id, header, chapeau, body, children):
-    prompt = PROMPT_TMPL.format(
-        node_id=node_id,
-        header=header or "(none)",
-        chapeau=chapeau or "(none)",
-        body=body or "(none)",
-        children=child_summary(children),
-    )
+    node = {"header": header, "chapeau": chapeau, "body": body}
+    prompt = PROMPT_TMPL.format(provision_text=format_provision(node, children))
     result = subprocess.run(
-        ["claude", "-p", prompt, "--model", "claude-haiku-4-5-20251001"],
+        ["claude", "-p", prompt, "--model", "claude-sonnet-5"],
         capture_output=True, text=True, timeout=60, check=False,
     )
     raw = result.stdout.strip()

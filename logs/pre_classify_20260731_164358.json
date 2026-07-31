@@ -1,0 +1,64 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "other",
+      "reason": "Provision groups two independent term definitions under shared header; each defines a distinct term rather than being an exhaustive alternative, computation, or jointly-required condition.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Two branches split on who term refers to (Secretary vs any other official), covering all cases with no overlap.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "All three sub-provisions (supervision, business purpose, 60% asset test) must hold simultaneously for entity to qualify as domestic building and loan association.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Provision defines a 60% asset-composition test that only means something once you compute qualifying assets against total assets and compare to the threshold.",
+      "inputs": "total assets of the entity at close of taxable year; value of assets falling into each enumerated category (cash, government obligations, member loans, real property loans, REMIC interests, etc.)",
+      "condition": "sum of the enumerated qualifying asset categories, measured at the close of the taxable year, is at least 60 percent of total assets",
+      "output": "whether the entity satisfies this 60-percent asset test (true/false) toward qualifying as a domestic building and loan association"
+    },
+    "error": null
+  }
+]

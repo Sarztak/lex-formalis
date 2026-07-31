@@ -1,0 +1,64 @@
+[
+  {
+    "id": "7701(a)(11)",
+    "tags": [
+      "container_bare"
+    ],
+    "header": "Secretary of the Treasury and Secretary",
+    "result": {
+      "construct": "other",
+      "reason": "Two sub-provisions define two distinct terms (\"Secretary of the Treasury\" and \"Secretary\") independently, not conditional modifications, exhaustive alternatives of one concept, or jointly-required conditions.",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "meaning of \"delegate\" change depending on whether reference is to Secretary of Treasury or to other official",
+      "inputs": "which official term references (Secretary of Treasury or other official)",
+      "condition": "reference is to Secretary of Treasury vs any other official",
+      "output": "applicable meaning of \"or his delegate\" for that official"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "all three sub-conditions must hold together for association to qualify",
+      "inputs": null,
+      "condition": null,
+      "output": null
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)(C)",
+    "tags": [
+      "container_intro"
+    ],
+    "header": "",
+    "result": {
+      "construct": "scope",
+      "reason": "Provision defines percentage asset-composition test — sums listed qualifying asset categories against total assets and compares to 60% threshold, incomplete without that computation.",
+      "inputs": "total assets at close of taxable year; amounts in each listed category (cash, government/state obligations, certain certificates of deposit, member-secured loans, residential/church real property loans, urban renewal loans, institutional facility loans, defaulted-loan property, education loans, business-use property, qualifying REMIC interests)",
+      "condition": "sum of listed qualifying asset categories is at least 60 percent of total assets",
+      "output": "whether the asset-composition (60 percent) test is satisfied"
+    },
+    "error": null
+  }
+]

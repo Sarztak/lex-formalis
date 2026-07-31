@@ -1,0 +1,148 @@
+Construct-candidate nodes: 144
+
+ID                        TAGS                                               NAME
+-------------------------------------------------------------------------------------------------------------------
+7701                      ['container_bare']                                 USCDefinitions
+7701(a)                   ['container_intro']                                Title
+7701(a)(11)               ['container_bare']                                 SecretaryTreasurySecretary
+7701(a)(12)               ['container_bare', 'scope_rule']                   Delegate
+7701(a)(12)(A)            ['container_intro']                                HisDelegate
+7701(a)(19)               ['container_intro']                                DomesticBuildingLoanAssociation
+7701(a)(19)(C)            ['container_intro']                                Sec7701A19C
+7701(a)(30)               ['container_intro']                                UnitedStatesPerson
+7701(a)(30)(E)            ['container_intro']                                Trust
+7701(a)(31)               ['container_bare']                                 ForeignEstateTrust
+7701(a)(32)               ['container_intro']                                CooperativeBank
+7701(a)(33)               ['container_intro']                                RegulatedPublicUtility
+7701(a)(33)(A)            ['container_intro']                                Corporation
+7701(a)(36)               ['container_bare', 'scope_rule']                   TaxReturnPreparer
+7701(a)(36)(B)            ['container_intro']                                Person
+7701(a)(37)               ['container_intro']                                IndividualRetirementPlan
+7701(a)(39)               ['container_intro', 'scope_def']                   PersonsResidingOutsideUnitedStates
+7701(a)(40)               ['container_bare', 'scope_rule']                   IndianTribalGovernment
+7701(a)(42)               ['container_intro']                                SubstitutedBasisProperty
+7701(a)(48)               ['container_bare']                                 OffHighwayVehicles
+7701(a)(48)(A)            ['container_bare', 'scope_rule']                   OffHighwayTransportationVehicles
+7701(a)(49)               ['container_intro']                                QualifiedBloodCollectorOrganization
+7701(a)(50)               ['container_bare', 'scope_rule']                   TerminationUnitedStatesCitizenship
+7701(a)(51)               ['container_bare', 'scope_rule']                   ProhibitedForeignEntity
+7701(a)(51)(A)            ['container_bare']                                 Sec7701A51A
+7701(a)(51)(A)(ii)        ['container_bare', 'scope_rule']                   Determination
+7701(a)(51)(B)            ['container_intro', 'scope_def']                   SpecifiedForeignEntity
+7701(a)(51)(C)            ['container_intro', 'scope_def']                   ForeignControlledEntity
+7701(a)(51)(D)            ['container_bare', 'scope_rule']                   ForeignInfluencedEntity
+7701(a)(51)(D)(i)         ['container_intro', 'scope_def']                   ForeignInfluencedEntity
+7701(a)(51)(D)(i)(I)      ['container_intro']                                Sec7701A51DII
+7701(a)(51)(D)(i)(II)     ['container_intro']                                Sec7701A51DIIi
+7701(a)(51)(D)(i)(II)(bb) ['container_intro']                                Sec7701A51DIIiBb
+7701(a)(51)(D)(ii)        ['container_bare', 'scope_rule']                   EffectiveControl
+7701(a)(51)(D)(ii)(I)     ['container_bare', 'scope_rule']                   Sec7701A51DIiI
+7701(a)(51)(D)(ii)(II)    ['container_intro', 'scope_def']                   EffectiveControl
+7701(a)(51)(D)(ii)(III)   ['container_bare', 'scope_rule']                   LicensingOtherAgreements
+7701(a)(51)(D)(ii)(III)(aa) ['container_intro', 'scope_def']                   EffectiveControl
+7701(a)(51)(D)(ii)(III)(bb) ['container_bare', 'scope_rule']                   Sec7701A51DIiIiiBb
+7701(a)(51)(E)            ['container_bare', 'scope_rule']                   PubliclyTradedEntities
+7701(a)(51)(E)(i)         ['container_bare']                                 Sec7701A51EI
+7701(a)(51)(E)(i)(I)      ['container_intro']                                NonapplicationCertainForeignControlledEntityRules
+7701(a)(51)(E)(i)(II)     ['container_intro']                                NonapplicationCertainForeignInfluencedEntityRules
+7701(a)(51)(E)(i)(III)    ['container_intro']                                ExclusionExchangesMarketsCoveredNations
+7701(a)(51)(E)(ii)        ['container_intro']                                AdditionalForeignControlledEntityRequirementsPubliclyTradedCompanies
+7701(a)(51)(E)(iii)       ['container_intro']                                AdditionalForeignInfluencedEntityRequirementsPubliclyTradedCompanies
+7701(a)(51)(E)(iii)(I)    ['container_intro']                                Sec7701A51EIiiI
+7701(a)(51)(F)            ['container_intro', 'scope_def']                   CoveredOfficer
+7701(a)(51)(G)            ['container_intro', 'scope_def']                   Control
+7701(a)(51)(I)            ['container_intro', 'scope_def']                   OtherDefinitions
+7701(a)(51)(I)(v)         ['container_intro']                                QualifiedFacility
+7701(a)(52)               ['container_bare', 'scope_rule']                   MaterialAssistanceFromProhibitedForeignEntity
+7701(a)(52)(A)            ['container_intro']                                MaterialAssistanceFromProhibitedForeignEntity
+7701(a)(52)(B)            ['container_intro', 'scope_def']                   ThresholdPercentageQualifiedFacilitiesEnergyStorageTechnology
+7701(a)(52)(B)(i)         ['container_intro']                                Sec7701A52BI
+7701(a)(52)(B)(ii)        ['container_intro']                                Sec7701A52BIi
+7701(a)(52)(C)            ['container_bare', 'scope_rule']                   ThresholdPercentageEligibleComponents
+7701(a)(52)(C)(i)         ['container_intro', 'scope_def']                   Sec7701A52CI
+7701(a)(52)(C)(i)(I)      ['container_intro']                                Sec7701A52CII
+7701(a)(52)(C)(i)(II)     ['container_intro']                                Sec7701A52CIIi
+7701(a)(52)(C)(i)(III)    ['container_intro']                                Sec7701A52CIIii
+7701(a)(52)(C)(i)(IV)     ['container_intro']                                Sec7701A52CIIv
+7701(a)(52)(C)(i)(V)      ['container_intro']                                Sec7701A52CIV
+7701(a)(52)(C)(ii)        ['container_intro']                                AdjustedThresholdPercentageApplicableCriticalMinerals
+7701(a)(52)(C)(ii)(II)    ['container_intro']                                ThresholdPercentage
+7701(a)(52)(D)            ['container_bare']                                 MaterialAssistanceCostRatio
+7701(a)(52)(D)(i)         ['container_intro', 'scope_def']                   MaterialAssistanceCostRatio
+7701(a)(52)(D)(i)(I)      ['container_intro']                                Sec7701A52DII
+7701(a)(52)(D)(i)(I)(bb)  ['container_intro']                                TotalDirectCosts
+7701(a)(52)(D)(ii)        ['container_intro', 'scope_def']                   MaterialAssistanceCostRatio
+7701(a)(52)(D)(ii)(I)     ['container_intro']                                Sec7701A52DIiI
+7701(a)(52)(D)(iii)       ['container_bare', 'scope_rule']                   SafeHarborTables
+7701(a)(52)(D)(iii)(I)    ['container_intro']                                Secretary
+7701(a)(52)(D)(iii)(II)   ['container_intro', 'scope_def']                   SafeHarborsPriorIssuance
+7701(a)(52)(D)(iii)(II)(bb) ['container_intro']                                Supplier
+7701(a)(52)(D)(iii)(III)  ['container_intro']                                Sec7701A52DIiiIii
+7701(a)(52)(D)(iii)(IV)   ['container_intro']                                CertificationRequirement
+7701(a)(52)(D)(iii)(IV)(aa) ['container_intro']                                Sec7701A52DIiiIvAa
+7701(a)(52)(D)(iii)(IV)(dd) ['container_intro']                                Supplier
+7701(a)(52)(D)(iv)        ['container_intro']                                ExistingContract
+7701(a)(52)(D)(iv)(II)    ['container_bare']                                 Sec7701A52DIvIi
+7701(a)(52)(D)(v)         ['container_intro']                                AntiCircumventionRules
+7701(a)(52)(E)            ['container_intro', 'scope_def']                   OtherDefinitions
+7701(a)(52)(E)(i)         ['container_intro']                                EligibleComponent
+7701(a)(52)(E)(iii)       ['container_intro']                                ManufacturedProduct
+7701(a)(52)(E)(iv)        ['container_intro']                                QualifiedFacility
+7701(a)(52)(G)            ['container_intro']                                RegulationsGuidance
+7701(b)                   ['container_bare', 'scope_rule']                   DefinitionResidentAlienNonresidentAlien
+7701(b)(1)                ['container_intro', 'scope_def']                   Sec7701B1
+7701(b)(1)(A)             ['container_intro']                                ResidentAlien
+7701(b)(2)                ['container_bare']                                 SpecialRulesFirstLastYearResidency
+7701(b)(2)(A)             ['container_bare', 'scope_rule']                   FirstYearResidency
+7701(b)(2)(B)             ['container_intro']                                LastYearResidency
+7701(b)(2)(C)             ['container_bare', 'scope_rule']                   CertainNominalPresenceDisregarded
+7701(b)(3)                ['container_bare', 'scope_rule']                   SubstantialPresenceTest
+7701(b)(3)(A)             ['container_intro']                                Sec7701B3A
+7701(b)(3)(B)             ['container_intro']                                ExceptionIndividualPresentUnitedStatesDuringLessThanOneHalfCurrentYearCloserConnectionForeignCountryEstablished
+7701(b)(3)(C)             ['container_intro']                                SubparagraphBApplyCertainCases
+7701(b)(3)(D)             ['container_intro']                                ExceptionExemptIndividualsCertainMedicalConditions
+7701(b)(4)                ['container_bare']                                 FirstYearElection
+7701(b)(4)(A)             ['container_intro']                                AlienIndividual
+7701(b)(4)(A)(iv)         ['container_intro']                                Both
+7701(b)(5)                ['container_intro', 'scope_def', 'scope_rule']     ExemptIndividualDefined
+7701(b)(5)(A)             ['container_intro']                                Individual
+7701(b)(5)(A)(iv)         ['container_intro']                                ProfessionalAthlete
+7701(b)(5)(B)             ['container_intro']                                ForeignGovernmentRelatedIndividual
+7701(b)(5)(C)             ['container_intro']                                TeacherTrainee
+7701(b)(5)(D)             ['container_intro']                                Student
+7701(b)(5)(D)(i)          ['container_intro']                                Sec7701B5DI
+7701(b)(5)(E)             ['container_bare']                                 SpecialRulesTeachersTraineesStudents
+7701(b)(6)                ['container_intro', 'scope_def']                   LawfulPermanentResident
+7701(b)(7)                ['container_intro', 'scope_def', 'scope_rule']     PresenceUnitedStates
+7701(b)(9)                ['container_bare', 'scope_rule']                   TaxableYear
+7701(b)(9)(B)             ['container_intro']                                FiscalYearTaxpayer
+7701(b)(10)               ['container_intro']                                CoordinationSection
+7701(e)                   ['container_intro', 'scope_def', 'scope_rule']     TreatmentCertainContractsProvidingServicesEtc
+7701(e)(1)                ['container_intro']                                Contract
+7701(e)(3)                ['container_bare', 'scope_rule']                   SpecialRulesContractsArrangementsInvolvingSolidWasteDisposalEnergyCleanWaterFacilities
+7701(e)(3)(A)             ['container_intro']                                Sec7701E3A
+7701(e)(3)(A)(i)          ['container_intro']                                Sec7701E3AI
+7701(e)(4)                ['container_bare', 'scope_rule']                   ParagraphApplyCertainCases
+7701(e)(4)(A)             ['container_intro']                                QualifiedSolidWasteDisposalFacility
+7701(e)(4)(B)             ['container_intro', 'scope_def']                   SpecialRulesApplicationSubparagraphRespectCertainRightsAllocationsUnderContract
+7701(e)(4)(C)             ['container_bare']                                 SpecialRulesApplicationSubparagraphCaseCertainEvents
+7701(e)(5)                ['container_intro']                                ExceptionCertainLowIncomeHousing
+7701(f)                   ['container_intro']                                UseRelatedPersonsPassThruEntities
+7701(h)                   ['container_bare', 'scope_rule']                   MotorVehicleOperatingLeases
+7701(h)(1)                ['container_intro', 'scope_def']                   Sec7701H1
+7701(h)(2)                ['container_intro', 'scope_def', 'scope_rule']     QualifiedMotorVehicleOperatingAgreementDefined
+7701(h)(2)(B)             ['container_intro']                                MinimumLiabilityLessor
+7701(h)(2)(C)             ['container_intro']                                CertificationLesseeNoticeTaxOwnership
+7701(h)(3)                ['container_bare', 'scope_rule']                   TerminalRentalAdjustmentClauseDefined
+7701(i)                   ['container_bare']                                 TaxableMortgagePools
+7701(i)(2)                ['container_intro', 'scope_def', 'scope_rule']     TaxableMortgagePoolDefined
+7701(i)(2)(A)             ['container_intro']                                Sec7701I2A
+7701(i)(3)                ['container_intro']                                TreatmentCertainReitS
+7701(j)                   ['container_bare', 'scope_rule']                   TaxTreatmentFederalThriftSavingsFund
+7701(j)(1)                ['container_intro', 'scope_def']                   Sec7701J1
+7701(k)                   ['container_intro']                                TreatmentCertainAmountsPaidCharity
+7701(o)                   ['container_bare']                                 ClarificationEconomicSubstanceDoctrine
+7701(o)(1)                ['container_intro']                                ApplicationDoctrine
+7701(o)(2)                ['container_bare', 'scope_rule']                   SpecialRuleTaxpayerReliesOnProfitPotential
+7701(o)(5)                ['container_intro', 'scope_def']                   DefinitionsSpecialRules
+7701(p)                   ['container_bare']                                 CrossReferences

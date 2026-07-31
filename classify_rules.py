@@ -63,7 +63,38 @@ def _scope_tags(chapeau_l, body_l, has_in_general_child, has_children):
         tags.append(("scope_def", "chapeau/body: 'for purposes of'"))
     if has_in_general_child:
         tags.append(("scope_rule", "child named 'In general' or 'General rule'"))
+    if has_children and re.search(r"\bin the case of\b", chapeau_l):
+        tags.append(
+            (
+                "scope_case",
+                "chapeau: 'in the case of' — conditional classification scope",
+            )
+        )
+    if has_children and re.search(r"\bif—", chapeau_l):
+        tags.append(("scope_if", "chapeau: 'if—' — conditional scope"))
+    if has_children and re.search(r"at least \d|an amount equal to", chapeau_l):
+        tags.append(("scope_threshold", "chapeau: threshold or amount computation"))
+    if has_children and re.search(
+        r"except as otherwise provided|shall not apply", chapeau_l
+    ):
+        tags.append(("scope_override", "chapeau: exception/override scope"))
     return tags
+
+
+def _admin_rule_tags(chapeau_l, body_l, has_children):
+    if has_children and re.search(
+        r"shall (prescribe|issue|establish).{0,40}(regulations?|guidance)",
+        chapeau_l,
+    ):
+        return [
+            ("admin_rule", "chapeau: administrative delegation — no Catala construct")
+        ]
+    if has_children and re.search(
+        r"shall (prescribe|issue|establish).{0,40}(regulations?|guidance)",
+        body_l,
+    ):
+        return [("admin_rule", "body: administrative delegation — no Catala construct")]
+    return []
 
 
 def _container_tags(raw_children, has_in_general_child, body, chapeau):
@@ -176,7 +207,7 @@ def classify_node(node):
         )
     )
     tags.extend(_structure_tags(chapeau_l, bool(raw_children)))
-
+    tags.extend(_admin_rule_tags(chapeau_l, body_l, bool(raw_children)))
     tags.extend(_has_def_child_tags(classified_children))
     return _result(node, classified_children, tags)
 

@@ -12,14 +12,33 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify_rules_20260731_194902.json"
+CLASSIFY_LOG = "logs/classify_rules_20260731_201832.json"
 TREE_FILE = "7701_tree.json"
 
 # Tags that make classification deterministic — skip agent for these.
 #
-# leaf       : no children, no Catala construct needed beyond prose
-# scope_rule : child named "In general" / "General rule" — structurally a scope
-# scope_def  : "for purposes of" in chapeau/body with children — structurally a scope
+# leaf          : no children, no Catala construct needed beyond prose
+# scope_rule    : child named "In general" / "General rule" — structurally a scope.
+#                 "In general" is the default rule inside a scope; its presence means
+#                 the parent must be a scope that houses that default + exceptions.
+# scope_def     : "for purposes of" in chapeau/body — structurally a scope.
+#                 "For purposes of X" restricts the domain of a definition or rule;
+#                 that restriction is a computation input, making the parent a scope.
+# scope_case    : "in the case of" in chapeau — conditional classification scope.
+#                 Children branch on a condition and produce different outcomes;
+#                 that conditional dispatch is definitionally a scope.
+# scope_if      : "if—" ending chapeau — conditional scope.
+#                 Parent sets up a condition (if …) and children are the branches;
+#                 no enumeration or structure can be conditional in this way.
+# scope_threshold : threshold/amount computation in chapeau ("at least N", "an amount
+#                 equal to"). Children specify how to reach or measure that threshold;
+#                 the result is a numeric computation, making the parent a scope.
+# scope_override  : "except as otherwise provided" / "shall not apply" in chapeau.
+#                 Parent establishes an override rule; children define when the
+#                 exception applies. Structural override = scope, not enum or structure.
+# admin_rule    : "shall prescribe/issue/establish regulations/guidance" — delegates
+#                 rule-making to the Secretary. No Catala construct captures a
+#                 delegation of authority; these become prose comments only.
 #
 # has_def_child : at least one child carries the `definition` tag ("The term X means…").
 #   Reasoning: the four Catala constructs are enumeration, structure, scope, other.
@@ -36,7 +55,17 @@ TREE_FILE = "7701_tree.json"
 #   - other      is the only remaining option: the parent is a grouping wrapper for
 #                independent definitions, no Catala construct needed.
 #   Conclusion: if any child has definition tag → parent is deterministically `other`.
-SKIP_TAGS = {"leaf", "scope_rule", "scope_def", "has_def_child"}
+SKIP_TAGS = {
+    "leaf",
+    "scope_rule",
+    "scope_def",
+    "scope_case",
+    "scope_if",
+    "scope_threshold",
+    "scope_override",
+    "admin_rule",
+    "has_def_child",
+}
 
 PROMPT_TMPL = """\
 Read the following provision of US tax law and determine its logical structure.
@@ -82,7 +111,7 @@ def format_provision(node, children):
     return "\n".join(lines) or "(no text)"
 
 
-def call_agent(node_id, header, chapeau, body, children):
+def call_agent(header, chapeau, body, children):
     node = {"header": header, "chapeau": chapeau, "body": body}
     prompt = PROMPT_TMPL.format(provision_text=format_provision(node, children))
     result = subprocess.run(
@@ -117,10 +146,10 @@ def main():
     )
     args = parser.parse_args()
 
-    with open(CLASSIFY_LOG) as f:
+    with open(CLASSIFY_LOG, encoding="utf-8") as f:
         classify_data = json.load(f)
 
-    with open(TREE_FILE) as f:
+    with open(TREE_FILE, encoding="utf-8") as f:
         tree_data = json.load(f)
 
     node_map = {n["id"]: n for n in walk(tree_data)}
@@ -149,7 +178,6 @@ def main():
     for node_id, tags in subset:
         node = node_map.get(node_id, {})
         parsed, error = call_agent(
-            node_id,
             node.get("header", ""),
             node.get("chapeau", ""),
             node.get("body", ""),
@@ -172,7 +200,7 @@ def main():
 
     ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
     out_path = f"logs/pre_classify_{ts}.json"
-    with open(out_path, "w") as f:
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     print(f"\nWritten: {out_path}", file=sys.stderr)
 

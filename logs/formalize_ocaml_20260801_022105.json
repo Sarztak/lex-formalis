@@ -1,0 +1,29 @@
+[
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "result": {
+      "ocaml": "",
+      "pattern": "ambiguous",
+      "reason": "Pattern depends on definitions in section 45Y(b)(1) and section 48E(b)(3), which are cross-referenced and not given here."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(i)",
+    "result": {
+      "ocaml": "let is_eligible_component (component : component) : bool =\n  described_in_section_45X_c_1 component ||\n  identified_by_secretary_under_subparagraph_g component",
+      "pattern": "disjunction",
+      "reason": "Eligible component defined as either of two alternative sufficient conditions joined by \"or\"."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iii)",
+    "result": {
+      "ocaml": "let is_manufactured_product (product : product) : bool =\n  is_component_of_qualified_facility product ||\n  identified_by_secretary_under_subparagraph_g product",
+      "pattern": "disjunction",
+      "reason": "Term qualifies if either of two alternative conditions holds, joined by \"or\"."
+    },
+    "error": null
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "7701(a)(52)(C)(ii)(II)",
+    "result": {
+      "ocaml": "",
+      "pattern": "ambiguous",
+      "reason": "Fragment sets adjustment factors for agency-determined threshold percentage under a cross-referenced clause, but specifies no formula, so no logic can be captured here."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(i)(I)(bb)",
+    "result": {
+      "ocaml": "(* total_direct_costs_of_prohibited_products : money\n   — cost attributable to manufactured products/components incorporated into qualified facility or energy storage tech AND mined/produced/manufactured by prohibited foreign entity\n   — partial expression, computation completes at parent level (divided by ...) *)",
+      "pattern": "partial",
+      "reason": "Text ends mid-formula with 'divided by', defining only numerator of ratio computed at parent level."
+    },
+    "error": null
+  }
+]

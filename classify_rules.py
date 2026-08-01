@@ -82,17 +82,12 @@ def _scope_tags(chapeau_l, body_l, has_in_general_child, has_children):
 
 
 def _admin_rule_tags(chapeau_l, body_l, has_children):
-    if has_children and re.search(
-        r"shall (prescribe|issue|establish).{0,40}(regulations?|guidance)",
-        chapeau_l,
-    ):
+    pattern = r"(shall|may) (prescribe|issue|establish).{0,40}(regulations?|guidance)"
+    if has_children and re.search(pattern, chapeau_l):
         return [
             ("admin_rule", "chapeau: administrative delegation — no Catala construct")
         ]
-    if has_children and re.search(
-        r"shall (prescribe|issue|establish).{0,40}(regulations?|guidance)",
-        body_l,
-    ):
+    if has_children and re.search(pattern, body_l):
         return [("admin_rule", "body: administrative delegation — no Catala construct")]
     return []
 

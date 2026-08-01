@@ -1,0 +1,15 @@
+[
+  {
+    "id": "7701(a)(37)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Individual retirement plan",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Provision names concept 'individual retirement plan' and lists two mutually exclusive alternatives (account under 408(a), annuity under 408(b)) that exhaust it."
+    },
+    "error": null
+  }
+]

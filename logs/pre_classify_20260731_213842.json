@@ -1,0 +1,80 @@
+[
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "scope",
+      "reason": "three bullets joined conjunctively (supervision, business purpose, 60% asset test) all must hold for entity to qualify as association — logical AND computation, not exhaustive alternatives of a named concept."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(32)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Cooperative bank",
+    "result": {
+      "construct": "scope",
+      "reason": "definition of cooperative bank complete only if both conditions hold (supervision by State/Federal authority AND meets subparagraphs B/C of paragraph 19), a logical AND computation over two inputs yielding qualification status."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(49)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Qualified blood collector organization",
+    "result": {
+      "construct": "scope",
+      "reason": "Four sub-provisions are conjunctive conditions (A∧B∧C∧D) all required to define membership in the term, a logical computation over inputs to produce the qualifying output."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Qualified facility",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Both children define same named concept \"qualified facility\" as alternative cases via cross-reference, not conditional rule needing computation."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Teacher or trainee",
+    "result": {
+      "construct": "scope",
+      "reason": "Term defined by AND of two conditions (visa status under J/Q minus student, plus substantial compliance) — both required, logical computation needed to complete definition."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Student",
+    "result": {
+      "construct": "scope",
+      "reason": "Both sub-provisions are cumulative conditions (temporarily present AND substantially complies) whose joint satisfaction determines who counts as a student — a logical AND computation, not exclusive alternatives."
+    },
+    "error": null
+  }
+]

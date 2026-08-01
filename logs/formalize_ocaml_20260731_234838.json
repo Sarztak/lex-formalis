@@ -1,0 +1,47 @@
+[
+  {
+    "id": "7701(a)(33)",
+    "result": {
+      "ocaml": "let is_leased_rail_carrier (corporation : corporation) : bool =\n  subject_to_part_a_subtitle_iv_title_49 corporation &&\n  substantially_all_properties_leased_before_1954 corporation &&\n  each_lease_term_exceeds_20_years corporation &&\n  at_least_80_percent_gross_income_from_leases_or_subparagraphs_a_through_f corporation\n\nlet is_common_parent_railroad_corporation (corporation : corporation) : bool =\n  is_common_carrier_by_railroad_subject_to_part_a_subtitle_iv_title_49 corporation &&\n  at_least_80_percent_gross_income_from_subparagraphs_a_through_f corporation\n\nlet is_regulated_public_utility (corporation : corporation) : bool =\n  furnishes_or_sells_electricity_gas_water_or_sewerage_disposal_service corporation ||\n  common_carrier_gas_pipeline_transportation_ferc_jurisdiction corporation ||\n  common_carrier_railroad_or_petroleum_pipeline_transportation corporation ||\n  furnishes_or_sells_telephone_or_telegraph_service_rate_regulated corporation ||\n  common_carrier_air_transportation_secretary_of_transportation_jurisdiction corporation ||\n  water_carrier_transportation_subject_to_jurisdiction corporation ||\n  is_leased_rail_carrier corporation ||\n  is_common_parent_railroad_corporation corporation",
+      "pattern": "disjunction",
+      "reason": "Term is defined as any corporation meeting one of eight alternative categories (A through H) joined by \"or\", each independently sufficient, with G and H carrying their own internal conjunctive conditions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(32)",
+    "result": {
+      "ocaml": "let is_cooperative_bank (institution : institution) : bool =\n  no_capital_stock institution &&\n  organized_and_operated_for_mutual_purposes_without_profit institution &&\n  subject_to_state_or_federal_supervision institution &&\n  meets_domestic_building_and_loan_association_requirements_b_and_c institution",
+      "pattern": "conjunction",
+      "reason": "All listed conditions (no capital stock, mutual/nonprofit purpose, supervision, and paragraph 19 B/C requirements) must hold together for the institution to qualify as a cooperative bank."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)(A)",
+    "result": {
+      "ocaml": "let meaning_of_delegate (ref_official : official) : delegate =\n  if refers_to_secretary_of_treasury ref_official then\n    duly_authorized_officer_employee_or_agency ref_official\n  else\n    similarly_construed_delegate ref_official",
+      "pattern": "conditional",
+      "reason": "Term \"or his delegate\" defined one way for Secretary of Treasury reference, another way for any other US official."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(A)",
+    "result": {
+      "ocaml": "let is_material_assistance_from_prohibited_foreign_entity (facility : facility) : bool =\n  if is_qualified_facility_or_energy_storage_technology facility then\n    material_assistance_cost_ratio facility <. threshold_percentage_b facility\n  else if produces_eligible_components facility then\n    material_assistance_cost_ratio facility <. threshold_percentage_c facility\n  else\n    false",
+      "pattern": "mixed",
+      "reason": "Entity category (qualified facility/storage vs. eligible-component facility) selects which threshold percentage the cost ratio is compared against."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(11)",
+    "result": {
+      "ocaml": "module SecretaryOfTheTreasuryAndSecretary = struct\n  (* Secretary of the Treasury: means the Secretary of the Treasury, personally; does not include any delegate of his *)\n\n  (* Secretary: means the Secretary of the Treasury or his delegate *)\nend",
+      "pattern": "wrapper",
+      "reason": "Header groups two independently complete term definitions with no shared computation between them."
+    },
+    "error": null
+  }
+]

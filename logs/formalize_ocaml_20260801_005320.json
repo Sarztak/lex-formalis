@@ -1,0 +1,470 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "result": {
+      "ocaml": "let meaning_of_or_his_delegate (ref_official : official) : delegate =\n  if refers_to_secretary_of_treasury ref_official then\n    officer_employee_or_agency_of_treasury_authorized_by_secretary ref_official\n  else\n    similarly_construed_delegate ref_official",
+      "pattern": "conditional",
+      "reason": "Term \"or his delegate\" is defined one way for the Secretary of the Treasury and another way (by similar construction) for any other US official."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "result": {
+      "ocaml": "let is_domestic_building_and_loan_association (association : association) : bool =\n  subject_to_state_or_federal_supervision association &&\n  business_principally_acquiring_savings_and_investing_in_loans association &&\n  meets_sixty_percent_asset_test association",
+      "pattern": "conjunction",
+      "reason": "Three cumulative requirements (supervision, business purpose, asset test) joined by \"and\" must all hold for the association to qualify."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(30)",
+    "result": {
+      "ocaml": "let is_united_states_person (entity : entity) : bool =\n  is_citizen_or_resident entity ||\n  is_domestic_partnership entity ||\n  is_domestic_corporation entity ||\n  (is_estate entity && not (is_foreign_estate entity)) ||\n  (is_trust entity && qualifies_as_domestic_trust entity)",
+      "pattern": "disjunction",
+      "reason": "Term qualifies if any one of the listed entity categories holds, so top-level structure is boolean OR across sub-provisions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(32)",
+    "result": {
+      "ocaml": "let is_cooperative_bank (institution : institution) : bool =\n  no_capital_stock institution &&\n  organized_for_mutual_purposes institution &&\n  operated_without_profit institution &&\n  subject_to_state_or_federal_supervision institution &&\n  meets_domestic_building_and_loan_association_requirements_b_and_c institution",
+      "pattern": "conjunction",
+      "reason": "All listed conditions (no capital stock, mutual/nonprofit purpose, state/federal supervision, and meeting subparagraphs (B)/(C) of paragraph (19)) are cumulative requirements that must all hold."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(33)",
+    "result": {
+      "ocaml": "let is_regulated_public_utility (entity : entity) : bool =\n  furnishes_or_sells_electricity_gas_water entity ||\n  transports_gas_by_pipeline_ferc_jurisdiction entity ||\n  transports_railroad_or_petroleum_pipeline entity ||\n  furnishes_telephone_or_telegraph_service entity ||\n  transports_by_air_as_common_carrier entity ||\n  transports_by_water_carrier entity ||\n  is_leased_rail_carrier_before_1954 entity ||\n  is_common_parent_railroad_corporation entity",
+      "pattern": "disjunction",
+      "reason": "Entity qualifies as a regulated public utility if it satisfies any one of the eight independent corporation categories listed in subparagraphs (A) through (H)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(33)(A)",
+    "result": {
+      "ocaml": "let is_public_utility_corporation (corporation : corporation) : bool =\n  furnishes_or_sells_utility_services corporation ||\n  operates_intrastate_electric_railroad_or_trolley_or_bus_system corporation ||\n  provides_motor_vehicle_transportation corporation\n",
+      "pattern": "disjunction",
+      "reason": "Three alternative activity categories joined by or, any one qualifies corporation as public utility."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(36)(B)",
+    "result": {
+      "ocaml": "let is_excepted_from_tax_return_preparer (person : person) : bool =\n  furnishes_mechanical_assistance person ||\n  prepares_return_for_regular_employer person ||\n  prepares_return_as_fiduciary person ||\n  prepares_refund_claim_for_deficiency_or_audit_waiver person",
+      "pattern": "disjunction",
+      "reason": "Four alternative conditions, any one true excepts person from tax return preparer status."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(37)",
+    "result": {
+      "ocaml": "let is_individual_retirement_plan (entity : entity) : bool =\n  is_individual_retirement_account entity ||\n  is_individual_retirement_annuity entity",
+      "pattern": "disjunction",
+      "reason": "Term covers either an account described in 408(a) or an annuity described in 408(b), so either alone qualifies."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(42)",
+    "result": {
+      "ocaml": "let is_substituted_basis_property (property : property) : bool =\n  is_transferred_basis_property property ||\n  is_exchanged_basis_property property",
+      "pattern": "disjunction",
+      "reason": "Term qualifies if property is transferred basis property or exchanged basis property, alternative sufficient conditions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(48)",
+    "result": {
+      "ocaml": "module OffHighwayVehicles = struct\n  (* sub-provision: off-highway transportation vehicles - defined separately *)\n\n  let is_nontransportation_trailer_or_semitrailer (vehicle : vehicle) : bool =\n    specially_designed_as_enclosed_stationary_shelter vehicle &&\n    functions_only_for_off_highway_function vehicle &&\n    located_at_off_highway_site vehicle\nend",
+      "pattern": "wrapper",
+      "reason": "Heading groups two independent sub-definitions, one with no body text (placeholder) and one with its own conjunctive test, so no single computation unifies them."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(49)",
+    "result": {
+      "ocaml": "let is_qualified_blood_collector_organization (organization : entity) : bool =\n  is_501c3_exempt_organization organization &&\n  primarily_engaged_in_blood_collection organization &&\n  registered_with_secretary_for_excise_tax_exemption organization &&\n  registered_with_fda_to_collect_blood organization\n",
+      "pattern": "conjunction",
+      "reason": "Four requirements joined by structure of list, all must hold for org to qualify."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(D)(i)(I)",
+    "result": {
+      "ocaml": "let is_specified_foreign_entity_controlled (entity : entity) : bool =\n  has_authority_to_appoint_covered_officer entity ||\n  single_specified_foreign_entity_owns_at_least_25_percent entity ||\n  specified_foreign_entities_own_in_aggregate_at_least_40_percent entity ||\n  debt_issued_to_specified_foreign_entities_at_least_15_percent entity",
+      "pattern": "disjunction",
+      "reason": "Four sub-conditions joined by \"or\", any one satisfies entity qualification."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(D)(i)(II)",
+    "result": {
+      "ocaml": "let made_payment_granting_foreign_control (taxpayer : entity) (foreign_entity : entity) : bool =\n  made_payment_to_specified_foreign_entity taxpayer foreign_entity &&\n  payment_pursuant_to_control_arrangement taxpayer foreign_entity &&\n  (grants_effective_control_over_qualified_facility_or_storage taxpayer foreign_entity ||\n   grants_effective_control_over_eligible_component taxpayer foreign_entity)",
+      "pattern": "conjunction",
+      "reason": "payment, arrangement, and control grant are all cumulative requirements, with the two control targets (facility/storage vs component) as an inner disjunction."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(D)(i)(II)(bb)",
+    "result": {
+      "ocaml": "let qualifies_as_eligible_component_activity (component : eligible_component) : bool =\n  extracts_processes_or_recycles_applicable_critical_mineral component ||\n  produces_eligible_component_not_critical_mineral component",
+      "pattern": "disjunction",
+      "reason": "Two alternative activities (mineral extraction/processing/recycling, or production of non-mineral component) each independently qualify, joined by \"or\"."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(E)(i)",
+    "result": {
+      "ocaml": "let excludes_foreign_controlled_entity_rules (entity : entity) : bool =\n  regularly_traded_on_national_securities_exchange entity ||\n  regularly_traded_on_qualifying_foreign_exchange entity",
+      "pattern": "disjunction",
+      "reason": "entity escape foreign-controlled rule if traded on any one listed exchange, alternative sufficient conditions joined by structure of list"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(E)(iii)(I)",
+    "result": {
+      "ocaml": "let meets_ownership_or_control_test (entity : specified_foreign_entity) : bool =\n  has_authority_to_appoint_covered_officer entity ||\n  single_entity_owns_at_least_25_percent entity ||\n  entities_own_in_aggregate_at_least_40_percent entity",
+      "pattern": "disjunction",
+      "reason": "Three bullets joined by \"or\" are alternative sufficient conditions, any one satisfies the test."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "result": {
+      "ocaml": "let is_qualified_facility (facility : facility) : bool =\n  is_qualified_facility_45y_b_1 facility ||\n  is_qualified_facility_48e_b_3 facility",
+      "pattern": "disjunction",
+      "reason": "Term qualifies if facility meets either section 45Y(b)(1) or section 48E(b)(3) definition, alternative sufficient conditions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(A)",
+    "result": {
+      "ocaml": "let is_material_assistance_from_prohibited_foreign_entity (facility : facility) : bool =\n  if is_qualified_facility_or_energy_storage_technology facility then\n    material_assistance_cost_ratio facility < threshold_percentage_b facility\n  else\n    material_assistance_cost_ratio facility < threshold_percentage_c facility",
+      "pattern": "mixed",
+      "reason": "Facility category (qualified facility/energy storage vs. eligible-components facility) selects which cost ratio and threshold subparagraph (B or C) apply to the comparison."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(C)(ii)",
+    "result": {
+      "ocaml": "let adjusted_threshold_percentage (mineral : applicable_critical_mineral) (calendar_year : int) : decimal =\n  let secretary_issued_threshold = secretary_issued_threshold_percentage mineral calendar_year in\n  let otherwise_applicable_threshold = threshold_percentage_under_clause_i_v mineral calendar_year in\n  Float.max secretary_issued_threshold otherwise_applicable_threshold",
+      "pattern": "arithmetic",
+      "reason": "Provision computes replacement threshold as max of secretary-issued value and clause (i)(V) value, no branching condition."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(C)(ii)(II)",
+    "result": {
+      "ocaml": "let adjusted_threshold_percentage (mineral : critical_mineral) (calendar_year : int) : decimal =\n  let base_threshold = otherwise_applicable_threshold_percentage mineral calendar_year in\n  let geographic_adjustment = domestic_geographic_availability_factor mineral calendar_year in\n  let supply_chain_adjustment = supply_chain_constraints_factor mineral calendar_year in\n  let processing_capacity_adjustment = domestic_processing_capacity_needs_factor mineral calendar_year in\n  let national_security_adjustment = national_security_concerns_factor mineral calendar_year in\n  base_threshold\n  +. geographic_adjustment\n  +. supply_chain_adjustment\n  +. processing_capacity_adjustment\n  +. national_security_adjustment",
+      "pattern": "arithmetic",
+      "reason": "Provision computes adjusted threshold percentage from base value plus four named factors, not a boolean condition."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(i)(I)(bb)",
+    "result": {
+      "ocaml": "type manufactured_product = {\n  cost : money;\n  incorporated_into_facility_upon_completion : bool;\n  mined_produced_or_manufactured_by_prohibited_foreign_entity : bool;\n}\n\nlet is_prohibited_foreign_product (product : manufactured_product) : bool =\n  product.incorporated_into_facility_upon_completion &&\n  product.mined_produced_or_manufactured_by_prohibited_foreign_entity\n\nlet total_direct_costs_attributable_to_prohibited_foreign_products (products : manufactured_product list) : money =\n  products\n  |> List.filter is_prohibited_foreign_product\n  |> List.fold_left (fun acc product -> acc +. product.cost) 0.0\n\nlet material_assistance_cost_ratio (products : manufactured_product list) (total_manufactured_product_cost : money) : decimal =\n  total_direct_costs_attributable_to_prohibited_foreign_products products /. total_manufactured_product_cost",
+      "pattern": "arithmetic",
+      "reason": "Numerator sums direct costs of products meeting a conjunctive filter, then divides by a total cost to form a ratio."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(II)(bb)",
+    "result": {
+      "ocaml": "let has_valid_supplier_certification (component : component) : bool =\n  certifies_direct_cost_percentage_not_from_prohibited_entity component ||\n  certifies_product_not_produced_by_prohibited_entity component",
+      "pattern": "disjunction",
+      "reason": "supplier certification satisfied by either a cost-percentage attestation or a simple non-production attestation, alternative sufficient conditions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(III)",
+    "result": {
+      "ocaml": "type cost_treatment =\n  | Attributable_to_prohibited_foreign_entity\n  | Normal_treatment\n\nmodule ExceptionNotwithstandingSubclauses = struct\n  let direct_cost_treatment (taxpayer : taxpayer) (product_or_component : manufactured_product_or_eligible_component) : cost_treatment =\n    if knows_or_has_reason_to_know_produced_by_prohibited_foreign_entity taxpayer product_or_component then\n      Attributable_to_prohibited_foreign_entity\n    else\n      Normal_treatment\n\n  let may_rely_on_certification (taxpayer : taxpayer) (certification : certification) : bool =\n    not (knows_or_has_reason_to_know_certification_inaccurate taxpayer certification)\nend",
+      "pattern": "wrapper",
+      "reason": "exception groups two independent knowledge-triggered directives (cost attribution override, certification reliance bar) that do not combine into single boolean or computation"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(IV)",
+    "result": {
+      "ocaml": "let certification_satisfies_requirement (certification : certification) : bool =\n  signed_under_penalties_of_perjury certification &&\n  retained_by_supplier_and_taxpayer_for_at_least_6_years certification &&\n  provided_to_secretary_upon_request certification &&\n  from_supplier_of_manufactured_product_or_component certification",
+      "pattern": "conjunction",
+      "reason": "Certification must satisfy all listed sub-requirements (signature, retention/provision, supplier source) simultaneously, not any one alone."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(IV)(aa)",
+    "result": {
+      "ocaml": "let includes_supplier_identification (supplier : supplier) : bool =\n  has_employer_identification_number supplier ||\n  has_foreign_government_identification_number supplier",
+      "pattern": "disjunction",
+      "reason": "Two alternative ID types, either satisfies inclusion requirement."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iii)(IV)(dd)",
+    "result": {
+      "ocaml": "let is_valid_supplier_certification (certification : certification) : bool =\n  states_property_not_from_prohibited_foreign_entity certification ||\n  states_45x_direct_material_costs_excluding_prohibited_entity certification ||\n  states_45y_48e_direct_costs_excluding_prohibited_entity certification",
+      "pattern": "disjunction",
+      "reason": "certification satisfies provision if it states any one of the three alternative content items, joined by or."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(D)(iv)(II)",
+    "result": {
+      "ocaml": "let satisfies_service_or_sale_deadline (property : property) : bool =\n  placed_in_service_before_deadline_at_qualifying_facility property ||\n  constituent_element_used_in_product_sold_before_deadline property\n\nlet placed_in_service_before_deadline_at_qualifying_facility (property : property) : bool =\n  construction_of_facility_began_before_august_1_2025 property &&\n  (if is_applicable_facility property then\n     placed_in_service_before_january_1_2028 property\n   else\n     placed_in_service_before_january_1_2030 property)\n\nlet constituent_element_used_in_product_sold_before_deadline (property : property) : bool =\n  is_constituent_element_material_or_subcomponent property &&\n  used_in_product_sold_before_january_1_2030 property",
+      "pattern": "disjunction",
+      "reason": "Two alternative sufficient conditions joined by \"or\" — placed-in-service-at-qualifying-facility or constituent-element-in-sold-product — either qualifies."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(i)",
+    "result": {
+      "ocaml": "let is_eligible_component (component : component) : bool =\n  is_45x_c1_property component ||\n  identified_by_secretary_under_subparagraph_g component",
+      "pattern": "disjunction",
+      "reason": "Term qualifies if either of two alternative conditions holds, joined by or."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iii)",
+    "result": {
+      "ocaml": "let is_manufactured_product (product : product) : bool =\n  is_component_of_qualified_facility product ||\n  is_identified_by_secretary product",
+      "pattern": "disjunction",
+      "reason": "Two alternative sufficient conditions joined by \"or\" each independently qualify the product."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iv)",
+    "result": {
+      "ocaml": "let is_qualified_facility (facility : facility) : bool =\n  is_qualified_facility_45y_b_1 facility ||\n  is_qualified_facility_48e_b_3 facility ||\n  (is_qualified_interconnection_property_48e_b_4 facility &&\n   is_part_of_qualified_investment_48e_b_1 facility)",
+      "pattern": "disjunction",
+      "reason": "Three alternative sufficient conditions (two facility definitions plus interconnection property tied to investment) any one of which qualifies the facility."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(g)",
+    "result": {
+      "ocaml": "module regulationsandguidance = struct\n  (* identification of components or products for purposes of clauses (i) and (iii) of subparagraph (e) *)\n\n  (* for purposes of subparagraph (a)(ii), rules to address facilities which produce more than one eligible component *)\nend",
+      "pattern": "wrapper",
+      "reason": "provision grants secretary authority to issue regulations covering independently listed topics, with no internal computation or logic of its own."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)(A)",
+    "result": {
+      "ocaml": "let is_resident_alien (individual : individual) (calendar_year : year) : bool =\n  lawfully_admitted_permanent_resident individual calendar_year ||\n  meets_substantial_presence_test individual calendar_year ||\n  makes_first_year_election individual calendar_year",
+      "pattern": "disjunction",
+      "reason": "Three clauses (i)/(ii)/(iii) are alternative sufficient conditions joined by if-and-only-if-any-one, matching boolean disjunction."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)",
+    "result": {
+      "ocaml": "module SpecialRulesFirstLastYearResidency = struct\n  (* First year of residency: defined separately *)\n  (* Last year of residency: alien not treated as resident during portion of year under specified conditions, defined separately *)\n  (* Certain nominal presence disregarded: defined separately *)\nend",
+      "pattern": "wrapper",
+      "reason": "Header groups three independently defined sub-provisions (first year, last year, nominal presence) with no computation of its own."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)",
+    "result": {
+      "ocaml": "module First_year_election = struct\n  (* meets_requirements: alien individual deemed to meet requirements of this subparagraph if conditions (i)-(iv) hold, defined separately *)\n\n  (* treated_as_resident_for_election_year: alien individual meeting subparagraph (A) requirements, if elects, treated as resident for election year, defined separately *)\n\n  (* residency_start_date: individual making election under (B) treated as resident starting 1st day of earliest testing period in election year meeting clause (iv) of (A), defined separately *)\n\n  (* presence_determination_rules: rules of subparagraph (D)(i) of paragraph (3) apply for determining presence in United States, defined separately *)\n\n  (* election_procedure: election under (B) made on tax return for election year, may not be made before individual meets substantial presence test for calendar year immediately following election year, defined separately *)\n\n  (* election_duration: election once made under (B) remains in effect for election year unless revoked with consent of Secretary, defined separately *)\nend",
+      "pattern": "wrapper",
+      "reason": "Provision groups several independent sub-rules (qualifying test, election effect, start date, presence rules, election procedure, revocation) each defined on its own rather than combining into single boolean or formula."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)",
+    "result": {
+      "ocaml": "let meets_alien_individual_requirements (individual : alien_individual) (election_year : int) : bool =\n  not (is_resident_clause_i_or_ii individual election_year) &&\n  not (is_resident_paragraph_1a individual (election_year - 1)) &&\n  is_resident_clause_ii individual (election_year + 1) &&\n  meets_both_conditions individual",
+      "pattern": "conjunction",
+      "reason": "Four bullets are cumulative requirements joined by structure culminating in \"and\", all must hold for individual to be deemed to meet subparagraph."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(iv)",
+    "result": {
+      "ocaml": "let meets_substantial_presence_test (individual : person) (election_year : year) : bool =\n  present_31_consecutive_days_in_election_year individual election_year &&\n  present_75_percent_of_testing_period individual election_year\n\nlet testing_period (thirty_one_day_period : date_range) (election_year : year) : date_range =\n  { start_date = thirty_one_day_period.start_date; end_date = last_day_of_year election_year }\n\nlet present_75_percent_of_testing_period (individual : person) (election_year : year) : bool =\n  let period = testing_period (thirty_one_day_period individual election_year) election_year in\n  let days_present = days_present_in_period individual period in\n  let days_absent_excused = min 5 (days_absent_in_period individual period) in\n  let effective_days_present = days_present + days_absent_excused in\n  effective_days_present >= (75 * days_in_period period) / 100",
+      "pattern": "conjunction",
+      "reason": "Provision joins two required conditions (31 consecutive days present AND 75% presence in testing period) with cumulative \"both\"."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)",
+    "result": {
+      "ocaml": "let is_exempt_individual (individual : individual) (day : date) : bool =\n  is_foreign_government_related_individual individual day ||\n  is_teacher_or_trainee individual day ||\n  is_student individual day ||\n  is_professional_athlete_temporarily_competing individual day",
+      "pattern": "disjunction",
+      "reason": "Four sub-provisions joined by or, any one being true makes individual exempt for that day."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)",
+    "result": {
+      "ocaml": "let is_professional_athlete_exception (athlete : person) : bool =\n  temporarily_in_united_states_to_compete athlete &&\n  organized_for_primary_purpose_of_benefiting_501c3 athlete &&\n  all_net_proceeds_contributed_to_organization athlete &&\n  utilizes_volunteers_for_substantially_all_work athlete",
+      "pattern": "conjunction",
+      "reason": "All four conditions (temporary presence, charitable purpose, proceeds contributed, volunteer labor) must hold together for athlete to qualify."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)",
+    "result": {
+      "ocaml": "let is_foreign_government_related_individual (individual : individual) : bool =\n  has_diplomatic_status individual ||\n  has_full_time_consular_visa individual ||\n  is_full_time_employee_of_international_organization individual ||\n  is_immediate_family_of_qualifying_individual individual",
+      "pattern": "disjunction",
+      "reason": "Three clauses joined by or, any one qualifies individual as foreign government-related."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)",
+    "result": {
+      "ocaml": "let is_teacher_or_trainee (individual : person) : bool =\n  temporarily_present_under_j_or_q_visa individual &&\n  not (present_as_student individual) &&\n  substantially_complies_with_presence_requirements individual",
+      "pattern": "conjunction",
+      "reason": "Both visa-status and compliance conditions, plus non-student exclusion, must hold together for individual to qualify as teacher or trainee."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)",
+    "result": {
+      "ocaml": "let is_student (individual : person) : bool =\n  temporarily_present_in_united_states individual &&\n  substantially_complies_with_presence_requirements individual",
+      "pattern": "conjunction",
+      "reason": "Both sub-provisions are cumulative requirements that must hold together for individual to qualify as student."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(i)",
+    "result": {
+      "ocaml": "let is_temporarily_present_exempt_individual (person : person) : bool =\n  has_status_f_or_m_visa person ||\n  is_student_under_j_or_q_visa person",
+      "pattern": "disjunction",
+      "reason": "Either visa category alone qualifies person as temporarily present, so sub-provisions are alternative sufficient conditions joined by or."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(E)",
+    "result": {
+      "ocaml": "module SpecialRulesForTeachersTraineesAndStudents = struct\n  (* limitation_on_teachers_and_trainees: defined separately *)\n  (* limitation_on_students: defined separately *)\nend",
+      "pattern": "wrapper",
+      "reason": "Header groups two independent limitation rules (teachers/trainees and students) that are each complete sub-provisions with their own conditions, not combined by any shared computation."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(1)",
+    "result": {
+      "ocaml": "let is_lease_of_property (contract : contract) : bool =\n  service_recipient_in_physical_possession contract &&\n  service_recipient_controls_property contract &&\n  service_recipient_has_significant_economic_or_possessory_interest contract &&\n  service_provider_bears_no_risk_of_diminished_receipts_or_increased_expenditures contract &&\n  service_provider_does_not_use_property_concurrently_for_unrelated_entities contract &&\n  contract_price_does_not_substantially_exceed_rental_value contract",
+      "pattern": "conjunction",
+      "reason": "all listed factors bear on single lease-treatment determination, modeled as ANDed sub-conditions per skeleton conventions."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(3)(A)",
+    "result": {
+      "ocaml": "let is_service_contract (contract : contract) : bool =\n  is_between_service_provider_and_recipient contract &&\n  purports_to_be_service_contract contract &&\n  not (excepted_by_paragraph_4 contract)",
+      "pattern": "conjunction",
+      "reason": "Contract qualifies only if all cumulative conditions hold: right parties, purports as service contract, not excepted under paragraph 4."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(3)(A)(i)",
+    "result": {
+      "ocaml": "let qualifies_for_facility_service_contract (contract : contract) : bool =\n  operates_qualified_solid_waste_disposal_facility contract ||\n  sells_cogeneration_or_alternative_energy_to_service_recipient contract ||\n  operates_water_treatment_works_facility contract ||\n  operates_storage_facility contract",
+      "pattern": "disjunction",
+      "reason": "Four bullets joined by \"or\" — any one facility type/activity satisfies the clause."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(e)(4)(C)",
+    "result": {
+      "ocaml": "module SpecialRulesForCertainEvents = struct\n  (* temporary shut-downs, etc.: for clause (ii) of subparagraph (A), exclude temporary shut-down for repairs/maintenance/capital improvements, or financial burden from service provider bankruptcy or similar financial difficulty *)\n  let is_disregarded_shutdown_or_burden (event : facility_event) : bool =\n    is_temporary_shutdown_for_repairs_maintenance_or_capital_improvements event\n    || is_financial_burden_from_service_provider_bankruptcy_or_similar_difficulty event\n\n  (* reduced costs: for clause (iii) of subparagraph (A), exclude significant financial benefit merely from decreased payments due to increased production/efficiency or recovery of energy or other products *)\n  let is_disregarded_reduced_cost_benefit (event : facility_event) : bool =\n    is_payment_decrease_due_to_increased_production_or_efficiency event\n    || is_payment_decrease_due_to_recovery_of_energy_or_other_products event\nend",
+      "pattern": "wrapper",
+      "reason": "Provision groups two independent, unrelated exclusion rules for different clauses of subparagraph (A), each self-contained with no shared computation."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(h)(2)(B)",
+    "result": {
+      "ocaml": "let minimum_liability_of_lessor (lessor : lessor) : money =\n  let personal_liability_amount = amount_lessor_personally_liable_to_repay lessor in\n  let pledged_property_net_fmv = net_fair_market_value_of_pledged_interest lessor in\n  personal_liability_amount +. pledged_property_net_fmv\n",
+      "pattern": "arithmetic",
+      "reason": "Provision sums two dollar amounts (personal liability repay amount and net FMV of pledged interest) with no branching."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(h)(2)(C)",
+    "result": {
+      "ocaml": "let meets_certification_requirement (agreement : agreement) : bool =\n  contains_separate_signed_statement agreement &&\n  certifies_more_than_50_percent_business_use agreement &&\n  states_lessee_advised_not_treated_as_owner agreement",
+      "pattern": "conjunction",
+      "reason": "Statement must be separately signed and satisfy both the perjury certification and the ownership-notice clause, all required together."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(i)",
+    "result": {
+      "ocaml": "module TaxableMortgagePool = struct\n  (* treated as separate corporation: taxable mortgage pool cannot be includible corporation with any other corporation under section 1501 *)\n\n  let is_treated_as_separate_corporation (pool : taxable_mortgage_pool) : bool =\n    true\n\n  let may_be_includible_corporation (pool : taxable_mortgage_pool) (other : corporation) : bool =\n    false\n\n  (* taxable mortgage pool defined: separate definition provision *)\n\n  let is_taxable_mortgage_pool (entity : entity) : bool =\n    meets_taxable_mortgage_pool_definition entity\n\n  (* treatment of certain REIT's: separate conditional provision *)\n\n  let reit_treatment (reit : real_estate_investment_trust) : reit_treatment_result =\n    if meets_reit_condition reit then treated_as_taxable_mortgage_pool reit\n    else default_reit_treatment reit\nend",
+      "pattern": "wrapper",
+      "reason": "Header groups three independently complete sub-provisions (separate-corporation rule, definition, REIT treatment) with no shared computation of its own."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(o)",
+    "result": {
+      "ocaml": "module ClarificationOfEconomicSubstanceDoctrine = struct\n  (* paragraph 1: application of doctrine - transaction has economic substance only if conjunctive test met *)\n  (* paragraph 2: special rule where taxpayer relies on profit potential *)\n  (* paragraph 3: state and local tax benefits treated same as federal tax effect for purposes of paragraph 1 *)\n  (* paragraph 4: financial accounting benefits not counted as purpose if origin is reduction of federal income tax *)\n  (* paragraph 5: definitions and special rules for purposes of this subsection *)\nend",
+      "pattern": "wrapper",
+      "reason": "Top-level text only lists paragraph headers of subsection (o), each an independently defined sub-provision with no computation at this level."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(p)",
+    "result": {
+      "ocaml": "module CrossReferences = struct\n  (* singular includes plural: defined in 1 U.S.C. section 1, not formalized here *)\n  (* plural includes singular: defined in 1 U.S.C. section 1, not formalized here *)\n  (* masculine includes feminine: defined in 1 U.S.C. section 1, not formalized here *)\n  (* officer: defined in 1 U.S.C. section 1, not formalized here *)\n  (* oath includes affirmation: defined in 1 U.S.C. section 1, not formalized here *)\n  (* county includes parish: defined in 1 U.S.C. section 2, not formalized here *)\n  (* vessel includes all means of water transportation: defined in 1 U.S.C. section 3, not formalized here *)\n  (* vehicle includes all means of land transportation: defined in 1 U.S.C. section 4, not formalized here *)\n  (* company or association includes successors and assigns: defined in 1 U.S.C. section 5, not formalized here *)\n  (* effect of cross references: governed by 26 U.S.C. section 7806(a), not formalized here *)\nend",
+      "pattern": "wrapper",
+      "reason": "Provision just points to definitions elsewhere in Title 1 and section 7806(a), no independent logic or computation of own."
+    },
+    "error": null
+  }
+]

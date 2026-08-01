@@ -1,0 +1,210 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "meaning of \"or his delegate\" depends on whether reference is to Secretary of Treasury (input: Secretary) or another official (input: other official), with condition being which official is referenced and output being who counts as delegate in each case"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(19)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Domestic building and loan association",
+    "result": {
+      "construct": "structure",
+      "reason": "All three bullets must hold simultaneously to define one thing: qualifying domestic building and loan association."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(30)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "United States person",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Sub-provisions list mutually exclusive alternative categories (citizen/resident, partnership, corporation, estate, trust) that each independently satisfy definition of \"United States person\"."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(32)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Cooperative bank",
+    "result": {
+      "construct": "structure",
+      "reason": "Both sub-provisions are conjunctive conditions that together define single concept 'cooperative bank' — institution must simultaneously satisfy supervision requirement and meet paragraph (19)(B)/(C) requirements."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(33)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Regulated public utility",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Sub-provisions list mutually exclusive corporation types (A-G) each independently satisfying the named term 'regulated public utility'."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(37)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Individual retirement plan",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Term \"individual retirement plan\" defined as either IRA account or IRA annuity, mutually exclusive alternative forms of one named concept."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(42)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Substituted basis property",
+    "result": {
+      "construct": "enumeration",
+      "reason": "transferred basis property and exchanged basis property mutually exclusive exhaustive alternatives of named concept substituted basis property"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(49)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Qualified blood collector organization",
+    "result": {
+      "construct": "structure",
+      "reason": "all four sub-conditions must hold together to define single thing: qualified blood collector organization"
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Qualified facility",
+    "result": {
+      "construct": "structure",
+      "reason": "Two bullets both define same term 'qualified facility' by reference to other code sections, all describing single concept: what count as qualified facility."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(A)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "In general",
+    "result": {
+      "construct": "scope",
+      "reason": "Term's meaning depends on facility type context (qualified facility/storage vs eligible-component facility), each branch computing whether cost ratio input falls below threshold percentage output from referenced subparagraph B or C."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(i)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Eligible component",
+    "result": {
+      "construct": "enumeration",
+      "reason": "two branches list mutually exclusive ways property qualify as eligible component under named concept 'eligible component'."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iii)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Manufactured product",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Term \"manufactured product\" defined by two mutually exclusive alternatives joined by \"or\" — component of qualified facility, or product identified by Secretary under subparagraph (G)."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(a)(52)(E)(iv)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Qualified facility",
+    "result": {
+      "construct": "enumeration",
+      "reason": "three bullets list alternative definitions of 'qualified facility' (any one satisfies term), not conditions to satisfy together."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Foreign government-related individual",
+    "result": {
+      "construct": "enumeration",
+      "reason": "Three clauses joined by \"or\" list mutually exclusive alternative reasons an individual counts as foreign government-related: diplomatic status, international org employee, or immediate family of either."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Teacher or trainee",
+    "result": {
+      "construct": "structure",
+      "reason": "Both sub-provisions (temporary presence under J/Q visa, and substantial compliance) must hold together to define single concept 'individual' qualifying as teacher or trainee, joined by conjunctive 'and'."
+    },
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)",
+    "tags": [
+      "container_intro",
+      "definition"
+    ],
+    "header": "Student",
+    "result": {
+      "construct": "structure",
+      "reason": "Both sub-provisions jointly describe same individual, both conditions must hold simultaneously to qualify as student."
+    },
+    "error": null
+  }
+]

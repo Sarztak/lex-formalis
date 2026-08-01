@@ -12,7 +12,7 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify_rules_20260731_201832.json"
+CLASSIFY_LOG = "logs/classify_rules_20260801_035408.json"
 TREE_FILE = "7701_tree.json"
 
 # Tags that make classification deterministic — skip agent for these.
@@ -74,13 +74,12 @@ Read the following provision of US tax law and determine its logical structure.
 
 Answer the following questions in order and stop at the first that applies:
 
-1. Do the sub-provisions conditionally define or modify the concept in the main provision — that is, does the meaning or application of the provision change depending on a condition, context, or reference? Or would this provision be incomplete without a computation — does it require specifying inputs, a condition, and an output to be meaningful? If either applies: "scope". Also identify what the inputs, condition, and output are.
-2. Does this provision only make complete sense when all sub-provisions are simultaneously satisfied? To verify: identify what single thing the sub-provisions are all describing. If no such single identifiable thing exists in the provision text, it is not a structure. If yes: "structure".
-3. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of a single named concept stated in the provision? To verify: identify what that named concept (the object being enumerated) is. If no such named concept exists in the provision text, it is not an enumeration. If yes: "enumeration".
-4. If none of the above: "other".
+1. Do the sub-provisions conditionally define or modify the concept in the main provision — that is, does the meaning or application of the provision change depending on a condition, context, or reference? Or is a computation needed to make the provision complete — either mathematical (a quantity derived from inputs: a + b/c), or logical (a boolean derived from conditions: A ∨ B ∨ C where any one qualifies, or A ∧ B ∧ C where all must hold), or mixed (logical condition selects which mathematical computation applies)? If either applies: "scope". Identify the inputs, condition, and output.
+2. Do the sub-provisions represent mutually exclusive and exhaustive alternatives of a single named concept stated in the provision? To verify: identify what that named concept (the object being enumerated) is. If no such named concept exists in the provision text, it is not an enumeration. If yes: "enumeration".
+3. If none of the above: "other".
 
 Respond with JSON only, no prose, no markdown fences:
-{{"construct": "enumeration"|"scope"|"structure"|"other", "reason": "one sentence"}}
+{{"construct": "enumeration"|"scope"|"other", "reason": "one sentence"}}
 """
 
 
@@ -144,6 +143,7 @@ def main():
     parser.add_argument(
         "--nodes", nargs="+", default=None, help="run only these node IDs"
     )
+    parser.add_argument("--file", default=None, help="file with one node ID per line")
     args = parser.parse_args()
 
     with open(CLASSIFY_LOG, encoding="utf-8") as f:
@@ -164,7 +164,11 @@ def main():
             continue
         candidates.append((entry["id"], tags))
 
-    if args.nodes:
+    if args.file:
+        with open(args.file, encoding="utf-8") as f:
+            node_filter = {line.strip() for line in f if line.strip()}
+        subset = [(nid, tags) for nid, tags in candidates if nid in node_filter]
+    elif args.nodes:
         subset = [(nid, tags) for nid, tags in candidates if nid in args.nodes]
     else:
         random.shuffle(candidates)

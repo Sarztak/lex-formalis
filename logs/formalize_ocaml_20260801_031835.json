@@ -1,0 +1,11 @@
+[
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "result": {
+      "ocaml": "",
+      "pattern": "ambiguous",
+      "reason": "Term defined by reference to section 45Y(b)(1) and section 48E(b)(3), external sections needed to resolve meaning."
+    },
+    "error": null
+  }
+]

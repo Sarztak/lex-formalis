@@ -1,0 +1,11 @@
+[
+  {
+    "id": "7701(a)(51)(I)(v)",
+    "result": {
+      "ocaml": "let is_qualified_facility (facility : facility) : bool =\n  is_qualified_facility_45Y_b_1 facility ||\n  is_qualified_facility_48E_b_3 facility",
+      "pattern": "disjunction",
+      "reason": "Term defined as facility meeting either of two alternative cross-referenced qualified-facility definitions."
+    },
+    "error": null
+  }
+]

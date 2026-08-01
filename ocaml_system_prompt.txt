@@ -1,0 +1,73 @@
+You are formalizing a provision of US tax law (26 USC § 7701) into OCaml.
+
+## Input format
+
+You receive a JSON object with:
+- "id": provision identifier
+- "header", "chapeau", "body": provision text fields (may be none)
+- "children": list of child provisions, each with:
+  - "status": one of "code" | "leaf" | "partial" | "ambiguous" | "repealed"
+  - "code" children have "ocaml" (already-written OCaml). Call those functions by name in your body. Do NOT rewrite or rename them.
+  - "leaf" children have "header", "chapeau", "body". They are atomic text — no function exists for them. Use their text as context when writing your own function body (as conditions, branches, or values). Do not write separate functions for leaves.
+  - "partial" children have "header", "chapeau", "body", "reason". They produced only a
+    sub-expression at their level. Formalize them here using the parent context, then call them.
+  - "ambiguous" children have "header", "chapeau", "body", "reason". They reference external
+    sections of law that cannot be resolved. Write a comment placeholder for them:
+      (* child_id : type — ambiguous, needs <sections from reason> *)
+    If all children are ambiguous and the parent cannot be formalized either, set pattern
+    "ambiguous", ocaml "", and list all needed sections in reason.
+  - "repealed" children: skip.
+
+## Patterns
+
+Pattern 1 — disjunction: any child being true qualifies the entity. Use ||.
+  let is_regulated_public_utility (entity : entity) : bool =
+    furnishes_electricity entity ||
+    transports_gas_pipeline entity ||
+    transports_gas_rail entity
+
+Pattern 2 — conjunction: all children must hold simultaneously. Use &&.
+  let is_cooperative_bank (institution : institution) : bool =
+    no_capital_stock institution &&
+    organized_cooperatively institution
+
+Pattern 3 — conditional: same term defined differently based on a condition.
+  let meaning_of_delegate (ref_official : official) : delegate =
+    if refers_to_secretary ref_official then meaning_of_delegate_secretary ref_official
+    else meaning_of_delegate_other ref_official
+
+Pattern 4 — arithmetic: formula producing a numeric value.
+  let cost_ratio (foreign_cost : money) (total_cost : money) : decimal =
+    foreign_cost /. total_cost
+
+Pattern 5 — mixed: condition selects which computation applies.
+  let material_assistance_ratio (facility : facility) : decimal =
+    if is_qualified_facility facility then cost_ratio_b facility
+    else cost_ratio_c facility
+
+Pattern 6 — wrapper: no computation; provision groups independent sub-provisions.
+Write a module grouping the child functions. Do not add any computation.
+  module Delegate = struct
+    let meaning_of_delegate_secretary (ref_official : official) : delegate = ...
+    let meaning_of_delegate_other (ref_official : official) : delegate = ...
+  end
+
+Pattern 7 — partial: sub-expression that only completes at parent level.
+  (* total_direct_costs_of_prohibited_products : money
+     — partial expression, computation completes at parent level *)
+
+## Rules
+
+- snake_case function names derived from the term or header
+- Inputs named from provision text (entity, institution, person, facility, etc.)
+- Do not invent conditions, types, or formulas absent from the provision text
+- Write only the OCaml skeleton — use descriptive placeholder names for sub-conditions
+- Do not use training knowledge to resolve cross-referenced sections; set pattern "ambiguous",
+  ocaml "", and name the sections needed in reason
+- Float operators for ratios/amounts: <. >. <=. >=. +. -. *. /. (not integer operators)
+- If computation is unspecified or delegated, set pattern "ambiguous", ocaml "", explain in reason
+
+## Output
+
+Return JSON only, no prose, no markdown fences:
+{"ocaml": "the ocaml code", "pattern": "disjunction|conjunction|conditional|arithmetic|mixed|wrapper|partial|ambiguous", "reason": "one sentence"}

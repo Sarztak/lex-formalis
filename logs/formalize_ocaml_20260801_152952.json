@@ -1,0 +1,10 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "status": "code",
+    "pattern": "conditional",
+    "reason": "term \"or his delegate\" defined one way when referencing Secretary of Treasury, another way (similarly construed) for any other US official.",
+    "ocaml": "let meaning_of_or_his_delegate (ref_official : official) : delegate =\n  if refers_to_secretary_of_treasury ref_official then\n    treasury_officer_or_employee_or_agency_duly_authorized ref_official\n  else\n    similarly_construed_delegate ref_official",
+    "error": null
+  }
+]

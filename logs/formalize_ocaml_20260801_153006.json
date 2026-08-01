@@ -1,0 +1,18 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "status": "code",
+    "pattern": "conditional",
+    "reason": "Term \"or his delegate\" defined one way when referencing Secretary of Treasury and analogously for any other US official.",
+    "ocaml": "let meaning_of_or_his_delegate (ref_official : official) : delegate =\n  if refers_to_secretary_of_treasury ref_official then\n    authorized_treasury_officer_employee_or_agency ref_official\n  else\n    similarly_construed_delegate ref_official",
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "Parent term 'Delegate' groups two independent, self-contained sub-definitions (A conditional, B leaf) with no computation of its own, so wrapped in a module per Pattern 6.",
+    "ocaml": "module Delegate = struct\n  let meaning_of_or_his_delegate (ref_official : official) : delegate =\n    if refers_to_secretary_of_treasury ref_official then\n      authorized_treasury_officer_employee_or_agency ref_official\n    else\n      similarly_construed_delegate ref_official\n\n  let meaning_of_delegate_guam_american_samoa (officer : officer_or_employee) : delegate =\n    if performs_functions_in_guam_or_american_samoa officer\n       && relates_to_taxes_chapters_1_2_21 officer\n       && duly_authorized_by_secretary officer then\n      other_department_or_agency_delegate officer\n    else\n      not_a_delegate officer\nend",
+    "error": null
+  }
+]

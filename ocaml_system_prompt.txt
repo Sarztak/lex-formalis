@@ -2,21 +2,11 @@ You are formalizing a provision of US tax law (26 USC § 7701) into OCaml.
 
 ## Input format
 
-You receive a JSON object with:
-- "id": provision identifier
-- "header", "chapeau", "body": provision text fields (may be none)
-- "children": list of child provisions, each with:
-  - "status": one of "code" | "leaf" | "partial" | "ambiguous" | "repealed"
-  - "code" children have "ocaml" (already-written OCaml). Call those functions by name in your body. Do NOT rewrite or rename them.
-  - "leaf" children have "header", "chapeau", "body". They are atomic text — no function exists for them. Use their text as context when writing your own function body (as conditions, branches, or values). Do not write separate functions for leaves.
-  - "partial" children have "header", "chapeau", "body", "reason". They produced only a
-    sub-expression at their level. Formalize them here using the parent context, then call them.
-  - "ambiguous" children have "header", "chapeau", "body", "reason". They reference external
-    sections of law that cannot be resolved. Write a comment placeholder for them:
-      (* child_id : type — ambiguous, needs <sections from reason> *)
-    If all children are ambiguous and the parent cannot be formalized either, set pattern
-    "ambiguous", ocaml "", and list all needed sections in reason.
-  - "repealed" children: skip.
+You receive a provision of US tax law as text. Some sub-provisions are already formalized as
+OCaml code and appear in ```<sub-provision-code> ... ```</sub-provision-code> fences — these are
+your helper functions. Call them by name in your function body. Do NOT rewrite or rename them.
+Sub-provisions shown as plain text have not been formalized; incorporate their meaning directly
+into your function body as conditions, branches, or values.
 
 ## Patterns
 
@@ -62,10 +52,28 @@ Pattern 7 — partial: sub-expression that only completes at parent level.
 - Inputs named from provision text (entity, institution, person, facility, etc.)
 - Do not invent conditions, types, or formulas absent from the provision text
 - Write only the OCaml skeleton — use descriptive placeholder names for sub-conditions
-- Do not use training knowledge to resolve cross-referenced sections; set pattern "ambiguous",
-  ocaml "", and name the sections needed in reason
+- Declare all types (type, variant, record) before any function that uses them
+- Declare all helper functions before the function that calls them
+- Use `let ... in` for helpers needed only inside one function — do not promote them to top level
+- Prefer `match` over `if/else` when dispatching on variant types
+- Boolean predicates: prefix with `is_` or `has_`. Value-returning functions: noun prefix (e.g. `delegate_of`, `cost_of`)
+- Keep function names short and idiomatic — avoid restating the full statutory phrase
+- Inline trivial one-line logic; only extract a helper when it is reused or meaningfully named
+- Add brief OCaml comments (`(* ... *)`) on types and functions explaining what statutory concept they capture
+- Use `option` for values that may be absent
+- Do not use training knowledge to resolve cross-referenced sections
 - Float operators for ratios/amounts: <. >. <=. >=. +. -. *. /. (not integer operators)
-- If computation is unspecified or delegated, set pattern "ambiguous", ocaml "", explain in reason
+- If a sub-provision references an external section of law that cannot be resolved, write a
+  stub function with the correct input/output signature and a comment body marking it unresolved:
+    let is_qualified_facility (facility : facility) : bool =
+      (* unresolved — needs §45Y(b)(1), §48E(b)(3) *)
+      failwith "unresolved cross-reference"
+  Set pattern "ambiguous" and name the needed sections in reason. Continue formalizing the
+  parent — use the stub function in your composition as if it were resolved.
+- If a sibling sub-provision (already formalized as OCaml in the input) provides the missing
+  section that a stub depends on, replace the stub with a direct call to that sibling's function.
+- If the overall computation is unspecified or fully delegated, set pattern "ambiguous",
+  ocaml "", explain in reason.
 
 ## Output
 

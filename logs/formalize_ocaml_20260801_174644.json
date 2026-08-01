@@ -1,0 +1,18 @@
+[
+  {
+    "id": "7701(b)(1)(A)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Individual treated as resident alien if any of clause (i) LPR status, (ii) substantial presence test, or (iii) first-year election holds, with (ii) and (iii) stubbed as cross-references to paragraphs (3) and (4).",
+    "ocaml": "type alien_individual = {\n  lawful_permanent_resident_years : int list; (* calendar years in which individual held lawful permanent resident status at any time during the year *)\n}\n\n(* clause (i): lawfully admitted for permanent residence at any time during the calendar year *)\nlet is_lawful_permanent_resident (individual : alien_individual) (year : int) : bool =\n  List.mem year individual.lawful_permanent_resident_years\n\n(* clause (ii): substantial presence test of paragraph (3) *)\nlet meets_substantial_presence_test (individual : alien_individual) (year : int) : bool =\n  (* unresolved -- needs 7701(b)(3) *)\n  failwith \"unresolved cross-reference\"\n\n(* clause (iii): first year election of paragraph (4) *)\nlet has_first_year_election (individual : alien_individual) (year : int) : bool =\n  (* unresolved -- needs 7701(b)(4) *)\n  failwith \"unresolved cross-reference\"\n\n(* 7701(b)(1)(A): resident alien if any of (i), (ii), (iii) hold *)\nlet is_resident_alien (individual : alien_individual) (year : int) : bool =\n  is_lawful_permanent_resident individual year ||\n  meets_substantial_presence_test individual year ||\n  has_first_year_election individual year",
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "7701(b)(1) groups the (A) resident alien test and (B) nonresident alien test (defined as negation of citizen-or-resident) without adding its own computation.",
+    "ocaml": "type individual_status = {\n  alien : alien_individual; (* underlying alien_individual data from 7701(b)(1)(A) *)\n  is_us_citizen : bool; (* whether individual is a citizen of the United States *)\n}\n\nmodule Alien_status = struct\n  (* 7701(b)(1)(A): resident alien test, reused from sub-provision *)\n  let is_resident_alien_status (individual : individual_status) (year : int) : bool =\n    is_resident_alien individual.alien year\n\n  (* 7701(b)(1)(B): nonresident alien if neither a US citizen nor a resident alien *)\n  let is_nonresident_alien (individual : individual_status) (year : int) : bool =\n    not individual.is_us_citizen &&\n    not (is_resident_alien_status individual year)\nend",
+    "error": null
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "7701(a)(12)(A)",
+    "status": "code",
+    "pattern": "conditional",
+    "reason": "term \"or his delegate\" defined one way when referring to Secretary of Treasury and construed similarly for any other US official.",
+    "ocaml": "type official_reference =\n  | Secretary_of_treasury\n  | Other_official\n\nlet meaning_of_or_his_delegate (ref_official : official) : delegate =\n  if references_secretary_of_treasury ref_official then\n    (* officer, employee, or agency of Treasury Department duly authorized by Secretary,\n       directly or through one or more redelegations, to perform function in context *)\n    duly_authorized_treasury_delegate ref_official\n  else\n    (* similarly construed for any other official of United States *)\n    duly_authorized_delegate_of_other_official ref_official\n\nlet duly_authorized_treasury_delegate (ref_official : official) : delegate =\n  is_officer_employee_or_agency_of_treasury ref_official &&\n  authorized_by_secretary_directly_or_by_redelegation ref_official\n\nlet duly_authorized_delegate_of_other_official (ref_official : official) : delegate =\n  is_officer_employee_or_agency_of_official ref_official &&\n  authorized_by_official_directly_or_by_redelegation ref_official",
+    "error": null
+  },
+  {
+    "id": "7701(a)(12)",
+    "status": "code",
+    "pattern": "mixed",
+    "reason": "condition on Guam/American Samoa function selects between general delegate meaning alone or general meaning plus (B)'s additional inclusion, itself a conjunction of requirements.",
+    "ocaml": "let meaning_of_delegate (ref_official : official) (context : guam_american_samoa_context) : delegate =\n  if pertains_to_guam_or_american_samoa_functions context then\n    meaning_of_or_his_delegate ref_official ||\n    meaning_of_delegate_guam_or_american_samoa ref_official context\n  else\n    meaning_of_or_his_delegate ref_official\n\n(* 7701(a)(12)(B) — extension for functions performed in Guam or American Samoa\n   under chapters 1, 2, and 21 *)\nlet meaning_of_delegate_guam_or_american_samoa (ref_official : official) (context : guam_american_samoa_context) : delegate =\n  performed_in_guam_or_american_samoa context &&\n  taxes_imposed_by_chapters_1_2_21 context &&\n  is_officer_or_employee_of_other_department_agency_or_possession ref_official &&\n  authorized_by_secretary_directly_or_by_redelegation ref_official",
+    "error": null
+  }
+]

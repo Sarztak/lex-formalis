@@ -121,62 +121,47 @@ def _result_row(node, error):
     }
 
 
+def _child_text(child):
+    """Full provision text of a child node, newline-joined."""
+    parts = []
+    label = f"{child.id}" + (f" — {child.header}" if child.header else "")
+    parts.append(label)
+    if child.chapeau:
+        parts.append(child.chapeau)
+    if child.body:
+        parts.append(child.body)
+    if child.continuation:
+        parts.append(child.continuation)
+    return "\n".join(parts)
+
+
 def build_user_message(node):
-    payload = {
-        "id": node.id,
-        "header": node.header or None,
-        "chapeau": node.chapeau or None,
-        "body": node.body or None,
-        "children": [],
-    }
+    parts = []
+
+    # parent's own provision text (header, chapeau, body — continuation comes after children)
+    label = f"{node.id}" + (f" — {node.header}" if node.header else "")
+    parts.append(label)
+    if node.chapeau:
+        parts.append(node.chapeau)
+    if node.body:
+        parts.append(node.body)
 
     for child in node.children:
         if child.status == "repealed":
-            payload["children"].append({"id": child.id, "status": "repealed"})
-        elif child.status == "code":
-            payload["children"].append(
-                {
-                    "id": child.id,
-                    "status": "code",
-                    "pattern": child.pattern,
-                    "ocaml": child.ocaml,
-                }
-            )
-        elif child.status == "leaf":
-            payload["children"].append(
-                {
-                    "id": child.id,
-                    "status": "leaf",
-                    "header": child.header or None,
-                    "chapeau": child.chapeau or None,
-                    "body": child.body or None,
-                }
-            )
-        elif child.status == "partial":
-            payload["children"].append(
-                {
-                    "id": child.id,
-                    "status": "partial",
-                    "reason": child.reason,
-                    "header": child.header or None,
-                    "chapeau": child.chapeau or None,
-                    "body": child.body or None,
-                }
-            )
+            parts.append(f"\n{child.id} — [REPEALED]")
+        elif child.status in ("code", "ambiguous") and child.ocaml:
+            # has code (resolved or ambiguous stub) — fence it, no text
+            parts.append(f"\n{child.id}" + (f" — {child.header}" if child.header else ""))
+            parts.append(f"```<sub-provision-code>\n{child.ocaml}\n```</sub-provision-code>")
         else:
-            # ambiguous or error — cross-reference or unresolvable
-            payload["children"].append(
-                {
-                    "id": child.id,
-                    "status": "ambiguous",
-                    "reason": child.reason,
-                    "header": child.header or None,
-                    "chapeau": child.chapeau or None,
-                    "body": child.body or None,
-                }
-            )
+            # leaf or partial — pass full provision text
+            parts.append("\n" + _child_text(child))
 
-    return json.dumps(payload, indent=2, ensure_ascii=False)
+    if node.continuation:
+        parts.append(node.continuation)
+
+    parts.append(f"\nWrite an OCaml function for provision {node.id}.")
+    return "\n".join(parts)
 
 
 def call_agent(node, results):

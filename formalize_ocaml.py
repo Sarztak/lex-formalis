@@ -7,12 +7,15 @@ import json
 import os
 import subprocess
 import sys
+from collections import deque
 from datetime import UTC, datetime
+
+from resolve_refs import find_refs
 
 TREE_FILE = "7701_tree.json"
 LOG_DIR = "logs"
 
-with open('ocaml_system_prompt.txt', encoding='utf-8') as r:
+with open("ocaml_system_prompt.txt", encoding="utf-8") as r:
     SYSTEM_PROMPT = r.read()
 
 # ── Node / Tree ────────────────────────────────────────────────────────────────
@@ -89,25 +92,108 @@ class Tree:
         return None
 
 
+# ── Dependency graph + topological sort ────────────────────────────────────────
+
+
+def build_dep_graph(tree):
+    """
+    Returns deps: {node_id: set of node_ids this node must be processed after}.
+    Edges come from two sources:
+      - structural: parent depends on each child (children processed first)
+      - cross-refs: resolved via find_refs on all text fields
+    """
+    nodes = list(tree.walk())
+    all_ids, deps = set(), {}
+    for node in nodes:
+        all_ids.add(node.id)
+        deps[node.id] = set()
+
+    def ancestor_ids(node):
+        ids = set()
+        p = node.parent
+        while p:
+            ids.add(p.id)
+            p = p.parent
+        return ids
+
+    for node in nodes:
+        for child in node.children:
+            deps[node.id].add(child.id)
+        anc = ancestor_ids(node)
+        for field in ("header", "chapeau", "body", "continuation"):
+            text = getattr(node, field) or ""
+            for _, target in find_refs(node.id, text):
+                if target in all_ids and target != node.id and target not in anc:
+                    deps[node.id].add(target)
+    return deps
+
+
+def topo_sort(deps, depth_map=None):
+    """
+    Kahn's algorithm over deps: {node_id: set of node_ids it depends on}.
+    Nodes with no unresolved dependencies are queued first; as each node is
+    emitted, in_degree of its dependents decrements and newly-ready nodes join
+    the queue. Nodes whose in_degree never reaches 0 are in a dependency cycle
+    and cannot be ordered — they are appended at the end sorted by depth
+    (deepest first) so parents still come after children within the cycle group.
+    """
+    dependents = {nid: set() for nid in deps}
+    in_degree = {nid: 0 for nid in deps}
+
+    for nid, needed in deps.items():
+        for target in needed:
+            dependents[target].add(nid)
+            in_degree[nid] += 1
+
+    queue = deque(nid for nid, d in in_degree.items() if d == 0)
+    order = []
+
+    while queue:
+        nid = queue.popleft()
+        order.append(nid)
+        for dep in dependents[nid]:
+            in_degree[dep] -= 1
+            if in_degree[dep] == 0:
+                queue.append(dep)
+
+    cycles = [nid for nid, d in in_degree.items() if d > 0]
+    if cycles:
+        print(
+            f"WARNING: {len(cycles)} nodes in dependency cycle: {cycles}",
+            file=sys.stderr,
+        )
+        if depth_map:
+            cycles.sort(key=lambda nid: -depth_map.get(nid, 0))
+        order.extend(cycles)
+
+    return order
+
+
 # ── Processing ─────────────────────────────────────────────────────────────────
 
 
-def process(node, results):
-    """Recursively formalize bottom-up. Fills node.ocaml / node.status."""
-    if node.is_leaf:
-        node.status = "leaf"
-        return
+def process_flat(nodes_in_order, deps, results):
+    """Process nodes in topological order (dependencies first)."""
+    formalized = {}  # node_id -> (node_id, header, ocaml)
 
-    if node.is_repealed:
-        node.status = "repealed"
-        node.ocaml = f"(* REPEALED: {node.id} — {node.header} *)"
-        results.append(_result_row(node, None))
-        return
+    for node in nodes_in_order:
+        if node.is_repealed:
+            node.status = "repealed"
+            node.ocaml = f"(* REPEALED: {node.id} — {node.header} *)"  # output marker in .ml file
+            results.append(_result_row(node, None))
+            continue  # build_user_message shows "[REPEALED]" to agent, not this OCaml comment
 
-    for child in node.children:
-        process(child, results)
+        child_ids = {c.id for c in node.children}
+        context = {
+            nid: formalized[nid]
+            for nid in deps.get(node.id, set())
+            if nid not in child_ids and nid in formalized
+        }
 
-    call_agent(node, results)
+        call_agent(node, results, context)
+
+        if node.status in ("code", "ambiguous") and node.ocaml:
+            formalized[node.id] = (node.id, node.header, node.ocaml)
 
 
 def _result_row(node, error):
@@ -135,8 +221,20 @@ def _child_text(child):
     return "\n".join(parts)
 
 
-def build_user_message(node):
+def build_user_message(node, context=None):
     parts = []
+
+    # resolved cross-references available from already-processed siblings/ancestors
+    if context:
+        parts.append(
+            "The following sections are already formalized and available as helpers:"
+        )
+        for node_id, header, ocaml in context.values():
+            label = f"{node_id}" + (f" — {header}" if header else "")
+            parts.append(
+                f"\n{label}\n```<sub-provision-code>\n{ocaml}\n```</sub-provision-code>"
+            )
+        parts.append("\n---")
 
     # parent's own provision text (header, chapeau, body — continuation comes after children)
     label = f"{node.id}" + (f" — {node.header}" if node.header else "")
@@ -148,24 +246,35 @@ def build_user_message(node):
 
     for child in node.children:
         if child.status == "repealed":
+            # build_user_message shows "[REPEALED]" to agent, not the OCaml comment set to node.ocaml for repealed sections
             parts.append(f"\n{child.id} — [REPEALED]")
         elif child.status in ("code", "ambiguous") and child.ocaml:
-            # has code (resolved or ambiguous stub) — fence it, no text
-            parts.append(f"\n{child.id}" + (f" — {child.header}" if child.header else ""))
-            parts.append(f"```<sub-provision-code>\n{child.ocaml}\n```</sub-provision-code>")
+            parts.append(
+                f"\n{child.id}" + (f" — {child.header}" if child.header else "")
+            )
+            parts.append(
+                f"```<sub-provision-code>\n{child.ocaml}\n```</sub-provision-code>"
+            )
         else:
-            # leaf or partial — pass full provision text
             parts.append("\n" + _child_text(child))
 
     if node.continuation:
         parts.append(node.continuation)
 
-    parts.append(f"\nWrite an OCaml function for provision {node.id}.")
+    if node.is_leaf:
+        parts.append(
+            f"\nThis is a terminal provision (no sub-provisions). "
+            f"Write OCaml for {node.id}: a type/let binding if it defines a term "
+            f"(pattern 'definition'), a comment stub if it is a clause fragment that "
+            f"completes at the containing provision level (pattern 'partial')."
+        )
+    else:
+        parts.append(f"\nWrite an OCaml function for provision {node.id}.")
     return "\n".join(parts)
 
 
-def call_agent(node, results):
-    user_message = build_user_message(node)
+def call_agent(node, results, context=None):
+    user_message = build_user_message(node, context)
     full_prompt = SYSTEM_PROMPT + "\n\n---\n\n" + user_message
 
     print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
@@ -211,6 +320,7 @@ def call_agent(node, results):
         "ambiguous"
         if node.pattern == "ambiguous"
         else ("partial" if node.pattern == "partial" else "code")
+        # "definition" counts as "code" — added to formalized and usable as context
     )
     print(f"  [{node.pattern}] {node.reason}", file=sys.stderr)
     write_log(node, full_prompt, result.stdout, parsed, None)
@@ -267,17 +377,6 @@ def write_log(node, prompt, raw_response, parsed, error=None):
         json.dump(log, f, indent=2, ensure_ascii=False)
 
 
-# ── Assembly ───────────────────────────────────────────────────────────────────
-
-
-def collect_ocaml(node):
-    """DFS post-order: children first, then parent. Skips leaves and repealed."""
-    for child in node.children:
-        yield from collect_ocaml(child)
-    if node.status not in ("leaf", None):
-        yield node
-
-
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 
@@ -290,33 +389,38 @@ def main():
     total = sum(1 for _ in tree.walk())
     print(f"Loaded: {tree.root.id}, {total} nodes", file=sys.stderr)
 
+    deps = build_dep_graph(tree)
+    node_by_id = {n.id: n for n in tree.walk()}
+    depth_map = {n.id: len(n.id.split("(")) - 1 for n in tree.walk()}
+    order = topo_sort(deps, depth_map)
+
     results = []
     ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
     out_json = f"logs/formalize_ocaml_{ts}.json"
 
     if args.node:
-        node = tree.find(args.node)
-        if not node:
+        target = tree.find(args.node)
+        if not target:
             print(f"Node {args.node} not found", file=sys.stderr)
             sys.exit(1)
-        process(node, results)
-        for n in collect_ocaml(node):
-            if n.ocaml:
-                print(n.ocaml)
-                print()
+        subtree_ids = {n.id for n in tree.walk(target)}
+        filtered = [node_by_id[nid] for nid in order if nid in subtree_ids]
+        process_flat(filtered, deps, results)
+        for nid in order:
+            if nid in subtree_ids:
+                n = node_by_id[nid]
+                if n.ocaml:
+                    print(n.ocaml)
+                    print()
     else:
         out_ml = "7701.ml"
-        for subsection in tree.root.children:
-            process(subsection, results)
-            # write progressively so partial runs are not lost
-            with open(out_json, "w", encoding="utf-8") as f:
-                json.dump(results, f, indent=2, ensure_ascii=False)
+        process_flat([node_by_id[nid] for nid in order], deps, results)
 
         with open(out_ml, "w", encoding="utf-8") as f:
-            for subsection in tree.root.children:
-                for n in collect_ocaml(subsection):
-                    if n.ocaml:
-                        f.write(n.ocaml + "\n\n")
+            for nid in order:
+                n = node_by_id[nid]
+                if n.ocaml:
+                    f.write(n.ocaml + "\n\n")
         print(f"Wrote {out_ml}", file=sys.stderr)
 
     with open(out_json, "w", encoding="utf-8") as f:

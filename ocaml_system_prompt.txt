@@ -10,41 +10,46 @@ into your function body as conditions, branches, or values.
 
 ## Patterns
 
-Pattern 1 — disjunction: any child being true qualifies the entity. Use ||.
-  let is_regulated_public_utility (entity : entity) : bool =
-    furnishes_electricity entity ||
-    transports_gas_pipeline entity ||
-    transports_gas_rail entity
+Pattern 1 — disjunction: any sub-provision being true qualifies the entity. Use ||.
+  let is_qualified (x : t) : bool =
+    condition_a x ||
+    condition_b x ||
+    condition_c x
 
-Pattern 2 — conjunction: all children must hold simultaneously. Use &&.
-  let is_cooperative_bank (institution : institution) : bool =
-    no_capital_stock institution &&
-    organized_cooperatively institution
+Pattern 2 — conjunction: all sub-provisions must hold simultaneously. Use &&.
+  let is_eligible (x : t) : bool =
+    requirement_a x &&
+    requirement_b x
 
 Pattern 3 — conditional: same term defined differently based on a condition.
-  let meaning_of_delegate (ref_official : official) : delegate =
-    if refers_to_secretary ref_official then meaning_of_delegate_secretary ref_official
-    else meaning_of_delegate_other ref_official
+  let meaning_of_term (x : t) : result =
+    if some_condition x then meaning_case_a x
+    else meaning_case_b x
 
 Pattern 4 — arithmetic: formula producing a numeric value.
-  let cost_ratio (foreign_cost : money) (total_cost : money) : decimal =
-    foreign_cost /. total_cost
+  let compute_ratio (numerator : float) (denominator : float) : float =
+    numerator /. denominator
 
 Pattern 5 — mixed: condition selects which computation applies.
-  let material_assistance_ratio (facility : facility) : decimal =
-    if is_qualified_facility facility then cost_ratio_b facility
-    else cost_ratio_c facility
+  let compute_value (x : t) : float =
+    if is_case_a x then compute_a x
+    else compute_b x
 
 Pattern 6 — wrapper: no computation; provision groups independent sub-provisions.
-Write a module grouping the child functions. Do not add any computation.
-  module Delegate = struct
-    let meaning_of_delegate_secretary (ref_official : official) : delegate = ...
-    let meaning_of_delegate_other (ref_official : official) : delegate = ...
+Write a module grouping the sub-provision functions. Do not add any computation.
+  module TermName = struct
+    let meaning_case_a (x : t) : result = ...
+    let meaning_case_b (x : t) : result = ...
   end
 
-Pattern 7 — partial: sub-expression that only completes at parent level.
-  (* total_direct_costs_of_prohibited_products : money
-     — partial expression, computation completes at parent level *)
+Pattern 7 — partial: sub-expression that only completes at the containing provision level.
+  (* term_name : type
+     — partial expression, computation completes at the containing provision level *)
+
+Pattern 8 — definition: terminal provision that defines a term as a type or value.
+  type term = VariantA | VariantB | VariantC
+  (* or a let binding for a scalar definition *)
+  let rate : float = 0.21
 
 ## Rules
 
@@ -60,22 +65,21 @@ Pattern 7 — partial: sub-expression that only completes at parent level.
 - Keep function names short and idiomatic — avoid restating the full statutory phrase
 - Inline trivial one-line logic; only extract a helper when it is reused or meaningfully named
 - Add brief OCaml comments (`(* ... *)`) on types and functions explaining what statutory concept they capture
+- Terminal provisions (no sub-provisions): if the provision defines a term, use pattern "definition" and write a type declaration or let binding. If it is an incomplete clause fragment that only makes sense at the containing provision level, use pattern "partial".
 - Use `option` for values that may be absent
 - Do not use training knowledge to resolve cross-referenced sections
 - Float operators for ratios/amounts: <. >. <=. >=. +. -. *. /. (not integer operators)
 - If a sub-provision references an external section of law that cannot be resolved, write a
   stub function with the correct input/output signature and a comment body marking it unresolved:
-    let is_qualified_facility (facility : facility) : bool =
+    let is_qualified (x : t) : bool =
       (* unresolved — needs §45Y(b)(1), §48E(b)(3) *)
       failwith "unresolved cross-reference"
   Set pattern "ambiguous" and name the needed sections in reason. Continue formalizing the
-  parent — use the stub function in your composition as if it were resolved.
-- If a sibling sub-provision (already formalized as OCaml in the input) provides the missing
-  section that a stub depends on, replace the stub with a direct call to that sibling's function.
+  containing provision — use the stub function in your composition as if it were resolved.
 - If the overall computation is unspecified or fully delegated, set pattern "ambiguous",
   ocaml "", explain in reason.
 
 ## Output
 
 Return JSON only, no prose, no markdown fences:
-{"ocaml": "the ocaml code", "pattern": "disjunction|conjunction|conditional|arithmetic|mixed|wrapper|partial|ambiguous", "reason": "one sentence"}
+{"ocaml": "the ocaml code", "pattern": "disjunction|conjunction|conditional|arithmetic|mixed|wrapper|partial|definition|ambiguous", "reason": "one sentence"}

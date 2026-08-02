@@ -1,1 +1,6 @@
 __pycache__
+
+# ocaml intermediate files
+*.cmi
+*.cmx
+*.o

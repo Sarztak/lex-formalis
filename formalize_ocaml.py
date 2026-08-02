@@ -18,6 +18,9 @@ LOG_DIR = "logs"
 with open("ocaml_system_prompt.txt", encoding="utf-8") as r:
     SYSTEM_PROMPT = r.read()
 
+with open("type_system_prompt.txt", encoding="utf-8") as r:
+    TYPE_SYSTEM_PROMPT = r.read()
+
 # ── Node / Tree ────────────────────────────────────────────────────────────────
 
 
@@ -172,10 +175,11 @@ def topo_sort(deps, depth_map=None):
 # ── Processing ─────────────────────────────────────────────────────────────────
 
 
-def process_flat(nodes_in_order, deps, results, tags=None):
+def process_flat(nodes_in_order, deps, results, tags=None, type_preamble=None):
     """
     Process nodes in topological order (dependencies first).
     tags: {node_id: set of construct strings} from classify_rules output.
+    type_preamble: shared OCaml type declarations prepended to every agent prompt.
     Leaf nodes without a 'definition' tag are clause fragments — marked partial
     without an agent call since they produce no reusable OCaml.
     """
@@ -190,12 +194,20 @@ def process_flat(nodes_in_order, deps, results, tags=None):
             results.append(_result_row(node, None))
             continue  # build_user_message shows "[REPEALED]" to agent, not this OCaml comment
 
-        if node.is_leaf and "definition" not in tags.get(node.id, set()):
-            node.status = "partial"
-            node.pattern = "partial"
-            node.reason = (
-                "leaf clause fragment — completes at containing provision level"
-            )
+        if node.is_leaf:
+            node_tags = tags.get(node.id, set())
+            if "definition" in node_tags:
+                node.status = "definition"
+                node.pattern = "definition"
+                node.reason = (
+                    "terminal definition — type declared in shared types.ml preamble"
+                )
+            else:
+                node.status = "partial"
+                node.pattern = "partial"
+                node.reason = (
+                    "leaf clause fragment — completes at containing provision level"
+                )
             results.append(_result_row(node, None))
             continue
 
@@ -206,7 +218,7 @@ def process_flat(nodes_in_order, deps, results, tags=None):
             if nid not in child_ids and nid in formalized
         }
 
-        call_agent(node, results, context)
+        call_agent(node, results, context, type_preamble)
 
         if node.status in ("code", "ambiguous") and node.ocaml:
             formalized[node.id] = (node.id, node.header, node.ocaml)
@@ -237,8 +249,14 @@ def _child_text(child):
     return "\n".join(parts)
 
 
-def build_user_message(node, context=None):
+def build_user_message(node, context=None, type_preamble=None):
     parts = []
+
+    if type_preamble:
+        parts.append(
+            "The following OCaml types are shared across all provisions — do NOT redefine them:\n"
+            f"```ocaml\n{type_preamble}\n```\n"
+        )
 
     # resolved cross-references available from already-processed siblings/ancestors
     if context:
@@ -289,8 +307,8 @@ def build_user_message(node, context=None):
     return "\n".join(parts)
 
 
-def call_agent(node, results, context=None):
-    user_message = build_user_message(node, context)
+def call_agent(node, results, context=None, type_preamble=None):
+    user_message = build_user_message(node, context, type_preamble)
     full_prompt = SYSTEM_PROMPT + "\n\n---\n\n" + user_message
 
     print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
@@ -393,6 +411,54 @@ def write_log(node, prompt, raw_response, parsed, error=None):
         json.dump(log, f, indent=2, ensure_ascii=False)
 
 
+# ── Type generation pass ───────────────────────────────────────────────────────
+
+
+def generate_types(tree, tags=None, out_path="types.ml"):
+    """
+    Pass 1: one agent call generates all OCaml types from definition leaves only.
+    Saves result to out_path and returns the type source as a string.
+    """
+    if tags is None:
+        tags = {}
+    parts = ["Definition provisions of 26 USC § 7701:\n"]
+    for node in tree.walk():
+        if node.is_leaf and "definition" in tags.get(node.id, set()):
+            label = node.id + (f" — {node.header}" if node.header else "")
+            text = node.raw_text()
+            if text:
+                parts.append(f"\n{label}\n{text}")
+
+    user_message = (
+        "\n".join(parts) + "\n\nGenerate the shared OCaml types for these definitions."
+    )
+    full_prompt = TYPE_SYSTEM_PROMPT + "\n\n---\n\n" + user_message
+
+    print("[type-pass] generating shared types...", file=sys.stderr)
+    result = subprocess.run(
+        ["claude", "-p", full_prompt, "--model", "claude-sonnet-5"],
+        capture_output=True,
+        text=True,
+        timeout=180,
+        check=False,
+    )
+
+    if result.returncode != 0:
+        print(f"  ERROR: {result.stderr[:300]}", file=sys.stderr)
+        return ""
+
+    raw = result.stdout.strip()
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1]
+    if raw.endswith("```"):
+        raw = raw.rsplit("```", 1)[0].strip()
+
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(raw + "\n")
+    print(f"  wrote {out_path}", file=sys.stderr)
+    return raw
+
+
 # ── Classify tags ──────────────────────────────────────────────────────────────
 
 
@@ -420,6 +486,11 @@ def load_classify_tags():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--node", help="Process single subtree by node ID")
+    parser.add_argument(
+        "--gen-types",
+        action="store_true",
+        help="Generate shared types only (writes types.ml) and exit",
+    )
     args = parser.parse_args()
 
     tree = Tree(TREE_FILE)
@@ -428,6 +499,18 @@ def main():
 
     tags = load_classify_tags()
     print(f"Loaded classify tags for {len(tags)} nodes", file=sys.stderr)
+
+    if args.gen_types:
+        generate_types(tree, tags)
+        return
+
+    if os.path.exists("types.ml"):
+        with open("types.ml", encoding="utf-8") as f:
+            type_preamble = f.read()
+        print("Loaded types.ml", file=sys.stderr)
+    else:
+        print("WARNING: types.ml not found — run --gen-types first", file=sys.stderr)
+        type_preamble = ""
 
     deps = build_dep_graph(tree)
     node_by_id = {n.id: n for n in tree.walk()}
@@ -445,7 +528,7 @@ def main():
             sys.exit(1)
         subtree_ids = {n.id for n in tree.walk(target)}
         filtered = [node_by_id[nid] for nid in order if nid in subtree_ids]
-        process_flat(filtered, deps, results, tags)
+        process_flat(filtered, deps, results, tags, type_preamble)
         for nid in order:
             if nid in subtree_ids:
                 n = node_by_id[nid]
@@ -454,9 +537,13 @@ def main():
                     print()
     else:
         out_ml = "7701.ml"
-        process_flat([node_by_id[nid] for nid in order], deps, results, tags)
+        process_flat(
+            [node_by_id[nid] for nid in order], deps, results, tags, type_preamble
+        )
 
         with open(out_ml, "w", encoding="utf-8") as f:
+            if type_preamble:
+                f.write("(* shared types *)\n" + type_preamble + "\n\n")
             for nid in order:
                 n = node_by_id[nid]
                 if n.ocaml:

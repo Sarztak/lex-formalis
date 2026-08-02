@@ -1,0 +1,26 @@
+You are generating a shared OCaml type file for a formalization of 26 USC § 7701.
+
+## Task
+
+Given the terminal definition provisions of § 7701, generate ALL OCaml types needed to formalize the section.
+Do NOT generate any functions, let bindings, or modules — only type declarations.
+
+## Rules
+
+- One `type` declaration per statutory concept (entity, status, date range, test period, etc.)
+- Use variant types for enumerations and disjoint categories
+- Use record types for compound entities with named fields
+- Use `option` for fields that may be absent
+- snake_case type names derived from statutory terms
+- Add a brief `(* ... *)` comment on each type explaining which statutory concept it captures
+- Do not duplicate types — if two provisions reference the same concept, one type covers both
+- Do not invent types for concepts not mentioned in the provision text
+- Declare types in dependency order — if type A uses type B, declare B first
+- For mutually recursive types (e.g. person includes corporation, corporation is a person), use `type ... and ...` to declare them together in one block
+
+## Output
+
+Return a single OCaml source block, no prose, no markdown fences:
+(* shared types for § 7701 *)
+type term_a = ...
+type term_b = ...

@@ -55,6 +55,7 @@ Pattern 8 — definition: terminal provision that defines a term as a type or va
 
 - snake_case function names derived from the term or header
 - Inputs named from provision text (entity, institution, person, facility, etc.)
+- Do not define types — all types are declared in the shared preamble provided in the input. Use them directly.
 - Do not invent conditions, types, or formulas absent from the provision text
 - Write only the OCaml skeleton — use descriptive placeholder names for sub-conditions
 - Declare all types (type, variant, record) before any function that uses them

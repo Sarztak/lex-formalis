@@ -172,8 +172,15 @@ def topo_sort(deps, depth_map=None):
 # ── Processing ─────────────────────────────────────────────────────────────────
 
 
-def process_flat(nodes_in_order, deps, results):
-    """Process nodes in topological order (dependencies first)."""
+def process_flat(nodes_in_order, deps, results, tags=None):
+    """
+    Process nodes in topological order (dependencies first).
+    tags: {node_id: set of construct strings} from classify_rules output.
+    Leaf nodes without a 'definition' tag are clause fragments — marked partial
+    without an agent call since they produce no reusable OCaml.
+    """
+    if tags is None:
+        tags = {}
     formalized = {}  # node_id -> (node_id, header, ocaml)
 
     for node in nodes_in_order:
@@ -182,6 +189,15 @@ def process_flat(nodes_in_order, deps, results):
             node.ocaml = f"(* REPEALED: {node.id} — {node.header} *)"  # output marker in .ml file
             results.append(_result_row(node, None))
             continue  # build_user_message shows "[REPEALED]" to agent, not this OCaml comment
+
+        if node.is_leaf and "definition" not in tags.get(node.id, set()):
+            node.status = "partial"
+            node.pattern = "partial"
+            node.reason = (
+                "leaf clause fragment — completes at containing provision level"
+            )
+            results.append(_result_row(node, None))
+            continue
 
         child_ids = {c.id for c in node.children}
         context = {
@@ -377,6 +393,27 @@ def write_log(node, prompt, raw_response, parsed, error=None):
         json.dump(log, f, indent=2, ensure_ascii=False)
 
 
+# ── Classify tags ──────────────────────────────────────────────────────────────
+
+
+def load_classify_tags():
+    """
+    Load the latest classify_rules JSON from logs/.
+    Returns {node_id: set of construct strings}, empty dict if none found.
+    """
+    import glob
+
+    files = sorted(glob.glob(os.path.join(LOG_DIR, "classify_rules_*.json")))
+    if not files:
+        return {}
+    with open(files[-1], encoding="utf-8") as f:
+        data = json.load(f)
+    return {
+        r["id"]: {t["construct"] for t in r.get("tags", [])}
+        for r in data.get("results", [])
+    }
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 
@@ -388,6 +425,9 @@ def main():
     tree = Tree(TREE_FILE)
     total = sum(1 for _ in tree.walk())
     print(f"Loaded: {tree.root.id}, {total} nodes", file=sys.stderr)
+
+    tags = load_classify_tags()
+    print(f"Loaded classify tags for {len(tags)} nodes", file=sys.stderr)
 
     deps = build_dep_graph(tree)
     node_by_id = {n.id: n for n in tree.walk()}
@@ -405,7 +445,7 @@ def main():
             sys.exit(1)
         subtree_ids = {n.id for n in tree.walk(target)}
         filtered = [node_by_id[nid] for nid in order if nid in subtree_ids]
-        process_flat(filtered, deps, results)
+        process_flat(filtered, deps, results, tags)
         for nid in order:
             if nid in subtree_ids:
                 n = node_by_id[nid]
@@ -414,7 +454,7 @@ def main():
                     print()
     else:
         out_ml = "7701.ml"
-        process_flat([node_by_id[nid] for nid in order], deps, results)
+        process_flat([node_by_id[nid] for nid in order], deps, results, tags)
 
         with open(out_ml, "w", encoding="utf-8") as f:
             for nid in order:

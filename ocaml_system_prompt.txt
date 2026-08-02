@@ -68,7 +68,7 @@ Pattern 8 — definition: terminal provision that defines a term as a type or va
 - Terminal provisions (no sub-provisions): if the provision defines a term, use pattern "definition" and write a type declaration or let binding. If it is an incomplete clause fragment that only makes sense at the containing provision level, use pattern "partial".
 - Use `option` for values that may be absent
 - Do not use training knowledge to resolve cross-referenced sections
-- Float operators for ratios/amounts: <. >. <=. >=. +. -. *. /. (not integer operators)
+- Float arithmetic operators: +. -. *. /. (not integer operators). Comparisons (< > <= >= =) are polymorphic — no dot suffix needed.
 - If a sub-provision references an external section of law that cannot be resolved, write a
   stub function with the correct input/output signature and a comment body marking it unresolved:
     let is_qualified (x : t) : bool =

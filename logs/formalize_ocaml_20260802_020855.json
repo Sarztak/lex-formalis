@@ -1,0 +1,10 @@
+[
+  {
+    "id": "7701(a)(1)",
+    "status": "code",
+    "pattern": "definition",
+    "reason": "Terminal provision defines \"person\" as enumerated entity kinds, so it becomes a variant type.",
+    "ocaml": "(* 7701(a)(1): term \"person\" — statutory taxpayer entity type *)\ntype person =\n  | Individual\n  | Trust\n  | Estate\n  | Partnership\n  | Association\n  | Company\n  | Corporation",
+    "error": null
+  }
+]

@@ -1,0 +1,706 @@
+[
+  {
+    "id": "7701(b)(1)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(B)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(B)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(iv)(I)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(iv)(II)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)(I)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)(II)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)(III)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(i)(I)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(i)(II)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(6)(A)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(6)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(7)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(7)(C)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(7)(D)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(9)(A)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(10)(A)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(10)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(11)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(B)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "(A) require both (i) 31-day floor and (ii) weighted 3-year sum >= 183, joined by 'and'.",
+    "ocaml": "(* substantial presence test: 31-day floor plus weighted 3-year day count >= 183 *)\nlet meets_substantial_presence_test\n    (days_present_current_year : int)\n    (days_present_1st_preceding_year : int)\n    (days_present_2nd_preceding_year : int) : bool =\n  let at_least_31_days_current_year = days_present_current_year >= 31 in\n  let weighted_day_sum =\n    (float_of_int days_present_current_year *. 1.0) +.\n    (float_of_int days_present_1st_preceding_year *. (1.0 /. 3.0)) +.\n    (float_of_int days_present_2nd_preceding_year *. (1.0 /. 6.0))\n  in\n  let weighted_sum_meets_183 = weighted_day_sum >= 183.0 in\n  at_least_31_days_current_year && weighted_sum_meets_183",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Exception applies only when both fewer-than-183-days presence and foreign tax home with closer connection hold simultaneously.",
+    "ocaml": "(* 7701(b)(3)(B): individual escapes substantial presence test if present <183 days\n   and has foreign tax home (per section 911(d)(3), second sentence disregarded) with\n   closer connection to that foreign country than to the United States. *)\nlet is_closer_connection_exception (individual : person) (days_present_current_year : int) (has_foreign_tax_home : bool) (has_closer_connection_to_foreign_country : bool) : bool =\n  days_present_current_year < 183 &&\n  has_foreign_tax_home &&\n  has_closer_connection_to_foreign_country",
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(D)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Day excluded from presence if exempt-individual condition (i) or medical-condition condition (ii) holds, no shared type captures these flags so bool inputs named from provision text.",
+    "ocaml": "(* 7701(b)(3)(D): day excluded from US presence count if exempt individual or medical-condition-bound *)\nlet is_excepted_from_us_presence (is_exempt_individual : bool) (unable_to_leave_due_to_medical_condition : bool) : bool =\n  is_exempt_individual ||\n  unable_to_leave_due_to_medical_condition",
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(iv)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Individual must satisfy both the 31-consecutive-day presence subclause (I) and the 75%-of-testing-period presence subclause (II), joined by 'is both'.",
+    "ocaml": "(* 7701(b)(4)(A)(iv): 31-day-in-election-year + 75%-of-testing-period presence test *)\nlet meets_31_consecutive_day_test (days_present_in_31_day_period : int) : bool =\n  days_present_in_31_day_period >= 31\n\nlet meets_75_percent_testing_period_test (days_present_in_testing_period : int) (days_absent_in_testing_period : int) (testing_period_length : int) : bool =\n  let counted_absent_days = min days_absent_in_testing_period 5 in\n  let effective_days_present = days_present_in_testing_period + counted_absent_days in\n  float_of_int effective_days_present >= 0.75 *. float_of_int testing_period_length\n\nlet is_present_for_31_day_and_testing_period (days_present_in_31_day_period : int) (days_present_in_testing_period : int) (days_absent_in_testing_period : int) (testing_period_length : int) : bool =\n  meets_31_consecutive_day_test days_present_in_31_day_period &&\n  meets_75_percent_testing_period_test days_present_in_testing_period days_absent_in_testing_period testing_period_length",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(E)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)(iv)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "All five elements (temporary presence, competing, charitable purpose, proceeds contributed, volunteer-run) must hold together for athlete to qualify under this exempt-individual prong.",
+    "ocaml": "(* 7701(b)(5)(A)(iv): professional athlete temporarily in US for charitable sports event, exempt individual for substantial presence test *)\nlet is_exempt_professional_athlete (is_temporarily_in_united_states : bool) (competes_in_sports_event : bool) (event_primary_purpose_benefits_501c3_organization : bool) (all_net_proceeds_contributed_to_organization : bool) (volunteers_perform_substantially_all_event_work : bool) : bool =\n  is_temporarily_in_united_states &&\n  competes_in_sports_event &&\n  event_primary_purpose_benefits_501c3_organization &&\n  all_net_proceeds_contributed_to_organization &&\n  volunteers_perform_substantially_all_event_work\n",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(C)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Term defined as individual meeting both (i) J/Q visa presence excluding students and (ii) substantial compliance with that status's requirements.",
+    "ocaml": "(* 7701(b)(5)(C): defines \"teacher or trainee\" for an individual *)\nlet is_teacher_or_trainee (individual : person) (present_under_j_or_q_visa : bool) (is_student : bool) (substantially_complies_with_presence_requirements : bool) : bool =\n  (* (i): temporarily present under INA 101(15)(J) or (Q), excluding students *)\n  present_under_j_or_q_visa && not is_student &&\n  (* (ii): substantially complies with requirements for such presence *)\n  substantially_complies_with_presence_requirements",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)(i)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "clause combines two unformalized visa-status sub-provisions (I) F/M and (II) J/Q student with or",
+    "ocaml": "(* temporarily present under F/M visa or J/Q student visa, per INA section 101(15) subparagraphs *)\nlet is_temporarily_present_under_exempt_visa\n  (has_f_or_m_visa_status : bool)\n  (has_j_or_q_student_status : bool) : bool =\n  has_f_or_m_visa_status ||\n  has_j_or_q_student_status\n",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(E)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(6)",
+    "status": "code",
+    "pattern": "mixed",
+    "reason": "conjunction defines lawful permanent resident status from (A) and (B); separate conjunction captures the flush-language cessation rule.",
+    "ocaml": "(* 7701(b)(6): lawful permanent resident status *)\nlet is_lawful_permanent_resident\n    (has_lawful_permanent_residence_status : bool)\n    (status_revoked : bool)\n    (status_abandoned_by_determination : bool) : bool =\n  has_lawful_permanent_residence_status\n  && not status_revoked\n  && not status_abandoned_by_determination\n\n(* cessation rule: treaty residency claim without waiver, notified to Secretary *)\nlet ceases_to_be_lawful_permanent_resident\n    (treated_as_foreign_resident_under_tax_treaty : bool)\n    (waives_treaty_benefits : bool)\n    (notifies_secretary_of_treatment : bool) : bool =\n  treated_as_foreign_resident_under_tax_treaty\n  && not waives_treaty_benefits\n  && notifies_secretary_of_treatment",
+    "error": null
+  },
+  {
+    "id": "7701(b)(7)(A)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(9)(B)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(10)",
+    "status": "ambiguous",
+    "pattern": "ambiguous",
+    "reason": "Combines conditions (A) and (B) with a tax comparison whose computation is delegated to unresolved §877(b) and §871.",
+    "ocaml": "(* stub — tax computed in manner provided in section 877(b) *)\nlet tax_under_section_877b (taxpayer : taxpayer) (gap_start : date) (gap_end : date) : float =\n  (* unresolved — needs §877(b) *)\n  failwith \"unresolved cross-reference\"\n\n(* stub — tax imposed pursuant to section 871, without regard to this paragraph *)\nlet tax_under_section_871 (taxpayer : taxpayer) (gap_start : date) (gap_end : date) : float =\n  (* unresolved — needs §871 *)\n  failwith \"unresolved cross-reference\"\n\n(* 7701(b)(10)(A): alien individual treated as US resident for a period including at least 3 consecutive calendar years (the initial residency period) *)\nlet has_initial_residency_period (consecutive_resident_years : int) : bool =\n  consecutive_resident_years >= 3\n\n(* 7701(b)(10)(B): individual ceases to be a resident but again becomes a resident before close of the 3rd calendar year after the initial residency period ends *)\nlet resumes_residency_in_time (initial_residency_period_end_year : int) (resumed_residency_year : int) : bool =\n  resumed_residency_year <= initial_residency_period_end_year + 3\n\n(* 7701(b)(10): coordination with section 877 — applies only if tax under 877(b) exceeds tax under 871 for the gap period *)\nlet coordination_with_section_877\n    (taxpayer : taxpayer)\n    (consecutive_resident_years : int)\n    (initial_residency_period_end_year : int)\n    (resumed_residency_year : int)\n    (gap_period_start : date)\n    (gap_period_end : date)\n    : bool =\n  has_initial_residency_period consecutive_resident_years &&\n  resumes_residency_in_time initial_residency_period_end_year resumed_residency_year &&\n  tax_under_section_877b taxpayer gap_period_start gap_period_end >\n  tax_under_section_871 taxpayer gap_period_start gap_period_end\n",
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(B)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Three sub-clauses (i)-(iii) must all hold for alien to escape residency treatment for the trailing portion of the year.",
+    "ocaml": "(* 7701(b)(2)(B): alien individual not treated as US resident during portion of calendar year if (i)-(iii) hold *)\nlet is_excluded_from_residency_last_year\n    (portion_is_after_last_presence_or_described_day : bool)\n    (has_closer_connection_to_foreign_country_during_portion : bool)\n    (is_resident_next_calendar_year : bool) : bool =\n  portion_is_after_last_presence_or_described_day &&\n  has_closer_connection_to_foreign_country_during_portion &&\n  not is_resident_next_calendar_year",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Either pending adjustment-of-status application or other LPR-status steps bars the (B) exception.",
+    "ocaml": "(* 7701(b)(3)(C): bars (B) closer-connection exception if individual sought LPR status during year *)\nlet bars_closer_connection_exception (individual : person) (has_pending_status_adjustment_application : bool) (took_other_steps_toward_lawful_permanent_resident_status : bool) : bool =\n  has_pending_status_adjustment_application ||\n  took_other_steps_toward_lawful_permanent_resident_status",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(A)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "individual is exempt if any of the four listed statuses (foreign government-related individual, teacher/trainee, student, or qualifying athlete) applies for that day.",
+    "ocaml": "(* 7701(b)(5)(A): exempt individual for substantial presence test if foreign govt-related individual, teacher/trainee, student, or professional athlete under (iv) *)\nlet is_exempt_individual (is_foreign_government_related_individual : bool) (is_teacher_or_trainee : bool) (is_student : bool) (is_temporarily_in_united_states : bool) (competes_in_sports_event : bool) (event_primary_purpose_benefits_501c3_organization : bool) (all_net_proceeds_contributed_to_organization : bool) (volunteers_perform_substantially_all_event_work : bool) : bool =\n  is_foreign_government_related_individual ||\n  is_teacher_or_trainee ||\n  is_student ||\n  is_exempt_professional_athlete is_temporarily_in_united_states competes_in_sports_event event_primary_purpose_benefits_501c3_organization all_net_proceeds_contributed_to_organization volunteers_perform_substantially_all_event_work",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(B)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Individual qualifies as foreign government-related if any of the four listed reasons for temporary presence holds.",
+    "ocaml": "(* foreign government-related individual : temporarily present in US by reason of diplomatic status, visa determined by Secretary to represent full-time diplomatic/consular status, full-time employment at international organization, or immediate family membership with such an individual *)\nlet is_foreign_government_related_individual\n    (has_diplomatic_status : bool)\n    (has_secretary_determined_diplomatic_or_consular_visa : bool)\n    (is_full_time_employee_of_international_organization : bool)\n    (is_immediate_family_member_of_qualifying_individual : bool)\n  : bool =\n  has_diplomatic_status ||\n  has_secretary_determined_diplomatic_or_consular_visa ||\n  is_full_time_employee_of_international_organization ||\n  is_immediate_family_member_of_qualifying_individual\n",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(D)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Student status requires both exempt visa presence (i) and substantial compliance with its requirements (ii).",
+    "ocaml": "(* student : individual temporarily present under exempt visa who substantially complies with presence requirements *)\nlet is_student\n  (has_f_or_m_visa_status : bool)\n  (has_j_or_q_student_status : bool)\n  (substantially_complies_with_presence_requirements : bool) : bool =\n  is_temporarily_present_under_exempt_visa has_f_or_m_visa_status has_j_or_q_student_status &&\n  substantially_complies_with_presence_requirements",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)(E)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "Provision (E) groups two independent, unrelated limitation rules — (i) on teachers/trainees and (ii) on students — each with its own year-counting computation, so it is bundled as a module rather than a single composed function.",
+    "ocaml": "module Special_rules_for_teachers_trainees_and_students = struct\n  (* (i) — bars teacher/trainee exemption under (A)(ii) if exempt under (A)(ii) or (A)(iii) in >= threshold of preceding 6 calendar years; threshold is 4 (not 2) if all compensation is described in section 872(b)(3) *)\n  let is_teacher_or_trainee_exempt (current_year : int) (exempt_calendar_years_under_A_ii_or_A_iii : int list) (all_compensation_under_section_872_b_3 : bool) : bool =\n    let threshold = if all_compensation_under_section_872_b_3 then 4 else 2 in\n    let exempt_years_in_preceding_six =\n      List.filter (fun y -> y < current_year && y >= current_year - 6) exempt_calendar_years_under_A_ii_or_A_iii\n    in\n    List.length exempt_years_in_preceding_six < threshold\n\n  (* (ii) — bars student exemption under (A)(iii) after the 5th calendar year of exemption under (A)(ii) or (A)(iii), unless individual establishes no intent to permanently reside in the US and meets subparagraph (D)(ii) requirements *)\n  let is_student_exempt (current_year : int) (exempt_calendar_years_under_A_ii_or_A_iii : int list) (does_not_intend_permanent_residence : bool) (meets_subparagraph_D_ii : bool) : bool =\n    let prior_exempt_year_count =\n      List.length (List.filter (fun y -> y < current_year) exempt_calendar_years_under_A_ii_or_A_iii)\n    in\n    if prior_exempt_year_count < 5 then true\n    else does_not_intend_permanent_residence && meets_subparagraph_D_ii\nend",
+    "error": null
+  },
+  {
+    "id": "7701(b)(7)",
+    "status": "code",
+    "pattern": "conditional",
+    "reason": "General presence rule (A) applies except when commuter (B), short foreign transit (C), or crew-member (D) exceptions override it, so result depends on which condition holds.",
+    "ocaml": "(* is_present_in_united_states : determines whether individual treated as present in US on given day, per 7701(b)(7) general rule plus commuter, transit, and crew exceptions *)\nlet is_present_in_united_states\n    (physically_present : bool)\n    (commutes_from_canada_or_mexico : bool)\n    (in_transit_between_two_foreign_points : bool)\n    (hours_present_during_transit : float)\n    (is_regular_crew_member_of_foreign_vessel : bool)\n    (vessel_engaged_in_us_foreign_transportation : bool)\n    (engages_in_trade_or_business_in_us : bool)\n  : bool =\n  (* (B) commuter from Canada or Mexico on day of commute *)\n  if commutes_from_canada_or_mexico then false\n  (* (C) in transit between 2 foreign points, present less than 24 hours *)\n  else if in_transit_between_two_foreign_points && hours_present_during_transit < 24.0 then false\n  (* (D) regular crew member of foreign vessel, unless also engaged in US trade or business that day *)\n  else if is_regular_crew_member_of_foreign_vessel\n          && vessel_engaged_in_us_foreign_transportation\n          && not engages_in_trade_or_business_in_us then false\n  (* (A) general rule: physical presence any time during day *)\n  else physically_present",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)",
+    "status": "code",
+    "pattern": "mixed",
+    "reason": "Combines (A) day-count test with (B) closer-connection exception gated by (C) bar; (D) handled upstream as day-count exclusion.",
+    "ocaml": "(* 7701(b)(3): substantial presence test overall, subject to (B) closer-connection\n   exception unless barred by (C). Day counts passed in must already exclude days\n   excepted under (D) (exempt individual / medical condition). *)\nlet meets_substantial_presence_test_overall\n    (individual : person)\n    (days_present_current_year : int)\n    (days_present_1st_preceding_year : int)\n    (days_present_2nd_preceding_year : int)\n    (has_foreign_tax_home : bool)\n    (has_closer_connection_to_foreign_country : bool)\n    (has_pending_status_adjustment_application : bool)\n    (took_other_steps_toward_lawful_permanent_resident_status : bool) : bool =\n  let raw_test_met =\n    meets_substantial_presence_test\n      days_present_current_year\n      days_present_1st_preceding_year\n      days_present_2nd_preceding_year\n  in\n  let exception_applies =\n    is_closer_connection_exception\n      individual days_present_current_year has_foreign_tax_home has_closer_connection_to_foreign_country\n    && not (bars_closer_connection_exception\n              individual has_pending_status_adjustment_application took_other_steps_toward_lawful_permanent_resident_status)\n  in\n  raw_test_met && not exception_applies",
+    "error": null
+  },
+  {
+    "id": "7701(b)(5)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "7701(b)(5) is a grouping header with no independent computation, gathering the exempt-individual definitions in (A)-(E).",
+    "ocaml": "(* 7701(b)(5): groups definitions used throughout subsection (b) — exempt individual and its components *)\nmodule Exempt_individual = struct\n  let is_exempt_individual = is_exempt_individual\n  let is_foreign_government_related_individual = is_foreign_government_related_individual\n  let is_teacher_or_trainee = is_teacher_or_trainee\n  let is_student = is_student\n  module Special_rules_for_teachers_trainees_and_students = Special_rules_for_teachers_trainees_and_students\nend",
+    "error": null
+  },
+  {
+    "id": "7701(b)(8)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(A)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(C)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(C)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(C)",
+    "status": "code",
+    "pattern": "arithmetic",
+    "reason": "combines general closer-connection disregard rule with clause (ii)'s 10-day cap into single capped count.",
+    "ocaml": "(* days present in US disregarded under closer-connection exception, capped at 10 days per (b)(2)(C)(ii) *)\nlet days_disregarded_for_closer_connection (days_with_closer_connection_established : int) : int =\n  min days_with_closer_connection_established 10",
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)(A)(iii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(A)(iv)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(9)(B)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)(A)",
+    "status": "ambiguous",
+    "pattern": "ambiguous",
+    "reason": "Disjunction of three clauses but (ii) and (iii) delegate to unformalized §7701(b)(3) and §7701(b)(4), and (i) needs immigration status data absent from person type.",
+    "ocaml": "let is_lawful_permanent_resident (individual : person) (year : int) : bool =\n  (* clause (i): permanent resident status under immigration law, not modeled in person type *)\n  failwith \"unresolved cross-reference\"\n\nlet meets_substantial_presence_test (individual : person) (year : int) : bool =\n  (* clause (ii): delegated to §7701(b)(3), not yet formalized *)\n  failwith \"unresolved cross-reference\"\n\nlet makes_first_year_election (individual : person) (year : int) : bool =\n  (* clause (iii): delegated to §7701(b)(4), not yet formalized *)\n  failwith \"unresolved cross-reference\"\n\nlet is_resident_alien (individual : person) (year : int) : bool =\n  (* 7701(b)(1)(A): alien treated as US resident if any clause (i)-(iii) holds *)\n  is_lawful_permanent_resident individual year ||\n  meets_substantial_presence_test individual year ||\n  makes_first_year_election individual year",
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)(A)",
+    "status": "code",
+    "pattern": "mixed",
+    "reason": "residency starting date dispatches on which basis (LPR, substantial presence, or election) applies, then that date is used to compute the fractional first-year residency period.",
+    "ocaml": "(* residency_starting_date : determines first day of US residency depending on which basis (i)(ii)(iii)(iv) applies *)\nlet residency_starting_date\n    (is_lawful_permanent_resident : bool)\n    (meets_substantial_presence_test : bool)\n    (makes_first_year_election : bool)\n    (first_day_present_as_lawful_permanent_resident : date option)\n    (first_day_present_in_united_states : date option)\n    (first_day_treated_as_resident_under_election : date option)\n    : date =\n  if meets_substantial_presence_test then\n    (* (iii) substantial presence test: residency starting date is first day present in US during the year *)\n    match first_day_present_in_united_states with\n    | Some d -> d\n    | None -> failwith \"missing first day present in United States\"\n  else if is_lawful_permanent_resident then\n    (* (ii) lawful permanent resident not meeting substantial presence test: first day present in US as LPR *)\n    match first_day_present_as_lawful_permanent_resident with\n    | Some d -> d\n    | None -> failwith \"missing first day present as lawful permanent resident\"\n  else if makes_first_year_election then\n    (* (iv) first-year election under paragraph (4): first day treated as resident under that election *)\n    match first_day_treated_as_resident_under_election with\n    | Some d -> d\n    | None -> failwith \"missing first day treated as resident under election\"\n  else\n    failwith \"no residency basis established for residency starting date\"\n\n(* first_year_residency_period : (i) alien individual resident this calendar year under (1)(A) but not resident preceding calendar year is treated as resident only for portion of year beginning on residency starting date *)\nlet first_year_residency_period\n    (is_resident_under_1A_this_year : bool)\n    (was_resident_preceding_calendar_year : bool)\n    (is_lawful_permanent_resident : bool)\n    (meets_substantial_presence_test : bool)\n    (makes_first_year_election : bool)\n    (first_day_present_as_lawful_permanent_resident : date option)\n    (first_day_present_in_united_states : date option)\n    (first_day_treated_as_resident_under_election : date option)\n    (calendar_year_end : date)\n    : taxable_year option =\n  if is_resident_under_1A_this_year && not was_resident_preceding_calendar_year then\n    let start_date =\n      residency_starting_date\n        is_lawful_permanent_resident\n        meets_substantial_presence_test\n        makes_first_year_election\n        first_day_present_as_lawful_permanent_resident\n        first_day_present_in_united_states\n        first_day_treated_as_resident_under_election\n    in\n    Some (Fractional_period { period_start = start_date; period_end = calendar_year_end })\n  else\n    None",
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(A)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Four clauses (i)-(iv) must all hold for alien deemed to meet first-year election requirements.",
+    "ocaml": "(* 7701(b)(4)(A): alien deemed to meet requirements if not resident in election year and prior year under (1)(A)(i)/(ii), but resident under (1)(A)(ii) in following year, plus presence test *)\nlet meets_first_year_election_requirements (is_nonresident_election_year : bool) (is_nonresident_preceding_year : bool) (is_resident_following_year_under_substantial_presence : bool) (days_present_in_31_day_period : int) (days_present_in_testing_period : int) (days_absent_in_testing_period : int) (testing_period_length : int) : bool =\n  is_nonresident_election_year &&\n  is_nonresident_preceding_year &&\n  is_resident_following_year_under_substantial_presence &&\n  is_present_for_31_day_and_testing_period days_present_in_31_day_period days_present_in_testing_period days_absent_in_testing_period testing_period_length",
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(C)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(E)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)(F)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(9)(B)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Resident status for the taxable-year portion requires both residency under paragraph (1) for the calendar year and a non-calendar taxable year established under subparagraph (A).",
+    "ocaml": "(* fiscal-year alien resident under (b)(1): treated resident for the portion of taxable year within the calendar year *)\nlet is_resident_for_fiscal_year_portion (is_resident_under_paragraph_1_for_calendar_year : bool) (taxable_year_after_9a : taxable_year) : bool =\n  is_resident_under_paragraph_1_for_calendar_year &&\n  (match taxable_year_after_9a with\n   | Calendar_year_basis -> false\n   | Fiscal_year_basis _ -> true\n   | Fractional_period _ -> true)",
+    "error": null
+  },
+  {
+    "id": "7701(b)(1)",
+    "status": "ambiguous",
+    "pattern": "ambiguous",
+    "reason": "nonresident alien status depends on citizenship, which person type does not model and nationality law is not resolvable here.",
+    "ocaml": "let is_us_citizen (individual : person) : bool =\n  (* citizenship status not modeled in person type; determined under nationality law, not Title 26 *)\n  failwith \"unresolved cross-reference\"\n\nlet is_nonresident_alien (individual : person) (year : int) : bool =\n  (* 7701(b)(1)(B): alien who is neither citizen nor resident (per subparagraph (A)) *)\n  not (is_us_citizen individual) &&\n  not (is_resident_alien individual year)",
+    "error": null
+  },
+  {
+    "id": "7701(b)(2)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "7701(b)(2) groups three independent sub-rules (A first year, B last year, C nominal presence disregarded) with no computation combining them at this level.",
+    "ocaml": "(* 7701(b)(2): groups special rules for first year residency, last year residency, and nominal presence disregarded — independent sub-rules, no shared computation *)\nmodule Special_rules_first_last_year_of_residency = struct\n  let first_year_residency_period = first_year_residency_period\n  let is_excluded_from_residency_last_year = is_excluded_from_residency_last_year\n  let days_disregarded_for_closer_connection = days_disregarded_for_closer_connection\nend",
+    "error": null
+  },
+  {
+    "id": "7701(b)(4)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "Provision groups independent sub-provisions (B eligibility, C start date, E timing, F revocation) into one election concept without a single unifying computation.",
+    "ocaml": "(* 7701(b)(4)(B): elect first-year residency treatment if requirements of (A) met *)\nlet is_first_year_election_resident\n    (meets_first_year_election_requirements : bool) (* from 7701(b)(4)(A) *)\n    (elects_first_year_treatment : bool) (* (B): election choice *)\n    (revoked_with_secretary_consent : bool) (* (F): revocation *)\n  : bool =\n  meets_first_year_election_requirements &&\n  elects_first_year_treatment &&\n  not revoked_with_secretary_consent\n\n(* 7701(b)(4)(C): residency begins 1st day of earliest qualifying testing period *)\nlet first_year_election_residency_start_date\n    (meets_first_year_election_requirements : bool)\n    (earliest_qualifying_testing_period_start : date) (* start of earliest testing period meeting (A)(iv) *)\n  : date option =\n  if meets_first_year_election_requirements then\n    Some earliest_qualifying_testing_period_start\n  else None\n\n(* 7701(b)(4)(D): presence under this paragraph determined by (3)(D)(i) rules, already folded into (A)'s presence test helper *)\n\n(* 7701(b)(4)(E): election timing — cannot elect before meeting substantial presence test for year after election year *)\nlet is_first_year_election_timely\n    (has_met_substantial_presence_test_for_following_calendar_year : bool)\n    (filed_on_tax_return_for_election_year : bool)\n  : bool =\n  has_met_substantial_presence_test_for_following_calendar_year &&\n  filed_on_tax_return_for_election_year\n\n(* 7701(b)(4): wraps election eligibility, effective date, and timing rules for first-year election *)\nmodule First_year_election = struct\n  let is_resident = is_first_year_election_resident\n  let residency_start_date = first_year_election_residency_start_date\n  let is_timely = is_first_year_election_timely\nend",
+    "error": null
+  },
+  {
+    "id": "7701(b)(9)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "Provision groups two independent sub-provisions - (A) default calendar-year assignment for aliens with no established prior taxable year, and (B) fiscal-year resident portion rule - with no computation binding them together.",
+    "ocaml": "module Taxable_year_alien = struct\n  (* (A): alien individual who has not established a taxable year for any prior period is treated as having a taxable year which is the calendar year *)\n  let default_taxable_year_for_alien (has_established_taxable_year_for_prior_period : bool) : taxable_year option =\n    if has_established_taxable_year_for_prior_period then None\n    else Some Calendar_year_basis\n\n  (* (B): fiscal-year alien resident under (b)(1): treated resident for the portion of taxable year within the calendar year *)\n  let is_resident_for_fiscal_year_portion = is_resident_for_fiscal_year_portion\nend",
+    "error": null
+  },
+  {
+    "id": "7701(b)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "7701(b) is a header provision grouping independent sub-provision definitions (residency tests, elections, exemptions, presence rules, taxable year, coordination with 877) with no computation of its own.",
+    "ocaml": "(* 7701(b): definition of resident alien and nonresident alien — groups general residency test, special first/last year rules, substantial presence test, first-year election, exempt individual, lawful permanent resident status, presence rules, annual statement requirement, taxable year rules, and coordination with section 877 *)\nmodule Resident_and_nonresident_alien = struct\n  let is_nonresident_alien = is_nonresident_alien\n\n  module Special_rules_first_last_year_of_residency = Special_rules_first_last_year_of_residency\n\n  let meets_substantial_presence_test_overall = meets_substantial_presence_test_overall\n\n  module First_year_election = First_year_election\n\n  module Exempt_individual = Exempt_individual\n\n  let is_lawful_permanent_resident = is_lawful_permanent_resident\n  let ceases_to_be_lawful_permanent_resident = ceases_to_be_lawful_permanent_resident\n\n  let is_present_in_united_states = is_present_in_united_states\n\n  (* 7701(b)(8): Secretary may require annual statement from individual who would meet substantial presence test but for closer-connection (3)(B) or medical-condition (3)(D) exception *)\n  let must_submit_annual_statement\n      (individual : person)\n      (would_meet_test_but_for_closer_connection_exception : bool)\n      (would_meet_test_but_for_medical_condition_exception : bool) : bool =\n    (* unresolved — needs regulations prescribed by Secretary under 7701(b)(8) *)\n    failwith \"unresolved cross-reference\"\n\n  module Taxable_year_alien = Taxable_year_alien\n\n  let coordination_with_section_877 = coordination_with_section_877\nend\n",
+    "error": null
+  }
+]

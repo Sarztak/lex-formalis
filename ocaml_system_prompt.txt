@@ -70,15 +70,16 @@ Pattern 8 — definition: terminal provision that defines a term as a type or va
 - Use `option` for values that may be absent
 - Do not use training knowledge to resolve cross-referenced sections
 - Float arithmetic operators: +. -. *. /. (not integer operators). Comparisons (< > <= >= =) are polymorphic — no dot suffix needed.
-- If a sub-provision references an external section of law that cannot be resolved, write a
-  stub function with the correct input/output signature and a comment body marking it unresolved:
+- Use positional arguments only: `(name : type)`. Do not use labeled arguments (`~name` or `~(name : type)`).
+- If a provision or sub-provision references an external section of law that cannot be resolved,
+  or if the computation is partially or fully delegated to another section, ALWAYS write a stub
+  function with the correct input/output signature and a `failwith` body:
     let is_qualified (x : t) : bool =
       (* unresolved — needs §45Y(b)(1), §48E(b)(3) *)
       failwith "unresolved cross-reference"
   Set pattern "ambiguous" and name the needed sections in reason. Continue formalizing the
   containing provision — use the stub function in your composition as if it were resolved.
-- If the overall computation is unspecified or fully delegated, set pattern "ambiguous",
-  ocaml "", explain in reason.
+  Never set ocaml to an empty string for an ambiguous provision — always produce at least a stub.
 
 ## Output
 

@@ -5,6 +5,7 @@ Bottom-up OCaml formalization pipeline for 26 USC § 7701.
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from collections import deque
@@ -282,6 +283,13 @@ def build_user_message(node, context=None, type_preamble=None):
         if child.status == "repealed":
             # build_user_message shows "[REPEALED]" to agent, not the OCaml comment set to node.ocaml for repealed sections
             parts.append(f"\n{child.id} — [REPEALED]")
+        elif child.status == "ambiguous" and not child.ocaml:
+            # should not happen — prompt requires all ambiguous nodes to produce a stub
+            parts.append(
+                f"\n{child.id}"
+                + (f" — {child.header}" if child.header else "")
+                + " [AMBIGUOUS — stub missing, do not reference]"
+            )
         elif child.status in ("code", "ambiguous") and child.ocaml:
             parts.append(
                 f"\n{child.id}" + (f" — {child.header}" if child.header else "")
@@ -414,6 +422,18 @@ def write_log(node, prompt, raw_response, parsed, error=None):
 # ── Type generation pass ───────────────────────────────────────────────────────
 
 
+def build_type_index(types_ml_source):
+    """
+    Strip OCaml comments from types.ml and return compact type declarations only.
+    Removes (* ... *) comments so the agent gets names/constructors without docs.
+    """
+    # Remove (* ... *) comments (non-greedy, handles multiline)
+    stripped = re.sub(r"\(\*.*?\*\)", "", types_ml_source, flags=re.DOTALL)
+    # Collapse blank lines
+    lines = [ln for ln in stripped.splitlines() if ln.strip()]
+    return "\n".join(lines)
+
+
 def generate_types(tree, tags=None, out_path="types.ml"):
     """
     Pass 1: one agent call generates all OCaml types from definition leaves only.
@@ -506,8 +526,8 @@ def main():
 
     if os.path.exists("types.ml"):
         with open("types.ml", encoding="utf-8") as f:
-            type_preamble = f.read()
-        print("Loaded types.ml", file=sys.stderr)
+            type_preamble = build_type_index(f.read())
+        print("Loaded types.ml (compact index)", file=sys.stderr)
     else:
         print("WARNING: types.ml not found — run --gen-types first", file=sys.stderr)
         type_preamble = ""

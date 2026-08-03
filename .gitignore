@@ -4,3 +4,17 @@ __pycache__
 *.cmi
 *.cmx
 *.o
+
+# pipeline output artifacts
+logs/
+batch_results*.json
+7701_parsed.txt
+nodes_ambiguous.txt
+
+# test scratch dirs
+test1/
+test2/
+
+# local tooling
+TASKS.md
+memory/

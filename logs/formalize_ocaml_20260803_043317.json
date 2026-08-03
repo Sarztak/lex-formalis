@@ -1,0 +1,65 @@
+[
+  {
+    "id": "7701(b)(3)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "individual meets test only if both the 31-day current-year floor (i) and the 183-day weighted 3-year sum (ii) hold.",
+    "exceptions": [],
+    "ocaml": "let meets_substantial_presence_test (days_current_year : int) (days_1st_preceding_year : int) (days_2nd_preceding_year : int) : bool =\n  (* 7701(b)(3)(A)(ii): weighted sum of days present, multipliers 1, 1/3, 1/6 *)\n  let weighted_days_sum =\n    float_of_int days_current_year *. 1.0 +.\n    float_of_int days_1st_preceding_year *. (1.0 /. 3.0) +.\n    float_of_int days_2nd_preceding_year *. (1.0 /. 6.0)\n  in\n  (* (i) at least 31 days in current year, and (ii) weighted 3-year sum >= 183 days *)\n  days_current_year >= 31 && weighted_days_sum >= 183.0",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "(B) exception to base test (A), (C) exception to (B), (D) independent exception to day-counting, so parent groups them without merging, leaving priority resolution to external DAG; needs sec_911_d_3 cross-ref.",
+    "exceptions": [],
+    "ocaml": "(* 7701(b)(3)(D): day not counted as US presence if exempt individual or medical-emergency-bound *)\nlet is_exempt_presence_day\n    (is_exempt_individual : bool)\n    (unable_to_leave_due_to_medical_condition_arising_during_presence : bool)\n  : bool =\n  is_exempt_individual || unable_to_leave_due_to_medical_condition_arising_during_presence\n\n(* 7701(b)(3)(C): (B) closer-connection exception disallowed if individual sought permanent-resident status *)\nlet closer_connection_exception_inapplicable\n    (has_pending_adjustment_of_status_application : bool)\n    (has_taken_steps_toward_permanent_residency : bool)\n  : bool =\n  has_pending_adjustment_of_status_application || has_taken_steps_toward_permanent_residency\n\n(* 7701(b)(3)(B): exception to substantial presence test -- <183 days current year, foreign tax home, closer connection abroad *)\nlet has_closer_connection_exception\n    (is_present_less_than_183_days : bool)\n    (sec_911_d_3 : bool) (* cross-ref: §911(d)(3) -- tax home in foreign country, without regard to second sentence *)\n    (has_closer_connection_to_foreign_country : bool)\n  : bool =\n  is_present_less_than_183_days && sec_911_d_3 && has_closer_connection_to_foreign_country\n\n(* 7701(b)(3): substantial presence test -- base rule (A) plus exceptions (B)/(C)/(D), priority resolved externally by DAG *)\nmodule Substantial_presence_test = struct\n  let meets_substantial_presence_test = meets_substantial_presence_test\n  let has_closer_connection_exception = has_closer_connection_exception\n  let closer_connection_exception_inapplicable = closer_connection_exception_inapplicable\n  let is_exempt_presence_day = is_exempt_presence_day\nend",
+    "error": null
+  }
+]

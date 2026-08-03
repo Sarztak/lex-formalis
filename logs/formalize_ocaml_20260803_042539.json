@@ -1,0 +1,65 @@
+[
+  {
+    "id": "7701(b)(3)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Individual meets test only if both the 31-day-in-current-year floor (i) and the weighted 3-year day sum reaching 183 (ii) hold together.",
+    "exceptions": [],
+    "ocaml": "(* substantial presence test — §7701(b)(3)(A): 31-day floor plus weighted 3-year day count *)\nlet has_substantial_presence_test (days_current_year : int) (days_first_preceding_year : int) (days_second_preceding_year : int) : bool =\n  let weighted_day_sum =\n    float_of_int days_current_year\n    +. float_of_int days_first_preceding_year /. 3.0\n    +. float_of_int days_second_preceding_year /. 6.0\n  in\n  days_current_year >= 31 &&\n  weighted_day_sum >= 183.0",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)",
+    "status": "code",
+    "pattern": "wrapper",
+    "reason": "subparagraph (B) is an exception to (A), (C) is an exception to (B), and (D) is an independent day-exclusion exception, so base and each exception get separate functions grouped in a wrapper module with resolution left to the external DAG.",
+    "exceptions": [],
+    "ocaml": "(* 7701(b)(3)(B) — exception to substantial presence test: <183 days plus closer connection to foreign tax home *)\nlet is_closer_connection_exception (days_present_current_year : int) (has_tax_home_in_foreign_country : bool) (* cross-ref: §911(d)(3), without regard to second sentence *) (has_closer_connection_to_foreign_country : bool) : bool =\n  days_present_current_year < 183 &&\n  has_tax_home_in_foreign_country &&\n  has_closer_connection_to_foreign_country\n\n(* 7701(b)(3)(C) — exception to the (B) exception: pending adjustment of status or steps toward lawful permanent residency *)\nlet is_adjustment_of_status_exception (has_pending_adjustment_of_status_application : bool) (has_taken_other_steps_toward_lawful_permanent_resident_status : bool) : bool =\n  has_pending_adjustment_of_status_application ||\n  has_taken_other_steps_toward_lawful_permanent_resident_status\n\n(* 7701(b)(3)(D) — day excluded from presence count: exempt individual or medical condition arising in US *)\nlet is_excluded_presence_day (is_exempt_individual : bool) (unable_to_leave_due_to_medical_condition_arising_in_united_states : bool) : bool =\n  is_exempt_individual ||\n  unable_to_leave_due_to_medical_condition_arising_in_united_states\n\n(* 7701(b)(3) wrapper — groups substantial presence test (A) with its exceptions (B), (C), (D); priority resolved externally by DAG *)\nmodule Substantial_presence_test = struct\n  let base = has_substantial_presence_test\n  let closer_connection_exception = is_closer_connection_exception\n  let adjustment_of_status_exception = is_adjustment_of_status_exception\n  let excluded_presence_day = is_excluded_presence_day\nend",
+    "error": null
+  }
+]

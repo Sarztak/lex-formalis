@@ -65,10 +65,52 @@ class Node:
         return f"Node({self.id!r}, children={len(self.children)})"
 
 
+_EXCEPTION_HEADER_KW = [
+    "exception",
+    "not to apply",
+    "nonapplication",
+    "shall not apply",
+    "inapplicability",
+]
+_EXCEPTION_CHAPEAU_KW = ["shall not apply", "does not apply"]
+
+
+def _is_exception_provision(data):
+    header = (data.get("header") or "").lower()
+    chapeau = (data.get("chapeau") or "").lower()
+    return (
+        any(kw in header for kw in _EXCEPTION_HEADER_KW)
+        or any(kw in chapeau for kw in _EXCEPTION_CHAPEAU_KW)
+    ) and bool(data.get("children"))
+
+
+def _flatten_children(data):
+    parts = []
+    for child in data.get("children", []):
+        _flatten_children(child)
+        for field in ("chapeau", "body", "continuation"):
+            t = (child.get(field) or "").strip()
+            if t:
+                parts.append(t)
+    existing = (data.get("body") or "").strip()
+    extra = " ".join(parts)
+    data["body"] = (existing + " " + extra).strip() if existing else extra
+    data["children"] = []
+
+
+def _preprocess_tree(data):
+    if _is_exception_provision(data):
+        _flatten_children(data)
+    else:
+        for child in data.get("children", []):
+            _preprocess_tree(child)
+
+
 class Tree:
     def __init__(self, path):
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
+        _preprocess_tree(data)
         self.root = self._build(data, parent=None)
 
     def _build(self, data, parent):

@@ -36,10 +36,11 @@ Pattern 5 — mixed: condition selects which computation applies.
     else compute_b x
 
 Pattern 6 — wrapper: no computation; provision groups independent sub-provisions.
-Write a module grouping the sub-provision functions. Do not add any computation.
+Write a module that aliases already-formalized sub-provision functions using `let name = existing_name`.
+Do not redefine any function already present as a sub-provision code block. Do not add any computation.
   module TermName = struct
-    let meaning_case_a (x : t) : result = ...
-    let meaning_case_b (x : t) : result = ...
+    let meaning_case_a = meaning_case_a
+    let meaning_case_b = meaning_case_b
   end
 
 Pattern 7 — partial: sub-expression that only completes at the containing provision level.
@@ -74,14 +75,16 @@ Pattern 8 — definition: terminal provision that defines a term as a type or va
 - Float arithmetic operators: +. -. *. /. (not integer operators). Comparisons (< > <= >= =) are polymorphic — no dot suffix needed.
 - Use positional arguments only: `(name : type)`. Do not use labeled arguments (`~name` or `~(name : type)`).
 - If a provision or sub-provision references an external section of law that cannot be resolved,
-  or if the computation is partially or fully delegated to another section, ALWAYS write a stub
-  function with the correct input/output signature and a `failwith` body:
-    let is_qualified (x : t) : bool =
-      (* unresolved — needs §45Y(b)(1), §48E(b)(3) *)
-      failwith "unresolved cross-reference"
-  Set pattern "ambiguous" and name the needed sections in reason. Continue formalizing the
-  containing provision — use the stub function in your composition as if it were resolved.
-  Never set ocaml to an empty string for an ambiguous provision — always produce at least a stub.
+  or if the computation is partially or fully delegated to another section, add a boolean parameter
+  whose value will be supplied by the caller. The parameter name MUST be `sec_<sanitized_section>`
+  where sanitized = section id with dots removed and parentheses replaced by underscores.
+  Do NOT use a semantic name. Use ONLY the section-derived name.
+  (e.g. §911(d)(3) → `sec_911_d_3`, §45Y(b)(1) → `sec_45y_b_1`, §7701(b)(5) → `sec_7701_b_5`).
+  Always add inline comment immediately after the parameter: `(* cross-ref: §<section> *)`.
+  Example — a provision references §7701(b)(5):
+    let is_qualified (entity : t) (sec_7701_b_5 : bool) (* cross-ref: §7701(b)(5) *) : bool =
+      sec_7701_b_5 && other_condition entity
+  Set pattern "ambiguous" and name the needed sections in reason.
 
 ## Output
 

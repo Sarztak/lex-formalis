@@ -1,42 +1,74 @@
-# Tax Law Formalization — 26 USC § 7701
+# Statutory Formalization Pipeline — 26 USC § 7701
 
-Experimental pipeline that converts US federal tax code into machine-checkable OCaml, starting with the definitions section (§ 7701).
+A pipeline that converts US federal tax code from statutory prose into typed, machine-checkable OCaml — one function per provision, one-to-one with the law.
 
-## The Problem
+## The Upstream Problem
 
-Tax law is written in natural language but is fundamentally computational — it defines terms, sets conditions, and specifies exceptions that override base rules. Lawyers and accountants manually trace this logic case by case. The goal here is to make it formal enough that a machine can evaluate it: given facts about an entity, derive the correct legal conclusion deterministically.
+Formal verification of tax law requires a structured, typed representation of the law as input. You cannot feed raw statutory text to a verifier. The question of how to get from prose to a representation that is:
 
-The hard part is not the translation itself — it is the exception structure. Tax law uses a layered override system: a base rule applies unless an exception fires, and exceptions can themselves be overridden by sub-exceptions. This is exactly what Catala was designed to formalize, but Catala's syntax is rigid and difficult to generate reliably at scale with LLMs. OCaml — the language Catala itself compiles to — turns out to be a cleaner target: strong static types, exhaustive pattern matching, and a familiar syntax that models follow well.
+- **typed** — legal concepts expressed as algebraic types with exhaustive case analysis
+- **traceable** — every function maps to a specific provision by section identifier
+- **dependency-ordered** — definitions appear before the provisions that use them
+- **exception-aware** — overrides encoded structurally, not as conditional branches
 
-## What This Does
+is unsolved and non-trivial. This pipeline solves it.
+
+## Why Not Raw LLM Calls on Statutory Text?
+
+Passing raw statutory text to an LLM and asking it to "formalize this" has two fundamental problems:
+
+**No traceability.** LLM output has no provenance. When a proof fails or a contradiction is found, you cannot point to which provision produced it. Explainability requires one-to-one correspondence between code and law — one function per provision, named by section identifier.
+
+**Too much freedom.** An LLM given a full section will combine provisions, inline definitions, and collapse exception hierarchies into conditional branches. This destroys the structural information that makes verification meaningful. You need the exceptions kept separate so the override hierarchy can be encoded as a DAG, not merged into an if-else chain that erases the legal structure.
+
+## Why OCaml, Not Catala
+
+[Catala](https://catala-lang.org/) is the natural starting point — it was designed for formalizing law, and its default/exception semantics directly model statutory override hierarchies. But Catala has practical limitations at LLM generation scale:
+
+- **Designed for human pair-programming.** Catala's tooling (LSP, editor integration) targets a human writing law alongside a programmer. Batch LLM generation over hundreds of provisions is not the intended use case.
+
+OCaml gives the same static guarantees — exhaustive pattern matching on variant types, strong typing, no implicit coercions — with a type system that LLMs generate reliably. Catala's runtime is OCaml; the semantic model is preserved.
+
+## Pipeline
 
 ```
-parse_7701.py       scrapes Cornell LII and builds a JSON tree of § 7701
-      ↓
-7701_tree.json      531 nodes, hierarchically structured
-      ↓
-resolve_refs.py     resolves cross-references between provisions
-      ↓
-formalize_ocaml.py  LLM agent formalizes each node bottom-up into OCaml
-      ↓
-section_7701.ml     compiled OCaml module with types + functions for each provision
-      ↓
-exception_dag.py    runtime DAG evaluates exception priority for a given set of inputs
+pipeline/parse_7701.py              Scrape Cornell LII → data/7701_tree.json (531 nodes, 16 subsections)
+          ↓
+pipeline/classify_rules.py          Rule-based bottom-up tagger (leaf, definition, exception, scope_rule, ...)
+          ↓
+pipeline/resolve_refs.py            Build cross-reference graph across all provisions
+          ↓
+pipeline/formalize_ocaml.py         Pass 1 (--gen-types): one LLM call generates all shared OCaml types
+          ↓                         from definition leaves → data/types.ml
+pipeline/formalize_ocaml.py         Pass 2: LLM agent formalizes each provision in topological order,
+          ↓                         using data/types.ml as shared context
+pipeline/assemble_ml.py             Assemble types + formalized provisions into a single .ml file
+          ↓
+data/section_7701.ml                686 lines of typed OCaml: 61 types, 37 functions, 6 modules
 ```
 
-The formalization is bottom-up: leaf provisions are formalized first, then parents call their already-formalized children. Cross-section references (e.g., "within the meaning of § 911(d)(3)") become typed boolean parameters that the caller supplies.
+## Key Contributions
 
-## Output
+### 1. Dependency Graph + Topological Sort
 
-`section_7701.ml` is the current output: 686 lines of OCaml covering § 7701, including:
-- **61 type declarations** — `person`, `corporation`, `partnership`, `fiduciary`, `taxpayer`, etc.
-- **37 functions** — one per provision, typed and named from statutory language
-- **6 modules** — grouping wrappers for subsections with independent sub-provisions
+§ 7701 defines "person", "corporation", "partnership", "fiduciary", and 50+ other terms — many of which reference each other. If multiple provisions are formalized independently, the same type gets defined multiple times with incompatible declarations, producing compiler errors.
 
-Example (§ 7701(a)(30) — United States person):
+`resolve_refs.py` builds a dependency graph over all 531 nodes by parsing cross-references in the statutory text. `formalize_ocaml.py` runs a topological sort over this graph (Kahn's algorithm, with cycle detection) and processes nodes in dependency order. Each definition is formalized exactly once; downstream provisions call the already-formalized version rather than redefining it. This is a compiler correctness guarantee.
+
+### 2. Exception DAG
+
+Tax law uses a layered override system. § 7701(b)(3)(A) defines the substantial presence test. § 7701(b)(3)(B) carves out an exception. § 7701(b)(3)(C) carves out an exception to the exception. Collapsing this into nested `if/else` loses the legal structure and makes it impossible to audit which rule applied.
+
+`pipeline/exception_dag.py` implements a Catala-style exception DAG. Each provision becomes a `Rule` with a condition, a value, and an `overrides` list pointing to the rules it defeats. The DAG evaluator walks from base rules upward, fires conditions, and returns the value of the highest-priority applicable rule — raising `ConflictError` if two rules at the same priority level conflict and `GapError` if no rule applies. The override hierarchy is explicit, auditable, and separate from the computation.
+
+Exception provisions in the statutory text are detected automatically during parsing and preprocessed so each gets its own formalized function rather than being merged into its parent.
+
+### 3. One-to-One Traceability
+
+Every OCaml type, function, and module is named from the statutory text and annotated with its section identifier. `is_united_states_person` traces to `7701(a)(30)`. `entity_residency` traces to `7701(a)(4)-(5)`. When a proof fails, you can point to the exact provision.
 
 ```ocaml
-(* 7701(a)(30): US person - citizen/resident individual, domestic partnership,
+(* 7701(a)(30): US person — citizen/resident individual, domestic partnership,
    domestic corporation, domestic estate, domestic trust *)
 let is_united_states_person (p : person) : bool =
   match p with
@@ -48,28 +80,42 @@ let is_united_states_person (p : person) : bool =
   | _ -> false
 ```
 
-## Exception Resolution
+Cross-section references that cannot be resolved within § 7701 become typed boolean parameters named by section identifier (`sec_911_d_3`, `sec_7701_b_5`), so the caller supplies them explicitly rather than the LLM inventing values.
 
-Provisions phrased as exceptions (language like "notwithstanding", "shall not apply", "except as provided in") are formalized as separate functions. At runtime, `exception_dag.py` evaluates the override hierarchy: given a set of inputs, it walks the DAG and returns the value of the highest-priority applicable rule, raising `ConflictError` if two rules at the same priority level conflict and `GapError` if no rule applies.
+## Output
+
+`data/section_7701.ml` — current output for § 7701:
+
+- **61 type declarations**: `person`, `corporation`, `partnership`, `fiduciary`, `taxpayer`, `entity_residency`, `stock`, `shareholder`, and more
+- **37 functions**: one per provision, typed and named from statutory language
+- **6 modules**: grouping wrappers for subsections with independent sub-provisions
+
+## Toward Verification
+
+The OCaml representation is a structured intermediate layer — not the final target. The natural next step is generating [Lean 4](https://lean4.dev/) type declarations and definitions from this structure. OCaml variant types map directly to Lean 4 inductive types; OCaml functions map to Lean 4 definitions. The translation is mechanical, not a re-extraction from statutory text.
+
+The exception DAG structure in particular maps well to Lean 4's dependent type system: an exception rule presupposes that the base rule's applicability conditions are expressible as propositions, and the override semantics can be encoded as a proof obligation rather than a runtime check.
 
 ## Running
 
 ```bash
-# dependencies (Python 3.12+, requires Claude CLI in PATH)
+# dependencies (Python 3.12+, requires claude CLI in PATH)
 uv sync
 
-# scrape and parse § 7701
-python parse_7701.py
+# step 1: scrape and parse
+python pipeline/parse_7701.py
 
-# formalize (LLM agent — calls claude CLI per node, runs in parallel)
-python formalize_ocaml.py
+# step 2: classify nodes (rule-based, no LLM)
+python pipeline/classify_rules.py
 
-# assemble output
-python assemble_ml.py
+# step 3: generate shared types (one LLM call)
+python pipeline/formalize_ocaml.py --gen-types
+
+# step 4: formalize all provisions (parallel LLM calls)
+python pipeline/formalize_ocaml.py
+
+# step 5: assemble
+python pipeline/assemble_ml.py
 ```
 
-The formalization agent uses `ocaml_system_prompt.txt` and `type_system_prompt.txt`. A checker agent validates each output and retries up to 2 times if issues are found.
-
-## Status
-
-Work in progress. § 7701 is the definitions section and a natural starting point — every other section of the IRC uses terms defined here. The pipeline handles the main structural patterns but exception DAG integration (wiring generated OCaml functions into the runtime evaluator) is the active next step.
+All scripts run from the repo root. Logs write to `logs/classify/`, `logs/formalize/`, etc.

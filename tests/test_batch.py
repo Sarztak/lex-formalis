@@ -8,7 +8,7 @@ import json
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from formalize import Tree, find_node, process, TREE_FILE
+from formalize import TREE_FILE, Tree, find_node, process
 
 NODES = [
     "7701(a)(11)",

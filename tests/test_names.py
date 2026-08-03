@@ -6,7 +6,7 @@ Writes log to logs/names_<timestamp>.txt
 
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from formalize import node_to_name
 
@@ -44,7 +44,7 @@ def main():
     out = "\n".join(lines)
     print(out)
 
-    ts = datetime.now(tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
+    ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
     fname = f"logs/names_{ts}.txt"
     with open(fname, "w") as f:
         f.write(out + "\n")

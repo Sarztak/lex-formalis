@@ -14,7 +14,7 @@ import sys
 from datetime import UTC, datetime
 
 CLASSIFY_LOG = "logs/classify/classify_rules_20260801_035408.json"
-TREE_FILE = "7701_tree.json"
+TREE_FILE = "data/7701_tree.json"
 
 # Tags that make classification deterministic — skip agent for these.
 #

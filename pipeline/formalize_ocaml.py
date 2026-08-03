@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 
 from resolve_refs import find_refs
 
-TREE_FILE = "7701_tree.json"
+TREE_FILE = "data/7701_tree.json"
 LOG_DIR = "logs/formalize"
 _CLASSIFY_LOG_DIR = "logs/classify"
 
@@ -587,7 +587,7 @@ def build_type_index(types_ml_source):
     return "\n".join(lines)
 
 
-def generate_types(tree, tags=None, out_path="types.ml"):
+def generate_types(tree, tags=None, out_path="data/types.ml"):
     """
     Pass 1: one agent call generates all OCaml types from definition leaves only.
     Saves result to out_path and returns the type source as a string.
@@ -677,12 +677,12 @@ def main():
         generate_types(tree, tags)
         return
 
-    if os.path.exists("types.ml"):
-        with open("types.ml", encoding="utf-8") as f:
+    if os.path.exists("data/types.ml"):
+        with open("data/types.ml", encoding="utf-8") as f:
             type_preamble = build_type_index(f.read())
-        print("Loaded types.ml (compact index)", file=sys.stderr)
+        print("Loaded data/types.ml (compact index)", file=sys.stderr)
     else:
-        print("WARNING: types.ml not found — run --gen-types first", file=sys.stderr)
+        print("WARNING: data/types.ml not found — run --gen-types first", file=sys.stderr)
         type_preamble = ""
 
     deps = build_dep_graph(tree)
@@ -709,7 +709,7 @@ def main():
                     print(n.ocaml)
                     print()
     else:
-        out_ml = "7701.ml"
+        out_ml = "data/7701.ml"
         process_flat(
             [node_by_id[nid] for nid in order], deps, results, tags, type_preamble
         )

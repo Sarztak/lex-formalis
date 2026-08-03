@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 URL = "https://www.law.cornell.edu/uscode/text/26/7701"
-OUTPUT_FILE = "7701_tree.json"
+OUTPUT_FILE = "data/7701_tree.json"
 
 LEVEL_CLASSES = [
     "subsection", "paragraph", "subparagraph",

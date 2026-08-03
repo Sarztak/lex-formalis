@@ -10,7 +10,7 @@ import os
 import subprocess
 import sys
 
-LOG_DIR = "logs"
+LOG_DIR = "logs/formalize"
 
 
 def latest_log():
@@ -21,7 +21,7 @@ def latest_log():
     return files[-1]
 
 
-def load_types(types_path="types.ml"):
+def load_types(types_path="data/types.ml"):
     if not os.path.exists(types_path):
         print(f"WARNING: {types_path} not found — omitting preamble", file=sys.stderr)
         return ""
@@ -29,7 +29,7 @@ def load_types(types_path="types.ml"):
         return f.read()
 
 
-def assemble(log_path, out_path, types_path="types.ml"):
+def assemble(log_path, out_path, types_path="data/types.ml"):
     with open(log_path, encoding="utf-8") as f:
         results = json.load(f)
 
@@ -80,8 +80,8 @@ def check_compile(ml_path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--log", help="JSON log file (default: latest)")
-    parser.add_argument("--out", default="7701_assembled.ml", help="Output .ml file")
-    parser.add_argument("--types", default="types.ml", help="Shared types .ml file")
+    parser.add_argument("--out", default="data/7701_assembled.ml", help="Output .ml file")
+    parser.add_argument("--types", default="data/types.ml", help="Shared types .ml file")
     parser.add_argument(
         "--no-compile", action="store_true", help="Skip compile check"
     )

@@ -214,7 +214,7 @@ def main():
     with open(CLASSIFY_LOG) as f:
         data = json.load(f)
 
-    with open("7701_tree.json") as f:
+    with open("data/7701_tree.json") as f:
         tree_data = json.load(f)
 
     node_map = {n["id"]: n for n in walk(tree_data)}

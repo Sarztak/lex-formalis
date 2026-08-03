@@ -9,7 +9,7 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-TREE_FILE = "7701_tree.json"
+TREE_FILE = "data/7701_tree.json"
 PROMPT_FILE = "prompts/agent_prompt.md"
 LOG_DIR = "logs"
 

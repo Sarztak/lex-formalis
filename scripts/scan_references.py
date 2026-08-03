@@ -7,7 +7,7 @@ import json
 import os
 import re
 
-TREE_FILE = "7701_tree.json"
+TREE_FILE = "data/7701_tree.json"
 OUT_FILE = "logs/scan/scan_references.txt"
 
 PATTERN = re.compile(

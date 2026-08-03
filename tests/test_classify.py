@@ -4,7 +4,7 @@ Run classify() on batch2 nodes and print construct + reason.
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from formalize import Tree, find_node, classify, TREE_FILE
+from formalize import TREE_FILE, Tree, classify, find_node
 
 NODES = [
     "7701(b)(1)(A)",

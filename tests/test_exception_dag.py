@@ -1,7 +1,5 @@
 import pytest
-
-from exception_dag import ConflictError, CycleError, DAG, GapError, Rule
-
+from exception_dag import DAG, ConflictError, CycleError, GapError, Rule
 
 # helpers — condition/value functions take an inputs dict
 

@@ -38,6 +38,7 @@ class Node:
         self.ocaml = None
         self.pattern = None
         self.reason = None
+        self.exceptions = []  # provision IDs that override this node (from agent output)
         self.status = None  # leaf | code | partial | ambiguous | repealed | error
 
     @property
@@ -231,6 +232,7 @@ def _result_row(node, error):
         "status": node.status,
         "pattern": node.pattern,
         "reason": node.reason,
+        "exceptions": node.exceptions,
         "ocaml": node.ocaml,
         "error": error,
     }
@@ -358,6 +360,7 @@ def call_agent(node, results, context=None, type_preamble=None):
     node.ocaml = parsed.get("ocaml", "")
     node.pattern = parsed.get("pattern", "")
     node.reason = parsed.get("reason", "")
+    node.exceptions = parsed.get("exceptions", [])
     node.status = (
         "ambiguous"
         if node.pattern == "ambiguous"

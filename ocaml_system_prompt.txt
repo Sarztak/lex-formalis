@@ -69,6 +69,8 @@ Pattern 8 — definition: terminal provision that defines a term as a type or va
 - Terminal provisions (no sub-provisions): if the provision defines a term, use pattern "definition" and write a type declaration or let binding. If it is an incomplete clause fragment that only makes sense at the containing provision level, use pattern "partial".
 - Use `option` for values that may be absent
 - Do not use training knowledge to resolve cross-referenced sections
+- When a provision has exceptions: write a separate function for the base provision and a separate function for each exception. Do not merge exception conditions into the base function or into each other.
+- If any sub-provision is phrased as an exception to another sub-provision (language like "unless", "except as provided in", "notwithstanding"), use pattern wrapper for the parent provision. Do not add any resolution logic to the parent — exception priority is handled externally by a DAG.
 - Float arithmetic operators: +. -. *. /. (not integer operators). Comparisons (< > <= >= =) are polymorphic — no dot suffix needed.
 - Use positional arguments only: `(name : type)`. Do not use labeled arguments (`~name` or `~(name : type)`).
 - If a provision or sub-provision references an external section of law that cannot be resolved,

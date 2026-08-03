@@ -1,0 +1,122 @@
+[
+  {
+    "id": "7701(b)(3)(A)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)(i)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)(ii)",
+    "status": "partial",
+    "pattern": "partial",
+    "reason": "leaf clause fragment — completes at containing provision level",
+    "exceptions": [],
+    "ocaml": null,
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(A)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Both (i) 31-day minimum and (ii) weighted 3-year sum threshold must hold together per 'if' with two numbered conditions.",
+    "exceptions": [],
+    "ocaml": "(* substantial presence test: >=31 days current year AND weighted 3-year sum >=183 *)\nlet meets_substantial_presence_test (days_current_year : int) (days_1st_preceding_year : int) (days_2nd_preceding_year : int) : bool =\n  let present_at_least_31_days = days_current_year >= 31 in\n  let weighted_sum =\n    (float_of_int days_current_year *. 1.0) +.\n    (float_of_int days_1st_preceding_year *. (1.0 /. 3.0)) +.\n    (float_of_int days_2nd_preceding_year *. (1.0 /. 6.0))\n  in\n  present_at_least_31_days && weighted_sum >= 183.0",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(B)",
+    "status": "code",
+    "pattern": "conjunction",
+    "reason": "Both fewer-than-183-days presence and foreign tax home with closer connection must hold together for exception to apply.",
+    "exceptions": [],
+    "ocaml": "(* 7701(b)(3)(B): closer-connection exception to substantial presence test *)\nlet has_closer_connection_exception\n    (individual : person)\n    (days_present_in_current_year : int)\n    (has_foreign_tax_home : bool)\n    (has_closer_connection_to_foreign_country : bool)\n  : bool =\n  days_present_in_current_year < 183 &&\n  has_foreign_tax_home &&\n  has_closer_connection_to_foreign_country",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(D)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Individual excluded from a day of US presence if either (i) exempt individual that day or (ii) unable to leave due to medical condition arising while present, joined by 'or'.",
+    "exceptions": [],
+    "ocaml": "(* 7701(b)(3)(D): day excluded from US presence count if individual exempt that day, or stranded by medical condition arising while present *)\nlet is_excluded_presence_day\n    (individual : person)\n    (is_exempt_individual_for_day : bool)\n    (unable_to_leave_due_to_medical_condition_arising_while_present : bool)\n  : bool =\n  is_exempt_individual_for_day ||\n  unable_to_leave_due_to_medical_condition_arising_while_present",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)(C)",
+    "status": "code",
+    "pattern": "disjunction",
+    "reason": "Provision blocks (B) exception if either of two LPR-status-seeking conditions held true at any time during year.",
+    "exceptions": [],
+    "ocaml": "(* 7701(b)(3)(C): (B) closer-connection exception itself blocked if individual sought lawful permanent resident status during year *)\nlet has_pending_lawful_permanent_resident_application\n    (individual : person)\n    (has_pending_adjustment_of_status_application : bool)\n    (took_other_steps_to_apply_for_lawful_permanent_resident_status : bool)\n  : bool =\n  has_pending_adjustment_of_status_application ||\n  took_other_steps_to_apply_for_lawful_permanent_resident_status",
+    "error": null
+  },
+  {
+    "id": "7701(b)(3)",
+    "status": "code",
+    "pattern": "mixed",
+    "reason": "Base test (A) gated by closer-connection exception (B), itself blocked by pending LPR status (C); excluded days under (D) apply upstream to day counts fed into this function.",
+    "exceptions": [
+      "7701(b)(3)(B)",
+      "7701(b)(3)(D)"
+    ],
+    "ocaml": "(* 7701(b)(3): substantial presence test, subject to closer-connection exception (B) unless blocked by pending LPR status (C). Excluded days under (D) are applied upstream when computing day counts. *)\nlet meets_substantial_presence_test_overall\n    (individual : person)\n    (days_current_year : int)\n    (days_1st_preceding_year : int)\n    (days_2nd_preceding_year : int)\n    (has_foreign_tax_home : bool)\n    (has_closer_connection_to_foreign_country : bool)\n    (has_pending_adjustment_of_status_application : bool)\n    (took_other_steps_to_apply_for_lawful_permanent_resident_status : bool)\n  : bool =\n  let meets_base_test =\n    meets_substantial_presence_test days_current_year days_1st_preceding_year days_2nd_preceding_year\n  in\n  let seeks_lawful_permanent_resident_status =\n    has_pending_lawful_permanent_resident_application\n      individual\n      has_pending_adjustment_of_status_application\n      took_other_steps_to_apply_for_lawful_permanent_resident_status\n  in\n  let closer_connection_exception_applies =\n    (not seeks_lawful_permanent_resident_status) &&\n    has_closer_connection_exception\n      individual\n      days_current_year\n      has_foreign_tax_home\n      has_closer_connection_to_foreign_country\n  in\n  meets_base_test && not closer_connection_exception_applies",
+    "error": null
+  }
+]

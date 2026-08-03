@@ -216,6 +216,90 @@ def topo_sort(deps, depth_map=None):
     return order
 
 
+# ── Checker agent ─────────────────────────────────────────────────────────────
+
+_CHECKER_SYSTEM = (
+    "You are a code reviewer for OCaml formalizations of US tax law provisions.\n"
+    "You receive provision text, generated OCaml, and rules to verify.\n"
+    'Return JSON only: {"pass": true} if all rules satisfied, '
+    'or {"pass": false, "issues": "specific problems"} if any rule is violated.'
+)
+
+
+def _sanitize_section_id(section_id):
+    s = section_id.lower()
+    s = s.replace(".", "")
+    s = re.sub(r"[()]", "_", s)
+    s = re.sub(r"_+", "_", s).strip("_")
+    return "sec_" + s
+
+
+def _node_is_exception(node):
+    header = (node.header or "").lower()
+    chapeau = (node.chapeau or "").lower()
+    return any(kw in header for kw in _EXCEPTION_HEADER_KW) or any(
+        kw in chapeau for kw in _EXCEPTION_CHAPEAU_KW
+    )
+
+
+def _external_crossrefs(node, all_ids):
+    seen, result = set(), []
+    for field in ("header", "chapeau", "body", "continuation"):
+        text = getattr(node, field) or ""
+        for _, target_id in find_refs(node.id, text):
+            if target_id not in all_ids and target_id not in seen:
+                seen.add(target_id)
+                result.append((target_id, _sanitize_section_id(target_id)))
+    return result
+
+
+def _run_checker(node, ocaml, all_ids):
+    ext_refs = _external_crossrefs(node, all_ids)
+    is_exc = _node_is_exception(node)
+    if not ext_refs and not is_exc:
+        return True, None
+
+    rules = []
+    for target_id, param_name in ext_refs:
+        rules.append(
+            f"- Cross-reference to §{target_id} must appear as parameter "
+            f"`{param_name} : bool` in the OCaml."
+        )
+    if is_exc:
+        rules.append(
+            "- Exception provision: each exception must be a standalone top-level function. "
+            "Module body must only alias existing top-level functions using `let name = name` — "
+            "no new function definitions inside the module."
+        )
+
+    user_msg = (
+        f"Provision text:\n{node.raw_text()}\n\n"
+        f"Generated OCaml:\n```ocaml\n{ocaml}\n```\n\n"
+        f"Rules to verify:\n" + "\n".join(rules) + "\n\n"
+        'Return JSON only: {"pass": true} or {"pass": false, "issues": "..."}'
+    )
+
+    result = subprocess.run(
+        [
+            "claude",
+            "-p",
+            _CHECKER_SYSTEM + "\n\n" + user_msg,
+            "--model",
+            "claude-sonnet-5",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    if result.returncode != 0:
+        return True, None
+    parsed = parse_response(result.stdout.strip())
+    if parsed is None or parsed.get("pass"):
+        return True, None
+    return False, parsed.get("issues", "checker found issues")
+
+
 # ── Processing ─────────────────────────────────────────────────────────────────
 
 
@@ -230,6 +314,7 @@ def process_flat(nodes_in_order, deps, results, tags=None, type_preamble=None):
     if tags is None:
         tags = {}
     formalized = {}  # node_id -> (node_id, header, ocaml)
+    all_ids = {n.id for n in nodes_in_order}
 
     for node in nodes_in_order:
         if node.is_repealed:
@@ -262,7 +347,7 @@ def process_flat(nodes_in_order, deps, results, tags=None, type_preamble=None):
             if nid not in child_ids and nid in formalized
         }
 
-        call_agent(node, results, context, type_preamble)
+        call_agent(node, results, context, type_preamble, all_ids)
 
         if node.status in ("code", "ambiguous") and node.ocaml:
             formalized[node.id] = (node.id, node.header, node.ocaml)
@@ -359,50 +444,76 @@ def build_user_message(node, context=None, type_preamble=None):
     return "\n".join(parts)
 
 
-def call_agent(node, results, context=None, type_preamble=None):
+def call_agent(node, results, context=None, type_preamble=None, all_ids=None):
     user_message = build_user_message(node, context, type_preamble)
-    full_prompt = SYSTEM_PROMPT + "\n\n---\n\n" + user_message
+    base_prompt = SYSTEM_PROMPT + "\n\n---\n\n" + user_message
 
     print(f"[agent] {node.id} — {node.header}", file=sys.stderr)
 
-    result = subprocess.run(
-        ["claude", "-p", full_prompt, "--model", "claude-sonnet-5"],
-        capture_output=True,
-        text=True,
-        timeout=120,
-        check=False,
-    )
+    full_prompt = base_prompt
+    for attempt in range(3):
+        result = subprocess.run(
+            ["claude", "-p", full_prompt, "--model", "claude-sonnet-5"],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            check=False,
+        )
 
-    error = None
-    if result.returncode != 0:
-        error = result.stderr[:500]
-        print(f"  ERROR: {error}", file=sys.stderr)
-        node.status = "error"
-        node.ocaml = f"(* ERROR: {node.id} *)"
-        write_log(node, full_prompt, result.stdout, None, error)
-        results.append(_result_row(node, error))
-        return
-
-    raw = result.stdout.strip()
-    parsed = parse_response(raw)
-
-    if parsed is None:
-        print("  parse failed, attempting fix-up", file=sys.stderr)
-        raw2 = fixup_call(raw)
-        parsed = parse_response(raw2)
-        if parsed is None:
-            error = "JSONDecodeError — fix-up failed"
-            print("  fix-up also failed", file=sys.stderr)
+        error = None
+        if result.returncode != 0:
+            error = result.stderr[:500]
+            print(f"  ERROR: {error}", file=sys.stderr)
             node.status = "error"
-            node.ocaml = f"(* PARSE ERROR: {node.id} *)"
-            write_log(node, full_prompt, raw, None, error)
+            node.ocaml = f"(* ERROR: {node.id} *)"
+            write_log(node, full_prompt, result.stdout, None, error)
             results.append(_result_row(node, error))
             return
 
-    node.ocaml = parsed.get("ocaml", "")
-    node.pattern = parsed.get("pattern", "")
-    node.reason = parsed.get("reason", "")
-    node.exceptions = parsed.get("exceptions", [])
+        raw = result.stdout.strip()
+        parsed = parse_response(raw)
+
+        if parsed is None:
+            print("  parse failed, attempting fix-up", file=sys.stderr)
+            raw2 = fixup_call(raw)
+            parsed = parse_response(raw2)
+            if parsed is None:
+                error = "JSONDecodeError — fix-up failed"
+                print("  fix-up also failed", file=sys.stderr)
+                node.status = "error"
+                node.ocaml = f"(* PARSE ERROR: {node.id} *)"
+                write_log(node, full_prompt, raw, None, error)
+                results.append(_result_row(node, error))
+                return
+
+        node.ocaml = parsed.get("ocaml", "")
+        node.pattern = parsed.get("pattern", "")
+        node.reason = parsed.get("reason", "")
+        node.exceptions = parsed.get("exceptions", [])
+
+        if all_ids and node.ocaml:
+            ok, issues = _run_checker(node, node.ocaml, all_ids)
+            if not ok:
+                print(
+                    f"  [checker] attempt {attempt + 1} FAIL: {issues}", file=sys.stderr
+                )
+                if attempt < 2:
+                    full_prompt = base_prompt + (
+                        f"\n\n---\n\nPrevious attempt was rejected by the code reviewer.\n"
+                        f"Issues found:\n{issues}\n\nFix these issues and return corrected JSON."
+                    )
+                    continue
+                else:
+                    print(
+                        "  [checker] max retries reached, keeping last output",
+                        file=sys.stderr,
+                    )
+            else:
+                if attempt > 0:
+                    print(
+                        f"  [checker] passed on attempt {attempt + 1}", file=sys.stderr
+                    )
+        break
     node.status = (
         "ambiguous"
         if node.pattern == "ambiguous"

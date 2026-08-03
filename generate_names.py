@@ -9,24 +9,52 @@ generic headers get parent_name+GenericHeader instead of duplicating parent.
 """
 
 import json
+import os
 import re
 import sys
 from datetime import UTC, datetime
 
 import spacy
 
-CLASSIFY_LOG = "logs/classify_rules_20260730_215825.json"
+CLASSIFY_LOG = "logs/classify/classify_rules_20260730_215825.json"
 CONSTRUCT_TAGS = {"scope_rule", "scope_def", "container_intro", "container_bare"}
 
 STOP_WORDS = {
-    "a", "an", "the", "of", "or", "and", "in", "for", "to", "as", "by",
-    "with", "is", "are", "not", "any", "such", "which", "where", "when",
-    "if", "at", "be", "that", "this",
+    "a",
+    "an",
+    "the",
+    "of",
+    "or",
+    "and",
+    "in",
+    "for",
+    "to",
+    "as",
+    "by",
+    "with",
+    "is",
+    "are",
+    "not",
+    "any",
+    "such",
+    "which",
+    "where",
+    "when",
+    "if",
+    "at",
+    "be",
+    "that",
+    "this",
 }
 
 GENERIC_HEADERS = {
-    "in general", "general rule", "general", "exception", "exceptions",
-    "special rule", "special rules",
+    "in general",
+    "general rule",
+    "general",
+    "exception",
+    "exceptions",
+    "special rule",
+    "special rules",
 }
 
 # openers whose first noun is structural boilerplate, not a concept name
@@ -39,12 +67,35 @@ _STRUCTURAL_OPENER = re.compile(
 
 # spaCy noun chunks that are legal boilerplate
 _USELESS_CHUNKS = {
-    "term", "terms", "purposes", "case", "respect", "paragraph",
-    "subparagraph", "clause", "subclause", "provision", "section",
-    "subsection", "addition", "manner", "amount", "period", "december",
-    "certification", "treatment", "coordination", "references",
-    "secretary", "individual", "person", "corporation", "trust", "both",
-    "who", "taxpayer",
+    "term",
+    "terms",
+    "purposes",
+    "case",
+    "respect",
+    "paragraph",
+    "subparagraph",
+    "clause",
+    "subclause",
+    "provision",
+    "section",
+    "subsection",
+    "addition",
+    "manner",
+    "amount",
+    "period",
+    "december",
+    "certification",
+    "treatment",
+    "coordination",
+    "references",
+    "secretary",
+    "individual",
+    "person",
+    "corporation",
+    "trust",
+    "both",
+    "who",
+    "taxpayer",
 }
 
 _QUOTED_TERM = re.compile(r'[Tt]he terms?\s+"([^"]+)"')
@@ -135,7 +186,11 @@ def extract_name(nlp, node_id, header, chapeau, body, name_map=None):
 
     name = _raw_name(nlp, node_id, header, chapeau, body)
 
-    if _camel_word_count(name) > 5 or name_map and name in _ancestor_names(node_id, name_map):
+    if (
+        _camel_word_count(name) > 5
+        or name_map
+        and name in _ancestor_names(node_id, name_map)
+    ):
         name = _id_to_name(node_id)
 
     return name
@@ -193,7 +248,8 @@ def main():
 
     ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
 
-    json_path = f"logs/names_{ts}.json"
+    os.makedirs("logs/names", exist_ok=True)
+    json_path = f"logs/names/names_{ts}.json"
     with open(json_path, "w") as f:
         json.dump(name_map, f, indent=2, ensure_ascii=False)
 
@@ -207,7 +263,7 @@ def main():
         lines.append(f"{nid:<25} {tags!s:<50} {name}")
     txt = "\n".join(lines)
 
-    txt_path = f"logs/names_{ts}.txt"
+    txt_path = f"logs/names/names_{ts}.txt"
     with open(txt_path, "w") as f:
         f.write(txt + "\n")
 

@@ -7,12 +7,13 @@ Writes logs/pre_classify_<timestamp>.json
 
 import argparse
 import json
+import os
 import random
 import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify_rules_20260801_035408.json"
+CLASSIFY_LOG = "logs/classify/classify_rules_20260801_035408.json"
 TREE_FILE = "7701_tree.json"
 
 # Tags that make classification deterministic — skip agent for these.
@@ -203,7 +204,8 @@ def main():
         print(f"    {reason}")
 
     ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
-    out_path = f"logs/pre_classify_{ts}.json"
+    os.makedirs("logs/pre_classify", exist_ok=True)
+    out_path = f"logs/pre_classify/pre_classify_{ts}.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     print(f"\nWritten: {out_path}", file=sys.stderr)

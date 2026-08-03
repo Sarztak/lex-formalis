@@ -10,11 +10,12 @@ import sys
 from datetime import UTC, datetime
 
 TREE_FILE = "7701_tree.json"
-PROMPT_FILE = "agent_prompt.md"
+PROMPT_FILE = "prompts/agent_prompt.md"
 LOG_DIR = "logs"
 
 
 # ── Tree data structure ────────────────────────────────────────────────────────
+
 
 class Node:
     def __init__(self, data, parent=None):
@@ -24,9 +25,9 @@ class Node:
         self.chapeau = data["chapeau"]
         self.body = data["body"]
         self.parent = parent
-        self.children = []      # list of Node
-        self.catala = None      # filled in after processing
-        self.signals = []       # signals emitted for this node
+        self.children = []  # list of Node
+        self.catala = None  # filled in after processing
+        self.signals = []  # signals emitted for this node
 
     @property
     def is_leaf(self):
@@ -68,6 +69,7 @@ class Tree:
 
 # ── Processing ─────────────────────────────────────────────────────────────────
 
+
 def process(node, signals):
     """Recursively formalize a node bottom-up. Sets node.catala."""
     if node.is_leaf:
@@ -78,7 +80,9 @@ def process(node, signals):
     elif node.is_crossref:
         for child in node.children:
             term = child.header or child.body or child.id
-            signals.append({"type": "EXTERNAL_DEPENDENCY", "term": term, "id": child.id})
+            signals.append(
+                {"type": "EXTERNAL_DEPENDENCY", "term": term, "id": child.id}
+            )
         node.catala = f"Cross references: {node.id}"
     else:
         for child in node.children:
@@ -157,10 +161,12 @@ children:
 
 def classify(node):
     """Ask model: is this node an enumeration or not? Returns {"construct": ..., "reason": ...}."""
-    children_text = "\n".join(
-        f"  - {c.header or c.num}: {c.body or c.chapeau}"
-        for c in node.children
-    ) or "  (none)"
+    children_text = (
+        "\n".join(
+            f"  - {c.header or c.num}: {c.body or c.chapeau}" for c in node.children
+        )
+        or "  (none)"
+    )
     prompt = CLASSIFY_PROMPT.format(
         header=node.header or "(none)",
         chapeau=node.chapeau or "(none)",
@@ -169,7 +175,10 @@ def classify(node):
     )
     result = subprocess.run(
         ["claude", "-p", prompt, "--model", "claude-sonnet-4-6"],
-        capture_output=True, text=True, timeout=60, check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
     )
     raw = result.stdout.strip()
     if raw.startswith("```"):
@@ -234,7 +243,9 @@ def call_agent(node, signals):
     parsed = parse_response(raw)
     if parsed is None:
         print("  parse failed, attempting fix-up call", file=sys.stderr)
-        write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up attempted")
+        write_log(
+            node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up attempted"
+        )
         raw = fixup_call(raw)
         parsed = parse_response(raw)
 
@@ -242,10 +253,14 @@ def call_agent(node, signals):
         node.catala = reorder_catala(parsed["catala"])
         node.signals = parsed.get("signals", [])
         signals.extend(node.signals)
-        write_log(node.id, full_prompt, raw, {"catala": node.catala, "signals": node.signals})
+        write_log(
+            node.id, full_prompt, raw, {"catala": node.catala, "signals": node.signals}
+        )
     else:
         print("  fix-up also failed", file=sys.stderr)
-        write_log(node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up failed")
+        write_log(
+            node.id, full_prompt, raw, None, error="JSONDecodeError — fix-up failed"
+        )
         node.catala = f"# PARSE ERROR: {node.id}"
 
 
@@ -285,6 +300,7 @@ def fixup_call(bad_output):
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
+
 def find_node(tree, node_id):
     for node in tree.walk(tree.root):
         if node.id == node_id:
@@ -293,6 +309,7 @@ def find_node(tree, node_id):
 
 def main():
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--node", help="Process a single node by id")
     args = parser.parse_args()

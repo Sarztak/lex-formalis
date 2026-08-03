@@ -14,12 +14,13 @@ from datetime import UTC, datetime
 from resolve_refs import find_refs
 
 TREE_FILE = "7701_tree.json"
-LOG_DIR = "logs"
+LOG_DIR = "logs/formalize"
+_CLASSIFY_LOG_DIR = "logs/classify"
 
-with open("ocaml_system_prompt.txt", encoding="utf-8") as r:
+with open("prompts/ocaml_system_prompt.txt", encoding="utf-8") as r:
     SYSTEM_PROMPT = r.read()
 
-with open("type_system_prompt.txt", encoding="utf-8") as r:
+with open("prompts/type_system_prompt.txt", encoding="utf-8") as r:
     TYPE_SYSTEM_PROMPT = r.read()
 
 # ── Node / Tree ────────────────────────────────────────────────────────────────
@@ -641,7 +642,7 @@ def load_classify_tags():
     """
     import glob
 
-    files = sorted(glob.glob(os.path.join(LOG_DIR, "classify_rules_*.json")))
+    files = sorted(glob.glob(os.path.join(_CLASSIFY_LOG_DIR, "classify_rules_*.json")))
     if not files:
         return {}
     with open(files[-1], encoding="utf-8") as f:
@@ -691,7 +692,7 @@ def main():
 
     results = []
     ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
-    out_json = f"logs/formalize_ocaml_{ts}.json"
+    out_json = f"logs/formalize/formalize_ocaml_{ts}.json"
 
     if args.node:
         target = tree.find(args.node)

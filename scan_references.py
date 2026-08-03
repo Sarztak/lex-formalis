@@ -4,10 +4,11 @@ Outputs every unique line containing paragraph/subparagraph/clause/subclause/ite
 """
 
 import json
+import os
 import re
 
 TREE_FILE = "7701_tree.json"
-OUT_FILE = "logs/scan_references.txt"
+OUT_FILE = "logs/scan/scan_references.txt"
 
 PATTERN = re.compile(
     r"[^\n]*\b(paragraph|subparagraph|clause|subclause|item|subitem|section|subsection)\b[^\n]*",
@@ -39,6 +40,7 @@ def main():
                     seen_lines.add(key)
                     results.append((node_id, field, line))
 
+    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         for node_id, field, line in results:
             f.write(f"[{node_id}] [{field}] {line}\n")

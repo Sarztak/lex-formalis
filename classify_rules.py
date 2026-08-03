@@ -20,7 +20,7 @@ import re
 from datetime import UTC, datetime
 
 TREE_FILE = "7701_tree.json"
-LOG_DIR = "logs"
+LOG_DIR = "logs/classify"
 
 _TERM_OPENER = re.compile(r"^\s*(the terms?\s+\"|any term used\b)", re.IGNORECASE)
 

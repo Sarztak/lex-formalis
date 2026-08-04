@@ -1,24 +1,9 @@
 (* shared types for § 7701 *)
 
-(* 7701(a)(4)-(5): domestic vs foreign classification, applied to corporations and partnerships *)
-type entity_residency = Domestic | Foreign
+(* a(4)-(5): whether corporation/partnership created/organized in US or under US/State law *)
+type domesticity = Domestic | Foreign
 
-(* 7701(a)(3): corporation - includes associations, joint-stock companies, insurance companies *)
-type corporation_form = Association_corporation | Joint_stock_company | Insurance_company
-
-(* 7701(a)(3),(4),(5): corporation, with its domestic/foreign classification *)
-type corporation = {
-  corporation_form : corporation_form;
-  residency : entity_residency;
-}
-
-(* 7701(a)(2): organizational forms included within "partnership" *)
-type partnership_form = Syndicate | Group | Pool | Joint_venture | Other_unincorporated_organization
-
-(* 7701(a)(2): the business/financial/venture activity carried on through a partnership *)
-type business_activity = Business | Financial_operation | Venture
-
-(* 7701(a)(1): person - individual, trust, estate, partnership, association, company, or corporation *)
+(* a(1) person; a(2) partnership/partner; a(3) corporation; a(7) stock; a(8) shareholder — mutually recursive: corporation/partnership are persons, and reference persons as members *)
 type person =
   | Individual
   | Trust
@@ -27,221 +12,321 @@ type person =
   | Association
   | Company
   | Corporation of corporation
-(* 7701(a)(2),(4),(5): partnership - not a trust, estate, or corporation; and its members ("partners") *)
+
 and partnership = {
-  partnership_form : partnership_form;
-  carries_on : business_activity;
-  partners : person list;
-  residency : entity_residency;
+  partners : partner list;
+  partnership_domesticity : domesticity;
 }
 
-(* 7701(a)(6): fiduciary - guardian, trustee, executor, administrator, receiver, conservator, or any person acting in a fiduciary capacity for any person *)
-type fiduciary =
+and partner = person (* a(2): member in a syndicate/group/pool/joint venture/unincorporated org *)
+
+and corporation = {
+  shareholders : shareholder list;
+  stock : stock list;
+  corporation_domesticity : domesticity;
+}
+
+and shareholder = person (* a(8): member in an association, joint-stock company, or insurance company *)
+
+and stock = {
+  issuing_corporation : corporation; (* a(7): shares in an association, joint-stock company, or insurance company *)
+}
+
+(* a(6): capacity in which a fiduciary acts *)
+type fiduciary_capacity =
   | Guardian
   | Trustee
   | Executor
   | Administrator
   | Receiver
   | Conservator
-  | Fiduciary_capacity_holder of person
+  | OtherFiduciaryCapacity
 
-(* 7701(a)(7): stock - shares in an association, joint-stock company, or insurance company *)
-type stock = { issued_by : corporation_form }
-
-(* 7701(a)(8): shareholder - a member in an association, joint-stock company, or insurance company *)
-type shareholder = { member_of : corporation_form; holder : person }
-
-(* 7701(a)(14): taxpayer - any person subject to any internal revenue tax *)
-type taxpayer = { taxpayer_person : person }
-
-(* 7701(a)(11)(A): Secretary of the Treasury, personally, excluding any delegate *)
-type secretary_of_treasury = Secretary_of_treasury_personally
-
-(* 7701(a)(12)(B): territories where a delegate may perform certain functions *)
-type territory = Guam | American_samoa
-
-(* 7701(a)(11)(B),(12)(B): delegate of the Secretary, including territorial delegates for Guam/American Samoa *)
-type delegate =
-  | Treasury_delegate
-  | Territorial_delegate of territory
-
-(* 7701(a)(11)(B): Secretary - the Secretary of the Treasury or his delegate *)
-type secretary =
-  | Secretary_of_treasury_role
-  | Delegate_of_secretary of delegate
-
-(* 7701(a)(13): Commissioner - the Commissioner of Internal Revenue *)
-type commissioner = Commissioner_of_internal_revenue
-
-(* 7701(a)(22): Attorney General - the Attorney General of the United States *)
-type attorney_general = Attorney_general_of_united_states
-
-(* 7701(a)(16): withholding agent - person required to deduct and withhold tax under specified sections *)
-type withholding_code_section = Section_1441 | Section_1442 | Section_1443 | Section_1461
-
-type withholding_agent = {
-  agent : person;
-  required_under : withholding_code_section list;
+(* a(6): person acting in a fiduciary capacity for another person *)
+type fiduciary = {
+  capacity : fiduciary_capacity;
+  fiduciary_person : person;
+  acting_for : person;
 }
 
-(* 7701(a)(17): husband/wife term substitution rules for section 2516 upon divorce *)
-type marital_role = Husband | Wife | Former_husband | Former_wife
+(* a(10): State, construed to include DC where necessary *)
+type state =
+  | NamedState of string
+  | DistrictOfColumbia
 
-(* 7701(a)(18): international organization - entity entitled to privileges/immunities under the International Organizations Immunities Act *)
-type international_organization = International_organization_under_immunities_act
+(* a(9): United States in geographical sense — States and DC only *)
+type united_states = state list
 
-(* 7701(a)(20): statutory purposes for which "employee" is extended to full-time life insurance salesmen *)
-type employee_benefit_purpose =
-  | Group_term_life_insurance_section_79
-  | Accident_and_health_sections_104_105_106
-  | Stock_bonus_pension_profit_sharing_or_annuity_plan
-  | Cafeteria_plan_section_125
+(* a(11)(A): Secretary of the Treasury personally, excluding any delegate *)
+type secretary_of_treasury = SecretaryOfTreasury
 
-(* 7701(a)(20): employee - includes a full-time life insurance salesman treated as an employee under chapter 21 *)
-type employee = Standard_employee | Full_time_life_insurance_salesman
+(* a(12)(B): special delegate jurisdiction for Guam/American Samoa functions *)
+type delegate_jurisdiction = Guam | AmericanSamoa
 
-(* 7701(a)(21): levy - includes the power of distraint and seizure by any means *)
-type levy = Distraint | Seizure
+(* a(11)(B)/a(12)(B): person authorized by the Secretary to perform functions, including redelegations *)
+type delegate = {
+  officer : person;
+  authorized_by : secretary_of_treasury;
+  jurisdiction : delegate_jurisdiction option;
+}
 
-(* supports 7701(a)(23),(24): a calendar date *)
+(* a(11)(B): Secretary of the Treasury or his delegate *)
+type secretary =
+  | SecretaryPersonally of secretary_of_treasury
+  | SecretaryDelegate of delegate
+
+(* a(13): Commissioner of Internal Revenue *)
+type commissioner = Commissioner
+
+(* a(14): any person subject to any internal revenue tax *)
+type taxpayer = person
+
+(* a(15): branches of the military/naval and armed forces of the United States *)
+type armed_forces_branch = Army | Navy | AirForce | CoastGuard
+
+(* a(15): commissioned officers vs. personnel below that grade *)
+type service_member_rank = CommissionedOfficer | EnlistedPersonnel
+
+(* a(15): a member of the military/naval or armed forces *)
+type armed_forces_member = {
+  member : person;
+  branch : armed_forces_branch;
+  rank : service_member_rank;
+}
+
+type armed_forces = armed_forces_member list
+
+(* a(16): sections under which a withholding agent must deduct and withhold tax *)
+type withholding_section = Section1441 | Section1442 | Section1443 | Section1461
+
+(* a(16): person required to deduct and withhold tax *)
+type withholding_agent = {
+  agent : person;
+  required_under : withholding_section;
+}
+
+(* a(17): substitution of husband/wife with former husband/former wife for section 2516 *)
+type spouse_role = Husband | Wife | FormerHusband | FormerWife
+
+(* a(18): public international organization entitled to privileges under the IOIA *)
+type international_organization = InternationalOrganization of string
+
+(* a(20): employee, including full-time life insurance salesman treated as employee under chapter 21, for specified benefit provisions *)
+type employee = Employee | FullTimeLifeInsuranceSalesman
+
+(* a(21): levy includes power of distraint and seizure by any means *)
+type levy_means = Distraint | Seizure | OtherLevyMeans of string
+
+type levy = levy_means list
+
+(* a(22): Attorney General of the United States *)
+type attorney_general = AttorneyGeneral
+
+(* a(23)-(24): calendar date used in taxable-year/fiscal-year computations *)
 type date = { year : int; month : int; day : int }
 
-(* supports 7701(a)(24): calendar months *)
+(* a(23): period covered by a return made for a fractional part of a year *)
+type date_range = { range_start : date; range_end : date }
+
+(* a(24): month of the year, used to express the end of a fiscal year *)
 type month =
   | January | February | March | April | May | June
   | July | August | September | October | November | December
 
-(* 7701(a)(24): fiscal year - 12-month accounting period ending on the last day of any month other than December *)
+(* a(24): 12-month accounting period ending on the last day of any month other than December *)
 type fiscal_year = { fiscal_year_end_month : month }
 
-(* 7701(a)(23): taxable year - calendar year, fiscal year, or a fractional period covered by a return *)
+(* a(23): calendar year, fiscal year, or fractional period on which taxable income is computed *)
 type taxable_year =
-  | Calendar_year_basis
-  | Fiscal_year_basis of fiscal_year
-  | Fractional_period of { period_start : date; period_end : date }
+  | CalendarYear of int
+  | FiscalYearBasis of fiscal_year
+  | FractionalPeriod of date_range
 
-(* 7701(a)(25): paid or incurred / paid or accrued - construed per the taxpayer's method of accounting *)
-type accounting_method = Cash_method | Accrual_method
+(* a(25): method of accounting governing "paid or incurred" / "paid or accrued" *)
+type accounting_method = CashMethod | AccrualMethod
 
-(* 7701(a)(26): trade or business - includes performance of the functions of a public office *)
-type trade_or_business = Performance_of_public_office_functions | Other_trade_or_business
+(* a(26): trade or business, including performance of the functions of a public office *)
+type trade_or_business = PerformanceOfPublicOffice | OtherTradeOrBusiness of string
 
-(* 7701(a)(27): Tax Court - the United States Tax Court *)
-type tax_court = United_states_tax_court
+(* a(27): United States Tax Court *)
+type tax_court = UnitedStatesTaxCourt
 
-(* 7701(a)(29): Internal Revenue Code - the 1986 Code or the 1939 Code *)
-type internal_revenue_code = Code_of_1986 | Code_of_1939
+(* a(29): Internal Revenue Code of 1986 vs. of 1939 *)
+type internal_revenue_code = Code1986 | Code1939
 
-(* 7701(a)(31)(B): foreign trust - any trust other than a domestic trust *)
-type trust_residency = Domestic_trust | Foreign_trust
+(* a(31)(A): estate whose foreign-source income not effectively connected with a US trade or business is excluded from gross income *)
+type foreign_estate = {
+  foreign_source_income_effectively_connected : bool;
+  includible_in_gross_income : bool;
+}
 
-(* 7701(a)(31)(A): foreign estate - an estate whose qualifying foreign-source income is excluded from gross income *)
-type estate_residency = Domestic_estate | Foreign_estate
+(* a(31)(B): trust type, distinguishing foreign trust from domestic trust described in a(30)(E) *)
+type trust_type = DomesticTrust | ForeignTrust
 
-(* 7701(a)(35): enrolled actuary - enrolled by the Joint Board for the Enrollment of Actuaries *)
-type enrolled_actuary = Enrolled_by_joint_board_for_enrollment_of_actuaries
+(* a(35): person enrolled by the Joint Board for the Enrollment of Actuaries under ERISA *)
+type enrolled_actuary = EnrolledActuary
 
-(* 7701(a)(36)(A): tax return preparer - prepares for compensation, or employs others to prepare for compensation *)
-type tax_return_preparer =
-  | Direct_preparer_for_compensation of person
-  | Employer_of_compensated_preparers of person
+(* a(36)(A): person who prepares, or employs others to prepare, tax returns/refund claims for compensation *)
+type tax_return_preparer = {
+  preparer : person;
+  compensated : bool;
+  employs_preparers : person list;
+  prepares_substantial_portion : bool;
+}
 
-(* 7701(a)(38): joint return - a single return made jointly under section 6013 by a husband and wife *)
-type joint_return = { husband : person; wife : person }
+(* a(38): single return made jointly by husband and wife under section 6013 *)
+type joint_return = { joint_return_husband : person; joint_return_wife : person }
 
-(* 7701(a)(40)(A): governing bodies recognized as Indian tribal governments *)
-type tribal_entity = Tribe | Band | Community | Village | Group_of_indians | Alaska_natives
+(* a(40)(A): type of Indian group whose governing body may be an Indian tribal government *)
+type tribal_group_type = Tribe | Band | Community | Village | AlaskaNativeGroup
 
+(* a(40)(A): governing body determined by the Secretary to exercise governmental functions *)
 type indian_tribal_government = {
-  governing_body_of : tribal_entity;
+  governing_body : person;
+  group_type : tribal_group_type;
   exercises_governmental_functions : bool;
 }
 
-(* 7701(a)(41): TIN - identifying number assigned to a person under section 6109 *)
-type tin = { identifying_number : string }
+(* a(41): identifying number assigned to a person under section 6109 *)
+type tin = TIN of string
 
-(* 7701(a)(43),(44): transferred basis property and exchanged basis property *)
-type basis_property = Transferred_basis_property | Exchanged_basis_property
+(* a(43): property whose basis is determined by reference to the basis in the hands of a donor/grantor/transferor *)
+type transferred_basis_property = { transferor : person }
 
-(* 7701(a)(45): nonrecognition transaction - disposition where gain or loss is not recognized under subtitle A *)
-type nonrecognition_transaction = Nonrecognition_transaction
+(* a(44): property whose basis is determined by reference to other property held at any time by the same person *)
+type exchanged_basis_property = { other_property_held_by : person }
 
-(* 7701(a)(46): employee representatives - excludes organizations majority-controlled by owners/officers/executives *)
-type employee_representatives = { majority_are_owners_officers_or_executives : bool }
+(* o(5)(D): a transaction, which may itself be a series of transactions *)
+type transaction = SingleTransaction | SeriesOfTransactions of transaction list
 
-(* 7701(a)(46): collective bargaining agreement - bona fide agreement between bona fide employee representatives and employers *)
-type collective_bargaining_agreement = {
-  representatives : employee_representatives;
-  employers : person list;
-  is_bona_fide : bool;
+(* a(45): extent to which gain or loss is recognized on a disposition *)
+type recognition_extent = FullyRecognized | PartiallyRecognized | NotRecognized
+
+(* a(45): disposition of property in which gain or loss is not recognized in whole or part *)
+type nonrecognition_transaction = {
+  underlying_transaction : transaction;
+  recognition : recognition_extent;
 }
 
-(* 7701(a)(51)(A)(i): prohibited foreign entity - a specified foreign entity or a foreign-influenced entity *)
-type prohibited_foreign_entity = Specified_foreign_entity | Foreign_influenced_entity
+(* a(51)(A)(i): specified foreign entity or foreign-influenced entity *)
+type prohibited_foreign_entity = SpecifiedForeignEntity | ForeignInfluencedEntity
 
-(* 7701(a)(51)(D)(ii)(V): contractual counterparty - entity with which the taxpayer has entered a contract, agreement, or arrangement *)
-type contractual_counterparty = { counterparty : person }
+(* a(51)(D)(ii)(V): entity with which the taxpayer has entered into a contract, agreement, or arrangement *)
+type contractual_counterparty = { counterparty : person; contract_with : person }
 
-(* 7701(a)(51)(D)(ii)(IV): taxpayer term extended to include persons related to the taxpayer *)
-type taxpayer_including_related_persons = {
-  primary_taxpayer : taxpayer;
-  related_persons : person list;
+(* a(51)(D)(ii)(I)(aa): aspects of production/generation/storage over which a counterparty may hold specific authority *)
+type key_aspect =
+  | ProductionOfEligibleComponents
+  | EnergyGenerationInQualifiedFacility
+  | EnergyStorage
+
+(* a(51)(D)(ii)(I)(aa): contractual arrangements granting a counterparty specific authority not captured by authority/ownership/debt control *)
+type effective_control = {
+  counterparty : contractual_counterparty;
+  authority_over : key_aspect list;
 }
 
-(* 7701(a)(51)(D)(ii)(I)(aa): effective control - contractual arrangements giving counterparties specific authority beyond authority/ownership/debt-based control *)
-type effective_control = { counterparties_with_specific_authority : contractual_counterparty list }
+(* a(51)(D)(ii)(IV): "taxpayer," for subclauses (I)-(III), includes persons related to the taxpayer *)
+type prohibited_foreign_entity_taxpayer = { taxpayer : person; related_persons : person list }
 
-(* 7701(a)(51)(I)(i): applicable critical mineral - meaning per section 45X(c)(6) *)
-type applicable_critical_mineral = Applicable_critical_mineral
+(* a(51)(I)(i): meaning per section 45X(c)(6) *)
+type applicable_critical_mineral = ApplicableCriticalMineral of string
 
-(* 7701(a)(51)(I)(ii): covered nation - meaning per 10 U.S.C. 4872(f)(2) *)
-type covered_nation = Covered_nation
+(* a(51)(I)(ii): meaning per 10 U.S.C. 4872(f)(2) *)
+type covered_nation = CoveredNation of string
 
-(* 7701(a)(51)(I)(iii): eligible component - meaning per section 45X(c)(1) *)
-type eligible_component = Eligible_component
+(* a(51)(I)(iii): meaning per section 45X(c)(1) *)
+type eligible_component = EligibleComponent of string
 
-(* 7701(a)(51)(I)(iv),(a)(52)(E)(ii),(e)(3)(F): energy storage technology - meaning per section 48E(c)(2) (also cross-referenced via section 48(c)(6)) *)
-type energy_storage_technology = Energy_storage_technology
+(* a(51)(I)(iv)/a(52)(E)(ii): meaning per section 48E(c)(2)/48(c)(6) *)
+type energy_storage_technology = EnergyStorageTechnology of string
 
-(* 7701(a)(51)(I)(vi): related - meaning per sections 267(b) and 707(b) *)
-type related_person_relationship = Related
+(* a(51)(I)(vi): meaning per sections 267(b) and 707(b) *)
+type related = Related | NotRelated
 
-(* 7701(e)(3)(B)-(F): facility categories for purposes of subparagraph (A) *)
-type facility_type =
-  | Qualified_solid_waste_disposal_facility of {
-      governmental_units_served : int;
-      substantially_all_waste_from_general_public : bool;
-    }
-  | Cogeneration_facility
-  | Alternative_energy_facility of { primary_energy_source_is_oil_gas_coal_or_nuclear : bool }
-  | Water_treatment_works_facility
-  | Storage_facility of { technology : energy_storage_technology }
+(* e(3)(C)/(D): forms of useful energy output from a facility *)
+type energy_output = ElectricalPower | MechanicalPower | Steam | Heat | OtherUsefulEnergy
 
-(* supports 7701(h)(2)(A): a motor vehicle, including a trailer *)
-type motor_vehicle = { is_trailer : bool }
+(* e(3)(B): facility providing solid waste disposal services collected substantially from the general public *)
+type solid_waste_disposal_facility = {
+  service_area_governmental_units : string list;
+  substantially_all_from_general_public : bool;
+}
 
-(* 7701(h)(2)(A): qualified motor vehicle operating agreement - meets requirements of subparagraphs (B),(C),(D) *)
+(* e(3)(C): facility using one energy source for sequential generation of power combined with other useful energy *)
+type cogeneration_facility = {
+  energy_source : string;
+  outputs : energy_output list;
+}
+
+(* e(3)(D): primary energy source of a facility, used to test alternative energy facility status *)
+type primary_energy_source = Oil | NaturalGas | Coal | NuclearPower | OtherSource of string
+
+(* e(3)(D): facility producing electrical or thermal energy whose primary source is not oil, gas, coal, or nuclear *)
+type alternative_energy_facility = {
+  primary_energy_source : primary_energy_source;
+  produces : energy_output;
+}
+
+(* e(3)(E): treatment works within the meaning of section 212(2) of the Federal Water Pollution Control Act *)
+type water_treatment_works_facility = WaterTreatmentWorksFacility
+
+(* e(3)(F): facility using energy storage technology within the meaning of section 48(c)(6) *)
+type storage_facility = { uses : energy_storage_technology }
+
+(* h(2)(A): motor vehicle, including a trailer *)
+type motor_vehicle = MotorVehicle | Trailer
+
+(* h(2)(A): agreement w/ respect to a motor vehicle meeting the requirements of h(2)(B)-(D) *)
 type qualified_motor_vehicle_operating_agreement = {
   vehicle : motor_vehicle;
-  meets_requirements_b_c_d : bool;
+  meets_requirements : bool;
 }
 
-(* 7701(h)(3)(A)-(B): terminal rental adjustment clause - rental price adjustment by reference to sale proceeds, including lessee-dealer resale variant *)
-type terminal_rental_adjustment_clause =
-  | Adjustment_by_reference_to_sale_proceeds
-  | Lessee_dealer_predetermined_price_resale
+(* h(3)(A): direction in which the rental price may be adjusted *)
+type rental_adjustment_direction = Upward | Downward
 
-(* 7701(j)(4): Member/employee as participants in the Thrift Savings Fund, per subchapter III of chapter 84, title 5 U.S.C. *)
-type thrift_savings_participant = Member | Employee_participant
+(* h(3)(A): provision adjusting rental price by reference to amount realized by lessor on disposition *)
+type terminal_rental_adjustment_clause = {
+  adjustment_direction : rental_adjustment_direction;
+  based_on_amount_realized_by_lessor : bool;
+}
 
-(* 7701(j)(4): Thrift Savings Fund, per subchapter III of chapter 84, title 5 U.S.C. *)
-type thrift_savings_fund = Thrift_savings_fund
+(* h(3)(B): special-case terminal rental adjustment clause for a lessee who is a motor vehicle dealer *)
+type lessee_dealer_provision = {
+  lessee : person;
+  predetermined_price : float;
+  resells_vehicle : bool;
+}
 
-(* 7701(j)(3): coordination rule - basic pay contributed to the Thrift Savings Fund remains included in "wages" under SSA section 209 / section 3121(a) *)
-type thrift_savings_fund_contribution = { included_in_wages_under_ssa_or_3121a : bool }
+(* j(3): basic pay contributed to the Thrift Savings Fund and its treatment as wages under SSA §209 / IRC §3121(a) *)
+type wages = {
+  basic_pay_contributed_to_tsp : bool;
+  included_in_wages_for_ssa : bool;
+}
 
-(* 7701(o)(5)(D): transaction - includes a series of transactions *)
-type transaction = Single_transaction | Series_of_transactions of transaction list
+(* j(4): "Member" and "employee" as used in subchapter III of chapter 84 of title 5, U.S. Code *)
+type federal_employee_role = Member | FederalEmployee
 
-(* 7701(o)(5)(A): economic substance doctrine - denies tax benefits where a transaction lacks economic substance or business purpose *)
-type economic_substance_doctrine = { has_economic_substance : bool; has_business_purpose : bool }
+(* j(4): the Thrift Savings Fund *)
+type thrift_savings_fund = ThriftSavingsFund
+
+(* o(5)(A): common law doctrine denying tax benefits to transactions lacking economic substance or business purpose *)
+type economic_substance_doctrine = {
+  doctrine_transaction : transaction;
+  has_economic_substance : bool;
+  has_business_purpose : bool;
+}
+
+(* a(46): organization of employee representatives, excluding one where >1/2 of members are owner/officer/executive of the employer *)
+type employee_representative_organization = {
+  members : person list;
+  owner_officer_executive_members : person list;
+}
+
+(* a(46): bona fide agreement between bona fide employee representatives and one or more employers *)
+type collective_bargaining_agreement = {
+  representatives : employee_representative_organization;
+  employers : person list;
+  bona_fide : bool;
+}

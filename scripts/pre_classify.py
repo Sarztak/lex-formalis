@@ -6,6 +6,7 @@ Writes logs/pre_classify_<timestamp>.json
 """
 
 import argparse
+import glob
 import json
 import os
 import random
@@ -13,8 +14,14 @@ import subprocess
 import sys
 from datetime import UTC, datetime
 
-CLASSIFY_LOG = "logs/classify/classify_rules_20260801_035408.json"
 TREE_FILE = "data/7701_tree.json"
+
+_CLASSIFY_GLOB = "logs/classify/classify_rules_*.json"
+_files = sorted(glob.glob(_CLASSIFY_GLOB))
+if not _files:
+    print(f"No classify log found matching {_CLASSIFY_GLOB}", file=sys.stderr)
+    sys.exit(1)
+CLASSIFY_LOG = _files[-1]
 
 # Tags that make classification deterministic — skip agent for these.
 #

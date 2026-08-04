@@ -682,7 +682,9 @@ def main():
             type_preamble = build_type_index(f.read())
         print("Loaded data/types.ml (compact index)", file=sys.stderr)
     else:
-        print("WARNING: data/types.ml not found — run --gen-types first", file=sys.stderr)
+        print(
+            "WARNING: data/types.ml not found — run --gen-types first", file=sys.stderr
+        )
         type_preamble = ""
 
     deps = build_dep_graph(tree)
@@ -723,6 +725,7 @@ def main():
                     f.write(n.ocaml + "\n\n")
         print(f"Wrote {out_ml}", file=sys.stderr)
 
+    os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     print(f"Wrote {out_json}", file=sys.stderr)

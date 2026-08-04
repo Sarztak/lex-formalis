@@ -10,14 +10,15 @@ CHAIN_RE matches the full reference in one shot:
 
 Section refs are always MISSING (external to §7701); caller can filter by "section" kw later.
 
-Output: logs/resolve_refs.txt
+Output: logs/resolve/resolve_refs.txt
 """
 
 import json
+import os
 import re
 
-TREE_FILE = "7701_tree.json"
-OUT_FILE = "logs/resolve_refs.txt"
+TREE_FILE = "data/7701_tree.json"
+OUT_FILE = "logs/resolve/resolve_refs.txt"
 
 LEVEL = {
     "section": 0,  # caught for completeness; always external / MISSING
@@ -187,6 +188,7 @@ def main():
                 status = "OK" if target in all_ids else "MISSING"
                 lines.append(f'[{node_id}] [{field}] "{label}" → {target} [{status}]')
 
+    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 

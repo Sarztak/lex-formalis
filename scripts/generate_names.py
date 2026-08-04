@@ -1,13 +1,14 @@
 """
 Generate deterministic names for construct-candidate nodes.
 Hybrid: quoted-term regex → header → spaCy noun chunks (filtered) → ID fallback.
-Run once; outputs logs/names_<timestamp>.json (id → name) and matching .txt.
+Run once; outputs logs/names/names_<timestamp>.json (id → name) and matching .txt.
 
 spaCy is given chapeau+body combined. All noun chunks are inspected; single-word
 generic results are rejected. Parent name is threaded through so children with
 generic headers get parent_name+GenericHeader instead of duplicating parent.
 """
 
+import glob
 import json
 import os
 import re
@@ -16,7 +17,12 @@ from datetime import UTC, datetime
 
 import spacy
 
-CLASSIFY_LOG = "logs/classify/classify_rules_20260730_215825.json"
+_CLASSIFY_GLOB = "logs/classify/classify_rules_*.json"
+_files = sorted(glob.glob(_CLASSIFY_GLOB))
+if not _files:
+    print(f"No classify log found matching {_CLASSIFY_GLOB}", file=sys.stderr)
+    sys.exit(1)
+CLASSIFY_LOG = _files[-1]
 CONSTRUCT_TAGS = {"scope_rule", "scope_def", "container_intro", "container_bare"}
 
 STOP_WORDS = {

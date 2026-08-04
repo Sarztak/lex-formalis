@@ -15,6 +15,9 @@ nodes_ambiguous.txt
 test1/
 test2/
 
+# demo output (generated)
+demo/
+
 # local tooling
 TASKS.md
 memory/

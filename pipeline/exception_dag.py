@@ -1,42 +1,46 @@
 """
 Catala-style exception DAG resolution.
 
-Build a DAG once from Rule declarations. Call dag.evaluate(inputs) per case.
+Build a DAG once per exception chain from Rule declarations (static structure only).
+Only rules that participate in an override relationship belong in a DAG — standalone
+rules with no exceptions have no use for it. Each chain has exactly one root (base case).
+
+Call dag.evaluate(conditions, values) per case with precomputed booleans and values.
 
 Each Rule declares:
   - id: section identifier
-  - condition: function(inputs) -> bool — does this rule apply?
-  - value: function(inputs) -> any — what value does it produce?
-  - overrides: list of rule IDs this rule defeats (higher priority over those)
+  - overrides: list of rule IDs this rule overrides (higher priority than those)
 
-Rules with overrides=[] are base cases (lowest priority).
-Rules listing other IDs in overrides are higher priority than those rules.
+evaluate() arguments:
+  - conditions: {rule_id: bool} — does each rule's condition hold for this case?
+  - values: {rule_id: any} — precomputed result for each rule;
+            use the _BLOCKS sentinel for defeater rules (blocks target, no value)
+
+Returns NOT_APPLICABLE if the root condition is false or the chain is entirely blocked.
+Raises ConflictError if two rules at the same level produce conflicting values.
+Raises ValueError if conditions or values are missing rule ids, or DAG is malformed.
 """
 
 from dataclasses import dataclass, field
 
-_EMPTY = object()  # sentinel: rule did not fire (condition false)
+NOT_APPLICABLE = (
+    object()
+)  # chain doesn't apply: root condition false or blocked by defeater
+_BLOCKS = object()  # stored in values dict for defeater rules; blocks the target rule
 
 
 @dataclass
 class Rule:
     id: str
-    condition: object  # callable (inputs) -> bool
-    value: object      # callable (inputs) -> any
-    overrides: list = field(default_factory=list)  # list of rule IDs this rule defeats
+    overrides: list = field(default_factory=list)  # rule IDs this rule overrides
 
 
 class ConflictError(Exception):
     def __init__(self, rule_ids):
         self.rule_ids = rule_ids
         super().__init__(
-            f"conflict: rules {rule_ids} all apply simultaneously at the same priority level"
+            f"conflict: rules {rule_ids} each produced a non-blocking return value"
         )
-
-
-class GapError(Exception):
-    def __init__(self, msg="no rule applies to this case"):
-        super().__init__(msg)
 
 
 class CycleError(Exception):
@@ -47,54 +51,87 @@ class CycleError(Exception):
 class DAG:
     def __init__(self, rules):
         if not rules:
-            self._id_to_rule = {}
-            self._overridden_by = {}
-            self._roots = []
-            return
-        self._id_to_rule, self._overridden_by = _build_adjacency(rules)
+            raise ValueError("DAG requires at least one rule")
+        self._overrides_of, self._all_ids = _build_adjacency(rules)
         _detect_cycles(rules)
-        self._roots = [r for r in rules if not r.overrides]
+        roots = [r for r in rules if not r.overrides]
+        if len(roots) != 1:
+            raise ValueError(
+                f"DAG requires exactly one root (one default case only), "
+                f"got {len(roots)}: {[r.id for r in roots]}"
+            )
+        self._root = roots[0]
 
-    def evaluate(self, inputs):
+    def evaluate(self, conditions, values):
         """
-        Evaluate the DAG for a given inputs object passed to condition and value callables.
-
-        Returns the value of the winning rule.
-        Raises ConflictError if multiple rules at the same priority level fire with different values.
-        Raises GapError if no rule applies.
+        conditions: {rule_id: bool}
+        values:     {rule_id: any}  — use _BLOCKS sentinel for defeater rules
+        Returns NOT_APPLICABLE if root condition false or chain is entirely blocked.
+        Raises ConflictError if two rules at the same level conflict.
+        Raises ValueError if conditions or values are missing rule ids.
         """
-        active_roots = []
-        for root in self._roots:
-            result = _evaluate(root.id, self._id_to_rule, self._overridden_by, inputs)
-            if result is not _EMPTY:
-                active_roots.append((root.id, result))
+        missing_c = self._all_ids - set(conditions)
+        if missing_c:
+            raise ValueError(f"conditions missing rule ids: {sorted(missing_c)}")
+        missing_v = self._all_ids - set(values)
+        if missing_v:
+            raise ValueError(f"values missing rule ids: {sorted(missing_v)}")
 
-        if len(active_roots) == 0:
-            raise GapError()
-        elif len(active_roots) == 1:
-            return active_roots[0][1]
-        else:
-            values = [v for _, v in active_roots]
-            if all(v == values[0] for v in values):
-                return values[0]
-            raise ConflictError([rid for rid, _ in active_roots])
+        return self._resolve(self._root.id, conditions, values)
+
+    def _resolve(self, rule_id, conditions, values):
+        if not conditions[rule_id]:
+            return NOT_APPLICABLE
+        fired = []
+        # blockers first so we short-circuit before evaluating sibling value-rules
+        children = sorted(
+            self._overrides_of[rule_id], key=lambda r: values[r.id] is not _BLOCKS
+        )
+        for child in children:
+            result = self._resolve(child.id, conditions, values)
+            if result is _BLOCKS:
+                return NOT_APPLICABLE  # defeater fired: this rule is blocked
+            if result is not NOT_APPLICABLE:
+                fired.append((child.id, result))
+
+        if not fired:
+            return values[rule_id]
+
+        # multiple siblings can fire simultaneously; only a conflict if they disagree on the value
+        vals = [v for _, v in fired]
+        if all(v == vals[0] for v in vals):
+            return vals[0]  # unanimous — any element would do
+        raise ConflictError([rid for rid, _ in fired])
 
 
 def _build_adjacency(rules):
-    id_to_rule = {}
+    seen_ids = set()
     for rule in rules:
-        if rule.id in id_to_rule:
+        if rule.id in seen_ids:
             raise ValueError(f"duplicate rule id: {rule.id!r}")
-        id_to_rule[rule.id] = rule
+        seen_ids.add(rule.id)
 
-    overridden_by = {r.id: [] for r in rules}
+    # invert: rule.overrides (rules this rule overrides) → overrides_of[id] (rules that override id)
+    overrides_of = {r.id: [] for r in rules}
     for rule in rules:
         for target_id in rule.overrides:
-            if target_id not in id_to_rule:
-                raise ValueError(f"rule {rule.id!r} references unknown id {target_id!r}")
-            overridden_by[target_id].append(rule)
+            if target_id not in overrides_of:
+                raise ValueError(
+                    f"rule {rule.id!r} references unknown id {target_id!r}"
+                )
+            overrides_of[target_id].append(rule)
 
-    return id_to_rule, overridden_by
+    # every rule must participate in at least one override relationship
+    overridden = {tid for r in rules for tid in r.overrides}
+    overriding = {r.id for r in rules if r.overrides}
+    standalone = seen_ids - (overriding | overridden)
+    if standalone:
+        raise ValueError(
+            f"standalone rules not in any override chain: {standalone} — "
+            "evaluate them directly without a DAG"
+        )
+
+    return overrides_of, seen_ids
 
 
 def _detect_cycles(rules):
@@ -114,21 +151,3 @@ def _detect_cycles(rules):
     for rule in rules:
         if color[rule.id] == WHITE:
             dfs(rule.id)
-
-
-def _evaluate(rule_id, id_to_rule, overridden_by, inputs):
-    rule = id_to_rule[rule_id]
-    exc_children = overridden_by[rule_id]
-
-    active = []
-    for child in exc_children:
-        result = _evaluate(child.id, id_to_rule, overridden_by, inputs)
-        if result is not _EMPTY:
-            active.append((child.id, result))
-
-    if len(active) == 0:
-        return rule.value(inputs) if rule.condition(inputs) else _EMPTY
-    elif len(active) == 1:
-        return active[0][1]
-    else:
-        raise ConflictError([rid for rid, _ in active])

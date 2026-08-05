@@ -1,16 +1,23 @@
 """
-Parse 26 USC § 7701 into a JSON tree.
+Parse any 26 USC section into a JSON tree from Cornell LII.
 Each node: id, num, header, chapeau, body (div.content text), children.
+
+Usage:
+    python pipeline/parse_section.py              # default: §7701 → data/7701_tree.json
+    python pipeline/parse_section.py 163          # §163 → data/163_tree.json
+    python pipeline/parse_section.py 61 72 108    # multiple sections
 """
 
 import json
 import re
+import sys
+import time
 
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://www.law.cornell.edu/uscode/text/26/7701"
-OUTPUT_FILE = "data/7701_tree.json"
+BASE_URL = "https://www.law.cornell.edu/uscode/text/26/{}"
+DATA_DIR = "data"
 
 LEVEL_CLASSES = [
     "subsection", "paragraph", "subparagraph",
@@ -31,7 +38,7 @@ def is_level_node(tag):
     return hasattr(tag, "attrs") and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES)
 
 
-def build_node(div, parent_id="7701"):
+def build_node(div, parent_id):
     num_span = div.find("span", class_="num", recursive=False)
     num = ""
     if num_span:
@@ -64,19 +71,29 @@ def build_node(div, parent_id="7701"):
     }
 
 
-def main():
-    r = requests.get(URL, headers={"User-Agent": "Mozilla/5.0"})
+def walk_all(node):
+    yield node
+    for child in node.get("children", []):
+        yield from walk_all(child)
+
+
+def scrape_section(section: str) -> dict:
+    url = BASE_URL.format(section)
+    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
 
     statute_div = soup.find("div", class_="section")
     if not statute_div:
-        raise RuntimeError("Could not find div.section")
+        raise RuntimeError(f"§{section}: could not find div.section at {url}")
+
+    heading_tag = soup.find("h1") or soup.find("h2")
+    heading_text = clean(heading_tag) if heading_tag else f"26 U.S.C. § {section}"
 
     tree = {
-        "id": "7701",
+        "id": section,
         "num": "",
-        "header": "26 U.S.C. § 7701 — Definitions",
+        "header": heading_text,
         "chapeau": "",
         "body": "",
         "children": [],
@@ -84,22 +101,33 @@ def main():
 
     for child in statute_div.children:
         if is_level_node(child):
-            tree["children"].append(build_node(child, "7701"))
+            tree["children"].append(build_node(child, section))
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(tree, f, indent=2, ensure_ascii=False)
-
-    total = sum(1 for _ in walk_all(tree))
-    print(f"Saved to {OUTPUT_FILE}")
-    print(f"Top-level subsections: {len(tree['children'])}")
-    print(f"Total nodes: {total}")
+    return tree
 
 
-def walk_all(node):
-    yield node
-    for child in node.get("children", []):
-        yield from walk_all(child)
+def main(sections: list[str] | None = None):
+    import os
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+    if not sections:
+        sections = ["7701"]
+
+    for i, section in enumerate(sections):
+        out_path = f"{DATA_DIR}/{section}_tree.json"
+        print(f"[{i+1}/{len(sections)}] §{section} ...", end=" ", flush=True)
+        try:
+            tree = scrape_section(section)
+            total = sum(1 for _ in walk_all(tree))
+            with open(out_path, "w", encoding="utf-8") as f:
+                json.dump(tree, f, indent=2, ensure_ascii=False)
+            print(f"OK — {total} nodes → {out_path}")
+        except Exception as e:
+            print(f"FAILED: {e}")
+
+        if i < len(sections) - 1:
+            time.sleep(1.2)
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:] or None)

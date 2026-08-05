@@ -14,12 +14,13 @@ Construct taxonomy:
   leaf          — no children; raw prose
 """
 
+import argparse
 import json
 import os
 import re
 from datetime import UTC, datetime
 
-TREE_FILE = "data/7701_tree.json"
+DEFAULT_TREE_FILE = "data/7701_tree.json"
 LOG_DIR = "logs/classify"
 
 _TERM_OPENER = re.compile(r"^\s*(the terms?\s+\"|any term used\b)", re.IGNORECASE)
@@ -51,6 +52,8 @@ def _exception_tags(header_l, chapeau_l, body_l, has_children):
         tags.append(("exception", "body: 'shall not be treated as'"))
     if has_children and re.search(r"notwithstanding", body_l):
         tags.append(("exception", "body: 'notwithstanding'"))
+    if re.search(r"shall not apply", body_l):
+        tags.append(("exception", "body: 'shall not apply'"))
     return tags
 
 
@@ -209,9 +212,7 @@ def classify_node(node):
 
 def _result(node, classified_children, tags):
     return {
-        "id": node["id"],
-        "header": node["header"],
-        "chapeau": node["chapeau"][:80],
+        **{k: v for k, v in node.items() if k != "children"},
         "child_count": len(classified_children),
         "tags": [{"construct": c, "signal": s} for c, s in tags],
         "children": classified_children,
@@ -225,7 +226,11 @@ def walk_results(result):
 
 
 def main():
-    with open(TREE_FILE, encoding="utf-8") as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--tree", default=DEFAULT_TREE_FILE, help="Path to section tree JSON")
+    args = parser.parse_args()
+
+    with open(args.tree, encoding="utf-8") as f:
         tree = json.load(f)
 
     root = classify_node(tree)

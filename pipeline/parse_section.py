@@ -3,7 +3,6 @@ Parse any 26 USC section into a JSON tree from Cornell LII.
 Each node: id, num, header, chapeau, body (div.content text), children.
 
 Usage:
-    python pipeline/parse_section.py              # default: §7701 → data/7701_tree.json
     python pipeline/parse_section.py 163          # §163 → data/163_tree.json
     python pipeline/parse_section.py 61 72 108    # multiple sections
 """
@@ -14,7 +13,7 @@ import sys
 import time
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 BASE_URL = "https://www.law.cornell.edu/uscode/text/26/{}"
 DATA_DIR = "data"
@@ -25,26 +24,28 @@ LEVEL_CLASSES = [
 ]
 
 
+_CHAR_MAP = str.maketrans({"“": '"', "”": '"', "‘": "'", "’": "'"})
+
+
 def clean(tag):
     if tag is None:
         return ""
-    text = tag.get_text()
-    text = text.replace("“", '"').replace("”", '"')  # smart quotes → ASCII
-    text = text.replace("‘", "'").replace("’", "'")  # smart apostrophes → ASCII
-    return re.sub(r"\s+", " ", text).strip()
+    return re.sub(r"\s+", " ", tag.get_text().translate(_CHAR_MAP)).strip()
 
 
 def is_level_node(tag):
-    return hasattr(tag, "attrs") and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES)
+    return isinstance(tag, Tag) and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES) #type: ignore
 
 
 def build_node(div, parent_id):
     num_span = div.find("span", class_="num", recursive=False)
     num = ""
     if num_span:
-        num = num_span.get("value", "").strip() or clean(num_span).strip("()")
+        num = clean(num_span).strip("()")
+        if not num:
+            raise RuntimeError(f"Empty num span under {parent_id}: {num_span}")
 
-    node_id = f"{parent_id}({num})" if num else parent_id
+    node_id = f"{parent_id}({num})"
     header = clean(div.find("span", class_="heading", recursive=False))
     chapeau = clean(div.find("span", class_="chapeau", recursive=False))
 
@@ -106,12 +107,9 @@ def scrape_section(section: str) -> dict:
     return tree
 
 
-def main(sections: list[str] | None = None):
+def main(sections: list[str]):
     import os
     os.makedirs(DATA_DIR, exist_ok=True)
-
-    if not sections:
-        sections = ["7701"]
 
     for i, section in enumerate(sections):
         out_path = f"{DATA_DIR}/{section}_tree.json"
@@ -130,4 +128,6 @@ def main(sections: list[str] | None = None):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or None)
+    if not sys.argv[1:]:
+        sys.exit("Usage: parse_section.py <section> [section ...]")
+    main(sys.argv[1:])

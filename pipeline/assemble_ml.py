@@ -1,40 +1,39 @@
 """
 Assemble a .ml file from a formalize_ocaml JSON log.
 Log entries are already in topological order.
+
+Usage:
+    python pipeline/assemble_ml.py 101
+    python pipeline/assemble_ml.py 101 --no-compile
+    python pipeline/assemble_ml.py 101 --out data/my_101.ml
 """
 
 import argparse
-import glob
 import json
 import os
 import subprocess
 import sys
 
-LOG_DIR = "logs/formalize"
 
-
-def latest_log():
-    files = sorted(glob.glob(os.path.join(LOG_DIR, "formalize_ocaml_*.json")))
-    if not files:
-        print("No formalize_ocaml_*.json logs found", file=sys.stderr)
+def load_log(section, log_override=None):
+    path = log_override or f"logs/formalize/formalize_ocaml_{section}.json"
+    if not os.path.exists(path):
+        print(f"Log file not found: {path} — run formalize_ocaml.py {section} first", file=sys.stderr)
         sys.exit(1)
-    return files[-1]
+    with open(path, encoding="utf-8") as f:
+        return json.load(f), path
 
 
-def load_types(types_path="data/types.ml"):
-    if not os.path.exists(types_path):
-        print(f"WARNING: {types_path} not found — omitting preamble", file=sys.stderr)
+def load_types(section, types_override=None):
+    path = types_override or f"data/{section}_types.ml"
+    if not os.path.exists(path):
+        print(f"WARNING: {path} not found — omitting preamble", file=sys.stderr)
         return ""
-    with open(types_path, encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return f.read()
 
 
-def assemble(log_path, out_path, types_path="data/types.ml"):
-    with open(log_path, encoding="utf-8") as f:
-        results = json.load(f)
-
-    types_src = load_types(types_path)
-
+def assemble(results, types_src, out_path):
     with open(out_path, "w", encoding="utf-8") as f:
         if types_src:
             f.write("(* shared types *)\n")
@@ -79,18 +78,20 @@ def check_compile(ml_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--log", help="JSON log file (default: latest)")
-    parser.add_argument("--out", default="data/7701_assembled.ml", help="Output .ml file")
-    parser.add_argument("--types", default="data/types.ml", help="Shared types .ml file")
-    parser.add_argument(
-        "--no-compile", action="store_true", help="Skip compile check"
-    )
+    parser.add_argument("section", help="IRC section number (e.g. 101)")
+    parser.add_argument("--log", help="Override log file path")
+    parser.add_argument("--out", help="Override output .ml file path")
+    parser.add_argument("--types", help="Override shared types .ml file path")
+    parser.add_argument("--no-compile", action="store_true", help="Skip compile check")
     args = parser.parse_args()
 
-    log_path = args.log or latest_log()
+    results, log_path = load_log(args.section, args.log)
     print(f"Using log: {log_path}", file=sys.stderr)
 
-    out_path = assemble(log_path, args.out, args.types)
+    types_src = load_types(args.section, args.types)
+    out_path = args.out or f"data/{args.section}_assembled.ml"
+
+    assemble(results, types_src, out_path)
 
     if not args.no_compile:
         rc, _ = check_compile(out_path)

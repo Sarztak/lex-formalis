@@ -1,8 +1,12 @@
 """
-Rule-based construct classifier for § 7701 nodes.
+Rule-based construct classifier for any scraped IRC section tree.
 Bottom-up recursive walk: children classified before parent.
 Parent construct determined from children's resolved constructs + own text signals.
-Writes full results to logs/.
+Writes results to logs/classify/classify_rules_{section}.{json,txt} (overwrites).
+
+Usage:
+    python pipeline/classify_rules.py 7701
+    python pipeline/classify_rules.py 101
 
 Construct taxonomy:
   container     — groups independent self-contained definitions; no Catala wrapper
@@ -18,9 +22,7 @@ import argparse
 import json
 import os
 import re
-from datetime import UTC, datetime
 
-DEFAULT_TREE_FILE = "data/7701_tree.json"
 LOG_DIR = "logs/classify"
 
 _TERM_OPENER = re.compile(r"^\s*(the terms?\s+\"|any term used\b)", re.IGNORECASE)
@@ -227,10 +229,14 @@ def walk_results(result):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tree", default=DEFAULT_TREE_FILE, help="Path to section tree JSON")
+    parser.add_argument("section", help="IRC section number (e.g. 101)")
     args = parser.parse_args()
 
-    with open(args.tree, encoding="utf-8") as f:
+    tree_path = f"data/{args.section}_tree.json"
+    if not os.path.exists(tree_path):
+        parser.error(f"Tree file not found: {tree_path} — run parse_section.py {args.section} first")
+
+    with open(tree_path, encoding="utf-8") as f:
         tree = json.load(f)
 
     root = classify_node(tree)
@@ -245,9 +251,8 @@ def main():
         all_results.append(flat)
 
     os.makedirs(LOG_DIR, exist_ok=True)
-    timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
 
-    json_path = os.path.join(LOG_DIR, f"classify_rules_{timestamp}.json")
+    json_path = os.path.join(LOG_DIR, f"classify_rules_{args.section}.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(
             {"tag_counts": tag_counts, "results": all_results},
@@ -256,7 +261,7 @@ def main():
             ensure_ascii=False,
         )
 
-    txt_path = os.path.join(LOG_DIR, f"classify_rules_{timestamp}.txt")
+    txt_path = os.path.join(LOG_DIR, f"classify_rules_{args.section}.txt")
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write("=== Per-node tags ===\n")
         for r in all_results:

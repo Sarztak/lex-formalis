@@ -1,5 +1,5 @@
 """
-Resolve cross-references in 7701_tree.json using level-keyword reconstruction.
+Resolve cross-references in any scraped IRC section tree.
 
 Two component types in CHAIN_RE:
   _COMP     — paragraph/subparagraph/clause/etc. + stacked paren designators
@@ -8,17 +8,21 @@ Two component types in CHAIN_RE:
 CHAIN_RE matches the full reference in one shot:
   first component + optional bare followons + optional outer anchors (via _OF)
 
-Section refs are always MISSING (external to §7701); caller can filter by "section" kw later.
+Section refs are always MISSING (external to the parsed section); caller can filter by "section" kw later.
 
-Output: logs/resolve/resolve_refs.txt
+Usage:
+    python pipeline/resolve_refs.py 7701
+    python pipeline/resolve_refs.py 101
+
+Output: logs/resolve/resolve_refs_{section}.txt (overwrites)
 """
 
+import argparse
 import json
 import os
 import re
 
-TREE_FILE = "data/7701_tree.json"
-OUT_FILE = "logs/resolve/resolve_refs.txt"
+LOG_DIR = "logs/resolve"
 
 LEVEL = {
     "section": 0,  # caught for completeness; always external / MISSING
@@ -172,7 +176,15 @@ def walk(node):
 
 
 def main():
-    with open(TREE_FILE, encoding="utf-8") as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("section", help="IRC section number (e.g. 101)")
+    args = parser.parse_args()
+
+    tree_path = f"data/{args.section}_tree.json"
+    if not os.path.exists(tree_path):
+        parser.error(f"Tree file not found: {tree_path} — run parse_section.py {args.section} first")
+
+    with open(tree_path, encoding="utf-8") as f:
         data = json.load(f)
 
     all_ids = {node["id"] for node in walk(data)}
@@ -188,13 +200,14 @@ def main():
                 status = "OK" if target in all_ids else "MISSING"
                 lines.append(f'[{node_id}] [{field}] "{label}" → {target} [{status}]')
 
-    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
-    with open(OUT_FILE, "w", encoding="utf-8") as f:
+    os.makedirs(LOG_DIR, exist_ok=True)
+    out_path = os.path.join(LOG_DIR, f"resolve_refs_{args.section}.txt")
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
     ok = sum(1 for ln in lines if "[OK]" in ln)
     missing = sum(1 for ln in lines if "[MISSING]" in ln)
-    print(f"{len(lines)} refs: {ok} resolved OK, {missing} MISSING → {OUT_FILE}")
+    print(f"{len(lines)} refs: {ok} resolved OK, {missing} MISSING → {out_path}")
 
 
 if __name__ == "__main__":

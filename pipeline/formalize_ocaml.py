@@ -1,5 +1,10 @@
 """
-Bottom-up OCaml formalization pipeline for 26 USC § 7701.
+Bottom-up OCaml formalization pipeline for any 26 USC section.
+
+Usage:
+    python pipeline/formalize_ocaml.py 101                    # formalize whole section
+    python pipeline/formalize_ocaml.py 101 101(a)(3)          # formalize single node subtree
+    python pipeline/formalize_ocaml.py 101 --gen-types        # generate shared types only
 """
 
 import argparse
@@ -9,11 +14,9 @@ import re
 import subprocess
 import sys
 from collections import deque
-from datetime import UTC, datetime
 
 from resolve_refs import find_refs
 
-TREE_FILE = "data/7701_tree.json"
 LOG_DIR = "logs/formalize"
 _CLASSIFY_LOG_DIR = "logs/classify"
 
@@ -558,11 +561,9 @@ def fixup_call(bad_output):
 def write_log(node, prompt, raw_response, parsed, error=None):
     os.makedirs(LOG_DIR, exist_ok=True)
     safe_id = node.id.replace("(", "_").replace(")", "")
-    timestamp = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
-    path = os.path.join(LOG_DIR, f"ocaml_{safe_id}_{timestamp}.json")
+    path = os.path.join(LOG_DIR, f"ocaml_{safe_id}.json")
     log = {
         "node_id": node.id,
-        "timestamp": timestamp,
         "prompt": prompt,
         "raw_response": raw_response,
         "parsed": parsed,
@@ -587,14 +588,16 @@ def build_type_index(types_ml_source):
     return "\n".join(lines)
 
 
-def generate_types(tree, tags=None, out_path="data/types.ml"):
+def generate_types(tree, section, tags=None, out_path=None):
     """
     Pass 1: one agent call generates all OCaml types from definition leaves only.
     Saves result to out_path and returns the type source as a string.
     """
     if tags is None:
         tags = {}
-    parts = ["Definition provisions of 26 USC § 7701:\n"]
+    if out_path is None:
+        out_path = f"data/{section}_types.ml"
+    parts = [f"Definition provisions of 26 USC § {section}:\n"]
     for node in tree.walk():
         if node.is_leaf and "definition" in tags.get(node.id, set()):
             label = node.id + (f" — {node.header}" if node.header else "")
@@ -635,17 +638,15 @@ def generate_types(tree, tags=None, out_path="data/types.ml"):
 # ── Classify tags ──────────────────────────────────────────────────────────────
 
 
-def load_classify_tags():
+def load_classify_tags(section):
     """
-    Load the latest classify_rules JSON from logs/.
-    Returns {node_id: set of construct strings}, empty dict if none found.
+    Load classify_rules output for the given section.
+    Returns {node_id: set of construct strings}, empty dict if not found.
     """
-    import glob
-
-    files = sorted(glob.glob(os.path.join(_CLASSIFY_LOG_DIR, "classify_rules_*.json")))
-    if not files:
+    path = os.path.join(_CLASSIFY_LOG_DIR, f"classify_rules_{section}.json")
+    if not os.path.exists(path):
         return {}
-    with open(files[-1], encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     return {
         r["id"]: {t["construct"] for t in r.get("tags", [])}
@@ -658,32 +659,38 @@ def load_classify_tags():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--node", help="Process single subtree by node ID")
+    parser.add_argument("section", help="IRC section number (e.g. 101)")
+    parser.add_argument("node", nargs="?", help="Process single subtree by node ID (e.g. 101(a)(3))")
     parser.add_argument(
         "--gen-types",
         action="store_true",
-        help="Generate shared types only (writes types.ml) and exit",
+        help="Generate shared types only and exit",
     )
     args = parser.parse_args()
 
-    tree = Tree(TREE_FILE)
+    tree_path = f"data/{args.section}_tree.json"
+    if not os.path.exists(tree_path):
+        parser.error(f"Tree file not found: {tree_path} — run parse_section.py {args.section} first")
+
+    tree = Tree(tree_path)
     total = sum(1 for _ in tree.walk())
     print(f"Loaded: {tree.root.id}, {total} nodes", file=sys.stderr)
 
-    tags = load_classify_tags()
+    tags = load_classify_tags(args.section)
     print(f"Loaded classify tags for {len(tags)} nodes", file=sys.stderr)
 
     if args.gen_types:
-        generate_types(tree, tags)
+        generate_types(tree, args.section, tags)
         return
 
-    if os.path.exists("data/types.ml"):
-        with open("data/types.ml", encoding="utf-8") as f:
+    types_path = f"data/{args.section}_types.ml"
+    if os.path.exists(types_path):
+        with open(types_path, encoding="utf-8") as f:
             type_preamble = build_type_index(f.read())
-        print("Loaded data/types.ml (compact index)", file=sys.stderr)
+        print(f"Loaded {types_path} (compact index)", file=sys.stderr)
     else:
         print(
-            "WARNING: data/types.ml not found — run --gen-types first", file=sys.stderr
+            f"WARNING: {types_path} not found — run --gen-types first", file=sys.stderr
         )
         type_preamble = ""
 
@@ -693,13 +700,12 @@ def main():
     order = topo_sort(deps, depth_map)
 
     results = []
-    ts = datetime.now(tz=UTC).strftime("%Y%m%d_%H%M%S")
-    out_json = f"logs/formalize/formalize_ocaml_{ts}.json"
+    out_json = f"logs/formalize/formalize_ocaml_{args.section}.json"
 
     if args.node:
         target = tree.find(args.node)
         if not target:
-            print(f"Node {args.node} not found", file=sys.stderr)
+            print(f"Node {args.node!r} not found in §{args.section}", file=sys.stderr)
             sys.exit(1)
         subtree_ids = {n.id for n in tree.walk(target)}
         filtered = [node_by_id[nid] for nid in order if nid in subtree_ids]
@@ -711,7 +717,7 @@ def main():
                     print(n.ocaml)
                     print()
     else:
-        out_ml = "data/7701.ml"
+        out_ml = f"data/{args.section}_assembled.ml"
         process_flat(
             [node_by_id[nid] for nid in order], deps, results, tags, type_preamble
         )

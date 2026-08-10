@@ -19,8 +19,13 @@ BASE_URL = "https://www.law.cornell.edu/uscode/text/26/{}"
 DATA_DIR = "data"
 
 LEVEL_CLASSES = [
-    "subsection", "paragraph", "subparagraph",
-    "clause", "subclause", "item", "subitem",
+    "subsection",
+    "paragraph",
+    "subparagraph",
+    "clause",
+    "subclause",
+    "item",
+    "subitem",
 ]
 
 
@@ -34,7 +39,7 @@ def clean(tag):
 
 
 def is_level_node(tag):
-    return isinstance(tag, Tag) and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES) #type: ignore
+    return isinstance(tag, Tag) and any(lc in tag.get("class", []) for lc in LEVEL_CLASSES)  # type: ignore
 
 
 def build_node(div, parent_id):
@@ -109,6 +114,7 @@ def scrape_section(section: str) -> dict:
 
 def main(sections: list[str]):
     import os
+
     os.makedirs(DATA_DIR, exist_ok=True)
 
     for i, section in enumerate(sections):

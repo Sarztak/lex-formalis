@@ -141,10 +141,49 @@ def identify_containers_l2(node, container_map, l2_map, path=None):
             identify_containers_l2(c, container_map, l2_map, current_path)
 
 
+def identify_containers_recursive(node, resolved, path=None):
+    """
+    Semantic levels: L0 = is_header_leaf, Ln = all classified children at level < n.
+    Childless nodes that are not header-leaves (repealed, empty) get level None.
+    resolved: {id: (path, level)}  where level is int or None.
+    Returns the level of this node.
+    """
+    if path is None:
+        path = []
+    hdr = node.get("header", "").strip()
+    current_path = path + [(node["id"], hdr)] if hdr else path
+    children = node.get("children", [])
+    if not children:
+        level = 0 if is_header_leaf(node) else None
+        resolved[node["id"]] = (current_path, level)
+        return level
+    child_levels = [identify_containers_recursive(c, resolved, current_path) for c in children]
+    classified = [l for l in child_levels if l is not None]
+    my_level = (max(classified) + 1) if classified else None
+    resolved[node["id"]] = (current_path, my_level)
+    return my_level
+
+
 def walk(node):
     yield node
     for child in node.get("children", []):
         yield from walk(child)
+
+
+def format_recursive_entry(node, path, level, resolved):
+    lines = []
+    lines.append(f"\n{'='*70}")
+    lines.append(f"[L{level}]  " + "  >  ".join(f"{nid}: {hdr}" for nid, hdr in path))
+    lines.append("=" * 70)
+    if t := node.get("chapeau", "").strip():
+        lines.append(f"  [chapeau] {t[:200]}")
+    if t := node.get("continuation", "").strip():
+        lines.append(f"  [continuation] {t[:200]}")
+    for c in node.get("children", []):
+        clevel = resolved.get(c["id"], (None, None))[1]
+        tag = f"[L{clevel}]" if clevel is not None else "[?]"
+        lines.append(f"  {c['id']}  —  {tag}  {c.get('header', '')}")
+    return "\n".join(lines)
 
 
 def format_container_l2_entry(node, path, container_map):
@@ -247,6 +286,20 @@ def main():
         for node in walk(merged_tree):
             if node["id"] in l2_map:
                 f.write(format_container_l2_entry(node, l2_map[node["id"]], container_map) + "\n")
+
+        resolved = {}
+        identify_containers_recursive(merged_tree, resolved)
+        containers_all = {nid: info for nid, info in resolved.items() if info[1] is not None and info[1] > 0}
+        if args.node:
+            containers_all = {nid: info for nid, info in containers_all.items() if nid == args.node}
+
+        f.write(f"\n\n{'#'*70}\n")
+        f.write(f"RECURSIVE STRUCTURE — {len(containers_all)} container(s) (all depths)\n")
+        f.write(f"{'#'*70}\n")
+        for node in walk(merged_tree):
+            if node["id"] in containers_all:
+                path, level = containers_all[node["id"]]
+                f.write(format_recursive_entry(node, path, level, resolved) + "\n")
     print(f"Wrote {out_path}")
 
 

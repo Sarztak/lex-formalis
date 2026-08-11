@@ -82,7 +82,13 @@ def do_merge(node):
             parts.append(f"{child['id']} {t}")
     if cont := node.get("continuation", "").strip():
         parts.append(cont)
-    return {**node, "chapeau": "", "body": "\n".join(t for t in parts if t), "continuation": "", "children": []}
+    return {
+        **node,
+        "chapeau": "",
+        "body": "\n".join(t for t in parts if t),
+        "continuation": "",
+        "children": [],
+    }
 
 
 def flatten_recursive(node, merged_ids):
@@ -105,14 +111,34 @@ def flatten_recursive(node, merged_ids):
     return node
 
 
-def identify_containers(node, container_ids):
-    """Walk the original tree and collect nodes whose children are all header-bearing leaves."""
+def identify_containers(node, container_map, path=None):
+    """Walk the merged tree and collect nodes whose children are all header-bearing leaves.
+    container_map: {node_id: [(id, header), ...]} — path from section root to container (inclusive)."""
+    if path is None:
+        path = []
+    hdr = node.get("header", "").strip()
+    current_path = path + [(node["id"], hdr)] if hdr else path
     children = node.get("children", [])
     if children:
         if all(is_header_leaf(c) for c in children):
-            container_ids.add(node["id"])
+            container_map[node["id"]] = current_path
         for c in children:
-            identify_containers(c, container_ids)
+            identify_containers(c, container_map, current_path)
+
+
+def identify_containers_l2(node, container_map, l2_map, path=None):
+    """Find nodes (not already l1 containers) whose children are all header-bearing
+    leaves or l1 containers — i.e. the parent level above the leaf containers."""
+    if path is None:
+        path = []
+    hdr = node.get("header", "").strip()
+    current_path = path + [(node["id"], hdr)] if hdr else path
+    children = node.get("children", [])
+    if children and node["id"] not in container_map:
+        if all(is_header_leaf(c) or c["id"] in container_map for c in children):
+            l2_map[node["id"]] = current_path
+        for c in children:
+            identify_containers_l2(c, container_map, l2_map, current_path)
 
 
 def walk(node):
@@ -121,11 +147,26 @@ def walk(node):
         yield from walk(child)
 
 
-def format_container_entry(node):
+def format_container_l2_entry(node, path, container_map):
     lines = []
     lines.append(f"\n{'='*70}")
-    lines.append(f"{node['id']}  —  {node.get('header', '')}")
-    lines.append("="*70)
+    lines.append("  >  ".join(f"{nid}: {hdr}" for nid, hdr in path))
+    lines.append("=" * 70)
+    for c in node.get("children", []):
+        if c["id"] in container_map:
+            lines.append(f"  {c['id']}  —  [container] {c.get('header', '')}")
+            for gc in c.get("children", []):
+                lines.append(f"    {gc['id']}  —  {gc.get('header', '')}")
+        else:
+            lines.append(f"  {c['id']}  —  [leaf] {c.get('header', '')}")
+    return "\n".join(lines)
+
+
+def format_container_entry(node, path):
+    lines = []
+    lines.append(f"\n{'='*70}")
+    lines.append("  >  ".join(f"{nid}: {hdr}" for nid, hdr in path))
+    lines.append("=" * 70)
     for field in ("chapeau", "body"):
         if t := node.get(field, "").strip():
             lines.append(f"  [{field}] {t[:200]}")
@@ -143,7 +184,7 @@ def format_entry(original, merged, node_id):
     lines = []
     lines.append(f"\n{'='*70}")
     lines.append(f"{node_id}  —  {orig_node.get('header', '')}")
-    lines.append("="*70)
+    lines.append("=" * 70)
 
     lines.append("\n--- BEFORE ---")
     for field in ("chapeau", "body", "continuation"):
@@ -174,12 +215,12 @@ def main():
     if args.node:
         merged_ids = {nid for nid in merged_ids if nid == args.node}
 
-    container_ids = set()
-    identify_containers(merged_tree, container_ids)
+    container_map = {}
+    identify_containers(merged_tree, container_map)
 
     if args.node:
         merged_ids = {nid for nid in merged_ids if nid == args.node}
-        container_ids = {nid for nid in container_ids if nid == args.node}
+        container_map = {nid: p for nid, p in container_map.items() if nid == args.node}
 
     os.makedirs(LOG_DIR, exist_ok=True)
     out_path = os.path.join(LOG_DIR, f"flatten_{args.section}.txt")
@@ -189,11 +230,23 @@ def main():
             f.write(format_entry(original, merged_tree, nid) + "\n")
 
         f.write(f"\n\n{'#'*70}\n")
-        f.write(f"CONTAINERS — {len(container_ids)} node(s) with all header-bearing leaves\n")
+        f.write(f"CONTAINERS — {len(container_map)} node(s) with all header-bearing leaves\n")
         f.write(f"{'#'*70}\n")
         for node in walk(merged_tree):
-            if node["id"] in container_ids:
-                f.write(format_container_entry(node) + "\n")
+            if node["id"] in container_map:
+                f.write(format_container_entry(node, container_map[node["id"]]) + "\n")
+
+        l2_map = {}
+        identify_containers_l2(merged_tree, container_map, l2_map)
+        if args.node:
+            l2_map = {nid: p for nid, p in l2_map.items() if nid == args.node}
+
+        f.write(f"\n\n{'#'*70}\n")
+        f.write(f"CONTAINER L2 — {len(l2_map)} node(s): mixed header-leaves + containers\n")
+        f.write(f"{'#'*70}\n")
+        for node in walk(merged_tree):
+            if node["id"] in l2_map:
+                f.write(format_container_l2_entry(node, l2_map[node["id"]], container_map) + "\n")
     print(f"Wrote {out_path}")
 
 

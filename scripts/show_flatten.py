@@ -33,6 +33,15 @@ def is_leaf(node):
     return not node.get("children")
 
 
+def is_mergeable_leaf(node):
+    return (
+        not node.get("children")
+        and bool(node.get("body", "").strip())
+        and not node.get("header", "").strip()
+        and not node.get("chapeau", "").strip()
+    )
+
+
 def starts_lowercase(node):
     t = node.get("body", "").strip()
     return bool(t) and not t[0].isupper()
@@ -51,7 +60,7 @@ def do_merge(node):
 def flatten_recursive(node, merged_ids):
     """
     Bottom-up recursive flatten. Returns transformed node.
-    Records the id of every node that gets merged into.
+    Records the id of every node that gets merged into. 
     The logic is chapeau signal a potential splitting, body doesn't, so we check if a chapeau exists and if all children are leaf nodes and they start with a lower case letter or not, if so then we merge considering that it is part of the same chapeau.
     """
     children = node.get("children", [])
@@ -62,7 +71,12 @@ def flatten_recursive(node, merged_ids):
     new_children = [flatten_recursive(c, merged_ids) for c in children]
     node = {**node, "children": new_children}
 
-    if node.get("chapeau", "").strip() and all(is_leaf(c) and starts_lowercase(c) for c in new_children):
+    has_chapeau = bool(node.get("chapeau", "").strip())
+    has_header = bool(node.get("header", "").strip())
+    all_leaves = all(is_mergeable_leaf(c) for c in new_children)
+    all_noncaps = all(starts_lowercase(c) for c in new_children)
+
+    if has_chapeau and all_leaves and (all_noncaps or has_header):
         merged_ids.add(node["id"])
         return do_merge(node)
 

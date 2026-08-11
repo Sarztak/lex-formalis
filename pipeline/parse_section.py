@@ -46,7 +46,7 @@ def build_node(div, parent_id):
     num_span = div.find("span", class_="num", recursive=False)
     num = ""
     if num_span:
-        num = clean(num_span).strip("()")
+        num = clean(num_span).strip("()[]")
         if not num:
             raise RuntimeError(f"Empty num span under {parent_id}: {num_span}")
 

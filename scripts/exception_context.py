@@ -16,12 +16,12 @@ TASK = (
     "Subprovisions follow the same structure — id: header, followed by their own body or chapeau and further subprovisions. "
     "The reference you return must be the id of a provision explicitly present in the context. "
     "Do not invent or infer a provision id that does not appear in the context. "
-    "Each exception overrides exactly one provision — determine the single best match."
+    "An exception may override one or more provisions — return all that apply."
 )
 
 OUTPUT_SCHEMA = {
-    "found": "true if the provision being excepted was identified, false otherwise",
-    "reference": "id of a provision present in the context (e.g. '101(a)(1)'), empty string if not found",
+    "found": "true if at least one provision being excepted was identified, false otherwise",
+    "references": ["id of each provision overridden, present in the context (e.g. '101(a)(1)')"],
 }
 
 

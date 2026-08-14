@@ -16,12 +16,25 @@ TASK = (
     "Subprovisions follow the same structure — id: header, followed by their own body or chapeau and further subprovisions. "
     "The reference you return must be the id of a provision explicitly present in the context. "
     "Do not invent or infer a provision id that does not appear in the context. "
-    "An exception may override one or more provisions — return all that apply."
+    "An exception may override one or more provisions — return all that apply. "
+    "Return only provisions that this exception directly overrides. "
+    "A direct override means the exception explicitly targets that provision — changing what it applies to or what conclusion it produces. "
+    "Do not include provisions that are merely affected as a downstream consequence of the direct override. "
+    "For each directly overridden provision, determine whether the exception modifies the inputs to that provision "
+    "(restricting what cases, quantities, or conditions fall within its scope) "
+    "or overrides the output or conclusion that provision produces. "
+    "If there are multiple directly overridden provisions, answer for each independently."
 )
 
 OUTPUT_SCHEMA = {
     "found": "true if at least one provision being excepted was identified, false otherwise",
-    "references": ["id of each provision overridden, present in the context (e.g. '101(a)(1)')"],
+    "references": [
+        {
+            "reference": "id of the overridden provision, present in the context",
+            "type": "input or output",
+            "reason": "one line explanation of why this is an input or output exception",
+        }
+    ],
 }
 
 

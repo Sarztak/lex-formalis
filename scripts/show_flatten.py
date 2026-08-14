@@ -79,7 +79,7 @@ def do_merge(node):
             parts.append(t)
     for child in node.get("children", []):
         if t := child.get("body", "").strip():
-            parts.append(f"{child['id']} {t}")
+            parts.append(t)
     if cont := node.get("continuation", "").strip():
         parts.append(cont)
     return {
@@ -91,7 +91,7 @@ def do_merge(node):
     }
 
 
-def flatten_recursive(node, merged_ids):
+def flatten_recursive(node, merged_ids, merged_data):
     """
     Bottom-up recursive flatten. Returns transformed node.
     Records the id of every node that gets merged into.
@@ -101,12 +101,19 @@ def flatten_recursive(node, merged_ids):
         return node
 
     # Recurse first so children may already be merged leaves
-    new_children = [flatten_recursive(c, merged_ids) for c in children]
+    new_children = [flatten_recursive(c, merged_ids, merged_data) for c in children]
     node = {**node, "children": new_children}
 
     if all(is_mergeable_leaf(c) for c in new_children):
         merged_ids.add(node["id"])
-        return do_merge(node)
+        merged_node = do_merge(node)
+        merged_data[node["id"]] = {
+            "id": node["id"],
+            "header": node.get("header", "").strip(),
+            "merged_body": merged_node["body"],
+            "children": [c["id"] for c in new_children],
+        }
+        return merged_node
 
     return node
 
@@ -183,6 +190,9 @@ def format_recursive_entry(node, path, level, resolved):
         clevel = resolved.get(c["id"], (None, None))[1]
         tag = f"[L{clevel}]" if clevel is not None else "[?]"
         lines.append(f"  {c['id']}  —  {tag}  {c.get('header', '')}")
+        if clevel == 0:
+            if body := c.get("body", "").strip():
+                lines.append(f"    {body}")
     return "\n".join(lines)
 
 
@@ -249,7 +259,8 @@ def main():
 
     original = load_tree(args.section)
     merged_ids = set()
-    merged_tree = flatten_recursive(copy.deepcopy(original), merged_ids)
+    merged_data = {}
+    merged_tree = flatten_recursive(copy.deepcopy(original), merged_ids, merged_data)
 
     if args.node:
         merged_ids = {nid for nid in merged_ids if nid == args.node}
@@ -300,7 +311,70 @@ def main():
             if node["id"] in containers_all:
                 path, level = containers_all[node["id"]]
                 f.write(format_recursive_entry(node, path, level, resolved) + "\n")
+
+    node_lookup = {n["id"]: n for n in walk(merged_tree)}
+    recursive_json = {}
+    for nid, (path, level) in resolved.items():
+        if level is None or level == 0:
+            continue
+        node = node_lookup[nid]
+        children_data = []
+        for c in node.get("children", []):
+            clevel = resolved.get(c["id"], (None, None))[1]
+            children_data.append({
+                "id": c["id"],
+                "level": clevel,
+                "header": c.get("header", ""),
+                "body": c.get("body", "").strip() if clevel == 0 else "",
+                "chapeau": c.get("chapeau", "").strip(),
+            })
+        recursive_json[nid] = {
+            "id": nid,
+            "level": level,
+            "path": path,
+            "chapeau": node.get("chapeau", "").strip(),
+            "continuation": node.get("continuation", "").strip(),
+            "children": children_data,
+        }
+    json_path = os.path.join(LOG_DIR, f"recursive_{args.section}.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump({"section": args.section, "containers": recursive_json}, f, indent=2, ensure_ascii=False)
+    for node in walk(original):
+        if is_header_leaf(node) and node["id"] not in merged_data:
+            merged_data[node["id"]] = {
+                "id": node["id"],
+                "header": node.get("header", "").strip(),
+                "merged_body": node.get("body", "").strip(),
+                "children": [],
+            }
+
+    containers = []
+    for node in walk(merged_tree):
+        level = resolved.get(node["id"], (None, None))[1]
+        if level is None or level == 0:
+            continue
+        containers.append({
+            "id": node["id"],
+            "level": level,
+            "header": node.get("header", "").strip(),
+            "chapeau": node.get("chapeau", "").strip(),
+            "body": node.get("body", "").strip(),
+            "continuation": node.get("continuation", "").strip(),
+            "children": [c["id"] for c in node.get("children", [])],
+        })
+
+    leaves = [{"level": 0, **e} for e in merged_data.values()]
+    all_nodes = sorted(leaves + containers, key=lambda n: n["level"], reverse=True)
+
+    merged_json_path = os.path.join(LOG_DIR, f"merged_{args.section}.json")
+    with open(merged_json_path, "w", encoding="utf-8") as f:
+        json.dump(
+            {"section": args.section, "nodes": all_nodes},
+            f, indent=2, ensure_ascii=False,
+        )
     print(f"Wrote {out_path}")
+    print(f"Wrote {json_path}")
+    print(f"Wrote {merged_json_path}")
 
 
 if __name__ == "__main__":

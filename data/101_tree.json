@@ -1,0 +1,1326 @@
+{
+  "id": "101",
+  "num": "",
+  "header": "26 U.S. Code § 101 - Certain death benefits",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "101(a)",
+      "num": "a",
+      "header": "Proceeds of life insurance contracts payable by reason of death",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(a)(1)",
+          "num": "1",
+          "header": "General rule",
+          "chapeau": "",
+          "body": "Except as otherwise provided in paragraphs (2) and (3), subsection (d), subsection (f), and subsection (j), gross income does not include amounts received (whether in a single sum or otherwise) under a life insurance contract, if such amounts are paid by reason of the death of the insured.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "101(a)(2)",
+          "num": "2",
+          "header": "Transfer for valuable consideration",
+          "chapeau": "In the case of a transfer for a valuable consideration, by assignment or otherwise, of a life insurance contract or any interest therein, the amount excluded from gross income by paragraph (1) shall not exceed an amount equal to the sum of the actual value of such consideration and the premiums and other amounts subsequently paid by the transferee. The preceding sentence shall not apply in the case of such a transfer—",
+          "body": "",
+          "continuation": "The term \"other amounts\" in the first sentence of this paragraph includes interest paid or accrued by the transferee on indebtedness with respect to such contract or any interest therein if such interest paid or accrued is not allowable as a deduction by reason of section 264(a)(4).",
+          "children": [
+            {
+              "id": "101(a)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "if such contract or interest therein has a basis for determining gain or loss in the hands of a transferee determined in whole or in part by reference to such basis of such contract or interest therein in the hands of the transferor, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(a)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "if such transfer is to the insured, to a partner of the insured, to a partnership in which the insured is a partner, or to a corporation in which the insured is a shareholder or officer.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(a)(3)",
+          "num": "3",
+          "header": "Exception to valuable consideration rules for commercial transfers",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(a)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "The second sentence of paragraph (2) shall not apply in the case of a transfer of a life insurance contract, or any interest therein, which is a reportable policy sale.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(a)(3)(B)",
+              "num": "B",
+              "header": "Reportable policy sale",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"reportable policy sale\" means the acquisition of an interest in a life insurance contract, directly or indirectly, if the acquirer has no substantial family, business, or financial relationship with the insured apart from the acquirer's interest in such life insurance contract. For purposes of the preceding sentence, the term \"indirectly\" applies to the acquisition of an interest in a partnership, trust, or other entity that holds an interest in the life insurance contract.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "101(b)",
+      "num": "b",
+      "header": "Repealed. Pub. L. 104–188, title I, § 1402(a), Aug. 20, 1996, 110 Stat. 1789]",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "101(c)",
+      "num": "c",
+      "header": "Interest",
+      "chapeau": "",
+      "body": "If any amount excluded from gross income by subsection (a) is held under an agreement to pay interest thereon, the interest payments shall be included in gross income.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "101(d)",
+      "num": "d",
+      "header": "Payment of life insurance proceeds at a date later than death",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(d)(1)",
+          "num": "1",
+          "header": "General rule",
+          "chapeau": "",
+          "body": "The amounts held by an insurer with respect to any beneficiary shall be prorated (in accordance with such regulations as may be prescribed by the Secretary) over the period or periods with respect to which such payments are to be made. There shall be excluded from the gross income of such beneficiary in the taxable year received any amount determined by such proration. Gross income includes, to the extent not excluded by the preceding sentence, amounts received under agreements to which this subsection applies.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "101(d)(2)",
+          "num": "2",
+          "header": "Amount held by an insurer",
+          "chapeau": "An amount held by an insurer with respect to any beneficiary shall mean an amount to which subsection (a) applies which is—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(d)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "held by any insurer under an agreement provided for in the life insurance contract, whether as an option or otherwise, to pay such amount on a date or dates later than the death of the insured, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(d)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "equal to the value of such agreement to such beneficiary",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(d)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "as of the date of death of the insured (as if any option exercised under the life insurance contract were exercised at such time), and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(d)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "as discounted on the basis of the interest rate used by the insurer in calculating payments under the agreement and mortality tables prescribed by the Secretary.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "101(d)(3)",
+          "num": "3",
+          "header": "Application of subsection",
+          "chapeau": "",
+          "body": "This subsection shall not apply to any amount to which subsection (c) is applicable.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "101(e)",
+      "num": "e",
+      "header": "Repealed. Pub. L. 98–369, div. A, title IV, § 421(b)(2), July 18, 1984, 98 Stat. 794]",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "101(f)",
+      "num": "f",
+      "header": "Proceeds of flexible premium contracts issued before January 1, 1985 payable by reason of death",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(f)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "Any amount paid by reason of the death of the insured under a flexible premium life insurance contract issued before January 1, 1985 shall be excluded from gross income only if—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(f)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "under such contract—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(1)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the sum of the premiums paid under such contract does not at any time exceed the guideline premium limitation as of such time, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(1)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any amount payable by reason of the death of the insured (determined without regard to any qualified additional benefit) is not at any time less than the applicable percentage of the cash value of such contract at such time, or",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "by the terms of such contract, the cash value of such contract may not at any time exceed the net single premium with respect to the amount payable by reason of the death of the insured (determined without regard to any qualified additional benefit) at such time.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(f)(2)",
+          "num": "2",
+          "header": "Guideline premium limitation",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(f)(2)(A)",
+              "num": "A",
+              "header": "Guideline premium limitation",
+              "chapeau": "The term \"guideline premium limitation\" means, as of any date, the greater of—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the guideline single premium, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the sum of the guideline level premiums to such date.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(2)(B)",
+              "num": "B",
+              "header": "Guideline single premium",
+              "chapeau": "The term \"guideline single premium\" means the premium at issue with respect to future benefits under the contract (without regard to any qualified additional benefit), and with respect to any charges for qualified additional benefits, at the time of a determination under subparagraph (A) or (E) and which is based on—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the mortality and other charges guaranteed under the contract, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "interest at the greater of an annual effective rate of 6 percent or the minimum rate or rates guaranteed upon issue of the contract.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(2)(C)",
+              "num": "C",
+              "header": "Guideline level premium",
+              "chapeau": "",
+              "body": "The term \"guideline level premium\" means the level annual amount, payable over the longest period permitted under the contract (but ending not less than 20 years from date of issue or not later than age 95, if earlier), computed on the same basis as the guideline single premium, except that subparagraph (B)(ii) shall be applied by substituting \"4 percent\" for \"6 percent\".",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(f)(2)(D)",
+              "num": "D",
+              "header": "Computational rules",
+              "chapeau": "In computing the guideline single premium or guideline level premium under subparagraph (B) or (C)—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(2)(D)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the excess of the amount payable by reason of the death of the insured (determined without regard to any qualified additional benefit) over the cash value of the contract shall be deemed to be not greater than such excess at the time the contract was issued,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(2)(D)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the maturity date shall be the latest maturity date permitted under the contract, but not less than 20 years after the date of issue or (if earlier) age 95, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(2)(D)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount of any endowment benefit (or sum of endowment benefits) shall be deemed not to exceed the least amount payable by reason of the death of the insured (determined without regard to any qualified additional benefit) at any time under the contract.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(2)(E)",
+              "num": "E",
+              "header": "Adjustments",
+              "chapeau": "",
+              "body": "The guideline single premium and guideline level premium shall be adjusted in the event of a change in the future benefits or any qualified additional benefit under the contract which was not reflected in any guideline single premiums or guideline level premium previously determined.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(f)(3)",
+          "num": "3",
+          "header": "Other definitions and special rules",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(f)(3)(A)",
+              "num": "A",
+              "header": "Flexible premium life insurance contract",
+              "chapeau": "",
+              "body": "The terms \"flexible premium life insurance contract\" and \"contract\" mean a life insurance contract (including any qualified additional benefits) which provides for the payment of one or more premiums which are not fixed by the insurer as to both timing and amount. Such terms do not include that portion of any contract which is treated under State law as providing any annuity benefits other than as a settlement option.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(f)(3)(B)",
+              "num": "B",
+              "header": "Premiums paid",
+              "chapeau": "The term \"premiums paid\" means the premiums paid under the contract less any amounts (other than amounts includible in gross income) to which section 72(e) applies. If, in order to comply with the requirements of paragraph (1)(A), any portion of any premium paid during any contract year is returned by the insurance company (with interest) within 60 days after the end of a contract year—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(3)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount so returned (excluding interest) shall be deemed to reduce the sum of the premiums paid under the contract during such year, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "notwithstanding the provisions of section 72(e), the amount of any interest so returned shall be includible in the gross income of the recipient.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(3)(C)",
+              "num": "C",
+              "header": "Applicable percentage",
+              "chapeau": "The term \"applicable percentage\" means—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(3)(C)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "140 percent in the case of an insured with an attained age at the beginning of the contract year of 40 or less, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(C)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "in the case of an insured with an attained age of more than 40 as of the beginning of the contract year, 140 percent reduced (but not below 105 percent) by one percent for each year in excess of 40.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(3)(D)",
+              "num": "D",
+              "header": "Cash value",
+              "chapeau": "",
+              "body": "The cash value of any contract shall be determined without regard to any deduction for any surrender charge or policy loan.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(f)(3)(E)",
+              "num": "E",
+              "header": "Qualified additional benefits",
+              "chapeau": "The term \"qualified additional benefits\" means any—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(3)(E)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "guaranteed insurability,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(E)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "accidental death benefit,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(E)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "family term coverage, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(E)(iv)",
+                  "num": "iv",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "waiver of premium.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(3)(F)",
+              "num": "F",
+              "header": "Premium payments not disqualifying contract",
+              "chapeau": "",
+              "body": "The payment of a premium which would result in the sum of the premiums paid exceeding the guideline premium limitation shall be disregarded for purposes of paragraph (1)(A)(i) if the amount of such premium does not exceed the amount necessary to prevent the termination of the contract without cash value on or before the end of the contract year.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(f)(3)(G)",
+              "num": "G",
+              "header": "Net single premium",
+              "chapeau": "In computing the net single premium under paragraph (1)(B)—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(f)(3)(G)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the mortality basis shall be that guaranteed under the contract (determined by reference to the most recent mortality table allowed under all State laws on the date of issuance),",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(G)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "interest shall be based on the greater of—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(f)(3)(G)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "an annual effective rate of 4 percent (3 percent for contracts issued before July 1, 1983), or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(f)(3)(G)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the minimum rate or rates guaranteed upon issue of the contract, and",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "101(f)(3)(G)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the computational rules of paragraph (2)(D) shall apply, except that the maturity date referred to in clause (ii) thereof shall not be earlier than age 95.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(3)(H)",
+              "num": "H",
+              "header": "Correction of errors",
+              "chapeau": "If the taxpayer establishes to the satisfaction of the Secretary that—",
+              "body": "",
+              "continuation": "the Secretary may waive the failure to satisfy such requirements.",
+              "children": [
+                {
+                  "id": "101(f)(3)(H)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the requirements described in paragraph (1) for any contract year was not satisfied due to reasonable error, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(f)(3)(H)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "reasonable steps are being taken to remedy the error,",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(f)(3)(I)",
+              "num": "I",
+              "header": "Regulations",
+              "chapeau": "",
+              "body": "The Secretary shall prescribe such regulations as may be necessary or appropriate to carry out the purposes of this subsection.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "101(g)",
+      "num": "g",
+      "header": "Treatment of certain accelerated death benefits",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(g)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "For purposes of this section, the following amounts shall be treated as an amount paid by reason of the death of an insured:",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(g)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "Any amount received under a life insurance contract on the life of an insured who is a terminally ill individual.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "Any amount received under a life insurance contract on the life of an insured who is a chronically ill individual.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(g)(2)",
+          "num": "2",
+          "header": "Treatment of viatical settlements",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(g)(2)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "If any portion of the death benefit under a life insurance contract on the life of an insured described in paragraph (1) is sold or assigned to a viatical settlement provider, the amount paid for the sale or assignment of such portion shall be treated as an amount paid under the life insurance contract by reason of the death of such insured.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(2)(B)",
+              "num": "B",
+              "header": "Viatical settlement provider",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(g)(2)(B)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "The term \"viatical settlement provider\" means any person regularly engaged in the trade or business of purchasing, or taking assignments of, life insurance contracts on the lives of insureds described in paragraph (1) if—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(g)(2)(B)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "such person is licensed for such purposes (with respect to insureds described in the same subparagraph of paragraph (1) as the insured) in the State in which the insured resides, or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(g)(2)(B)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "in the case of an insured who resides in a State not requiring the licensing of such persons for such purposes with respect to such insured, such person meets the requirements of clause (ii) or (iii), whichever applies to such insured.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "101(g)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "Terminally ill insureds",
+                  "chapeau": "A person meets the requirements of this clause with respect to an insured who is a terminally ill individual if such person—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(g)(2)(B)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "meets the requirements of sections 8 and 9 of the Viatical Settlements Model Act of the National Association of Insurance Commissioners, and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(g)(2)(B)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "meets the requirements of the Model Regulations of the National Association of Insurance Commissioners (relating to standards for evaluation of reasonable payments) in determining amounts paid by such person in connection with such purchases or assignments.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "101(g)(2)(B)(iii)",
+                  "num": "iii",
+                  "header": "Chronically ill insureds",
+                  "chapeau": "A person meets the requirements of this clause with respect to an insured who is a chronically ill individual if such person—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(g)(2)(B)(iii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "meets requirements similar to the requirements referred to in clause (ii)(I), and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(g)(2)(B)(iii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "meets the standards (if any) of the National Association of Insurance Commissioners for evaluating the reasonableness of amounts paid by such person in connection with such purchases or assignments with respect to chronically ill individuals.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "101(g)(3)",
+          "num": "3",
+          "header": "Special rules for chronically ill insureds",
+          "chapeau": "In the case of an insured who is a chronically ill individual—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(g)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "Paragraphs (1) and (2) shall not apply to any payment received for any period unless—",
+              "body": "",
+              "continuation": "For purposes of the preceding sentence, the rule of section 7702B(b)(2)(B) shall apply.",
+              "children": [
+                {
+                  "id": "101(g)(3)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "such payment is for costs incurred by the payee (not compensated for by insurance or otherwise) for qualified long-term care services provided for the insured for such period, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(g)(3)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "the terms of the contract giving rise to such payment satisfy—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(g)(3)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the requirements of section 7702B(b)(1)(B), and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(g)(3)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the requirements (if any) applicable under subparagraph (B).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "101(g)(3)(B)",
+              "num": "B",
+              "header": "Other requirements",
+              "chapeau": "The requirements applicable under this subparagraph are—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(g)(3)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "those requirements of section 7702B(g) and section 4980C which the Secretary specifies as applying to such a purchase, assignment, or other arrangement,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(g)(3)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "standards adopted by the National Association of Insurance Commissioners which specifically apply to chronically ill individuals (and, if such standards are adopted, the analogous requirements specified under clause (i) shall cease to apply), and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(g)(3)(B)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "standards adopted by the State in which the policyholder resides (and if such standards are adopted, the analogous requirements specified under clause (i) and (subject to section 4980C(f)) standards under clause (ii), shall cease to apply).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(g)(3)(C)",
+              "num": "C",
+              "header": "Per diem payments",
+              "chapeau": "",
+              "body": "A payment shall not fail to be described in subparagraph (A) by reason of being made on a per diem or other periodic basis without regard to the expenses incurred during the period to which the payment relates.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(3)(D)",
+              "num": "D",
+              "header": "Limitation on exclusion for periodic payments",
+              "chapeau": "",
+              "body": "For limitation on amount of periodic payments which are treated as described in paragraph (1), see section 7702B(d).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(g)(4)",
+          "num": "4",
+          "header": "Definitions",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(g)(4)(A)",
+              "num": "A",
+              "header": "Terminally ill individual",
+              "chapeau": "",
+              "body": "The term \"terminally ill individual\" means an individual who has been certified by a physician as having an illness or physical condition which can reasonably be expected to result in death in 24 months or less after the date of the certification.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(4)(B)",
+              "num": "B",
+              "header": "Chronically ill individual",
+              "chapeau": "",
+              "body": "The term \"chronically ill individual\" has the meaning given such term by section 7702B(c)(2); except that such term shall not include a terminally ill individual.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(4)(C)",
+              "num": "C",
+              "header": "Qualified long-term care services",
+              "chapeau": "",
+              "body": "The term \"qualified long-term care services\" has the meaning given such term by section 7702B(c).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(g)(4)(D)",
+              "num": "D",
+              "header": "Physician",
+              "chapeau": "",
+              "body": "The term \"physician\" has the meaning given to such term by section 1861(r)(1) of the Social Security Act (42 U.S.C. 1395x(r)(1)).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(g)(5)",
+          "num": "5",
+          "header": "Exception for business-related policies",
+          "chapeau": "",
+          "body": "This subsection shall not apply in the case of any amount paid to any taxpayer other than the insured if such taxpayer has an insurable interest with respect to the life of the insured by reason of the insured being a director, officer, or employee of the taxpayer or by reason of the insured being financially interested in any trade or business carried on by the taxpayer.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "101(h)",
+      "num": "h",
+      "header": "Survivor benefits attributable to service by a public safety officer who is killed in the line of duty",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(h)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "Gross income shall not include any amount paid as a survivor annuity on account of the death of a public safety officer (as such term is defined in section 1204 of the Omnibus Crime Control and Safe Streets Act of 1968, as in effect immediately before the enactment of the National Defense Authorization Act for Fiscal Year 2013) killed in the line of duty—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(h)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "if such annuity is provided, under a governmental plan which meets the requirements of section 401(a), to the spouse (or a former spouse) of the public safety officer or to a child of such officer; and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(h)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "to the extent such annuity is attributable to such officer's service as a public safety officer.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(h)(2)",
+          "num": "2",
+          "header": "Exceptions",
+          "chapeau": "Paragraph (1) shall not apply with respect to the death of any public safety officer if, as determined in accordance with the provisions of the Omnibus Crime Control and Safe Streets Act of 1968—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(h)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the death was caused by the intentional misconduct of the officer or by such officer's intention to bring about such officer's death;",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(h)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the officer was voluntarily intoxicated (as defined in section 1204 of such Act) at the time of death;",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(h)(2)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "the officer was performing such officer's duties in a grossly negligent manner at the time of death; or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(h)(2)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "the payment is to an individual whose actions were a substantial contributing factor to the death of the officer.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "101(i)",
+      "num": "i",
+      "header": "Certain employee death benefits payable by reason of death of certain terrorist victims or astronauts",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(i)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "Gross income does not include amounts (whether in a single sum or otherwise) paid by an employer by reason of the death of an employee who is a specified terrorist victim (as defined in section 692(d)(4)).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "101(i)(2)",
+          "num": "2",
+          "header": "Limitation",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(i)(2)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "Subject to such rules as the Secretary may prescribe, paragraph (1) shall not apply to amounts which would have been payable after death if the individual had died other than as a specified terrorist victim (as so defined).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(i)(2)(B)",
+              "num": "B",
+              "header": "Exception",
+              "chapeau": "",
+              "body": "Subparagraph (A) shall not apply to incidental death benefits paid from a plan described in section 401(a) and exempt from tax under section 501(a).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(i)(3)",
+          "num": "3",
+          "header": "Treatment of self-employed individuals",
+          "chapeau": "",
+          "body": "For purposes of paragraph (1), the term \"employee\" includes a self-employed individual (as defined in section 401(c)(1)).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "101(i)(4)",
+          "num": "4",
+          "header": "Relief with respect to astronauts",
+          "chapeau": "",
+          "body": "The provisions of this subsection shall apply to any astronaut whose death occurs in the line of duty.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "101(j)",
+      "num": "j",
+      "header": "Treatment of certain employer-owned life insurance contracts",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "101(j)(1)",
+          "num": "1",
+          "header": "General rule",
+          "chapeau": "",
+          "body": "In the case of an employer-owned life insurance contract, the amount excluded from gross income of an applicable policyholder by reason of paragraph (1) of subsection (a) shall not exceed an amount equal to the sum of the premiums and other amounts paid by the policyholder for the contract.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "101(j)(2)",
+          "num": "2",
+          "header": "Exceptions",
+          "chapeau": "In the case of an employer-owned life insurance contract with respect to which the notice and consent requirements of paragraph (4) are met, paragraph (1) shall not apply to any of the following:",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(j)(2)(A)",
+              "num": "A",
+              "header": "Exceptions based on insured's status",
+              "chapeau": "Any amount received by reason of the death of an insured who, with respect to an applicable policyholder—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(j)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "was an employee at any time during the 12-month period before the insured's death, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(j)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "is, at the time the contract is issued—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(j)(2)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "a director,",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(j)(2)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "a highly compensated employee within the meaning of section 414(q) (without regard to paragraph (1)(B)(ii) thereof), or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(j)(2)(A)(ii)(III)",
+                      "num": "III",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "a highly compensated individual within the meaning of section 105(h)(5), except that \"35 percent\" shall be substituted for \"25 percent\" in subparagraph (C) thereof.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "101(j)(2)(B)",
+              "num": "B",
+              "header": "Exception for amounts paid to insured's heirs",
+              "chapeau": "Any amount received by reason of the death of an insured to the extent—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(j)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount is paid to a member of the family (within the meaning of section 267(c)(4)) of the insured, any individual who is the designated beneficiary of the insured under the contract (other than the applicable policyholder), a trust established for the benefit of any such member of the family or designated beneficiary, or the estate of the insured, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(j)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount is used to purchase an equity (or capital or profits) interest in the applicable policyholder from any person described in clause (i).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "101(j)(3)",
+          "num": "3",
+          "header": "Employer-owned life insurance contract",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(j)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "For purposes of this subsection, the term \"employer-owned life insurance contract\" means a life insurance contract which—",
+              "body": "",
+              "continuation": "For purposes of the preceding sentence, if coverage for each insured under a master contract is treated as a separate contract for purposes of sections 817(h), 7702, and 7702A, coverage for each such insured shall be treated as a separate contract.",
+              "children": [
+                {
+                  "id": "101(j)(3)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "is owned by a person engaged in a trade or business and under which such person (or a related person described in subparagraph (B)(ii)) is directly or indirectly a beneficiary under the contract, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(j)(3)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "covers the life of an insured who is an employee with respect to the trade or business of the applicable policyholder on the date the contract is issued.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "101(j)(3)(B)",
+              "num": "B",
+              "header": "Applicable policyholder",
+              "chapeau": "For purposes of this subsection—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "101(j)(3)(B)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "",
+                  "body": "The term \"applicable policyholder\" means, with respect to any employer-owned life insurance contract, the person described in subparagraph (A)(i) which owns the contract.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "101(j)(3)(B)(ii)",
+                  "num": "ii",
+                  "header": "Related persons",
+                  "chapeau": "The term \"applicable policyholder\" includes any person which—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "101(j)(3)(B)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "bears a relationship to the person described in clause (i) which is specified in section 267(b) or 707(b)(1), or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "101(j)(3)(B)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "is engaged in trades or businesses with such person which are under common control (within the meaning of subsection (a) or (b) of section 52).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "101(j)(4)",
+          "num": "4",
+          "header": "Notice and consent requirements",
+          "chapeau": "The notice and consent requirements of this paragraph are met if, before the issuance of the contract, the employee—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(j)(4)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "is notified in writing that the applicable policyholder intends to insure the employee's life and the maximum face amount for which the employee could be insured at the time the contract was issued,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(j)(4)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "provides written consent to being insured under the contract and that such coverage may continue after the insured terminates employment, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(j)(4)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "is informed in writing that an applicable policyholder will be a beneficiary of any proceeds payable upon the death of the employee.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "101(j)(5)",
+          "num": "5",
+          "header": "Definitions",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "101(j)(5)(A)",
+              "num": "A",
+              "header": "Employee",
+              "chapeau": "",
+              "body": "The term \"employee\" includes an officer, director, and highly compensated employee (within the meaning of section 414(q)).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "101(j)(5)(B)",
+              "num": "B",
+              "header": "Insured",
+              "chapeau": "",
+              "body": "The term \"insured\" means, with respect to an employer-owned life insurance contract, an individual covered by the contract who is a United States citizen or resident. In the case of a contract covering the joint lives of 2 individuals, references to an insured include both of the individuals.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

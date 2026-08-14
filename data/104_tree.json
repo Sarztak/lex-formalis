@@ -1,0 +1,278 @@
+{
+  "id": "104",
+  "num": "",
+  "header": "26 U.S. Code § 104 - Compensation for injuries or sickness",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "104(a)",
+      "num": "a",
+      "header": "In general",
+      "chapeau": "Except in the case of amounts attributable to (and not in excess of) deductions allowed under section 213 (relating to medical, etc., expenses) for any prior taxable year, gross income does not include—",
+      "body": "",
+      "continuation": "For purposes of paragraph (3), in the case of an individual who is, or has been, an employee within the meaning of section 401(c)(1) (relating to self-employed individuals), contributions made on behalf of such individual while he was such an employee to a trust described in section 401(a) which is exempt from tax under section 501(a), or under a plan described in section 403(a), shall, to the extent allowed as deductions under section 404, be treated as contributions by the employer which were not includible in the gross income of the employee. For purposes of paragraph (2), emotional distress shall not be treated as a physical injury or physical sickness. The preceding sentence shall not apply to an amount of damages not in excess of the amount paid for medical care (described in subparagraph (A) or (B) of section 213(d)(1)) attributable to emotional distress.",
+      "children": [
+        {
+          "id": "104(a)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "amounts received under workmen's compensation acts as compensation for personal injuries or sickness;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(a)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "the amount of any damages (other than punitive damages) received (whether by suit or agreement and whether as lump sums or as periodic payments) on account of personal physical injuries or physical sickness;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(a)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "",
+          "body": "amounts received through accident or health insurance (or through an arrangement having the effect of accident or health insurance) for personal injuries or sickness (other than amounts received by an employee, to the extent such amounts (A) are attributable to contributions by the employer which were not includible in the gross income of the employee, or (B) are paid by the employer);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(a)(4)",
+          "num": "4",
+          "header": "",
+          "chapeau": "",
+          "body": "amounts received as a pension, annuity, or similar allowance for personal injuries or sickness resulting from active service in the armed forces of any country or in the Coast and Geodetic Survey or the Public Health Service, or as a disability annuity payable under the provisions of section 808 of the Foreign Service Act of 1980;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(a)(5)",
+          "num": "5",
+          "header": "",
+          "chapeau": "",
+          "body": "amounts received by an individual as disability income attributable to injuries incurred as a direct result of a terroristic or military action (as defined in section 692(c)(2)); and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(a)(6)",
+          "num": "6",
+          "header": "",
+          "chapeau": "amounts received pursuant to—",
+          "body": "",
+          "continuation": "except that subparagraph (B) shall not apply to any amounts that would have been payable if death of the public safety officer had occurred other than as the direct and proximate result of a personal injury sustained in the line of duty.",
+          "children": [
+            {
+              "id": "104(a)(6)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "section 1201 of the Omnibus Crime Control and Safe Streets Act of 1968 (42 U.S.C. 3796); [1] or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "104(a)(6)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "a program established under the laws of any State which provides monetary compensation for surviving dependents of a public safety officer who has died as the direct and proximate result of a personal injury sustained in the line of duty,",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "104(b)",
+      "num": "b",
+      "header": "Termination of application of subsection (a)(4) in certain cases",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "104(b)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "Subsection (a)(4) shall not apply in the case of any individual who is not described in paragraph (2).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(b)(2)",
+          "num": "2",
+          "header": "Individuals to whom subsection (a)(4) continues to apply",
+          "chapeau": "An individual is described in this paragraph if—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "104(b)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "on or before September 24, 1975, he was entitled to receive any amount described in subsection (a)(4),",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "104(b)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "on September 24, 1975, he was a member of any organization (or reserve component thereof) referred to in subsection (a)(4) or under a binding written commitment to become such a member,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "104(b)(2)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "he receives an amount described in subsection (a)(4) by reason of a combat-related injury, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "104(b)(2)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "on application therefor, he would be entitled to receive disability compensation from the Department of Veterans Affairs.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "104(b)(3)",
+          "num": "3",
+          "header": "Special rules for combat-related injuries",
+          "chapeau": "For purposes of this subsection, the term \"combat-related injury\" means personal injury or sickness—",
+          "body": "",
+          "continuation": "In the case of an individual who is not described in subparagraph (A) or (B) of paragraph (2), except as provided in paragraph (4), the only amounts taken into account under subsection (a)(4) shall be the amounts which he receives by reason of a combat-related injury.",
+          "children": [
+            {
+              "id": "104(b)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "which is incurred—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "104(b)(3)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "as a direct result of armed conflict,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "104(b)(3)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "while engaged in extrahazardous service, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "104(b)(3)(A)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "under conditions simulating war; or",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "104(b)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "which is caused by an instrumentality of war.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "104(b)(4)",
+          "num": "4",
+          "header": "Amount excluded to be not less than veterans' disability compensation",
+          "chapeau": "",
+          "body": "In the case of any individual described in paragraph (2), the amounts excludable under subsection (a)(4) for any period with respect to any individual shall not be less than the maximum amount which such individual, on application therefor, would be entitled to receive as disability compensation from the Veterans' Administration.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "104(c)",
+      "num": "c",
+      "header": "Application of prior law in certain cases",
+      "chapeau": "The phrase \"(other than punitive damages)\" shall not apply to punitive damages awarded in a civil action—",
+      "body": "",
+      "continuation": "This subsection shall cease to apply to any civil action filed on or after the first date on which the applicable State law ceases to provide (or is no longer construed to provide) the treatment described in paragraph (2).",
+      "children": [
+        {
+          "id": "104(c)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "which is a wrongful death action, and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(c)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "with respect to which applicable State law (as in effect on September 13, 1995 and without regard to any modification after such date) provides, or has been construed to provide by a court of competent jurisdiction pursuant to a decision issued on or before September 13, 1995, that only punitive damages may be awarded in such an action.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "104(d)",
+      "num": "d",
+      "header": "Cross references",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "104(d)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "For exclusion from employee's gross income of employer contributions to accident and health plans, see section 106.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "104(d)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "For exclusion of part of disability retirement pay from the application of subsection (a)(4) of this section, see section 1403 of title 10, United States Code (relating to career compensation laws).",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

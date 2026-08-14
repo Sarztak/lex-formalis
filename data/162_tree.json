@@ -1,0 +1,2003 @@
+{
+  "id": "162",
+  "num": "",
+  "header": "26 U.S. Code § 162 - Trade or business expenses",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "162(a)",
+      "num": "a",
+      "header": "In general",
+      "chapeau": "There shall be allowed as a deduction all the ordinary and necessary expenses paid or incurred during the taxable year in carrying on any trade or business, including—",
+      "body": "",
+      "continuation": "For purposes of the preceding sentence, the place of residence of a Member of Congress (including any Delegate and Resident Commissioner) within the State, congressional district, or possession which he represents in Congress shall be considered his home, but amounts expended by such Members within each taxable year for living expenses shall not be deductible for income tax purposes. For purposes of paragraph (2), the taxpayer shall not be treated as being temporarily away from home during any period of employment if such period exceeds 1 year. The preceding sentence shall not apply to any Federal employee during any period for which such employee is certified by the Attorney General (or the designee thereof) as traveling on behalf of the United States in temporary duty status to investigate or prosecute, or provide support services for the investigation or prosecution of, a Federal crime.",
+      "children": [
+        {
+          "id": "162(a)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "a reasonable allowance for salaries or other compensation for personal services actually rendered;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(a)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "traveling expenses (including amounts expended for meals and lodging other than amounts which are lavish or extravagant under the circumstances) while away from home in the pursuit of a trade or business; and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(a)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "",
+          "body": "rentals or other payments required to be made as a condition to the continued use or possession, for purposes of the trade or business, of property to which the taxpayer has not taken or is not taking title or in which he has no equity.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(b)",
+      "num": "b",
+      "header": "Charitable contributions and gifts excepted",
+      "chapeau": "",
+      "body": "No deduction shall be allowed under subsection (a) for any contribution or gift which would be allowable as a deduction under section 170 were it not for the percentage limitations, the dollar limitations, or the requirements as to the time of payment, set forth in such section.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "162(c)",
+      "num": "c",
+      "header": "Illegal bribes, kickbacks, and other payments",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(c)(1)",
+          "num": "1",
+          "header": "Illegal payments to government officials or employees",
+          "chapeau": "",
+          "body": "No deduction shall be allowed under subsection (a) for any payment made, directly or indirectly, to an official or employee of any government, or of any agency or instrumentality of any government, if the payment constitutes an illegal bribe or kickback or, if the payment is to an official or employee of a foreign government, the payment is unlawful under the Foreign Corrupt Practices Act of 1977. The burden of proof in respect of the issue, for the purposes of this paragraph, as to whether a payment constitutes an illegal bribe or kickback (or is unlawful under the Foreign Corrupt Practices Act of 1977) shall be upon the Secretary to the same extent as he bears the burden of proof under section 7454 (concerning the burden of proof when the issue relates to fraud).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(c)(2)",
+          "num": "2",
+          "header": "Other illegal payments",
+          "chapeau": "",
+          "body": "No deduction shall be allowed under subsection (a) for any payment (other than a payment described in paragraph (1)) made, directly or indirectly, to any person, if the payment constitutes an illegal bribe, illegal kickback, or other illegal payment under any law of the United States, or under any law of a State (but only if such State law is generally enforced), which subjects the payor to a criminal penalty or the loss of license or privilege to engage in a trade or business. For purposes of this paragraph, a kickback includes a payment in consideration of the referral of a client, patient, or customer. The burden of proof in respect of the issue, for purposes of this paragraph, as to whether a payment constitutes an illegal bribe, illegal kickback, or other illegal payment shall be upon the Secretary to the same extent as he bears the burden of proof under section 7454 (concerning the burden of proof when the issue relates to fraud).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(c)(3)",
+          "num": "3",
+          "header": "Kickbacks, rebates, and bribes under medicare and medicaid",
+          "chapeau": "",
+          "body": "No deduction shall be allowed under subsection (a) for any kickback, rebate, or bribe made by any provider of services, supplier, physician, or other person who furnishes items or services for which payment is or may be made under the Social Security Act, or in whole or in part out of Federal funds under a State plan approved under such Act, if such kickback, rebate, or bribe is made in connection with the furnishing of such items or services or the making or receipt of such payments. For purposes of this paragraph, a kickback includes a payment in consideration of the referral of a client, patient, or customer.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(d)",
+      "num": "d",
+      "header": "Capital contributions to Federal National Mortgage Association",
+      "chapeau": "",
+      "body": "For purposes of this subtitle, whenever the amount of capital contributions evidenced by a share of stock issued pursuant to section 303(c) of the Federal National Mortgage Association Charter Act (12 U.S.C., sec. 1718) exceeds the fair market value of the stock as of the issue date of such stock, the initial holder of the stock shall treat the excess as ordinary and necessary expenses paid or incurred during the taxable year in carrying on a trade or business.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "162(e)",
+      "num": "e",
+      "header": "Denial of deduction for certain lobbying and political expenditures",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(e)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "No deduction shall be allowed under subsection (a) for any amount paid or incurred in connection with—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(e)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "influencing legislation,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "participation in, or intervention in, any political campaign on behalf of (or in opposition to) any candidate for public office,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "any attempt to influence the general public, or segments thereof, with respect to elections, legislative matters, or referendums, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(1)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "any direct communication with a covered executive branch official in an attempt to influence the official actions or positions of such official.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(e)(2)",
+          "num": "2",
+          "header": "Application to dues of tax-exempt organizations",
+          "chapeau": "",
+          "body": "No deduction shall be allowed under subsection (a) for the portion of dues or other similar amounts paid by the taxpayer to an organization which is exempt from tax under this subtitle which the organization notifies the taxpayer under section 6033(e)(1)(A)(ii) is allocable to expenditures to which paragraph (1) applies.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(e)(3)",
+          "num": "3",
+          "header": "Influencing legislation",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(e)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "The term \"influencing legislation\" means any attempt to influence any legislation through communication with any member or employee of a legislative body, or with any government official or employee who may participate in the formulation of legislation.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(3)(B)",
+              "num": "B",
+              "header": "Legislation",
+              "chapeau": "",
+              "body": "The term \"legislation\" has the meaning given such term by section 4911(e)(2).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(e)(4)",
+          "num": "4",
+          "header": "Other special rules",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(e)(4)(A)",
+              "num": "A",
+              "header": "Exception for certain taxpayers",
+              "chapeau": "",
+              "body": "In the case of any taxpayer engaged in the trade or business of conducting activities described in paragraph (1), paragraph (1) shall not apply to expenditures of the taxpayer in conducting such activities directly on behalf of another person (but shall apply to payments by such other person to the taxpayer for conducting such activities).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(4)(B)",
+              "num": "B",
+              "header": "De minimis exception",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(e)(4)(B)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "",
+                  "body": "Paragraph (1) shall not apply to any in-house expenditures for any taxable year if such expenditures do not exceed $2,000. In determining whether a taxpayer exceeds the $2,000 limit under this clause, there shall not be taken into account overhead costs otherwise allocable to activities described in paragraphs (1)(A) and (D).",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(e)(4)(B)(ii)",
+                  "num": "ii",
+                  "header": "In-house expenditures",
+                  "chapeau": "For purposes of clause (i), the term \"in-house expenditures\" means expenditures described in paragraphs (1)(A) and (D) other than—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(e)(4)(B)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "payments by the taxpayer to a person engaged in the trade or business of conducting activities described in paragraph (1) for the conduct of such activities on behalf of the taxpayer, or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(e)(4)(B)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "dues or other similar amounts paid or incurred by the taxpayer which are allocable to activities described in paragraph (1).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "162(e)(4)(C)",
+              "num": "C",
+              "header": "Expenses incurred in connection with lobbying and political activities",
+              "chapeau": "",
+              "body": "Any amount paid or incurred for research for, or preparation, planning, or coordination of, any activity described in paragraph (1) shall be treated as paid or incurred in connection with such activity.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(e)(5)",
+          "num": "5",
+          "header": "Covered executive branch official",
+          "chapeau": "For purposes of this subsection, the term \"covered executive branch official\" means—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(e)(5)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the President,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(5)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the Vice President,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(5)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "any officer or employee of the White House Office of the Executive Office of the President, and the 2 most senior level officers of each of the other agencies in such Executive Office, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(e)(5)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(e)(5)(D)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any individual serving in a position in level I of the Executive Schedule under section 5312 of title 5, United States Code, (ii) any other individual designated by the President as having Cabinet level status, and (iii) any immediate deputy of an individual described in clause (i) or (ii).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "162(e)(6)",
+          "num": "6",
+          "header": "Cross reference",
+          "chapeau": "",
+          "body": "For reporting requirements and alternative taxes related to this subsection, see section 6033(e).",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(f)",
+      "num": "f",
+      "header": "Fines, penalties, and other amounts",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(f)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "Except as provided in the following paragraphs of this subsection, no deduction otherwise allowable shall be allowed under this chapter for any amount paid or incurred (whether by suit, agreement, or otherwise) to, or at the direction of, a government or governmental entity in relation to the violation of any law or the investigation or inquiry by such government or entity into the potential violation of any law.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(f)(2)",
+          "num": "2",
+          "header": "Exception for amounts constituting restitution or paid to come into compliance with law",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(f)(2)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "Paragraph (1) shall not apply to any amount that—",
+              "body": "",
+              "continuation": "The identification under clause (ii) alone shall not be sufficient to make the establishment required under clause (i).",
+              "children": [
+                {
+                  "id": "162(f)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "the taxpayer establishes—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(f)(2)(A)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "constitutes restitution (including remediation of property) for damage or harm which was or may be caused by the violation of any law or the potential violation of any law, or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(f)(2)(A)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "is paid to come into compliance with any law which was violated or otherwise involved in the investigation or inquiry described in paragraph (1),",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(f)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "is identified as restitution or as an amount paid to come into compliance with such law, as the case may be, in the court order or settlement agreement, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(f)(2)(A)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "in the case of any amount of restitution for failure to pay any tax imposed under this title in the same manner as if such amount were such tax, would have been allowed as a deduction under this chapter if it had been timely paid.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(f)(2)(B)",
+              "num": "B",
+              "header": "Limitation",
+              "chapeau": "",
+              "body": "Subparagraph (A) shall not apply to any amount paid or incurred as reimbursement to the government or entity for the costs of any investigation or litigation.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(f)(3)",
+          "num": "3",
+          "header": "Exception for amounts paid or incurred as the result of certain court orders",
+          "chapeau": "",
+          "body": "Paragraph (1) shall not apply to any amount paid or incurred by reason of any order of a court in a suit in which no government or governmental entity is a party.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(f)(4)",
+          "num": "4",
+          "header": "Exception for taxes due",
+          "chapeau": "",
+          "body": "Paragraph (1) shall not apply to any amount paid or incurred as taxes due.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(f)(5)",
+          "num": "5",
+          "header": "Treatment of certain nongovernmental regulatory entities",
+          "chapeau": "For purposes of this subsection, the following nongovernmental entities shall be treated as governmental entities:",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(f)(5)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "Any nongovernmental entity which exercises self-regulatory powers (including imposing sanctions) in connection with a qualified board or exchange (as defined in section 1256(g)(7)).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(f)(5)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "To the extent provided in regulations, any nongovernmental entity which exercises self-regulatory powers (including imposing sanctions) as part of performing an essential governmental function.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(g)",
+      "num": "g",
+      "header": "Treble damage payments under the antitrust laws",
+      "chapeau": "If in a criminal proceeding a taxpayer is convicted of a violation of the antitrust laws, or his plea of guilty or nolo contendere to an indictment or information charging such a violation is entered or accepted in such a proceeding, no deduction shall be allowed under subsection (a) for two-thirds of any amount paid or incurred—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(g)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "on any judgment for damages entered against the taxpayer under section 4 of the Act entitled \"An Act to supplement existing laws against unlawful restraints and monopolies, and for other purposes\", approved October 15, 1914 (commonly known as the Clayton Act), on account of such violation or any related violation of the antitrust laws which occurred prior to the date of the final judgment of such conviction, or",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(g)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "in settlement of any action brought under such section 4 on account of such violation or related violation.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(h)",
+      "num": "h",
+      "header": "State legislators' travel expenses away from home",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(h)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "For purposes of subsection (a), in the case of any individual who is a State legislator at any time during the taxable year and who makes an election under this subsection for the taxable year—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(h)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the place of residence of such individual within the legislative district which he represented shall be considered his home,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(h)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "he shall be deemed to have expended for living expenses (in connection with his trade or business as a legislator) an amount equal to the sum of the amounts determined by multiplying each legislative day of such individual during the taxable year by the greater of—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(h)(1)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount generally allowable with respect to such day to employees of the State of which he is a legislator for per diem while away from home, to the extent such amount does not exceed 110 percent of the amount described in clause (ii) with respect to such day, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(h)(1)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount generally allowable with respect to such day to employees of the executive branch of the Federal Government for per diem while away from home but serving in the United States, and",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(h)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "he shall be deemed to be away from home in the pursuit of a trade or business on each legislative day.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(h)(2)",
+          "num": "2",
+          "header": "Legislative days",
+          "chapeau": "For purposes of paragraph (1), a legislative day during any taxable year for any individual shall be any day during such year on which—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(h)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the legislature was in session (including any day in which the legislature was not in session for a period of 4 consecutive days or less), or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(h)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the legislature was not in session but the physical presence of the individual was formally recorded at a meeting of a committee of such legislature.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(h)(3)",
+          "num": "3",
+          "header": "Election",
+          "chapeau": "",
+          "body": "An election under this subsection for any taxable year shall be made at such time and in such manner as the Secretary shall by regulations prescribe.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(h)(4)",
+          "num": "4",
+          "header": "Section not to apply to legislators who reside near capitol",
+          "chapeau": "",
+          "body": "This subsection shall not apply to any legislator whose place of residence within the legislative district which he represents is 50 or fewer miles from the capitol building of the State.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(i)",
+      "num": "i",
+      "header": "Repealed. Pub. L. 101–239, title VI, § 6202(b)(3)(A), Dec. 19, 1989, 103 Stat. 2233]",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "162(j)",
+      "num": "j",
+      "header": "Certain foreign advertising expenses",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(j)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "No deduction shall be allowed under subsection (a) for any expenses of an advertisement carried by a foreign broadcast undertaking and directed primarily to a market in the United States. This paragraph shall apply only to foreign broadcast undertakings located in a country which denies a similar deduction for the cost of advertising directed primarily to a market in the foreign country when placed with a United States broadcast undertaking.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(j)(2)",
+          "num": "2",
+          "header": "Broadcast undertaking",
+          "chapeau": "",
+          "body": "For purposes of paragraph (1), the term \"broadcast undertaking\" includes (but is not limited to) radio and television stations.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(k)",
+      "num": "k",
+      "header": "Stock reacquisition expenses",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(k)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "Except as provided in paragraph (2), no deduction otherwise allowable shall be allowed under this chapter for any amount paid or incurred by a corporation in connection with the reacquisition of its stock or of the stock of any related person (as defined in section 465(b)(3)(C)).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(k)(2)",
+          "num": "2",
+          "header": "Exceptions",
+          "chapeau": "Paragraph (1) shall not apply to—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(k)(2)(A)",
+              "num": "A",
+              "header": "Certain specific deductions",
+              "chapeau": "Any—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(k)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "deduction allowable under section 163 (relating to interest),",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(k)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "deduction for amounts which are properly allocable to indebtedness and amortized over the term of such indebtedness, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(k)(2)(A)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "deduction for dividends paid (within the meaning of section 561).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(k)(2)(B)",
+              "num": "B",
+              "header": "Stock of certain regulated investment companies",
+              "chapeau": "",
+              "body": "Any amount paid or incurred in connection with the redemption of any stock in a regulated investment company which issues only stock which is redeemable upon the demand of the shareholder.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(l)",
+      "num": "l",
+      "header": "Special rules for health insurance costs of self-employed individuals",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(l)(1)",
+          "num": "1",
+          "header": "Allowance of deduction",
+          "chapeau": "In the case of a taxpayer who is an employee within the meaning of section 401(c)(1), there shall be allowed as a deduction under this section an amount equal to the amount paid during the taxable year for insurance which constitutes medical care for—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(l)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the taxpayer,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(l)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the taxpayer's spouse,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(l)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "the taxpayer's dependents, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(l)(1)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "any child (as defined in section 152(f)(1)) of the taxpayer who as of the end of the taxable year has not attained age 27.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(l)(2)",
+          "num": "2",
+          "header": "Limitations",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(l)(2)(A)",
+              "num": "A",
+              "header": "Dollar amount",
+              "chapeau": "",
+              "body": "No deduction shall be allowed under paragraph (1) to the extent that the amount of such deduction exceeds the taxpayer's earned income (within the meaning of section 401(c)) derived by the taxpayer from the trade or business with respect to which the plan providing the medical care coverage is established.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(l)(2)(B)",
+              "num": "B",
+              "header": "Other coverage",
+              "chapeau": "Paragraph (1) shall not apply to any taxpayer for any calendar month for which the taxpayer is eligible to participate in any subsidized health plan maintained by any employer of the taxpayer or of the spouse of, or any dependent, or individual described in subparagraph (D) of paragraph (1) with respect to, the taxpayer. The preceding sentence shall be applied separately with respect to—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(l)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "plans which include coverage for qualified long-term care services (as defined in section 7702B(c)) or are qualified long-term care insurance contracts (as defined in section 7702B(b)), and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(l)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "plans which do not include such coverage and are not such contracts.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(l)(2)(C)",
+              "num": "C",
+              "header": "Long-term care premiums",
+              "chapeau": "",
+              "body": "In the case of a qualified long-term care insurance contract (as defined in section 7702B(b)), only eligible long-term care premiums (as defined in section 213(d)(10)) shall be taken into account under paragraph (1).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(l)(3)",
+          "num": "3",
+          "header": "Coordination with medical deduction",
+          "chapeau": "",
+          "body": "Any amount paid by a taxpayer for insurance to which paragraph (1) applies shall not be taken into account in computing the amount allowable to the taxpayer as a deduction under section 213(a).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(l)(4)",
+          "num": "4",
+          "header": "Deduction not allowed for self-employment tax purposes",
+          "chapeau": "",
+          "body": "The deduction allowable by reason of this subsection shall not be taken into account in determining an individual's net earnings from self-employment (within the meaning of section 1402(a)) for purposes of chapter 2 for taxable years beginning before January 1, 2010, or after December 31, 2010.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(l)(5)",
+          "num": "5",
+          "header": "Treatment of certain S corporation shareholders",
+          "chapeau": "This subsection shall apply in the case of any individual treated as a partner under section 1372(a), except that—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(l)(5)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "for purposes of this subsection, such individual's wages (as defined in section 3121) from the S corporation shall be treated as such individual's earned income (within the meaning of section 401(c)(1)), and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(l)(5)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "there shall be such adjustments in the application of this subsection as the Secretary may by regulations prescribe.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(m)",
+      "num": "m",
+      "header": "Certain excessive employee remuneration",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(m)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "In the case of any publicly held corporation, no deduction shall be allowed under this chapter for applicable employee remuneration with respect to any covered employee to the extent that the amount of such remuneration for the taxable year with respect to such employee exceeds $1,000,000.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(m)(2)",
+          "num": "2",
+          "header": "Publicly held corporation",
+          "chapeau": "For purposes of this subsection, the term \"publicly held corporation\" means any corporation which is an issuer (as defined in section 3 of the Securities Exchange Act of 1934 (15 U.S.C. 78c))—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(m)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the securities of which are required to be registered under section 12 of such Act (15 U.S.C. 78l), or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "that is required to file reports under section 15(d) of such Act (15 U.S.C. 78o(d)).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(m)(3)",
+          "num": "3",
+          "header": "Covered employee",
+          "chapeau": "For purposes of this subsection, the term \"covered employee\" means any employee of the taxpayer if—",
+          "body": "",
+          "continuation": "Such term shall include any employee who would be described in subparagraph (B) if the reporting described in such subparagraph were required as so described.",
+          "children": [
+            {
+              "id": "162(m)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "such employee is the principal executive officer or principal financial officer of the taxpayer at any time during the taxable year, or was an individual acting in such a capacity,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the total compensation of such employee for the taxable year is required to be reported to shareholders under the Securities Exchange Act of 1934 by reason of such employee being among the 3 highest compensated officers for the taxable year (other than any individual described in subparagraph (A)),",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(3)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "in the case of taxable years beginning after December 31, 2026, such employee is among the 5 highest compensated employees for the taxable year other than any individual described in subparagraph (A) or (B), or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(3)(D)",
+              "num": "D",
+              "header": "",
+              "chapeau": "",
+              "body": "was a covered employee described in subparagraph (A) or (B) of the taxpayer (or any predecessor) for any preceding taxable year beginning after December 31, 2016.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(m)(4)",
+          "num": "4",
+          "header": "Applicable employee remuneration",
+          "chapeau": "For purposes of this subsection—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(m)(4)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "Except as otherwise provided in this paragraph, the term \"applicable employee remuneration\" means, with respect to any covered employee for any taxable year, the aggregate amount allowable as a deduction under this chapter for such taxable year (determined without regard to this subsection) for remuneration for services performed by such employee (whether or not during the taxable year).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(4)(B)",
+              "num": "B",
+              "header": "Exception for existing binding contracts",
+              "chapeau": "",
+              "body": "The term \"applicable employee remuneration\" shall not include any remuneration payable under a written binding contract which was in effect on February 17, 1993, and which was not modified thereafter in any material respect before such remuneration is paid.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(4)(C)",
+              "num": "C",
+              "header": "Remuneration",
+              "chapeau": "For purposes of this paragraph, the term \"remuneration\" includes any remuneration (including benefits) in any medium other than cash, but shall not include—",
+              "body": "",
+              "continuation": "For purposes of clause (i), section 3121(a)(5) shall be applied without regard to section 3121(v)(1).",
+              "children": [
+                {
+                  "id": "162(m)(4)(C)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any payment referred to in so much of section 3121(a)(5) as precedes subparagraph (E) thereof, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(4)(C)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any benefit provided to or on behalf of an employee if at the time such benefit is provided it is reasonable to believe that the employee will be able to exclude such benefit from gross income under this chapter.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(4)(D)",
+              "num": "D",
+              "header": "Coordination with disallowed golden parachute payments",
+              "chapeau": "",
+              "body": "The dollar limitation contained in paragraph (1) shall be reduced (but not below zero) by the amount (if any) which would have been included in the applicable employee remuneration of the covered employee for the taxable year but for being disallowed under section 280G.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(4)(E)",
+              "num": "E",
+              "header": "Coordination with excise tax on specified stock compensation",
+              "chapeau": "",
+              "body": "The dollar limitation contained in paragraph (1) with respect to any covered employee shall be reduced (but not below zero) by the amount of any payment (with respect to such employee) of the tax imposed by section 4985 directly or indirectly by the expatriated corporation (as defined in such section) or by any member of the expanded affiliated group (as defined in such section) which includes such corporation.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(4)(F)",
+              "num": "F",
+              "header": "Special rule for remuneration paid to beneficiaries, etc.",
+              "chapeau": "",
+              "body": "Remuneration shall not fail to be applicable employee remuneration merely because it is includible in the income of, or paid to, a person other than the covered employee, including after the death of the covered employee.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(m)(5)",
+          "num": "5",
+          "header": "Special rule for application to employers participating in the Troubled Assets Relief Program",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(m)(5)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "In the case of an applicable employer, no deduction shall be allowed under this chapter—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(5)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "in the case of executive remuneration for any applicable taxable year which is attributable to services performed by a covered executive during such applicable taxable year, to the extent that the amount of such remuneration exceeds $500,000, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(5)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "in the case of deferred deduction executive remuneration for any taxable year for services performed during any applicable taxable year by a covered executive, to the extent that the amount of such remuneration exceeds $500,000 reduced (but not below zero) by the sum of—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(5)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the executive remuneration for such applicable taxable year, plus",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(5)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the portion of the deferred deduction executive remuneration for such services which was taken into account under this clause in a preceding taxable year.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "162(m)(5)(B)",
+              "num": "B",
+              "header": "Applicable employer",
+              "chapeau": "For purposes of this paragraph—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(5)(B)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "",
+                  "body": "Except as provided in clause (ii), the term \"applicable employer\" means any employer from whom 1 or more troubled assets are acquired under a program established by the Secretary under section 101(a) of the Emergency Economic Stabilization Act of 2008 if the aggregate amount of the assets so acquired for all taxable years exceeds $300,000,000.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(5)(B)(ii)",
+                  "num": "ii",
+                  "header": "Disregard of certain assets sold through direct purchase",
+                  "chapeau": "",
+                  "body": "If the only sales of troubled assets by an employer under the program described in clause (i) are through 1 or more direct purchases (within the meaning of section 113(c) of the Emergency Economic Stabilization Act of 2008), such assets shall not be taken into account under clause (i) in determining whether the employer is an applicable employer for purposes of this paragraph.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(5)(B)(iii)",
+                  "num": "iii",
+                  "header": "Aggregation rules",
+                  "chapeau": "",
+                  "body": "Two or more persons who are treated as a single employer under subsection (b) or (c) of section 414 shall be treated as a single employer, except that in applying section 1563(a) for purposes of either such subsection, paragraphs (2) and (3) thereof shall be disregarded.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(5)(C)",
+              "num": "C",
+              "header": "Applicable taxable year",
+              "chapeau": "For purposes of this paragraph, the term \"applicable taxable year\" means, with respect to any employer—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(5)(C)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "the first taxable year of the employer—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(5)(C)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "which includes any portion of the period during which the authorities under section 101(a) of the Emergency Economic Stabilization Act of 2008 are in effect (determined under section 120 thereof), and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(5)(C)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "in which the aggregate amount of troubled assets acquired from the employer during the taxable year pursuant to such authorities (other than assets to which subparagraph (B)(ii) applies), when added to the aggregate amount so acquired for all preceding taxable years, exceeds $300,000,000, and",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(m)(5)(C)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any subsequent taxable year which includes any portion of such period.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(5)(D)",
+              "num": "D",
+              "header": "Covered executive",
+              "chapeau": "For purposes of this paragraph—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(5)(D)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "The term \"covered executive\" means, with respect to any applicable taxable year, any employee—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(5)(D)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "who, at any time during the portion of the taxable year during which the authorities under section 101(a) of the Emergency Economic Stabilization Act of 2008 are in effect (determined under section 120 thereof), is the chief executive officer of the applicable employer or the chief financial officer of the applicable employer, or an individual acting in either such capacity, or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(5)(D)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "who is described in clause (ii).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(m)(5)(D)(ii)",
+                  "num": "ii",
+                  "header": "Highest compensated employees",
+                  "chapeau": "An employee is described in this clause if the employee is 1 of the 3 highest compensated officers of the applicable employer for the taxable year (other than an individual described in clause (i)(I)), determined—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(5)(D)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "on the basis of the shareholder disclosure rules for compensation under the Securities Exchange Act of 1934 (without regard to whether those rules apply to the employer), and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(5)(D)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "by only taking into account employees employed during the portion of the taxable year described in clause (i)(I).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(m)(5)(D)(iii)",
+                  "num": "iii",
+                  "header": "Employee remains covered executive",
+                  "chapeau": "",
+                  "body": "If an employee is a covered executive with respect to an applicable employer for any applicable taxable year, such employee shall be treated as a covered executive with respect to such employer for all subsequent applicable taxable years and for all subsequent taxable years in which deferred deduction executive remuneration with respect to services performed in all such applicable taxable years would (but for this paragraph) be deductible.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(5)(E)",
+              "num": "E",
+              "header": "Executive remuneration",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"executive remuneration\" means the applicable employee remuneration of the covered executive, as determined under paragraph (4) without regard to subparagraph (B) thereof. Such term shall not include any deferred deduction executive remuneration with respect to services performed in a prior applicable taxable year.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(5)(F)",
+              "num": "F",
+              "header": "Deferred deduction executive remuneration",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"deferred deduction executive remuneration\" means remuneration which would be executive remuneration for services performed in an applicable taxable year but for the fact that the deduction under this chapter (determined without regard to this paragraph) for such remuneration is allowable in a subsequent taxable year.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(5)(G)",
+              "num": "G",
+              "header": "Coordination",
+              "chapeau": "",
+              "body": "Rules similar to the rules of subparagraphs (D) and (E) of paragraph (4) shall apply for purposes of this paragraph.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(5)(H)",
+              "num": "H",
+              "header": "Regulatory authority",
+              "chapeau": "",
+              "body": "The Secretary may prescribe such guidance, rules, or regulations as are necessary to carry out the purposes of this paragraph and the Emergency Economic Stabilization Act of 2008, including the extent to which this paragraph applies in the case of any acquisition, merger, or reorganization of an applicable employer.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(m)(6)",
+          "num": "6",
+          "header": "Special rule for application to certain health insurance providers",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(m)(6)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "No deduction shall be allowed under this chapter—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(6)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "in the case of applicable individual remuneration which is for any disqualified taxable year beginning after December 31, 2012, and which is attributable to services performed by an applicable individual during such taxable year, to the extent that the amount of such remuneration exceeds $500,000, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(6)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "in the case of deferred deduction remuneration for any taxable year beginning after December 31, 2012, which is attributable to services performed by an applicable individual during any disqualified taxable year beginning after December 31, 2009, to the extent that the amount of such remuneration exceeds $500,000 reduced (but not below zero) by the sum of—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(6)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the applicable individual remuneration for such disqualified taxable year, plus",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(6)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "the portion of the deferred deduction remuneration for such services which was taken into account under this clause in a preceding taxable year (or which would have been taken into account under this clause in a preceding taxable year if this clause were applied by substituting \"December 31, 2009\" for \"December 31, 2012\" in the matter preceding subclause (I)).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "162(m)(6)(B)",
+              "num": "B",
+              "header": "Disqualified taxable year",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"disqualified taxable year\" means, with respect to any employer, any taxable year for which such employer is a covered health insurance provider.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(6)(C)",
+              "num": "C",
+              "header": "Covered health insurance provider",
+              "chapeau": "For purposes of this paragraph—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(6)(C)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "The term \"covered health insurance provider\" means—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(6)(C)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "with respect to taxable years beginning after December 31, 2009, and before January 1, 2013, any employer which is a health insurance issuer (as defined in section 9832(b)(2)) and which receives premiums from providing health insurance coverage (as defined in section 9832(b)(1)), and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(6)(C)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "with respect to taxable years beginning after December 31, 2012, any employer which is a health insurance issuer (as defined in section 9832(b)(2)) and with respect to which not less than 25 percent of the gross premiums received from providing health insurance coverage (as defined in section 9832(b)(1)) is from minimum essential coverage (as defined in section 5000A(f)).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(m)(6)(C)(ii)",
+                  "num": "ii",
+                  "header": "Aggregation rules",
+                  "chapeau": "",
+                  "body": "Two or more persons who are treated as a single employer under subsection (b), (c), (m), or (o) of section 414 shall be treated as a single employer, except that in applying section 1563(a) for purposes of any such subsection, paragraphs (2) and (3) thereof shall be disregarded.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(6)(D)",
+              "num": "D",
+              "header": "Applicable individual remuneration",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"applicable individual remuneration\" means, with respect to any applicable individual for any disqualified taxable year, the aggregate amount allowable as a deduction under this chapter for such taxable year (determined without regard to this subsection) for remuneration (as defined in paragraph (4) without regard to subparagraph (B) thereof) for services performed by such individual (whether or not during the taxable year). Such term shall not include any deferred deduction remuneration with respect to services performed during the disqualified taxable year.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(6)(E)",
+              "num": "E",
+              "header": "Deferred deduction remuneration",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"deferred deduction remuneration\" means remuneration which would be applicable individual remuneration for services performed in a disqualified taxable year but for the fact that the deduction under this chapter (determined without regard to this paragraph) for such remuneration is allowable in a subsequent taxable year.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(6)(F)",
+              "num": "F",
+              "header": "Applicable individual",
+              "chapeau": "For purposes of this paragraph, the term \"applicable individual\" means, with respect to any covered health insurance provider for any disqualified taxable year, any individual—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(6)(F)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "who is an officer, director, or employee in such taxable year, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(6)(F)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "who provides services for or on behalf of such covered health insurance provider during such taxable year.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(6)(G)",
+              "num": "G",
+              "header": "Coordination",
+              "chapeau": "",
+              "body": "Rules similar to the rules of subparagraphs (D) and (E) of paragraph (4) shall apply for purposes of this paragraph.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(m)(6)(H)",
+              "num": "H",
+              "header": "Regulatory authority",
+              "chapeau": "",
+              "body": "The Secretary may prescribe such guidance, rules, or regulations as are necessary to carry out the purposes of this paragraph.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(m)(7)",
+          "num": "7",
+          "header": "Remuneration from controlled group members",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(m)(7)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "In the case of any publicly held corporation which is a member of a controlled group—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(7)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "paragraph (1) shall be applied by substituting \"specified covered employee\" for \"covered employee\", and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(7)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "if any person which is a member of such controlled group (other than such publicly held corporation) provides applicable employee remuneration to an individual who is a specified covered employee of such controlled group and the aggregate amount described in subparagraph (B)(ii) with respect to such specified covered employee exceeds $1,000,000—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(m)(7)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "paragraph (1) shall apply to such person with respect to such remuneration, and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(m)(7)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "paragraph (1) shall apply to such publicly held corporation and to each such related person by substituting \"the allocable limitation amount\" for \"$1,000,000\".",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "162(m)(7)(B)",
+              "num": "B",
+              "header": "Allocable limitation amount",
+              "chapeau": "For purposes of this paragraph, the term \"allocable limitation amount\" means, with respect to any member of the controlled group referred to in subparagraph (A) with respect to any specified covered employee of such controlled group, the amount which bears the same ratio to $1,000,000 as—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(7)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amount of applicable employee remuneration provided by such member with respect to such specified covered employee, bears to",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(7)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the aggregate amount of applicable employee remuneration provided by all such members with respect to such specified covered employee.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(7)(C)",
+              "num": "C",
+              "header": "Specified covered employee",
+              "chapeau": "For purposes of this paragraph, the term \"specified covered employee\" means, with respect to any controlled group—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(m)(7)(C)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any employee described in subparagraph (A), (B), or (D) of paragraph (3), with respect to the publicly held corporation which is a member of such controlled group, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(m)(7)(C)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any employee who would be described in subparagraph (C) of paragraph (3) if such subparagraph were applied by taking into account the employees of all members of the controlled group.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(m)(7)(D)",
+              "num": "D",
+              "header": "Controlled group",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"controlled group\" means any group treated as a single employer under subsection (b), (c), (m), or (o) of section 414.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(n)",
+      "num": "n",
+      "header": "Special rule for certain group health plans",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(n)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "No deduction shall be allowed under this chapter to an employer for any amount paid or incurred in connection with a group health plan if the plan does not reimburse for inpatient hospital care services provided in the State of New York—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(n)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "except as provided in subparagraphs (B) and (C), at the same rate as licensed commercial insurers are required to reimburse hospitals for such services when such reimbursement is not through such a plan,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(n)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "in the case of any reimbursement through a health maintenance organization, at the same rate as health maintenance organizations are required to reimburse hospitals for such services for individuals not covered by such a plan (determined without regard to any government-supported individuals exempt from such rate), or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(n)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "in the case of any reimbursement through any corporation organized under Article 43 of the New York State Insurance Law, at the same rate as any such corporation is required to reimburse hospitals for such services for individuals not covered by such a plan.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(n)(2)",
+          "num": "2",
+          "header": "State law exception",
+          "chapeau": "",
+          "body": "Paragraph (1) shall not apply to any group health plan which is not required under the laws of the State of New York (determined without regard to this subsection or other provisions of Federal law) to reimburse at the rates provided in paragraph (1).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(n)(3)",
+          "num": "3",
+          "header": "Group health plan",
+          "chapeau": "",
+          "body": "For purposes of this subsection, the term \"group health plan\" means a plan of, or contributed to by, an employer or employee organization (including a self-insured plan) to provide health care (directly or otherwise) to any employee, any former employee, the employer, or any other individual associated or formerly associated with the employer in a business relationship, or any member of their family.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(o)",
+      "num": "o",
+      "header": "Treatment of certain expenses of rural mail carriers",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(o)(1)",
+          "num": "1",
+          "header": "General rule",
+          "chapeau": "In the case of any employee of the United States Postal Service who performs services involving the collection and delivery of mail on a rural route and who receives qualified reimbursements for the expenses incurred by such employee for the use of a vehicle in performing such services—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(o)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the amount allowable as a deduction under this chapter for the use of a vehicle in performing such services shall be equal to the amount of such qualified reimbursements; and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(o)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "such qualified reimbursements shall be treated as paid under a reimbursement or other expense allowance arrangement for purposes of section 62(a)(2)(A) (and section 62(c) shall not apply to such qualified reimbursements).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(o)(2)",
+          "num": "2",
+          "header": "Special rule where expenses exceed reimbursements",
+          "chapeau": "",
+          "body": "Notwithstanding paragraph (1)(A), if the expenses incurred by an employee for the use of a vehicle in performing services described in paragraph (1) exceed the qualified reimbursements for such expenses, such excess shall be taken into account in computing the miscellaneous itemized deductions of the employee under section 67.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(o)(3)",
+          "num": "3",
+          "header": "Definition of qualified reimbursements",
+          "chapeau": "For purposes of this subsection, the term \"qualified reimbursements\" means the amounts paid by the United States Postal Service to employees as an equipment maintenance allowance under the 1991 collective bargaining agreement between the United States Postal Service and the National Rural Letter Carriers' Association. Amounts paid as an equipment maintenance allowance by such Postal Service under later collective bargaining agreements that supersede the 1991 agreement shall be considered qualified reimbursements if such amounts do not exceed the amounts that would have been paid under the 1991 agreement, adjusted by increasing any such amount under the 1991 agreement by an amount equal to—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(o)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "such amount, multiplied by",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(o)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the cost-of-living adjustment determined under section 1(f)(3) for the calendar year in which the taxable year begins, by substituting \"calendar year 1990\" for \"calendar year 2016\" in subparagraph (A)(ii) thereof.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(p)",
+      "num": "p",
+      "header": "Treatment of expenses of members of reserve component of Armed Forces of the United States",
+      "chapeau": "",
+      "body": "For purposes of subsection (a)(2), in the case of an individual who performs services as a member of a reserve component of the Armed Forces of the United States at any time during the taxable year, such individual shall be deemed to be away from home in the pursuit of a trade or business for any period during which such individual is away from home in connection with such service.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "162(q)",
+      "num": "q",
+      "header": "Payments related to sexual harassment and sexual abuse",
+      "chapeau": "No deduction shall be allowed under this chapter for—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(q)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "any settlement or payment related to sexual harassment or sexual abuse if such settlement or payment is subject to a nondisclosure agreement, or",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(q)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "attorney's fees related to such a settlement or payment.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "162(r)",
+      "num": "r",
+      "header": "Disallowance of FDIC premiums paid by certain large financial institutions",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(r)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "No deduction shall be allowed for the applicable percentage of any FDIC premium paid or incurred by the taxpayer.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(r)(2)",
+          "num": "2",
+          "header": "Exception for small institutions",
+          "chapeau": "",
+          "body": "Paragraph (1) shall not apply to any taxpayer for any taxable year if the total consolidated assets of such taxpayer (determined as of the close of such taxable year) do not exceed $10,000,000,000.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(r)(3)",
+          "num": "3",
+          "header": "Applicable percentage",
+          "chapeau": "For purposes of this subsection, the term \"applicable percentage\" means, with respect to any taxpayer for any taxable year, the ratio (expressed as a percentage but not greater than 100 percent) which—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(r)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "the excess of—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(r)(3)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the total consolidated assets of such taxpayer (determined as of the close of such taxable year), over",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "162(r)(3)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "$10,000,000,000, bears to",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "162(r)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "$40,000,000,000.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "162(r)(4)",
+          "num": "4",
+          "header": "FDIC premiums",
+          "chapeau": "",
+          "body": "For purposes of this subsection, the term \"FDIC premium\" means any assessment imposed under section 7(b) of the Federal Deposit Insurance Act (12 U.S.C. 1817(b)).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(r)(5)",
+          "num": "5",
+          "header": "Total consolidated assets",
+          "chapeau": "",
+          "body": "For purposes of this subsection, the term \"total consolidated assets\" has the meaning given such term under section 165 of the Dodd-Frank Wall Street Reform and Consumer Protection Act (12 U.S.C. 5365).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(r)(6)",
+          "num": "6",
+          "header": "Aggregation rule",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(r)(6)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "Members of an expanded affiliated group shall be treated as a single taxpayer for purposes of applying this subsection.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(r)(6)(B)",
+              "num": "B",
+              "header": "Expanded affiliated group",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "162(r)(6)(B)(i)",
+                  "num": "i",
+                  "header": "In general",
+                  "chapeau": "For purposes of this paragraph, the term \"expanded affiliated group\" means an affiliated group as defined in section 1504(a), determined—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "162(r)(6)(B)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "by substituting \"more than 50 percent\" for \"at least 80 percent\" each place it appears, and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "162(r)(6)(B)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "without regard to paragraphs (2) and (3) of section 1504(b).",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "162(r)(6)(B)(ii)",
+                  "num": "ii",
+                  "header": "Control of non-corporate entities",
+                  "chapeau": "",
+                  "body": "A partnership or any other entity (other than a corporation) shall be treated as a member of an expanded affiliated group if such entity is controlled (within the meaning of section 954(d)(3)) by members of such group (including any entity treated as a member of such group by reason of this clause).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "162(s)",
+      "num": "s",
+      "header": "Cross reference",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "162(s)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "For special rule relating to expenses in connection with subdividing real property for sale, see section 1237.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(s)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "For special rule relating to the treatment of payments by a transferee of a franchise, trademark, or trade name, see section 1253.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "162(s)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "For special rules relating to—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "162(s)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "funded welfare benefit plans, see section 419, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "162(s)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "deferred compensation and other deferred benefits, see section 404.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

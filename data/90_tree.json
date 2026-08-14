@@ -1,0 +1,74 @@
+{
+  "id": "90",
+  "num": "",
+  "header": "26 U.S. Code § 90 - Illegal Federal irrigation subsidies",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "90(a)",
+      "num": "a",
+      "header": "General rule",
+      "chapeau": "",
+      "body": "Gross income shall include an amount equal to any illegal Federal irrigation subsidy received by the taxpayer during the taxable year.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "90(b)",
+      "num": "b",
+      "header": "Illegal Federal irrigation subsidy",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "90(b)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "The term \"illegal Federal irrigation subsidy\" means the excess (if any) of—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "90(b)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the amount required to be paid for any Federal irrigation water delivered to the taxpayer during the taxpayer year, over",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "90(b)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the amount paid for such water.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "90(b)(2)",
+          "num": "2",
+          "header": "Federal irrigation water",
+          "chapeau": "",
+          "body": "The term \"Federal irrigation water\" means any water made available for agricultural purposes from the operation of any reclamation or irrigation project referred to in paragraph (8) of section 202 of the Reclamation Reform Act of 1982.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "90(c)",
+      "num": "c",
+      "header": "Denial of deduction",
+      "chapeau": "",
+      "body": "No deduction shall be allowed under this subtitle by reason of any inclusion in gross income under subsection (a).",
+      "continuation": "",
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,1518 @@
+{
+  "id": "469",
+  "num": "",
+  "header": "26 U.S. Code § 469 - Passive activity losses and credits limited",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "469(a)",
+      "num": "a",
+      "header": "Disallowance",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(a)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "If for any taxable year the taxpayer is described in paragraph (2), neither—",
+          "body": "",
+          "continuation": "for the taxable year shall be allowed.",
+          "children": [
+            {
+              "id": "469(a)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the passive activity loss, nor",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(a)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the passive activity credit,",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(a)(2)",
+          "num": "2",
+          "header": "Persons described",
+          "chapeau": "The following are described in this paragraph:",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(a)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "any individual, estate, or trust,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(a)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "any closely held C corporation, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(a)(2)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "any personal service corporation.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(b)",
+      "num": "b",
+      "header": "Disallowed loss or credit carried to next year",
+      "chapeau": "",
+      "body": "Except as otherwise provided in this section, any loss or credit from an activity which is disallowed under subsection (a) shall be treated as a deduction or credit allocable to such activity in the next taxable year.",
+      "continuation": "",
+      "children": []
+    },
+    {
+      "id": "469(c)",
+      "num": "c",
+      "header": "Passive activity defined",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(c)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "The term \"passive activity\" means any activity—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(c)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "which involves the conduct of any trade or business, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(c)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "in which the taxpayer does not materially participate.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(c)(2)",
+          "num": "2",
+          "header": "Passive activity includes any rental activity",
+          "chapeau": "",
+          "body": "Except as provided in paragraph (7), the term \"passive activity\" includes any rental activity.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(c)(3)",
+          "num": "3",
+          "header": "Working interests in oil and gas property",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(c)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "The term \"passive activity\" shall not include any working interest in any oil or gas property which the taxpayer holds directly or through an entity which does not limit the liability of the taxpayer with respect to such interest.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(c)(3)(B)",
+              "num": "B",
+              "header": "Income in subsequent years",
+              "chapeau": "",
+              "body": "If any taxpayer has any loss for any taxable year from a working interest in any oil or gas property which is treated as a loss which is not from a passive activity, then any net income from such property (or any property the basis of which is determined in whole or in part by reference to the basis of such property) for any succeeding taxable year shall be treated as income of the taxpayer which is not from a passive activity. If the preceding sentence applies to the net income from any property for any taxable year, any credits allowable under subpart B (other than section 27) or D of part IV of subchapter A for such taxable year which are attributable to such property shall be treated as credits not from a passive activity to the extent the amount of such credits does not exceed the regular tax liability of the taxpayer for the taxable year which is allocable to such net income.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(c)(4)",
+          "num": "4",
+          "header": "Material participation not required for paragraphs (2) and (3)",
+          "chapeau": "",
+          "body": "Paragraphs (2) and (3) shall be applied without regard to whether or not the taxpayer materially participates in the activity.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(c)(5)",
+          "num": "5",
+          "header": "Trade or business includes research and experimentation activity",
+          "chapeau": "",
+          "body": "For purposes of paragraph (1)(A), the term \"trade or business\" includes any activity involving research or experimentation (within the meaning of section 174).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(c)(6)",
+          "num": "6",
+          "header": "Activity in connection with trade or business or production of income",
+          "chapeau": "To the extent provided in regulations, for purposes of paragraph (1)(A), the term \"trade or business\" includes—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(c)(6)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "any activity in connection with a trade or business, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(c)(6)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "any activity with respect to which expenses are allowable as a deduction under section 212.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(c)(7)",
+          "num": "7",
+          "header": "Special rules for taxpayers in real property business",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(c)(7)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "If this paragraph applies to any taxpayer for a taxable year—",
+              "body": "",
+              "continuation": "Notwithstanding clause (ii), a taxpayer may elect to treat all interests in rental real estate as one activity. Nothing in the preceding provisions of this subparagraph shall be construed as affecting the determination of whether the taxpayer materially participates with respect to any interest in a limited partnership as a limited partner.",
+              "children": [
+                {
+                  "id": "469(c)(7)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "paragraph (2) shall not apply to any rental real estate activity of such taxpayer for such taxable year, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(c)(7)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "this section shall be applied as if each interest of the taxpayer in rental real estate were a separate activity.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(c)(7)(B)",
+              "num": "B",
+              "header": "Taxpayers to whom paragraph applies",
+              "chapeau": "This paragraph shall apply to a taxpayer for a taxable year if—",
+              "body": "",
+              "continuation": "In the case of a joint return, the requirements of the preceding sentence are satisfied if and only if either spouse separately satisfies such requirements. For purposes of the preceding sentence, activities in which a spouse materially participates shall be determined under subsection (h).",
+              "children": [
+                {
+                  "id": "469(c)(7)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "more than one-half of the personal services performed in trades or businesses by the taxpayer during such taxable year are performed in real property trades or businesses in which the taxpayer materially participates, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(c)(7)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "such taxpayer performs more than 750 hours of services during the taxable year in real property trades or businesses in which the taxpayer materially participates.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(c)(7)(C)",
+              "num": "C",
+              "header": "Real property trade or business",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, the term \"real property trade or business\" means any real property development, redevelopment, construction, reconstruction, acquisition, conversion, rental, operation, management, leasing, or brokerage trade or business.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(c)(7)(D)",
+              "num": "D",
+              "header": "Special rules for subparagraph (B)",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(c)(7)(D)(i)",
+                  "num": "i",
+                  "header": "Closely held C corporations",
+                  "chapeau": "",
+                  "body": "In the case of a closely held C corporation, the requirements of subparagraph (B) shall be treated as met for any taxable year if more than 50 percent of the gross receipts of such corporation for such taxable year are derived from real property trades or businesses in which the corporation materially participates.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(c)(7)(D)(ii)",
+                  "num": "ii",
+                  "header": "Personal services as an employee",
+                  "chapeau": "",
+                  "body": "For purposes of subparagraph (B), personal services performed as an employee shall not be treated as performed in real property trades or businesses. The preceding sentence shall not apply if such employee is a 5-percent owner (as defined in section 416(i)(1)(B)) in the employer.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(d)",
+      "num": "d",
+      "header": "Passive activity loss and credit defined",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(d)(1)",
+          "num": "1",
+          "header": "Passive activity loss",
+          "chapeau": "The term \"passive activity loss\" means the amount (if any) by which—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(d)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the aggregate losses from all passive activities for the taxable year, exceed",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(d)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the aggregate income from all passive activities for such year.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(d)(2)",
+          "num": "2",
+          "header": "Passive activity credit",
+          "chapeau": "The term \"passive activity credit\" means the amount (if any) by which—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(d)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "the sum of the credits from all passive activities allowable for the taxable year under—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(d)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "subpart D of part IV of subchapter A, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(d)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "subpart B (other than section 27) of such part IV, exceeds",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(d)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "the regular tax liability of the taxpayer for the taxable year allocable to all passive activities.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(e)",
+      "num": "e",
+      "header": "Special rules for determining income or loss from a passive activity",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(e)(1)",
+          "num": "1",
+          "header": "Certain income not treated as income from passive activity",
+          "chapeau": "In determining the income or loss from any activity—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(e)(1)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "There shall not be taken into account—",
+              "body": "",
+              "continuation": "For purposes of clause (ii), any interest in a passive activity shall not be treated as property held for investment.",
+              "children": [
+                {
+                  "id": "469(e)(1)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "any—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "469(e)(1)(A)(i)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "gross income from interest, dividends, annuities, or royalties not derived in the ordinary course of a trade or business,",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "469(e)(1)(A)(i)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "expenses (other than interest) which are clearly and directly allocable to such gross income, and",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "469(e)(1)(A)(i)(III)",
+                      "num": "III",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "interest expense properly allocable to such gross income, and",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "469(e)(1)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "gain or loss not derived in the ordinary course of a trade or business which is attributable to the disposition of property—",
+                  "body": "",
+                  "continuation": "",
+                  "children": [
+                    {
+                      "id": "469(e)(1)(A)(ii)(I)",
+                      "num": "I",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "producing income of a type described in clause (i), or",
+                      "continuation": "",
+                      "children": []
+                    },
+                    {
+                      "id": "469(e)(1)(A)(ii)(II)",
+                      "num": "II",
+                      "header": "",
+                      "chapeau": "",
+                      "body": "held for investment.",
+                      "continuation": "",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "469(e)(1)(B)",
+              "num": "B",
+              "header": "Return on working capital",
+              "chapeau": "",
+              "body": "For purposes of subparagraph (A), any income, gain, or loss which is attributable to an investment of working capital shall be treated as not derived in the ordinary course of a trade or business.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(e)(2)",
+          "num": "2",
+          "header": "Passive losses of certain closely held corporations may offset active income",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(e)(2)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "If a closely held C corporation (other than a personal service corporation) has net active income for any taxable year, the passive activity loss of such taxpayer for such taxable year (determined without regard to this paragraph)—",
+              "body": "",
+              "continuation": "A similar rule shall apply in the case of any passive activity credit of the taxpayer.",
+              "children": [
+                {
+                  "id": "469(e)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "shall be allowable as a deduction against net active income, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(e)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "shall not be taken into account under subsection (a) to the extent so allowable as a deduction.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(e)(2)(B)",
+              "num": "B",
+              "header": "Net active income",
+              "chapeau": "For purposes of this paragraph, the term \"net active income\" means the taxable income of the taxpayer for the taxable year determined without regard to—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(e)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any income or loss from a passive activity, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(e)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any item of gross income, expense, gain, or loss described in paragraph (1)(A).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "469(e)(3)",
+          "num": "3",
+          "header": "Compensation for personal services",
+          "chapeau": "",
+          "body": "Earned income (within the meaning of section 911(d)(2)(A)) shall not be taken into account in computing the income or loss from a passive activity for any taxable year.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(e)(4)",
+          "num": "4",
+          "header": "Dividends reduced by dividends received deduction",
+          "chapeau": "",
+          "body": "For purposes of paragraphs (1) and (2), income from dividends shall be reduced by the amount of any dividends received deduction under section 243 or 245.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "469(f)",
+      "num": "f",
+      "header": "Treatment of former passive activities",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(f)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "If an activity is a former passive activity for any taxable year—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(f)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "any unused deduction allocable to such activity under subsection (b) shall be offset against the income from such activity for the taxable year,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(f)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "any unused credit allocable to such activity under subsection (b) shall be offset against the regular tax liability (computed after the application of paragraph (1)) allocable to such activity for the taxable year, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(f)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "any such deduction or credit remaining after the application of subparagraphs (A) and (B) shall continue to be treated as arising from a passive activity.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(f)(2)",
+          "num": "2",
+          "header": "Change in status of closely held C corporation or personal service corporation",
+          "chapeau": "",
+          "body": "If a taxpayer ceases for any taxable year to be a closely held C corporation or personal service corporation, this section shall continue to apply to losses and credits to which this section applied for any preceding taxable year in the same manner as if such taxpayer continued to be a closely held C corporation or personal service corporation, whichever is applicable.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(f)(3)",
+          "num": "3",
+          "header": "Former passive activity",
+          "chapeau": "The term \"former passive activity\" means any activity which, with respect to the taxpayer—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(f)(3)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "is not a passive activity for the taxable year, but",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(f)(3)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "was a passive activity for any prior taxable year.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(g)",
+      "num": "g",
+      "header": "Dispositions of entire interest in passive activity",
+      "chapeau": "If during the taxable year a taxpayer disposes of his entire interest in any passive activity (or former passive activity), the following rules shall apply:",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(g)(1)",
+          "num": "1",
+          "header": "Fully taxable transaction",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(g)(1)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "If all gain or loss realized on such disposition is recognized, the excess of—",
+              "body": "",
+              "continuation": "shall be treated as a loss which is not from a passive activity.",
+              "children": [
+                {
+                  "id": "469(g)(1)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any loss from such activity for such taxable year (determined after the application of subsection (b)), over",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(g)(1)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any net income or gain for such taxable year from all other passive activities (determined after the application of subsection (b)),",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(g)(1)(B)",
+              "num": "B",
+              "header": "Subparagraph (A) not to apply to disposition involving related party",
+              "chapeau": "",
+              "body": "If the taxpayer and the person acquiring the interest bear a relationship to each other described in section 267(b) or section 707(b)(1), then subparagraph (A) shall not apply to any loss of the taxpayer until the taxable year in which such interest is acquired (in a transaction described in subparagraph (A)) by another person who does not bear such a relationship to the tax­payer.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(g)(1)(C)",
+              "num": "C",
+              "header": "Income from prior years",
+              "chapeau": "",
+              "body": "To the extent provided in regulations, income or gain from the activity for preceding taxable years shall be taken into account under subparagraph (A)(ii) for the taxable year to the extent necessary to prevent the avoidance of this section.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(g)(2)",
+          "num": "2",
+          "header": "Disposition by death",
+          "chapeau": "If an interest in the activity is transferred by reason of the death of the taxpayer—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(g)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "paragraph (1)(A) shall apply to losses described in paragraph (1)(A) to the extent such losses are greater than the excess (if any) of—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(g)(2)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the basis of such property in the hands of the transferee, over",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(g)(2)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the adjusted basis of such property immediately before the death of the taxpayer, and",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(g)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "any losses to the extent of the excess described in subparagraph (A) shall not be allowed as a deduction for any taxable year.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(g)(3)",
+          "num": "3",
+          "header": "Installment sale of entire interest",
+          "chapeau": "",
+          "body": "In the case of an installment sale of an entire interest in an activity to which section 453 applies, paragraph (1) shall apply to the portion of such losses for each taxable year which bears the same ratio to all such losses as the gain recognized on such sale during such taxable year bears to the gross profit from such sale (realized or to be realized when payment is completed).",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "469(h)",
+      "num": "h",
+      "header": "Material participation defined",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(h)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "A taxpayer shall be treated as materially participating in an activity only if the taxpayer is involved in the operations of the activity on a basis which is—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(h)(1)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "regular,",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(h)(1)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "continuous, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(h)(1)(C)",
+              "num": "C",
+              "header": "",
+              "chapeau": "",
+              "body": "substantial.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(h)(2)",
+          "num": "2",
+          "header": "Interests in limited partnerships",
+          "chapeau": "",
+          "body": "Except as provided in regulations, no interest in a limited partnership as a limited partner shall be treated as an interest with respect to which a taxpayer materially participates.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(h)(3)",
+          "num": "3",
+          "header": "Treatment of certain retired individuals and surviving spouses",
+          "chapeau": "",
+          "body": "A taxpayer shall be treated as materially participating in any farming activity for a taxable year if paragraph (4) or (5) of section 2032A(b) would cause the requirements of section 2032A(b)(1)(C)(ii) to be met with respect to real property used in such activity if such taxpayer had died during the taxable year.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(h)(4)",
+          "num": "4",
+          "header": "Certain closely held C corporations and personal service corporations",
+          "chapeau": "A closely held C corporation or personal service corporation shall be treated as materially participating in an activity only if—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(h)(4)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "1 or more shareholders holding stock representing more than 50 percent (by value) of the outstanding stock of such corporation materially participate in such activity, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(h)(4)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "in the case of a closely held C corporation (other than a personal service corporation), the requirements of section 465(c)(7)(C) (without regard to clause (iv)) are met with respect to such activity.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(h)(5)",
+          "num": "5",
+          "header": "Participation by spouse",
+          "chapeau": "",
+          "body": "In determining whether a taxpayer materially participates, the participation of the spouse of the taxpayer shall be taken into account.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "469(i)",
+      "num": "i",
+      "header": "$25,000 offset for rental real estate activities",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(i)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "In the case of any natural person, subsection (a) shall not apply to that portion of the passive activity loss or the deduction equivalent (within the meaning of subsection (j)(5)) of the passive activity credit for any taxable year which is attributable to all rental real estate activities with respect to which such individual actively participated in such taxable year (and if any portion of such loss or credit arose in another taxable year, in such other taxable year).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(i)(2)",
+          "num": "2",
+          "header": "Dollar limitation",
+          "chapeau": "",
+          "body": "The aggregate amount to which paragraph (1) applies for any taxable year shall not exceed $25,000.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(i)(3)",
+          "num": "3",
+          "header": "Phase-out of exemption",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(i)(3)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "In the case of any taxpayer, the $25,000 amount under paragraph (2) shall be reduced (but not below zero) by 50 percent of the amount by which the adjusted gross income of the taxpayer for the taxable year exceeds $100,000.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(3)(B)",
+              "num": "B",
+              "header": "Special phase-out of rehabilitation credit",
+              "chapeau": "",
+              "body": "In the case of any portion of the passive activity credit for any taxable year which is attributable to the rehabilitation credit determined under section 47, subparagraph (A) shall be applied by substituting \"$200,000\" for \"$100,000\".",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(3)(C)",
+              "num": "C",
+              "header": "Exception for low-income housing credit",
+              "chapeau": "",
+              "body": "Subparagraph (A) shall not apply to any portion of the passive activity credit for any taxable year which is attributable to any credit determined under section 42.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(3)(D)",
+              "num": "D",
+              "header": "Ordering rule",
+              "chapeau": "Paragraph (1) shall be applied for any taxable year—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(i)(3)(D)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "first, to the passive activity loss,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(D)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "second, to the portion of the passive activity credit to which subparagraph (B) and [1] (C) does not apply,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(D)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "third, to the portion of such credit to which subparagraph (B) applies, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(D)(iv)",
+                  "num": "iv",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "then, to the portion of such credit to which subparagraph (C) applies.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(i)(3)(E)",
+              "num": "E",
+              "header": "Adjusted gross income",
+              "chapeau": "For purposes of this paragraph, adjusted gross income shall be determined without regard to—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(i)(3)(E)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any amount includible in gross income under section 86,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(E)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amounts excludable from gross income under sections 85(c), 135, and 137,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(E)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "the amounts allowable as a deduction under sections 219, 221, and 250, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(3)(E)(iv)",
+                  "num": "iv",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any passive activity loss or any loss allowable by reason of subsection (c)(7).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "469(i)(4)",
+          "num": "4",
+          "header": "Special rule for estates",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(i)(4)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "In the case of taxable years of an estate ending less than 2 years after the date of the death of the decedent, this subsection shall apply to all rental real estate activities with respect to which such decedent actively participated before his death.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(4)(B)",
+              "num": "B",
+              "header": "Reduction for surviving spouse's exemption",
+              "chapeau": "",
+              "body": "For purposes of subparagraph (A), the $25,000 amount under paragraph (2) shall be reduced by the amount of the exemption under paragraph (1) (without regard to paragraph (3)) allowable to the surviving spouse of the decedent for the taxable year ending with or within the taxable year of the estate.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(i)(5)",
+          "num": "5",
+          "header": "Married individuals filing separately",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(i)(5)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "Except as provided in subparagraph (B), in the case of any married individual filing a separate return, this subsection shall be applied by substituting—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(i)(5)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "\"$12,500\" for \"$25,000\" each place it appears,",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(5)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "\"$50,000\" for \"$100,000\" in paragraph (3)(A), and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(5)(A)(iii)",
+                  "num": "iii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "\"$100,000\" for \"$200,000\" in paragraph (3)(B).",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(i)(5)(B)",
+              "num": "B",
+              "header": "Taxpayers not living apart",
+              "chapeau": "This subsection shall not apply to a taxpayer who—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(i)(5)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "is a married individual filing a separate return for any taxable year, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(5)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "does not live apart from his spouse at all times during such taxable year.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "469(i)(6)",
+          "num": "6",
+          "header": "Active participation",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(i)(6)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "An individual shall not be treated as actively participating with respect to any interest in any rental real estate activity for any period if, at any time during such period, such interest (including any interest of the spouse of the individual) is less than 10 percent (by value) of all interests in such activity.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(6)(B)",
+              "num": "B",
+              "header": "No participation requirement for low-income housing or rehabilitation credit",
+              "chapeau": "Paragraphs (1) and (4)(A) shall be applied without regard to the active participation requirement in the case of—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "469(i)(6)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any credit determined under section 42 for any taxable year, or",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "469(i)(6)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any rehabilitation credit determined under section 47,[2]",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "469(i)(6)(C)",
+              "num": "C",
+              "header": "Interest as a limited partner",
+              "chapeau": "",
+              "body": "Except as provided in regulations, no interest as a limited partner in a limited partnership shall be treated as an interest with respect to which the taxpayer actively participates.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(i)(6)(D)",
+              "num": "D",
+              "header": "Participation by spouse",
+              "chapeau": "",
+              "body": "In determining whether a taxpayer actively participates, the participation of the spouse of the taxpayer shall be taken into account.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(j)",
+      "num": "j",
+      "header": "Other definitions and special rules",
+      "chapeau": "For purposes of this section—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(j)(1)",
+          "num": "1",
+          "header": "Closely held C corporation",
+          "chapeau": "",
+          "body": "The term \"closely held C corporation\" means any C corporation described in section 465(a)(1)(B).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(2)",
+          "num": "2",
+          "header": "Personal service corporation",
+          "chapeau": "The term \"personal service corporation\" has the meaning given such term by section 269A(b)(1), except that section 269A(b)(2) shall be applied—",
+          "body": "",
+          "continuation": "A corporation shall not be treated as a personal service corporation unless more than 10 percent of the stock (by value) in such corporation is held by employee-owners (within the meaning of section 269A(b)(2), as modified by the preceding sentence).",
+          "children": [
+            {
+              "id": "469(j)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "by substituting \"any\" for \"more than 10 percent\", and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(j)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "by substituting \"any\" for \"50 percent or more in value\" in section 318(a)(2)(C).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(j)(3)",
+          "num": "3",
+          "header": "Regular tax liability",
+          "chapeau": "",
+          "body": "The term \"regular tax liability\" has the meaning given such term by section 26(b).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(4)",
+          "num": "4",
+          "header": "Allocation of passive activity loss and credit",
+          "chapeau": "",
+          "body": "The passive activity loss and the passive activity credit (and the $25,000 amount under subsection (i)) shall be allocated to activities, and within activities, on a pro rata basis in such manner as the Secretary may prescribe.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(5)",
+          "num": "5",
+          "header": "Deduction equivalent",
+          "chapeau": "",
+          "body": "The deduction equivalent of credits from a passive activity for any taxable year is the amount which (if allowed as a deduction) would reduce the regular tax liability for such taxable year by an amount equal to such credits.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(6)",
+          "num": "6",
+          "header": "Special rule for gifts",
+          "chapeau": "In the case of a disposition of any interest in a passive activity by gift—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(j)(6)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the basis of such interest immediately before the transfer shall be increased by the amount of any passive activity losses allocable to such interest with respect to which a deduction has not been allowed by reason of subsection (a), and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(j)(6)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "such losses shall not be allowable as a deduction for any taxable year.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(j)(7)",
+          "num": "7",
+          "header": "Qualified residence interest",
+          "chapeau": "",
+          "body": "The passive activity loss of a taxpayer shall be computed without regard to qualified residence interest (within the meaning of section 163(h)(3)).",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(8)",
+          "num": "8",
+          "header": "Rental activity",
+          "chapeau": "",
+          "body": "The term \"rental activity\" means any activity where payments are principally for the use of tangible property.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(9)",
+          "num": "9",
+          "header": "Election to increase basis of property by amount of disallowed credit",
+          "chapeau": "",
+          "body": "For purposes of determining gain or loss from a disposition of any property to which subsection (g)(1) applies, the transferor may elect to increase the basis of such property immediately before the transfer by an amount equal to the portion of any unused credit allowable under this chapter which reduced the basis of such property for the taxable year in which such credit arose. If the taxpayer elects the application of this paragraph, such portion of the passive activity credit of such taxpayer shall not be allowed for any taxable year.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(10)",
+          "num": "10",
+          "header": "Coordination with section 280A",
+          "chapeau": "",
+          "body": "If a passive activity involves the use of a dwelling unit to which section 280A(c)(5) applies for any taxable year, any income, deduction, gain, or loss allocable to such use shall not be taken into account for purposes of this section for such taxable year.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(11)",
+          "num": "11",
+          "header": "Aggregation of members of affiliated groups",
+          "chapeau": "",
+          "body": "Except as provided in regulations, all members of an affiliated group which files a consolidated return shall be treated as 1 corporation.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(j)(12)",
+          "num": "12",
+          "header": "Special rule for distributions by estates or trusts",
+          "chapeau": "If any interest in a passive activity is distributed by an estate or trust—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(j)(12)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "the basis of such interest immediately before such distribution shall be increased by the amount of any passive activity losses allocable to such interest, and",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(j)(12)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "such losses shall not be allowable as a deduction for any taxable year.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "469(k)",
+      "num": "k",
+      "header": "Separate application of section in case of publicly traded partnerships",
+      "chapeau": "",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(k)(1)",
+          "num": "1",
+          "header": "In general",
+          "chapeau": "",
+          "body": "This section shall be applied separately with respect to items attributable to each publicly traded partnership (and subsection (i) shall not apply with respect to items attributable to any such partnership). The preceding sentence shall not apply to any credit determined under section 42, or any rehabilitation credit determined under section 47, attributable to a publicly traded partnership to the extent the amount of any such credits exceeds the regular tax liability attributable to income from such partnership.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(k)(2)",
+          "num": "2",
+          "header": "Publicly traded partnership",
+          "chapeau": "For purposes of this section, the term \"publicly traded partnership\" means any partnership if—",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "469(k)(2)(A)",
+              "num": "A",
+              "header": "",
+              "chapeau": "",
+              "body": "interests in such partnership are traded on an established securities market, or",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "469(k)(2)(B)",
+              "num": "B",
+              "header": "",
+              "chapeau": "",
+              "body": "interests in such partnership are readily tradable on a secondary market (or the substantial equivalent thereof).",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "469(k)(3)",
+          "num": "3",
+          "header": "Coordination with subsection (g)",
+          "chapeau": "",
+          "body": "For purposes of subsection (g), a taxpayer shall not be treated as having disposed of his entire interest in an activity of a publicly traded partnership until he disposes of his entire interest in such partnership.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(k)(4)",
+          "num": "4",
+          "header": "Application to regulated investment companies",
+          "chapeau": "",
+          "body": "For purposes of this section, a regulated investment company (as defined in section 851) holding an interest in a qualified publicly traded partnership (as defined in section 851(h)) shall be treated as a taxpayer described in subsection (a)(2) with respect to items attributable to such interest.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "469(l)",
+      "num": "l",
+      "header": "Regulations",
+      "chapeau": "The Secretary shall prescribe such regulations as may be necessary or appropriate to carry out provisions of this section, including regulations—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "469(l)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "which specify what constitutes an activity, material participation, or active participation for purposes of this section,",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(l)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "which provide that certain items of gross income will not be taken into account in determining income or loss from any activity (and the treatment of expenses allocable to such income),",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(l)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "",
+          "body": "requiring net income or gain from a limited partnership or other passive activity to be treated as not from a passive activity,",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(l)(4)",
+          "num": "4",
+          "header": "",
+          "chapeau": "",
+          "body": "which provide for the determination of the allocation of interest expense for purposes of this section, and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "469(l)(5)",
+          "num": "5",
+          "header": "",
+          "chapeau": "",
+          "body": "which deal with changes in marital status and changes between joint returns and separate returns.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

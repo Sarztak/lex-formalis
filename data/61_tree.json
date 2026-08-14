@@ -1,0 +1,154 @@
+{
+  "id": "61",
+  "num": "",
+  "header": "26 U.S. Code § 61 - Gross income defined",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "61(a)",
+      "num": "a",
+      "header": "General definition",
+      "chapeau": "Except as otherwise provided in this subtitle, gross income means all income from whatever source derived, including (but not limited to) the following items:",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "61(a)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "Compensation for services, including fees, commissions, fringe benefits, and similar items;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "Gross income derived from business;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "",
+          "body": "Gains derived from dealings in property;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(4)",
+          "num": "4",
+          "header": "",
+          "chapeau": "",
+          "body": "Interest;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(5)",
+          "num": "5",
+          "header": "",
+          "chapeau": "",
+          "body": "Rents;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(6)",
+          "num": "6",
+          "header": "",
+          "chapeau": "",
+          "body": "Royalties;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(7)",
+          "num": "7",
+          "header": "",
+          "chapeau": "",
+          "body": "Dividends;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(8)",
+          "num": "8",
+          "header": "",
+          "chapeau": "",
+          "body": "Annuities;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(9)",
+          "num": "9",
+          "header": "",
+          "chapeau": "",
+          "body": "Income from life insurance and endowment contracts;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(10)",
+          "num": "10",
+          "header": "",
+          "chapeau": "",
+          "body": "Pensions;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(11)",
+          "num": "11",
+          "header": "",
+          "chapeau": "",
+          "body": "Income from discharge of indebtedness;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(12)",
+          "num": "12",
+          "header": "",
+          "chapeau": "",
+          "body": "Distributive share of partnership gross income;",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(13)",
+          "num": "13",
+          "header": "",
+          "chapeau": "",
+          "body": "Income in respect of a decedent; and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "61(a)(14)",
+          "num": "14",
+          "header": "",
+          "chapeau": "",
+          "body": "Income from an interest in an estate or trust.",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "61(b)",
+      "num": "b",
+      "header": "Cross references",
+      "chapeau": "",
+      "body": "For items specifically included in gross income, see part II (sec. 71 and following). For items specifically excluded from gross income, see part III (sec. 101 and following).",
+      "continuation": "",
+      "children": []
+    }
+  ]
+}

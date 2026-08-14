@@ -1,0 +1,3 @@
+{
+  "7701(b)": "defining the header + header_leaf has been quite helpful, I can see\n  the same pattern repeated again and again if you just choose something\n  else to be header_leaf. for example 7701(b) is just a definition,\n  each of the paragraph A is In general and the other paragraph are\n  special cases. The if we go down further and see what has been flagged\n  as container we see the same pattern, which mean if we were to\n  recursively do containers then we can parse the entire structure.\n  Other than that two pattern that are very commonly repeating are In\n  general + other cases / exceptions. Defintions (For the purpose of...)\n  nodes with header_leafs in most cases don't have chapeau other than\n  For the purpose of."
+}

@@ -1,0 +1,343 @@
+{
+  "id": "318",
+  "num": "",
+  "header": "26 U.S. Code § 318 - Constructive ownership of stock",
+  "chapeau": "",
+  "body": "",
+  "children": [
+    {
+      "id": "318(a)",
+      "num": "a",
+      "header": "General rule",
+      "chapeau": "For purposes of those provisions of this subchapter to which the rules contained in this section are expressly made applicable—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "318(a)(1)",
+          "num": "1",
+          "header": "Members of family",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "318(a)(1)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "An individual shall be considered as owning the stock owned, directly or indirectly, by or for—",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "318(a)(1)(A)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "his spouse (other than a spouse who is legally separated from the individual under a decree of divorce or separate maintenance), and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "318(a)(1)(A)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "his children, grandchildren, and parents.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "318(a)(1)(B)",
+              "num": "B",
+              "header": "Effect of adoption",
+              "chapeau": "",
+              "body": "For purposes of subparagraph (A)(ii), a legally adopted child of an individual shall be treated as a child of such individual by blood.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "318(a)(2)",
+          "num": "2",
+          "header": "Attribution from partnerships, estates, trusts, and corporations",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "318(a)(2)(A)",
+              "num": "A",
+              "header": "From partnerships and estates",
+              "chapeau": "",
+              "body": "Stock owned, directly or indirectly, by or for a partnership or estate shall be considered as owned proportionately by its partners or beneficiaries.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(2)(B)",
+              "num": "B",
+              "header": "From trusts",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "318(a)(2)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "Stock owned, directly or indirectly, by or for a trust (other than an employees' trust described in section 401(a) which is exempt from tax under section 501(a)) shall be considered as owned by its beneficiaries in proportion to the actuarial interest of such beneficiaries in such trust.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "318(a)(2)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "Stock owned, directly or indirectly, by or for any portion of a trust of which a person is considered the owner under subpart E of part I of subchapter J (relating to grantors and others treated as substantial owners) shall be considered as owned by such person.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "318(a)(2)(C)",
+              "num": "C",
+              "header": "From corporations",
+              "chapeau": "",
+              "body": "If 50 percent or more in value of the stock in a corporation is owned, directly or indirectly, by or for any person, such person shall be considered as owning the stock owned, directly or indirectly, by or for such corporation, in that proportion which the value of the stock which such person so owns bears to the value of all the stock in such corporation.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "318(a)(3)",
+          "num": "3",
+          "header": "Attribution to partnerships, estates, trusts, and corporations",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "318(a)(3)(A)",
+              "num": "A",
+              "header": "To partnerships and estates",
+              "chapeau": "",
+              "body": "Stock owned, directly or indirectly, by or for a partner or a beneficiary of an estate shall be considered as owned by the partnership or estate.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(3)(B)",
+              "num": "B",
+              "header": "To trusts",
+              "chapeau": "",
+              "body": "",
+              "continuation": "",
+              "children": [
+                {
+                  "id": "318(a)(3)(B)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "Stock owned, directly or indirectly, by or for a beneficiary of a trust (other than an employees' trust described in section 401(a) which is exempt from tax under section 501(a)) shall be considered as owned by the trust, unless such beneficiary's interest in the trust is a remote contingent interest. For purposes of this clause, a contingent interest of a beneficiary in a trust shall be considered remote if, under the maximum exercise of discretion by the trustee in favor of such beneficiary, the value of such interest, computed actuarially, is 5 percent or less of the value of the trust property.",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "318(a)(3)(B)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "Stock owned, directly or indirectly, by or for a person who is considered the owner of any portion of a trust under subpart E of part I of subchapter J (relating to grantors and others treated as substantial owners) shall be considered as owned by the trust.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "318(a)(3)(C)",
+              "num": "C",
+              "header": "To corporations",
+              "chapeau": "",
+              "body": "If 50 percent or more in value of the stock in a corporation is owned, directly or indirectly, by or for any person, such corporation shall be considered as owning the stock owned, directly or indirectly, by or for such person.",
+              "continuation": "",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "318(a)(4)",
+          "num": "4",
+          "header": "Options",
+          "chapeau": "",
+          "body": "If any person has an option to acquire stock, such stock shall be considered as owned by such person. For purposes of this paragraph, an option to acquire such an option, and each one of a series of such options, shall be considered as an option to acquire such stock.",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(a)(5)",
+          "num": "5",
+          "header": "Operating rules",
+          "chapeau": "",
+          "body": "",
+          "continuation": "",
+          "children": [
+            {
+              "id": "318(a)(5)(A)",
+              "num": "A",
+              "header": "In general",
+              "chapeau": "",
+              "body": "Except as provided in subparagraphs (B) and (C), stock constructively owned by a person by reason of the application of paragraph (1), (2), (3), or (4), shall, for purposes of applying paragraphs (1), (2), (3), and (4), be considered as actually owned by such person.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(5)(B)",
+              "num": "B",
+              "header": "Members of family",
+              "chapeau": "",
+              "body": "Stock constructively owned by an individual by reason of the application of paragraph (1) shall not be considered as owned by him for purposes of again applying paragraph (1) in order to make another the constructive owner of such stock.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(5)(C)",
+              "num": "C",
+              "header": "Partnerships, estates, trusts, and corporations",
+              "chapeau": "",
+              "body": "Stock constructively owned by a partnership, estate, trust, or corporation by reason of the application of paragraph (3) shall not be considered as owned by it for purposes of applying paragraph (2) in order to make another the constructive owner of such stock.",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(5)(D)",
+              "num": "D",
+              "header": "Option rule in lieu of family rule",
+              "chapeau": "",
+              "body": "For purposes of this paragraph, if stock may be considered as owned by an individual under paragraph (1) or (4), it shall be considered as owned by him under paragraph (4).",
+              "continuation": "",
+              "children": []
+            },
+            {
+              "id": "318(a)(5)(E)",
+              "num": "E",
+              "header": "S corporation treated as partnership",
+              "chapeau": "For purposes of this subsection—",
+              "body": "",
+              "continuation": "The preceding sentence shall not apply for purposes of determining whether stock in the S corporation is constructively owned by any person.",
+              "children": [
+                {
+                  "id": "318(a)(5)(E)(i)",
+                  "num": "i",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "an S corporation shall be treated as a partnership, and",
+                  "continuation": "",
+                  "children": []
+                },
+                {
+                  "id": "318(a)(5)(E)(ii)",
+                  "num": "ii",
+                  "header": "",
+                  "chapeau": "",
+                  "body": "any shareholder of the S corporation shall be treated as a partner of such partnership.",
+                  "continuation": "",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "318(b)",
+      "num": "b",
+      "header": "Cross references",
+      "chapeau": "For provisions to which the rules contained in subsection (a) apply, see—",
+      "body": "",
+      "continuation": "",
+      "children": [
+        {
+          "id": "318(b)(1)",
+          "num": "1",
+          "header": "",
+          "chapeau": "",
+          "body": "section 302 (relating to redemption of stock);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(2)",
+          "num": "2",
+          "header": "",
+          "chapeau": "",
+          "body": "section 304 (relating to redemption by related corporations);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(3)",
+          "num": "3",
+          "header": "",
+          "chapeau": "",
+          "body": "section 306(b)(1)(A) (relating to disposition of section 306 stock);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(4)",
+          "num": "4",
+          "header": "",
+          "chapeau": "",
+          "body": "section 338(h)(3) (defining purchase);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(5)",
+          "num": "5",
+          "header": "",
+          "chapeau": "",
+          "body": "section 382(l)(3) (relating to special limitations on net operating loss carryovers);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(6)",
+          "num": "6",
+          "header": "",
+          "chapeau": "",
+          "body": "section 856(d) (relating to definition of rents from real property in the case of real estate investment trusts);",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(7)",
+          "num": "7",
+          "header": "",
+          "chapeau": "",
+          "body": "section 958(b) (relating to constructive ownership rules with respect to controlled foreign corporations); and",
+          "continuation": "",
+          "children": []
+        },
+        {
+          "id": "318(b)(8)",
+          "num": "8",
+          "header": "",
+          "chapeau": "",
+          "body": "section 6038(e)(2) (relating to information with respect to certain foreign corporations).",
+          "continuation": "",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

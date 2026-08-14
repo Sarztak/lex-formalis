@@ -66,6 +66,9 @@ SEC_COMP_RE = re.compile(rf"({_KW_SEC})\s+(\d\w*)((?:\([^)]+\))*)", re.IGNORECAS
 NUM_RE = re.compile(r"\(([^)]+)\)")
 VALID_NUM = re.compile(r"^[a-zA-Z0-9]+$")
 
+_KW_ANY = r"(?:section|subsections?|paragraphs?|subparagraphs?|clauses?|subclauses?|items?|subitems?)"
+THIS_RE = re.compile(rf"\b(?:this|such)\s+({_KW_ANY})\b", re.IGNORECASE)
+
 
 def normalize_kw(kw):
     """Strip plural 's' to singular form used in LEVEL."""
@@ -131,6 +134,13 @@ def find_refs(node_id, text):
     parts = parse_id(node_id)
     results = []
 
+    for m in THIS_RE.finditer(text):
+        kw = normalize_kw(m.group(1))
+        level = LEVEL.get(kw)
+        if level is not None and len(parts) > level:
+            target = "".join(parts[: level + 1])
+            results.append((m.group(0), target))
+
     for m in CHAIN_RE.finditer(text):
         match_text = m.group(0)
 
@@ -182,7 +192,9 @@ def main():
 
     tree_path = f"data/{args.section}_tree.json"
     if not os.path.exists(tree_path):
-        parser.error(f"Tree file not found: {tree_path} — run parse_section.py {args.section} first")
+        parser.error(
+            f"Tree file not found: {tree_path} — run parse_section.py {args.section} first"
+        )
 
     with open(tree_path, encoding="utf-8") as f:
         data = json.load(f)

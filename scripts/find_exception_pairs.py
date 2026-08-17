@@ -1,9 +1,12 @@
 """
-For each base-case "In general"/"General rule" node, call node_text on its parent
-to get the full flattened context, then ask Claude to identify exception pairs:
-which node overrides/qualifies which other node.
+For each base-case "In general"/"General rule" node in the merged lookup,
+call node_text on its parent to get the full flattened context, then ask
+Claude to identify exception pairs: which node overrides/qualifies which.
 
-Output: logs/exceptions/{section}_exception_pairs.json
+Uses the merged lookup (logs/flatten/merged_{section}.json) throughout —
+not the raw tree. Same approach as exception_context.py.
+
+Output: logs/exceptions/{section}_exception_pairs_{timestamp}.json
 
 Usage:
     python scripts/find_exception_pairs.py 7701
@@ -16,9 +19,10 @@ import os
 import re
 import subprocess
 import sys
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(__file__))
-from statute import load_lookup, build_child_map, node_text  # type: ignore
+from statute import load_lookup, build_child_map, node_text, get_parent  # type: ignore
 
 LOG_DIR = "logs/exceptions"
 MODEL = "claude-sonnet-4-6"
@@ -26,6 +30,7 @@ MODEL = "claude-sonnet-4-6"
 EXC_PATTERN = re.compile(
     r"\bexception|limitation|special rule|notwithstanding|shall not\b|except as\b", re.I
 )
+DEFN_PATTERN = re.compile(r'the terms?\s+[““‘]|any term used\b', re.I)
 
 SYSTEM = (
     "You are an expert tax attorney with deep knowledge of the Internal Revenue Code (IRC). "
@@ -34,7 +39,7 @@ SYSTEM = (
 
 TASK = (
     "Below is the text of an IRC provision. It contains a general rule and one or more siblings. "
-    "Identify every pair where one node overrides, qualifies, limits, or carves out from another node. "
+    "Identify every pair(if exists) where one node overrides, qualifies, limits, or carves out from another node. "
     "For each pair, the first node_id is the overriding node (the exception), "
     "the second node_id is the overridden node (the one being excepted). "
     "Only include direct overrides — not downstream effects. "
@@ -42,36 +47,29 @@ TASK = (
     "Also identify exceptions to exceptions: if node B overrides node A, and node C overrides node B, "
     "report both pairs. "
     "For each pair provide structured reasoning across three dimensions:\n"
-    "  mechanism: how the exception acts — one of: carves_out, displaces, limits, re_imposes, bars, other\n"
-    "  trigger: what activates the exception — one of: taxpayer_condition, temporal, regulatory_action, categorical, other\n"
+    "  mechanism: how the exception acts — one of: carves_out, displaces, limits, re_imposes, bars, extends, other\n"
+    "  trigger: array of what activates the exception — each one of: taxpayer_condition, temporal, regulatory_action, other\n"
     "  scope: what is changed in DAG terms — one of: input, output\n"
     "Return a JSON array only:\n"
-    '[{"overriding": "node_id", "overridden": "node_id", "mechanism": "...", "trigger": "...", "scope": "...", "reason": "one line"}]'
+    '[{"overriding": "node_id", "overridden": "node_id", "mechanism": "...", "trigger": [...], "scope": "...", "reason": "one line"}]'
 )
 
 
-def is_base_case(node, node_map, parent_map):
-    own_text = " ".join(node.get(f, "") for f in ("chapeau", "body", "continuation"))
-    if EXC_PATTERN.search(own_text):
+def is_base_case(node, lookup):
+    """Node must have In general/General rule header, no exception language in own text, no definition language, and no exception keyword in any ancestor header."""
+    own_text = " ".join(node.get(f, "") for f in ("chapeau", "body", "merged_body", "continuation"))
+    if DEFN_PATTERN.search(own_text) or EXC_PATTERN.search(own_text):
         return False
-    nid = parent_map.get(node["id"], {}).get("id") if parent_map.get(node["id"]) else None
-    while nid and nid in node_map:
-        h = node_map[nid].get("header", "").strip()
-        if EXC_PATTERN.search(h):
+    nid = node["id"]
+    while True:
+        try:
+            parent = get_parent(nid, lookup)
+        except KeyError:
+            break
+        if EXC_PATTERN.search(parent.get("header", "")):
             return False
-        nid = parent_map.get(nid, {}).get("id") if parent_map.get(nid) else None
+        nid = parent["id"]
     return True
-
-
-def build_node_maps(tree):
-    node_map, parent_map = {}, {}
-    def walk(node):
-        node_map[node["id"]] = node
-        for child in node.get("children", []):
-            parent_map[child["id"]] = node
-            walk(child)
-    walk(tree)
-    return node_map, parent_map
 
 
 def run_llm(parent_id, text):
@@ -101,47 +99,35 @@ def main():
     parser.add_argument("section", default="7701", nargs="?")
     args = parser.parse_args()
 
-    with open(f"data/{args.section}_tree.json", encoding="utf-8") as f:
-        tree = json.load(f)
-
-    raw_node_map, raw_parent_map = build_node_maps(tree)
-
     lookup = load_lookup(args.section)
     child_map = build_child_map(lookup)
 
-    # find base-case In general / General rule nodes, deduplicate by parent_id
-    # if two base-case nodes share the same parent, calling node_text on the parent
-    # would produce identical context — keep only the first occurrence per parent
+    # find base-case In general / General rule nodes from merged lookup
+    # deduplicate by parent_id — same parent would produce identical context
     seen_parents = set()
-    parent_ids = {}  # parent_id -> base_case node_id
-    for node in sorted(raw_node_map.values(), key=lambda n: n["id"]):
+    tasks = []
+
+    for node in sorted(lookup.values(), key=lambda n: n["id"]):
         if node.get("header", "").strip().lower() not in ("in general", "general rule"):
             continue
-        if not is_base_case(node, raw_node_map, raw_parent_map):
+        if not is_base_case(node, lookup):
             continue
-        parent = raw_parent_map.get(node["id"])
-        if not parent:
+        try:
+            parent = get_parent(node["id"], lookup)
+        except KeyError:
+            print(f"  [skip] {node['id']}: no parent in lookup", file=sys.stderr)
             continue
         pid = parent["id"]
         if pid in seen_parents:
             continue
         seen_parents.add(pid)
-        parent_ids[pid] = node["id"]
-
-    print(f"{len(parent_ids)} unique parents to evaluate", file=sys.stderr)
-
-    tasks = []
-    for pid in parent_ids:
-        if pid not in lookup:
-            # try via child_map
-            if pid not in child_map:
-                print(f"  [skip] {pid} not in lookup", file=sys.stderr)
-                continue
         try:
             _, text = node_text(pid, lookup, child_map)
             tasks.append((pid, text))
         except KeyError as e:
             print(f"  [skip] {pid}: {e}", file=sys.stderr)
+
+    print(f"{len(tasks)} unique parents to evaluate", file=sys.stderr)
 
     all_pairs = []
     with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -152,16 +138,15 @@ def main():
             if error:
                 print(f"  [error] {pid}: {error}", file=sys.stderr)
             else:
-                if pairs:
-                    print(f"  [ok] {pid}: {len(pairs)} pairs", file=sys.stderr)
-                    for p in pairs:
-                        p["context_parent"] = pid
-                    all_pairs.extend(pairs)
+                pairs = pairs or []
+                print(f"  [ok] {pid}: {len(pairs)} pairs", file=sys.stderr)
+                for p in pairs:
+                    p["context_parent"] = pid
+                all_pairs.extend(pairs)
 
     all_pairs.sort(key=lambda p: (p.get("context_parent", ""), p.get("overriding", "")))
 
     os.makedirs(LOG_DIR, exist_ok=True)
-    from datetime import datetime
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_path = os.path.join(LOG_DIR, f"{args.section}_exception_pairs_{ts}.json")
     with open(out_path, "w", encoding="utf-8") as f:

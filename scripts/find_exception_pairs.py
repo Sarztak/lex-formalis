@@ -41,8 +41,12 @@ TASK = (
     "Node ids appear in the text as the identifier before the colon or at the start of each provision. "
     "Also identify exceptions to exceptions: if node B overrides node A, and node C overrides node B, "
     "report both pairs. "
+    "For each pair provide structured reasoning across three dimensions:\n"
+    "  mechanism: how the exception acts — one of: carves_out, displaces, limits, re_imposes, bars, other\n"
+    "  trigger: what activates the exception — one of: taxpayer_condition, temporal, regulatory_action, categorical, other\n"
+    "  scope: what is changed in DAG terms — one of: input, output\n"
     "Return a JSON array only:\n"
-    '[{"overriding": "node_id", "overridden": "node_id", "reason": "one line"}]'
+    '[{"overriding": "node_id", "overridden": "node_id", "mechanism": "...", "trigger": "...", "scope": "...", "reason": "one line"}]'
 )
 
 
@@ -148,15 +152,18 @@ def main():
             if error:
                 print(f"  [error] {pid}: {error}", file=sys.stderr)
             else:
-                print(f"  [ok] {pid}: {len(pairs)} pairs", file=sys.stderr)
-                for p in pairs:
-                    p["context_parent"] = pid
-                all_pairs.extend(pairs)
+                if pairs:
+                    print(f"  [ok] {pid}: {len(pairs)} pairs", file=sys.stderr)
+                    for p in pairs:
+                        p["context_parent"] = pid
+                    all_pairs.extend(pairs)
 
     all_pairs.sort(key=lambda p: (p.get("context_parent", ""), p.get("overriding", "")))
 
     os.makedirs(LOG_DIR, exist_ok=True)
-    out_path = os.path.join(LOG_DIR, f"{args.section}_exception_pairs.json")
+    from datetime import datetime
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_path = os.path.join(LOG_DIR, f"{args.section}_exception_pairs_{ts}.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(all_pairs, f, indent=2, ensure_ascii=False)
     print(f"Wrote {out_path} — {len(all_pairs)} pairs total", file=sys.stderr)

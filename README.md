@@ -32,19 +32,19 @@ OCaml gives the same static guarantees — exhaustive pattern matching on varian
 ## Pipeline
 
 ```
-pipeline/parse_7701.py              Scrape Cornell LII → data/7701_tree.json (531 nodes, 16 subsections)
+pipeline/parse_section.py           Scrape any 26 USC section from Cornell LII → data/{section}_tree.json
           ↓
 pipeline/classify_rules.py          Rule-based bottom-up tagger (leaf, definition, exception, scope_rule, ...)
-          ↓
+          ↓                         → logs/classify/classify_rules_{section}.json
 pipeline/resolve_refs.py            Build cross-reference graph across all provisions
-          ↓
+          ↓                         → logs/resolve/resolve_refs_{section}.txt
 pipeline/formalize_ocaml.py         Pass 1 (--gen-types): one LLM call generates all shared OCaml types
-          ↓                         from definition leaves → data/types.ml
+          ↓                         from definition leaves → data/{section}_types.ml
 pipeline/formalize_ocaml.py         Pass 2: LLM agent formalizes each provision in topological order,
-          ↓                         using data/types.ml as shared context
+          ↓                         using data/{section}_types.ml as shared context
 pipeline/assemble_ml.py             Assemble types + formalized provisions into a single .ml file
           ↓
-data/section_7701.ml                686 lines of typed OCaml: 61 types, 37 functions, 6 modules
+data/{section}_assembled.ml
 ```
 
 ## Key Contributions
@@ -102,20 +102,28 @@ The exception DAG structure in particular maps well to Lean 4's dependent type s
 # dependencies (Python 3.12+, requires claude CLI in PATH)
 uv sync
 
-# step 1: scrape and parse
-python pipeline/parse_7701.py
+# step 1: scrape and parse (one section or many)
+python pipeline/parse_section.py 101
+python pipeline/parse_section.py 61 72 101 108   # batch
 
 # step 2: classify nodes (rule-based, no LLM)
-python pipeline/classify_rules.py
+python pipeline/classify_rules.py 101
 
-# step 3: generate shared types (one LLM call)
-python pipeline/formalize_ocaml.py --gen-types
+# step 3: resolve cross-references
+python pipeline/resolve_refs.py 101
 
-# step 4: formalize all provisions (parallel LLM calls)
-python pipeline/formalize_ocaml.py
+# step 4: generate shared types (one LLM call)
+python pipeline/formalize_ocaml.py 101 --gen-types
 
-# step 5: assemble
-python pipeline/assemble_ml.py
+# step 5: formalize all provisions
+python pipeline/formalize_ocaml.py 101
+
+# step 5b: formalize a single node subtree
+python pipeline/formalize_ocaml.py 101 101\(a\)\(3\)
+
+# step 6: assemble into a single .ml file
+python pipeline/assemble_ml.py 101
 ```
 
-All scripts run from the repo root. Logs write to `logs/classify/`, `logs/formalize/`, etc.
+All scripts run from the repo root. Logs write to `logs/classify/`, `logs/resolve/`, `logs/formalize/`.
+Each log is named `{script}_{section}.{ext}` and overwrites on re-run — no timestamped accumulation.

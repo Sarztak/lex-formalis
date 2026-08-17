@@ -7,15 +7,6 @@ Writes results to logs/classify/classify_rules_{section}.{json,txt} (overwrites)
 Usage:
     python pipeline/classify_rules.py 7701
     python pipeline/classify_rules.py 101
-
-Construct taxonomy:
-  container     — groups independent self-contained definitions; no Catala wrapper
-  legal_concept — children are incomplete variants of one concept; → enumeration in Catala
-  scope         — computes a result from inputs; "for purposes of", tests, elections
-  definition    — default rule inside an enclosing scope ("In general")
-  exception     — overrides a conclusion or excludes from a category
-  structure     — bundles named fields that travel together
-  leaf          — no children; raw prose
 """
 
 import argparse
@@ -25,7 +16,9 @@ import re
 
 LOG_DIR = "logs/classify"
 
+_SPAN_ENDINGS = ("—", ":")
 _TERM_OPENER = re.compile(r"^\s*(the terms?\s+\"|any term used\b)", re.IGNORECASE)
+_TERM_INLINE = re.compile(r'the terms?\s+["\']', re.IGNORECASE)
 
 """
 Reasoning behind ordering:
@@ -46,16 +39,18 @@ def _exception_tags(header_l, chapeau_l, body_l, has_children):
         tags.append(
             ("exception", "header contains 'Exception(s)' or 'Special rule(s)'")
         )
+    if re.search(r"shall not\b", header_l):
+        tags.append(("exception", "header: 'shall not'"))
     if re.search(r"\bexceptions?\b", chapeau_l):
         tags.append(("exception", "chapeau contains 'Exception(s)'"))
     # body patterns only meaningful on non-leaf nodes: on leaves, exclusionary
     # language is part of the definition, not a structural exception
-    if has_children and re.search(r"shall not be treated as", body_l):
-        tags.append(("exception", "body: 'shall not be treated as'"))
+    if has_children and re.search(r"shall not\b", body_l):
+        tags.append(("exception", "body: 'shall not'"))
     if has_children and re.search(r"notwithstanding", body_l):
         tags.append(("exception", "body: 'notwithstanding'"))
-    if re.search(r"shall not apply", body_l):
-        tags.append(("exception", "body: 'shall not apply'"))
+    if re.search(r"shall not\b", chapeau_l):
+        tags.append(("exception", "chapeau: 'shall not'"))
     return tags
 
 
@@ -99,13 +94,12 @@ def _admin_rule_tags(chapeau_l, body_l, has_children):
 
 def _container_tags(raw_children, has_in_general_child, body, chapeau):
     tags = []
-    _SPAN_ENDINGS = ("—", ":")
     if raw_children and (
         body.rstrip().endswith(_SPAN_ENDINGS)
         or chapeau.rstrip().endswith(_SPAN_ENDINGS)
     ):
         tags.append(
-            ("container_intro", "body/chapeau ends '—'/';': introduces children")
+            ("container_intro", "body/chapeau ends '—'/':': introduces children")
         )
     is_bare = raw_children and not body.strip() and not chapeau.strip()
     if is_bare:
@@ -137,9 +131,6 @@ def _legal_concept_tags(chapeau_l):
         if re.search(pat, chapeau_l):
             return [("legal_concept", f"chapeau matches '{pat}'")]
     return []
-
-
-_TERM_INLINE = re.compile(r'the terms?\s+["\']', re.IGNORECASE)
 
 
 def _definition_tags(body, chapeau):
@@ -280,3 +271,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
+Observations:
+1. the file was made after checking section 7701 and more of the decisions were made based on the trends seens in that section. However, I have come to realize that most of these do not help demarket how to fold the children into the parent in order to prevent calling the agent on the children that return partial. This is not just to save the wasteful calls but to pass sufficient information. What is most useful is that whenever there is a chapeau and the children are just leaves followed by a continuation then the whole node can be treated as one body rather than calling on children again and again. However, there are certain properties that children must have. For example they should not be definitions. A very simple test is if children start with a capital letter or not. If they don't then they can be treated as part of a sentence being continued. The continuation that follows illustrates some other point so it is linked to the body. So while folding the children this needs to be done under some constraints. Other than that I don't find the scope tags or any other tags helpful
+2. The 'shall not apply' has been repeated under exception tag and the scope tag. Need to fix that
+3. 'In general' or 'General rule' separation is not useful in practice because that does not signal what follows will be an exception or not.
+4. There are several types of exceptions possible. Limitations can double as exception in some cases, and in fact normal provision can contain hidden exception, so checking on keyword is not sufficient.
+5. Structure tag was supposed to map to enum however I haven't seen any structure tag yet, probably because scope handles it so should be subsumed under scope.
+6. Admin tags might be useful in a narrow sense. 
+7. Definition tags are useful because definitions leafs cannot be folded into the body of the parent, even if one of the child is a definition it needs to be treated differently.
+"""
+

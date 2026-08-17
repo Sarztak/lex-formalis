@@ -42,7 +42,7 @@ def node_text(node_id, lookup, child_map=None):
             if t := node.get(field, "").strip():
                 parts.append(t)
         for child_id in node.get("children", []):
-            _, child_text = node_text(child_id, lookup)
+            _, child_text = node_text(child_id, lookup, child_map)
             parts.append(f"{child_id} {child_text}")
         if t := node.get("continuation", "").strip():
             parts.append(t)

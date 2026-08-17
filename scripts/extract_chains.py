@@ -7,10 +7,9 @@ Pipeline:
   3. this script                           → logs/chains/{section}_chains.json
 
 Reads classify log to find exception-tagged nodes.
-Reads resolve_refs log to get within-section [OK] cross-references.
-Builds undirected adjacency list from exception nodes and their OK targets.
-Finds connected components — each component with at least one exception node is a candidate chain (base rule + exception(s)).
-Exceptions with no within-section refs are dropped.
+Reads resolve_refs log to get all cross-references.
+Builds undirected adjacency list and finds connected components.
+Each component with at least one exception node is a candidate chain.
 
 Usage:
     python scripts/extract_chains.py 7701
@@ -23,12 +22,34 @@ import re
 import sys
 from collections import defaultdict
 
+_ROMAN = {r: i for i, r in enumerate(
+    ['i','ii','iii','iv','v','vi','vii','viii','ix','x',
+     'xi','xii','xiii','xiv','xv','xvi','xvii','xviii','xix','xx'], 1
+)}
+
+def _node_key(node_id):
+    m = re.match(r'^(\d+)', node_id)
+    section = int(m.group(1)) if m else 0
+    parts = re.findall(r'\(([^)]+)\)', node_id)
+    key = [(section, '')]
+    for idx, p in enumerate(parts):
+        if p.isdigit():
+            key.append((int(p), ''))
+        elif idx in (3, 4) and p.lower() in _ROMAN:
+            key.append((_ROMAN[p.lower()], ''))
+        else:
+            key.append((0, p.lower()))
+    return key
+
+
 CLASSIFY_DIR = "logs/classify"
 RESOLVE_DIR = "logs/resolve"
 LOG_DIR = "logs/chains"
 
 # Parses: [7701(b)(3)(B)] [body] "subparagraph (A)" → 7701(b)(3)(A) [OK|MISSING]
-REF_LINE = re.compile(r"^\[([^\]]+)\] \[[^\]]+\] \"[^\"]+\" → (\S+) \[(?:OK|MISSING)\]$")
+REF_LINE = re.compile(
+    r"^\[([^\]]+)\] \[[^\]]+\] \"[^\"]+\" → (\S+) \[(?:OK|MISSING)\]$"
+)
 
 
 def load_exception_ids(section):
@@ -60,20 +81,6 @@ def load_refs(section):
     return refs
 
 
-def exception_subgraph(exception_ids, all_refs):
-    """Subgraph of exception nodes + nodes they directly reference (outgoing only)."""
-    subgraph_nodes = set(exception_ids) & set(all_refs)
-    for eid in list(subgraph_nodes):
-        subgraph_nodes |= set(all_refs.get(eid, []))
-    sub = defaultdict(set)
-    for node in subgraph_nodes:
-        for tgt in all_refs.get(node, []):
-            if tgt in subgraph_nodes:
-                sub[node].add(tgt)
-                sub[tgt].add(node)
-    return sub
-
-
 def connected_components(adj):
     parent = {node: node for node in adj}
 
@@ -102,41 +109,36 @@ def main():
     exception_ids = load_exception_ids(args.section)
     all_refs = load_refs(args.section)
 
-    # Build undirected adj list from all nodes and all their refs
     adj = defaultdict(set)
     for src, targets in all_refs.items():
         for tgt in targets:
             adj[src].add(tgt)
             adj[tgt].add(src)
 
-    # Track which exception nodes appear in the graph at all
-    active_exception_ids = exception_ids & set(all_refs.keys())
-    dropped = len(exception_ids) - len(active_exception_ids)
+    components = connected_components(adj)
 
-    sub = exception_subgraph(active_exception_ids, all_refs)
-    components = connected_components(sub)
-
-    # Keep components containing at least one exception node with refs
     chains = []
     for comp in components:
-        comp_exceptions = [n for n in comp if n in active_exception_ids]
+        comp_exceptions = [n for n in comp if n in exception_ids]
         if not comp_exceptions:
             continue
-        sorted_nodes = sorted(comp, key=lambda x: (len(x), x))
-        chains.append({
-            "nodes": sorted_nodes,
-            "exception_nodes": sorted(comp_exceptions, key=lambda x: (len(x), x)),
-            "edges": {src: list(sub[src]) for src in sorted_nodes},
-        })
+        sorted_nodes = sorted(comp, key=_node_key)
+        chains.append(
+            {
+                "nodes": sorted_nodes,
+                "exception_nodes": sorted(comp_exceptions, key=_node_key),
+                "edges": {src: list(adj[src]) for src in sorted_nodes},
+            }
+        )
 
-    chains.sort(key=lambda c: (len(c["nodes"][0]), c["nodes"][0]))
+    chains.sort(key=lambda c: _node_key(c["nodes"][0]))
 
     os.makedirs(LOG_DIR, exist_ok=True)
     out_path = os.path.join(LOG_DIR, f"{args.section}_chains.json")
     with open(out_path, "w") as f:
         json.dump({"section": args.section, "chains": chains}, f, indent=2)
 
-    print(f"{len(exception_ids)} exception nodes, {dropped} dropped (no within-section refs)")
+    print(f"{len(exception_ids)} exception nodes")
     print(f"{len(chains)} chains\n")
     for i, chain in enumerate(chains):
         print(f"Chain {i+1}: {chain['nodes']}")

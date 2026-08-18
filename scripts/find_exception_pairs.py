@@ -37,26 +37,29 @@ SYSTEM = (
 )
 
 TASK = (
-    "Below is the text of an IRC provision. It contains a general rule and one or more siblings. "
-    "Identify every pair (if any) where one node intervenes on another — overrides, qualifies, limits, extends, or carves out. "
-    "For each pair, the first node_id is the intervening node, the second is the node being intervened on. "
-    "Only include direct interventions — not downstream effects. "
-    "Node ids appear in the text as the identifier before the colon or at the start of each provision. "
-    "Also identify exceptions to exceptions: if node B intervenes on node A, and node C intervenes on node B, report both pairs.\n\n"
-    "For each pair reason across two causal dimensions:\n"
-    "  target: which structural element is being modified —\n"
-    "    output         — the conclusion or determination the provision produces\n"
-    "    input_variable — an upstream variable the provision reads to reach its conclusion\n"
-    "    guard          — the activation condition (whether the provision fires at all)\n"
-    "    edge           — a dependency link (what the provision depends on)\n"
-    "  modification: how that element is changed —\n"
-    "    replaces  — severs and substitutes with a new value or equation\n"
-    "    restricts — narrows the domain without full replacement\n"
-    "    extends   — adds a new path or broadens the domain\n"
-    "    blocks    — prevents the element from being computed or applied\n"
-    "If no combination of target × modification fits, set both to \"other\" and add a \"note\" field explaining why.\n\n"
+    "Below is the text of an IRC provision structured as sibling nodes. "
+    "Each provision A has the form (T_A, E_A) where T_A is the set of condition predicates "
+    "and E_A is the set of effect predicates asserted when all conditions in T_A hold.\n\n"
+    "Identify every pair where node B intervenes on node A. "
+    "Only direct interventions — not downstream. "
+    "Also identify exceptions to exceptions: if B intervenes on A and C intervenes on B, report both pairs.\n\n"
+    "Classify each intervention as exactly one of three operations:\n\n"
+    "  op: \"void_provision\"    ~A | C_B     A is not consulted at all when C_B holds\n"
+    "  op: \"void_conclusion\"   ~E_A | C_B   T_A is evaluated but no effect in E_A is asserted when C_B holds\n"
+    "  op: \"subst\"             A[f ↦ f']   a predicate f in T_A or E_A is replaced by f'\n\n"
+    "For subst, provide:\n"
+    "  f        -- short predicate name (e.g. days_present, united_states, employee)\n"
+    "  f_domain -- \"T\" if f is a condition predicate, \"E\" if f is an effect predicate\n"
+    "  f_prime  -- the formula for what f becomes, using one of:\n"
+    "               ~f       negation\n"
+    "               f'       disjoint replacement -- write the new predicate name\n"
+    "               f ∩ X    narrowing  -- describe X\n"
+    "               f ∪ X    broadening -- describe X\n"
+    "               ⊥        elimination (E only)\n\n"
     "Return a JSON array only:\n"
-    '[{"overriding": "node_id", "overridden": "node_id", "target": "...", "modification": "...", "reasoning": "one line: why this target and modification", "note": "only if other"}]'
+    '[{"overriding": "node_id", "overridden": "node_id", "op": "...", '
+    '"f": "predicate (subst only)", "f_domain": "T or E (subst only)", '
+    '"f_prime": "formula (subst only)", "reasoning": "one line"}]'
 )
 
 
@@ -162,8 +165,9 @@ def main():
     print(f"Wrote {out_path} — {len(all_pairs)} pairs total", file=sys.stderr)
 
     for p in all_pairs:
-        note = f"  note={p['note']}" if p.get("note") else ""
-        print(f"  {p['overriding']} → {p['overridden']}  [{p.get('target','?')}×{p.get('modification','?')}]  {p.get('reasoning','')}{note}")
+        op = p.get("op", "?")
+        subst = f"  [{p['f']} -> {p['f_prime']}]" if op == "subst" else ""
+        print(f"  {p['overriding']} → {p['overridden']}  {op}{subst}  {p.get('reasoning','')}")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
-"""
-For each base-case "In general"/"General rule" node in the merged lookup,
+""" For each base-case "In general"/"General rule" node in the merged lookup,
 call node_text on its parent to get the full flattened context, then ask
 Claude to identify exception pairs: which node overrides/qualifies which.
 
@@ -30,7 +29,7 @@ MODEL = "claude-sonnet-4-6"
 EXC_PATTERN = re.compile(
     r"\bexception|limitation|special rule|notwithstanding|shall not\b|except as\b", re.I
 )
-DEFN_PATTERN = re.compile(r'the terms?\s+[““‘]|any term used\b', re.I)
+DEFN_PATTERN = re.compile(r"the terms?\s|any term used\b", re.I)
 
 SYSTEM = (
     "You are an expert tax attorney with deep knowledge of the Internal Revenue Code (IRC). "
@@ -39,19 +38,25 @@ SYSTEM = (
 
 TASK = (
     "Below is the text of an IRC provision. It contains a general rule and one or more siblings. "
-    "Identify every pair(if exists) where one node overrides, qualifies, limits, or carves out from another node. "
-    "For each pair, the first node_id is the overriding node (the exception), "
-    "the second node_id is the overridden node (the one being excepted). "
-    "Only include direct overrides — not downstream effects. "
+    "Identify every pair (if any) where one node intervenes on another — overrides, qualifies, limits, extends, or carves out. "
+    "For each pair, the first node_id is the intervening node, the second is the node being intervened on. "
+    "Only include direct interventions — not downstream effects. "
     "Node ids appear in the text as the identifier before the colon or at the start of each provision. "
-    "Also identify exceptions to exceptions: if node B overrides node A, and node C overrides node B, "
-    "report both pairs. "
-    "For each pair provide structured reasoning across three dimensions:\n"
-    "  mechanism: how the exception acts — one of: carves_out, displaces, limits, re_imposes, bars, extends, other\n"
-    "  trigger: array of what activates the exception — each one of: taxpayer_condition, temporal, regulatory_action, other\n"
-    "  scope: what is changed in DAG terms — one of: input, output\n"
+    "Also identify exceptions to exceptions: if node B intervenes on node A, and node C intervenes on node B, report both pairs.\n\n"
+    "For each pair reason across two causal dimensions:\n"
+    "  target: which structural element is being modified —\n"
+    "    output         — the conclusion or determination the provision produces\n"
+    "    input_variable — an upstream variable the provision reads to reach its conclusion\n"
+    "    guard          — the activation condition (whether the provision fires at all)\n"
+    "    edge           — a dependency link (what the provision depends on)\n"
+    "  modification: how that element is changed —\n"
+    "    replaces  — severs and substitutes with a new value or equation\n"
+    "    restricts — narrows the domain without full replacement\n"
+    "    extends   — adds a new path or broadens the domain\n"
+    "    blocks    — prevents the element from being computed or applied\n"
+    "If no combination of target × modification fits, set both to \"other\" and add a \"note\" field explaining why.\n\n"
     "Return a JSON array only:\n"
-    '[{"overriding": "node_id", "overridden": "node_id", "mechanism": "...", "trigger": [...], "scope": "...", "reason": "one line"}]'
+    '[{"overriding": "node_id", "overridden": "node_id", "target": "...", "modification": "...", "reasoning": "one line: why this target and modification", "note": "only if other"}]'
 )
 
 
@@ -102,11 +107,11 @@ def main():
     lookup = load_lookup(args.section)
     child_map = build_child_map(lookup)
 
-    # find base-case In general / General rule nodes from merged lookup
-    # deduplicate by parent_id — same parent would produce identical context
-    seen_parents = set()
-    tasks = []
-
+    # Collect candidate parent IDs from base-case In general / General rule nodes.
+    # Sorted traversal guarantees ancestors appear before descendants.
+    # After collection, drop any candidate whose ancestor is also a candidate —
+    # the ancestor's context already contains the descendant's pairs.
+    candidate_parents: set[str] = set()
     for node in sorted(lookup.values(), key=lambda n: n["id"]):
         if node.get("header", "").strip().lower() not in ("in general", "general rule"):
             continue
@@ -117,10 +122,13 @@ def main():
         except KeyError:
             print(f"  [skip] {node['id']}: no parent in lookup", file=sys.stderr)
             continue
-        pid = parent["id"]
-        if pid in seen_parents:
+        candidate_parents.add(parent["id"])
+
+    # Keep only the highest ancestor in each lineage.
+    tasks = []
+    for pid in sorted(candidate_parents):
+        if any(pid.startswith(ancestor + "(") for ancestor in candidate_parents if ancestor != pid):
             continue
-        seen_parents.add(pid)
         try:
             _, text = node_text(pid, lookup, child_map)
             tasks.append((pid, text))
@@ -154,7 +162,8 @@ def main():
     print(f"Wrote {out_path} — {len(all_pairs)} pairs total", file=sys.stderr)
 
     for p in all_pairs:
-        print(f"  {p['overriding']} → {p['overridden']}  | {p['reason']}")
+        note = f"  note={p['note']}" if p.get("note") else ""
+        print(f"  {p['overriding']} → {p['overridden']}  [{p.get('target','?')}×{p.get('modification','?')}]  {p.get('reasoning','')}{note}")
 
 
 if __name__ == "__main__":

@@ -58,13 +58,25 @@ def build_node(div, parent_id):
     body = clean(content_div) if content_div else ""
 
     children = []
+    consumed_continuations: set[int] = set()
     search_in = content_div if content_div else div
     for child in search_in.children:
         if is_level_node(child):
             children.append(build_node(child, node_id))
+        elif (
+            isinstance(child, Tag)
+            and "continuation" in (child.get("class") or [])
+            and children
+        ):
+            # Continuation placed as sibling after the preceding level node in the HTML
+            children[-1]["continuation"] = clean(child)
+            consumed_continuations.add(id(child))
 
     continuation_div = div.find("div", class_="continuation", recursive=False)
-    continuation = clean(continuation_div) if continuation_div else ""
+    if continuation_div and id(continuation_div) in consumed_continuations:
+        continuation = ""
+    else:
+        continuation = clean(continuation_div) if continuation_div else ""
 
     return {
         "id": node_id,

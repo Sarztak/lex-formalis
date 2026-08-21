@@ -61,19 +61,44 @@ scope IncomeTaxComputation:
 
 declaration scope HouseholdTaxComputation:
     input individuals content list of Individual
+    input overseas_territories content boolean
+    input current_date content date
     output household_tax content money
 
 scope HouseholdTaxComputation:
-   definition household_tax equals
-       let number_of_individuals equals number of individuals in
-       let number_of_children equals
-            Integer.sum of 
-                map each individual among individuals to individual.number_of_children
-        in
-        $10,000
-        * (
-            decimal of number_of_individuals + number_of_children / 2
-        )
+    definition household_tax equals 
+    Money.sum of 
+        map each individual among individuals to (
+            output of HouseholdTaxIndividualComputation with {
+                -- individual: individual
+                -- overseas_territories: overseas_territories
+                -- current_date: current_date
+            }
+        ).individual_household_tax
+
+declaration scope HouseholdTaxIndividualComputation:
+    input individual content Individual
+    input overseas_territories content boolean
+    input current_date content date
+    internal individual_tax content money
+
+    output individual_household_tax content money
+        state base
+        state with_deduction
+
+scope HouseholdTaxIndividualComputation:
+   definition individual_tax equals 
+   (output of IncomeTaxComputation with {
+        -- individual: individual
+        -- overseas_territories: overseas_territories
+        -- current_date: current_date
+    }).income_tax
+    definition individual_household_tax state base equals
+        $10,000 * (1.0 + individual.number_of_children / 2)
+
+scope HouseholdTaxIndividualComputation:
+    definition individual_household_tax state with_deduction equals
+    if individual_tax < individual_household_tax then individual_household_tax - individual_tax else $0
 
 scope TestTaxComputation:
     definition individual equals 
@@ -103,6 +128,21 @@ scope TestHouseholdComputation:
                 -- income: $80,000
                 -- number_of_children: 2
             } ]
+            -- overseas_territories: false
+            -- current_date: |1999-01-01|
         }
 
+declaration scope TestIndividualHousehold:
+    output computation content HouseholdTaxIndividualComputation
+
+scope TestIndividualHousehold:
+    definition computation equals 
+    output of HouseholdTaxIndividualComputation with {
+        -- individual: Individual {
+            -- income: $15,000
+            -- number_of_children: 0
+        }
+        -- overseas_territories: false
+        -- current_date: |1999-01-01|
+    }
 ```

@@ -59,7 +59,22 @@ scope IncomeTaxComputation:
     under condition individual.income > $100,000 and overseas_territories
     consequence equals 25%
 
-# The prioritization of exceptions requires legal expertise and research, as it is not always obvious which exception should prevail in any given situation. Better Call Saul therefore.
+declaration scope HouseholdTaxComputation:
+    input individuals content list of Individual
+    output household_tax content money
+
+scope HouseholdTaxComputation:
+   definition household_tax equals
+       let number_of_individuals equals number of individuals in
+       let number_of_children equals
+            Integer.sum of 
+                map each individual among individuals to individual.number_of_children
+        in
+        $10,000
+        * (
+            decimal of number_of_individuals + number_of_children / 2
+        )
+
 scope TestTaxComputation:
     definition individual equals 
     Individual {
@@ -72,4 +87,22 @@ scope TestTaxComputation:
         -- overseas_territories: true
         -- current_date: |2025-04-01|
     }
+
+declaration scope TestHouseholdComputation:
+    output computation content HouseholdTaxComputation
+
+scope TestHouseholdComputation:
+    definition computation equals 
+        output of HouseholdTaxComputation with {
+            -- individuals:
+            [ Individual {
+                -- income: $15,000
+                -- number_of_children: 0
+            } ;
+            Individual{
+                -- income: $80,000
+                -- number_of_children: 2
+            } ]
+        }
+
 ```

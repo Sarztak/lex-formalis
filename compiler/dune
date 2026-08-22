@@ -1,0 +1,12 @@
+(executables
+ (names catala_rust_plugin)
+ (modules to_rust catala_rust_plugin)
+ (modes plugin)
+ (libraries
+  catala.catala_utils
+  catala.shared_ast
+  catala.runtime_ocaml
+  catala.lcalc
+  catala.scalc
+  catala.driver
+  cmdliner))

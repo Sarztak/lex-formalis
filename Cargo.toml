@@ -1,0 +1,3 @@
+[workspace]
+members = ["catala-runtime", "hello-test"]
+resolver = "2"

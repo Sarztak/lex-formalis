@@ -1,0 +1,95 @@
+# Section 7701 - Definitions
+
+## (a)(1) Person
+
+The term "person" shall be construed to mean and include an individual, a trust, estate, partnership, association, company or corporation.
+
+```catala
+declaration enumeration Person:
+  -- Individual
+  -- Trust
+  -- Estate
+  -- Partnership content Partnership
+  -- Association
+  -- Company
+  -- Corporation content Corporation
+```
+
+## (a)(2) Partnership and partner
+
+The term "partnership" includes a syndicate, group, pool, joint venture, or other unincorporated organization, through or by means of which any business, financial operation, or venture is carried on, and which is not, within the meaning of this title, a trust or estate or a corporation; and the term "partner" includes a member in such a syndicate, group, pool, joint venture, or organization.
+
+```catala
+declaration enumeration PartnershipOrganizationForm:
+  -- Syndicate
+  -- Group
+  -- Pool
+  -- JointVenture
+  -- OtherUnincorporatedOrganization
+
+declaration structure Partnership:
+  data form content PartnershipOrganizationForm
+  data business_carried_on content boolean
+  data is_not_trust_estate_or_corporation content boolean
+  data is_domestic content boolean
+
+# Partner: member_of implies membership, no is_member field needed
+declaration structure Partner:
+  data member_of content Partnership
+```
+
+## (a)(3) Corporation
+
+The term "corporation" includes associations, joint-stock companies, and insurance companies.
+
+```catala
+declaration enumeration CorporationForm:
+  -- Association
+  -- JointStockCompany
+  -- InsuranceCompany
+
+declaration structure Corporation:
+  data form content CorporationForm
+  data is_domestic content boolean
+```
+
+## (a)(4)-(5) Domestic and Foreign
+
+The term "domestic" when applied to a corporation or partnership means created or organized in the United States or under the law of the United States or of any State unless, in the case of a partnership, the Secretary provides otherwise by regulations. The term "foreign" when applied to a corporation or partnership means a corporation or partnership which is not domestic.
+
+```catala
+declaration enumeration CorpOrPartnership:
+  -- IsPartnership
+  -- IsCorporation
+
+declaration scope DomesticityDetermination:
+  input entity content CorpOrPartnership
+  input created_or_organized_in_us_or_under_law content boolean
+  input secretary_override content boolean
+  input secretary_decision content boolean
+  output is_domestic content boolean
+
+scope DomesticityDetermination:
+  label base_rule
+  definition is_domestic equals created_or_organized_in_us_or_under_law
+
+  exception base_rule
+  definition is_domestic
+  under condition
+    (match entity with pattern
+    -- IsPartnership content p : true
+    -- IsCorporation content c : false)
+    and secretary_override
+  consequence equals secretary_decision
+```
+
+## (a)(14) Taxpayer
+
+The term "taxpayer" means any person subject to any internal revenue tax.
+
+```catala
+declaration structure TaxPayer:
+  data person content Person
+  data subject_to_tax content boolean
+```
+

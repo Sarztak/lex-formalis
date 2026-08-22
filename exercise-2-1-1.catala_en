@@ -1,0 +1,88 @@
+```catala
+declaration structure Individual:
+    data date_of_birth content date
+    data date_of_death content DateOfDeath
+
+declaration enumeration DateOfDeath:
+    -- Deceased content date
+    -- StillAlive
+
+declaration test_person1 content Individual equals
+Individual {
+    -- date_of_birth: |1981-10-05|
+    -- date_of_death: Deceased content |2012-05-12|
+}
+
+declaration test_person2 content Individual equals
+Individual {
+    -- date_of_birth: |1977-12-21|
+    -- date_of_death: StillAlive
+}
+
+declaration scope KillPerson:
+    input fateful_date content date
+    input victim content Individual
+    output killed_individual content Individual
+
+scope KillPerson:
+    definition killed_individual equals 
+        victim but replace { -- date_of_death: Deceased content fateful_date }
+
+declaration scope TestKillPerson:
+    output computation content KillPerson
+
+scope TestKillPerson:
+    definition computation equals 
+        output of KillPerson with {
+            -- fateful_date: |2025-01-20|
+            -- victim: test_person2
+        }
+
+declaration structure Couple:
+    data husband content Individual
+    data wife content Individual
+    data household_yearly_income content money
+
+declaration couple_1 content Couple equals
+    Couple {
+        -- husband: test_person1
+        -- wife: test_person2
+        -- household_yearly_income: $100,000.00
+    }
+
+declaration scope TaxComputation:
+    input processing_date content date
+    input couple content Couple
+    internal person1_dead_before_processing_date content boolean
+    internal person2_dead_before_processing_date content boolean
+    output tax_amount content money
+
+scope TaxComputation:
+   definition tax_amount equals
+     if 
+        person1_dead_before_processing_date
+        or person2_dead_before_processing_date
+    then $0
+    else couple.household_yearly_income * 15%
+
+scope TaxComputation:
+    definition person1_dead_before_processing_date equals
+        match couple.husband.date_of_death with pattern
+        -- StillAlive: false
+        -- Deceased content deceased_date: deceased_date < processing_date
+
+    definition person2_dead_before_processing_date equals
+        match couple.wife.date_of_death with pattern
+        -- StillAlive: false
+        -- Deceased content deceased_date: deceased_date < processing_date
+
+declaration scope TestTaxComputation:
+    output computation content TaxComputation
+
+scope TestTaxComputation:
+    definition computation equals 
+        output of TaxComputation with {
+            -- processing_date: |2012-05-01|
+            -- couple: couple_1
+        }
+```

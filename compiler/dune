@@ -1,6 +1,6 @@
-(executables
- (names catala_rust_plugin)
- (modules to_rust catala_rust_plugin)
+(executable
+ (name catala_backends_plugin)
+ (modules to_rust to_lean catala_backends_plugin)
  (modes plugin)
  (libraries
   catala.catala_utils

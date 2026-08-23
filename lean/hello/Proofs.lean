@@ -37,6 +37,16 @@ theorem one_child_no_conflict (income : Int) :
     = catala_o_mult_mon_rat income (1/5 : Rat) := by
   simp [income_tax_computation, catalaHandleExceptions, catala_o_array_nth]
 
+-- Claim: for a taxpayer with exactly 1 child, the tax is always exactly 20% of income (one rule fires, no conflict).
+theorem one_child_tax_is_20_percent (income : Int) (h : income ≥ 0) :
+    (income_tax_computation { individual_in := { income := income, number_of_children := 1 } }).income_tax = catala_o_mult_mon_rat income (1/5 : Rat) := by
+  simp [income_tax_computation, catalaHandleExceptions, catala_o_array_nth]
+
+-- Claim: for a taxpayer with 0 children, same — only the base rule fires.
+theorem zero_children_tax_is_20_percent (income : Int) (h : income ≥ 0) :
+    (income_tax_computation { individual_in := { income := income, number_of_children := 0 } }).income_tax = catala_o_mult_mon_rat income (1/5 : Rat) := by
+  simp [income_tax_computation, catalaHandleExceptions, catala_o_array_nth]
+
 -- ── Summary of what is proved ─────────────────────────────────────────────────
 /-
   The agent said: "the statute as written is defective for 2+ children."

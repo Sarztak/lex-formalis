@@ -6,13 +6,13 @@ The term "person" shall be construed to mean and include an individual, a trust,
 
 ```catala
 declaration enumeration Person:
-  -- Individual
-  -- Trust
-  -- Estate
-  -- Partnership content Partnership
-  -- Association
-  -- Company
-  -- Corporation content Corporation
+    -- Individual
+    -- Trust
+    -- Estate
+    -- Partnership content Partnership
+    -- Association
+    -- Company
+    -- Corporation content Corporation
 ```
 
 ## (a)(2) Partnership and partner
@@ -21,20 +21,20 @@ The term "partnership" includes a syndicate, group, pool, joint venture, or othe
 
 ```catala
 declaration enumeration PartnershipOrganizationForm:
-  -- Syndicate
-  -- Group
-  -- Pool
-  -- JointVenture
-  -- OtherUnincorporatedOrganization
+    -- Syndicate
+    -- Group
+    -- Pool
+    -- JointVenture
+    -- OtherUnincorporatedOrganization
 
 declaration structure Partnership:
-  data form content PartnershipOrganizationForm
-  data business_carried_on content boolean
-  data is_not_trust_estate_or_corporation content boolean
+    data form content PartnershipOrganizationForm
+    data business_carried_on content boolean
+    data is_not_trust_estate_or_corporation content boolean
 
 # Partner: member_of implies membership, no is_member field needed
 declaration structure Partner:
-  data member_of content Partnership
+    data member_of content Partnership
 ```
 
 ## (a)(3) Corporation
@@ -43,15 +43,15 @@ The term "corporation" includes associations, joint-stock companies, and insuran
 
 ```catala
 declaration enumeration CorporationForm:
-  -- Association
-  -- JointStockCompany
-  -- InsuranceCompany
+    -- Association
+    -- JointStockCompany
+    -- InsuranceCompany
 
 # determination of domesticity should be separate issue from being
 # a corporation or parternership so I remove the fields.
 # if any provision needs it it will be determined.
 declaration structure Corporation:
-  data form content CorporationForm
+    data form content CorporationForm
 ```
 
 ## (a)(4)-(5) Domestic and Foreign
@@ -75,7 +75,7 @@ scope DomesticityDetermination:
     definition secretary_decision equals false
     label base_rule
     definition is_domestic equals
-    created_or_organized_in_us_or_under_law
+        created_or_organized_in_us_or_under_law
 
 # if the secretary provides a decision in case of a partnership ship that decision override the base case
 
@@ -83,8 +83,8 @@ scope DomesticityDetermination:
   definition is_domestic
   under condition
     (match entity with pattern
-    -- CorpOrPartnership.Partnership content p : true
-    -- CorpOrPartnership.Corporation content c : false)
+        -- CorpOrPartnership.Partnership content p : true
+        -- CorpOrPartnership.Corporation content c : false)
     and secretary_decision
   consequence equals secretary_decision
 ```
@@ -95,17 +95,17 @@ The term "fiduciary" means a guardian, trustee, executor, administrator, receive
 
 ```catala
 declaration enumeration FudiciaryForm:
-  -- Guardian
-  -- Trustee
-  -- Executor
-  -- Administrator
-  -- Receiver
-  -- Conservator
-  -- Person content Person
+    -- Guardian
+    -- Trustee
+    -- Executor
+    -- Administrator
+    -- Receiver
+    -- Conservator
+    -- Person content Person
 
 declaration structure Fudiciary:
-  data fudiciary_type content FudiciaryForm
-  data acting_in_any_fudiciary_capacity content boolean
+    data fudiciary_type content FudiciaryForm
+    data acting_in_any_fudiciary_capacity content boolean
 ```
 
 ## (a)(7) Stock
@@ -121,6 +121,7 @@ declaration enumeration ShareHoldingBody:
 declaration structure Stock:
     data stock_in content ShareHoldingBody
 ```
+
 ## (a)(8) Shareholder
 
 The term "shareholder" includes a member in an association, join-stock company, or insurance company
@@ -290,7 +291,7 @@ declaration scope IsWithholdingAgent:
 scope IsWithholdingAgent:
     definition valid_section_ids equals [1441; 1442; 1443; 1461]
     definition determination equals 
-    valid_section_ids contains section_id
+        valid_section_ids contains section_id
 ```
 
 ## (a)(17) Husband and Wife
@@ -345,150 +346,150 @@ At the election of the taxpayer, the percentage specified in this subparagraph s
 
 ```catala
 declaration enumeration BuildingAndLoanType:
-  -- DomesticBuildingAndLoan
-  -- DomesticSavingsAndLoan
-  -- FederalSavingsAndLoan
+    -- DomesticBuildingAndLoan
+    -- DomesticSavingsAndLoan
+    -- FederalSavingsAndLoan
 
 declaration structure Cash:
-  data amount content money
+    data amount content money
 
 declaration structure GovernmentObligations:
-  data amount content money
-  data is_excludable_under_section_103 content boolean
+    data amount content money
+    data is_excludable_under_section_103 content boolean
 
 declaration structure StateInsuredDeposits:
-  data amount content money
+    data amount content money
 
 declaration structure MemberSecuredLoans:
-  data amount content money
+    data amount content money
 
 declaration structure ResidentialRealPropertyLoan:
-  data amount content money
-  data has_nonresidential_use content boolean
-  data planned_residential_use_percent content decimal
-  data reasonable_assurance_within_3_years content boolean
-  data land_became_residential_within_3_years content boolean
+    data amount content money
+    data has_nonresidential_use content boolean
+    data planned_residential_use_percent content decimal
+    data reasonable_assurance_within_3_years content boolean
+    data land_became_residential_within_3_years content boolean
 
 declaration structure UrbanRenewalRealPropertyLoans:
-  data amount content money
+    data amount content money
 
 declaration structure EducationalHealthWelfareLoans:
-  data amount content money
+    data amount content money
 
 declaration structure LiquidatedDefaultProperty:
-  data amount content money
+    data amount content money
 
 declaration structure EducationExpenseLoans:
-  data amount content money
+    data amount content money
 
 declaration structure BusinessUseProperty:
-  data amount content money
+    data amount content money
 
 declaration structure RemicInterest:
-  data amount content money
-  data qualifying_asset_proportion content decimal
+    data amount content money
+    data qualifying_asset_proportion content decimal
 
 declaration enumeration Asset:
-  -- Cash content Cash
-  -- GovernmentObligations content GovernmentObligations
-  -- StateInsuredDeposits content StateInsuredDeposits
-  -- MemberSecuredLoans content MemberSecuredLoans
-  -- ResidentialRealPropertyLoan content ResidentialRealPropertyLoan
-  -- UrbanRenewalRealPropertyLoans content UrbanRenewalRealPropertyLoans
-  -- EducationalHealthWelfareLoans content EducationalHealthWelfareLoans
-  -- LiquidatedDefaultProperty content LiquidatedDefaultProperty
-  -- EducationExpenseLoans content EducationExpenseLoans
-  -- BusinessUseProperty content BusinessUseProperty
-  -- RemicInterest content RemicInterest
+    -- Cash content Cash
+    -- GovernmentObligations content GovernmentObligations
+    -- StateInsuredDeposits content StateInsuredDeposits
+    -- MemberSecuredLoans content MemberSecuredLoans
+    -- ResidentialRealPropertyLoan content ResidentialRealPropertyLoan
+    -- UrbanRenewalRealPropertyLoans content UrbanRenewalRealPropertyLoans
+    -- EducationalHealthWelfareLoans content EducationalHealthWelfareLoans
+    -- LiquidatedDefaultProperty content LiquidatedDefaultProperty
+    -- EducationExpenseLoans content EducationExpenseLoans
+    -- BusinessUseProperty content BusinessUseProperty
+    -- RemicInterest content RemicInterest
 
 declaration scope ClassifyGovernmentObligations:
-  input go content GovernmentObligations
-  output qualifying_amount content money
+    input go content GovernmentObligations
+    output qualifying_amount content money
 
 scope ClassifyGovernmentObligations:
-  definition qualifying_amount equals
-    if go.is_excludable_under_section_103 then $ 0 else go.amount
+    definition qualifying_amount equals
+        if go.is_excludable_under_section_103 then $ 0 else go.amount
 
 declaration scope ClassifyResidentialRealPropertyLoan:
-  input rpl content ResidentialRealPropertyLoan
-  output qualifying_amount content money
+    input rpl content ResidentialRealPropertyLoan
+    output qualifying_amount content money
 
 scope ClassifyResidentialRealPropertyLoan:
-  definition qualifying_amount equals
-    if (not rpl.has_nonresidential_use)
-       or rpl.planned_residential_use_percent > 80%
-       or (rpl.reasonable_assurance_within_3_years
-           and rpl.land_became_residential_within_3_years)
-    then rpl.amount else $ 0
+    definition qualifying_amount equals
+        if (not rpl.has_nonresidential_use)
+           or rpl.planned_residential_use_percent > 80%
+           or (rpl.reasonable_assurance_within_3_years
+               and rpl.land_became_residential_within_3_years)
+        then rpl.amount else $ 0
 
 declaration scope ClassifyRemicInterest:
-  input ri content RemicInterest
-  output qualifying_amount content money
+    input ri content RemicInterest
+    output qualifying_amount content money
 
 scope ClassifyRemicInterest:
-  definition qualifying_amount equals
-    ri.amount * ri.qualifying_asset_proportion
+    definition qualifying_amount equals
+        ri.amount * ri.qualifying_asset_proportion
 
 declaration scope GetAssetAmount:
-  input asset content Asset
-  output amount content money
+    input asset content Asset
+    output amount content money
 
 scope GetAssetAmount:
-  definition amount equals
-    match asset with pattern
-    -- GovernmentObligations content go :
-        (output of ClassifyGovernmentObligations
-          with { -- go: go }).qualifying_amount
-    -- ResidentialRealPropertyLoan content rpl :
-        (output of ClassifyResidentialRealPropertyLoan
-          with { -- rpl: rpl }).qualifying_amount
-    -- RemicInterest content ri :
-        (output of ClassifyRemicInterest
-          with { -- ri: ri }).qualifying_amount
-    -- Cash content c : c.amount
-    -- StateInsuredDeposits content sd : sd.amount
-    -- MemberSecuredLoans content ms : ms.amount
-    -- UrbanRenewalRealPropertyLoans content urban : urban.amount
-    -- EducationalHealthWelfareLoans content ehw : ehw.amount
-    -- LiquidatedDefaultProperty content ldp : ldp.amount
-    -- EducationExpenseLoans content eel : eel.amount
-    -- BusinessUseProperty content bup : bup.amount
+    definition amount equals
+        match asset with pattern
+            -- GovernmentObligations content go :
+                (output of ClassifyGovernmentObligations
+                    with { -- go: go }).qualifying_amount
+            -- ResidentialRealPropertyLoan content rpl :
+                (output of ClassifyResidentialRealPropertyLoan
+                    with { -- rpl: rpl }).qualifying_amount
+            -- RemicInterest content ri :
+                (output of ClassifyRemicInterest
+                    with { -- ri: ri }).qualifying_amount
+            -- Cash content c : c.amount
+            -- StateInsuredDeposits content sd : sd.amount
+            -- MemberSecuredLoans content ms : ms.amount
+            -- UrbanRenewalRealPropertyLoans content urban : urban.amount
+            -- EducationalHealthWelfareLoans content ehw : ehw.amount
+            -- LiquidatedDefaultProperty content ldp : ldp.amount
+            -- EducationExpenseLoans content eel : eel.amount
+            -- BusinessUseProperty content bup : bup.amount
 
 declaration scope DetermineDomesticBuildingAndLoan:
-  input association_type content BuildingAndLoanType
-  input subject_to_supervision content boolean
-  input business_is_savings_and_loans content boolean
-  input total_assets content money
-  input assets content list of Asset
-  context election_to_use_average content boolean
-  context average_assets_percent content decimal
-  internal qualifying_assets content money
-  internal qualifying_assets_percent content decimal
-  internal effective_percent content decimal
-  output is_domestic_building_and_loan content boolean
+    input association_type content BuildingAndLoanType
+    input subject_to_supervision content boolean
+    input business_is_savings_and_loans content boolean
+    input total_assets content money
+    input assets content list of Asset
+    context election_to_use_average content boolean
+    context average_assets_percent content decimal
+    internal qualifying_assets content money
+    internal qualifying_assets_percent content decimal
+    internal effective_percent content decimal
+    output is_domestic_building_and_loan content boolean
 
 scope DetermineDomesticBuildingAndLoan:
-  definition election_to_use_average equals false
-  definition average_assets_percent equals 0%
+    definition election_to_use_average equals false
+    definition average_assets_percent equals 0%
 
-  definition qualifying_assets equals
-    Money.sum of
-      (map each asset among assets to
-        (output of GetAssetAmount with { -- asset: asset }).amount)
+    definition qualifying_assets equals
+        Money.sum of
+            (map each asset among assets to
+                (output of GetAssetAmount with { -- asset: asset }).amount)
 
-  definition qualifying_assets_percent equals
-    qualifying_assets / total_assets * 100%
+    definition qualifying_assets_percent equals
+        qualifying_assets / total_assets * 100%
 
-  label base_assets
-  definition effective_percent equals qualifying_assets_percent
+    label base_assets
+    definition effective_percent equals qualifying_assets_percent
 
-  exception base_assets
-  definition effective_percent
-  under condition election_to_use_average
-  consequence equals average_assets_percent
+    exception base_assets
+    definition effective_percent
+        under condition election_to_use_average
+        consequence equals average_assets_percent
 
-  definition is_domestic_building_and_loan equals
-    subject_to_supervision
-    and business_is_savings_and_loans
-    and effective_percent >= 60%
+    definition is_domestic_building_and_loan equals
+        subject_to_supervision
+        and business_is_savings_and_loans
+        and effective_percent >= 60%
 ```

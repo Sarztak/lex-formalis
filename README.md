@@ -103,26 +103,26 @@ The exception DAG structure in particular maps well to Lean 4's dependent type s
 uv sync
 
 # step 1: scrape and parse (one section or many)
-python pipeline/parse_section.py 101
-python pipeline/parse_section.py 61 72 101 108   # batch
+python3 pipeline/parse_section.py 101
+python3 pipeline/parse_section.py 61 72 101 108   # batch
 
 # step 2: classify nodes (rule-based, no LLM)
-python pipeline/classify_rules.py 101
+python3 pipeline/classify_rules.py 101
 
 # step 3: resolve cross-references
-python pipeline/resolve_refs.py 101
+python3 pipeline/resolve_refs.py 101
 
 # step 4: generate shared types (one LLM call)
-python pipeline/formalize_ocaml.py 101 --gen-types
+python3 pipeline/formalize_ocaml.py 101 --gen-types
 
 # step 5: formalize all provisions
-python pipeline/formalize_ocaml.py 101
+python3 pipeline/formalize_ocaml.py 101
 
 # step 5b: formalize a single node subtree
-python pipeline/formalize_ocaml.py 101 101\(a\)\(3\)
+python3 pipeline/formalize_ocaml.py 101 101\(a\)\(3\)
 
 # step 6: assemble into a single .ml file
-python pipeline/assemble_ml.py 101
+python3 pipeline/assemble_ml.py 101
 ```
 
 All scripts run from the repo root. Logs write to `logs/classify/`, `logs/resolve/`, `logs/formalize/`.

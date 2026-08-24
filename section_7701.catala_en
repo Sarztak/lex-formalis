@@ -230,6 +230,9 @@ scope IsDelegate:
 
 # I don't know if it is possible or not, but thinking back about is while writing tests scope it is possible to specify the content to be directy another scope so I thought it could be done here as well while defining a structure which forces you to evaluate the function and pass it. However, this will pass the entire function including all its variables - input, internal and output so it is not a full determination. Though one can think of this as match on enum if the field is_delegate inside IsDelegate function is used to check. I don't think this is a good method though. 
 
+# Delegate seems to be determination based on certain facts being true and is determined in a function, however it can also be used as a bare tag in case you just need to match on something. Again, I am not sure this duality is the correct way forward. Just like Domesticity Delegate can just be a condition applied to the said officials, rather than keeping it as a tag. 
+
+# this implies that some definitions can be treated as structures or enums others are just means of determination given some other conditions which I am simply making explicity in the scopes.
 declaration structure Delegate:
     data is_delegate content IsDelegate
 ```
@@ -252,8 +255,71 @@ The term "taxpayer" means any person subject to any internal revenue tax.
 # two conditions are specified, one should be a person, and second subjected to tax. The second field is subject to intepretation as nothing has been specified about determination that can be formalized.
 # though it raises an interesting question, given these two conditions I can specify a scope for determination, earlier I have just created fields to surface the conditions however, it is possible to provide a single field. Though I don't know how useful that is going to be. This will same as what was done in case of delegate determination. The idea is the structure will carry the information needed for determination as well as the result, serving as determination, however the type as such is a Tag which is not yet determined. So if I specify TaxPayer as a matching field I will have to check the value inside the structure to truly know if that is a tax payer or not, which see wrong and circular. Essentially this makes the structure such as TaxPayer or Delegate an enum rather because it carries the result of being a TaxPayer and hides the true function underneath. 
 
-declaration structure TaxPayer:
-  data person content Person
-  data subject_to_tax content boolean
+# Taxpayer is a determination on a person, rather than a type by itself, hence I am removing the declaration.
+```
+
+## (a)(15) Military or naval forces and armed forces of the United States
+
+The term “military or naval forces of the United States” and the term “Armed Forces of the United States” each includes all regular and reserve components of the uniformed services which are subject to the jurisdiction of the Secretary of Defense, the Secretary of the Army, the Secretary of the Navy, or the Secretary of the Air Force, and each term also includes the Coast Guard. The members of such forces include commissioned officers and personnel below the grade of commissioned officers in such forces.
+
+```catala
+# The decision to make a scope over certain condition depends on whether there is there is an exception or expansion to be made. I favor this view. In the case of (a)(15) the term is used the whole body and the members therein are covered under this blanket term. The determination can be left to interpretation. Here I don't see a need to provide a separate scope. 
+
+# Alternatively one can argue that I can make an enum of jurisdiction and an enum over the jurisdiction and coast guard. But the term is applied over the regular and reserve components which means over the members, which requires interpretation as to who they are and how. Further, the provision applies commissioned officers and personnel below the commissioned officers. So again I can write a scope to express that someone is military if they are part of the jurisdiction or coast guard, they belong to regular or reserved components. But the law goes further to say to close the gap when it mentions the commissioned officers as well though they should have been covered under the term regular components. So significant intepretation is required. Jurisdiction is the best that I can write down, but determination is left to interpretation not calculus in this case.
+
+# This case is beyond my reach, I don't have a clear resolution of this.
+
+declaration enumeration UniformedServicesJurisdiction:
+    -- SecretaryOfDefense
+    -- SecretaryOfNavy
+    -- SecretaryOfAirForce
+```
+
+(a)(16) Withholding agent
+
+The term “withholding agent” means any person required to deduct and withhold any tax under the provisions of section 1441, 1442, 1443, or 1461.
+
+```catala
+# this is again a determination made on a Person. It assumes there exists a person which who is required to withhold any tax under said provisions. Since the determination is required to be made on Person, I can take Person as an input, however that is no binding on this person as of yet. I can make explicit the conditions under which the determination is made.
+
+declaration scope IsWithholdingAgent:
+    input section_id content integer
+    internal valid_section_ids content list of integer
+    output determination content boolean
+
+scope IsWithholdingAgent:
+    definition valid_section_ids equals [1441; 1442; 1443; 1461]
+    definition determination equals 
+    valid_section_ids contains section_id
+```
+
+## (a)(17) Husband and Wife
+
+As used in section 2516, if the husband and wife therein referred to are divorced, wherever appropriate to the meaning of such section, the term “wife” shall be read “former wife” and the term “husband” shall be read “former husband”; and, if the payments described in such section are made by or on behalf of the wife or former wife to the husband or former husband instead of vice versa, wherever appropriate to the meaning of such section, the term “husband” shall be read “wife” and the term “wife” shall be read “husband.”
+
+```catala
+# There are two separate points that (a)(17) makes. First one is that when someone is divorced and when appropriate the former spouse shall be treated under the term 'wife' or 'husband'. The second point is whenever appropriate when one partner pays to the other 'husband' and 'wife' can be used interchangably. 
+# The best I can do is to clarify the first point as an enum, and create a scope
+
+declaration enumeration Spouse:
+    -- CurrentPartner
+    -- FormerPartnerUnderSection2516
+
+declaration scope IsHusbandOrWife:
+    input spouse_current_or_former content Spouse
+    output determination content boolean
+
+# if anything other than given in enumeration is passed Catala will error out, so if everything is okay we just return true
+
+scope IsHusbandOrWife:
+    definition determination equals true
+```
+
+## (a)(18) International organization
+
+The term “international organization” means a public international organization entitled to enjoy privileges, exemptions, and immunities as an international organization under the International Organizations Immunities Act (22 U.S.C. 288–288f).
+
+```catala
+# This is again a bare type, the determination is fully made by some other law. Nothing to formalize. It is an entity brought into existence by the law. Also here the term 'public' need legal interpretation which has nothing to formalize
 ```
 

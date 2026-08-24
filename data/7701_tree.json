@@ -1,7 +1,7 @@
 {
   "id": "7701",
   "num": "",
-  "header": "26 U.S.C. § 7701 — Definitions",
+  "header": "26 U.S. Code § 7701 - Definitions",
   "chapeau": "",
   "body": "",
   "children": [
@@ -2483,7 +2483,7 @@
               "header": "Material assistance cost ratio",
               "chapeau": "",
               "body": "",
-              "continuation": "the cost to the taxpayer with respect to such product, component, element, material, or subcomponent shall not be included for purposes of determining the material assistance cost ratio under this subparagraph.",
+              "continuation": "",
               "children": [
                 {
                   "id": "7701(a)(52)(D)(i)",
@@ -2819,7 +2819,7 @@
                   "header": "Existing contract",
                   "chapeau": "Upon the election of the taxpayer (in such form and manner as the Secretary shall designate), in the case of any manufactured product, eligible component, or constituent element, material, or subcomponent of an eligible component which is—",
                   "body": "",
-                  "continuation": "",
+                  "continuation": "the cost to the taxpayer with respect to such product, component, element, material, or subcomponent shall not be included for purposes of determining the material assistance cost ratio under this subparagraph.",
                   "children": [
                     {
                       "id": "7701(a)(52)(D)(iv)(I)",
@@ -4918,5 +4918,6 @@
         }
       ]
     }
-  ]
+  ],
+  "continuation": ""
 }

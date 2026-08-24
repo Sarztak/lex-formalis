@@ -31,7 +31,6 @@ declaration structure Partnership:
   data form content PartnershipOrganizationForm
   data business_carried_on content boolean
   data is_not_trust_estate_or_corporation content boolean
-  data is_domestic content boolean
 
 # Partner: member_of implies membership, no is_member field needed
 declaration structure Partner:
@@ -48,9 +47,11 @@ declaration enumeration CorporationForm:
   -- JointStockCompany
   -- InsuranceCompany
 
+# determination of domesticity should be separate issue from being
+# a corporation or parternership so I remove the fields. 
+# if any provision needs it it will be determined.
 declaration structure Corporation:
   data form content CorporationForm
-  data is_domestic content boolean
 ```
 
 ## (a)(4)-(5) Domestic and Foreign
@@ -61,27 +62,30 @@ The term "foreign" when applied to a corporation or partnership means a corporat
 
 ```catala
 declaration enumeration CorpOrPartnership:
-  -- IsPartnership
-  -- IsCorporation
+    -- Partnership content Partnership
+    -- Corporation content Corporation
 
 declaration scope DomesticityDetermination:
-  input entity content CorpOrPartnership
-  input created_or_organized_in_us_or_under_law content boolean
-  input secretary_override content boolean
-  input secretary_decision content boolean
-  output is_domestic content boolean
+    input entity content CorpOrPartnership
+    input created_or_organized_in_us_or_under_law content boolean
+    context secretary_decision content boolean
+    output is_domestic content boolean
 
 scope DomesticityDetermination:
-  label base_rule
-  definition is_domestic equals created_or_organized_in_us_or_under_law
+    definition secretary_decision equals false
+    label base_rule
+    definition is_domestic equals
+    created_or_organized_in_us_or_under_law
+
+# if the secretary provides a decision in case of a partnership ship that decision override the base case
 
   exception base_rule
   definition is_domestic
   under condition
     (match entity with pattern
-    -- IsPartnership content p : true
-    -- IsCorporation content c : false)
-    and secretary_override
+    -- CorpOrPartnership.Partnership content p : true
+    -- CorpOrPartnership.Corporation content c : false)
+    and secretary_decision
   consequence equals secretary_decision
 ```
 

@@ -55,7 +55,9 @@ declaration structure Corporation:
 
 ## (a)(4)-(5) Domestic and Foreign
 
-The term "domestic" when applied to a corporation or partnership means created or organized in the United States or under the law of the United States or of any State unless, in the case of a partnership, the Secretary provides otherwise by regulations. The term "foreign" when applied to a corporation or partnership means a corporation or partnership which is not domestic.
+The term "domestic" when applied to a corporation or partnership means created or organized in the United States or under the law of the United States or of any State unless, in the case of a partnership, the Secretary provides otherwise by regulations. 
+
+The term "foreign" when applied to a corporation or partnership means a corporation or partnership which is not domestic.
 
 ```catala
 declaration enumeration CorpOrPartnership:
@@ -83,11 +85,169 @@ scope DomesticityDetermination:
   consequence equals secretary_decision
 ```
 
+## (a)(6) Fudiciary
+
+The term “fiduciary” means a guardian, trustee, executor, administrator, receiver, conservator, or any person acting in any fiduciary capacity for any person.
+
+```catala
+declaration enumeration FudiciaryForm:
+  -- Guardian
+  -- Trustee
+  -- Executor
+  -- Administrator
+  -- Receiver
+  -- Conservator
+  -- Person content Person
+
+declaration structure Fudiciary:
+  data fudiciary_type content FudiciaryForm
+  data acting_in_any_fudiciary_capacity content boolean
+```
+
+## (a)(7) Stock
+
+The term "stock" includes shares in an association, join-stock company, or insurance company
+
+```catala
+declaration enumeration ShareHoldingBody:
+    -- Association
+    -- JointStockCompany
+    -- InsuranceCompany
+
+declaration structure Stock:
+    data stock_in content ShareHoldingBody
+```
+## (a)(8) Shareholder
+
+The term "shareholder" includes a member in an association, join-stock company, or insurance company
+
+```catala
+declaration enumeration ShareholderMembershipBody:
+    -- Association
+    -- JointStockCompany
+    -- InsuranceCompany
+
+declaration structure Shareholder:
+    data shareholding_in content ShareholderMembershipBody
+```
+
+## (a)(9)-(10) United States & State
+The term "United States" when used in a geographical sense includes only the States and the District of Columbia
+
+The term "State" shall be construded to include the District of Columbia, hwere such construction is necessary to carry out provisions of this title
+
+```catala
+# Note that the law does not name the States (IL, CA, NY etc.) so it is open ended term that needs interpretation, but both the definition in 9 and 10 points out to District of Columbia to be include when this provision of the titles are be carried out. One way to formalize this is to just provide a state_id but the law does not says which state or if IL is a state in this definition or CA is a state. For not I provide no code for State
+
+# UnitedStates is just a bare type and though an integer can be used as a field to define United States, it is better understood and interpreted than defined, so no code
+
+```
+
+## (a)(11) Secretary of the Treasury and Secretary
+
+    (A) Secretary of the Treasury
+    The term “Secretary of the Treasury” means the Secretary of the Treasury, personally, and shall not include any delegate of his.
+
+    (B) Secretary
+    The term “Secretary” means the Secretary of the Treasury or his delegate.
+
+```catala
+# Here the law says Secretary  of the Treasury is the person himself there is no other definition, so it is base type and so the a delegate. However the Delegate itself needs determination as to whether the delegate is that of the Secretary or not which is further clarified.
+
+declaration enumeration Secretary:
+    -- SecretaryOfTheTreasury
+    -- DelegateOfTreasurySecretary content Delegate
+```
+
+## (a)(12) Delegate
+
+    (A) In general
+        The term “or his delegate”—
+
+        (i) when used with reference to the Secretary of the Treasury, means any officer, employee, or agency of the Treasury Department duly authorized by the Secretary of the Treasury directly, or indirectly by one or more redelegations of authority, to perform the function mentioned or described in the context; and
+
+        (ii) when used with reference to any other official of the United States, shall be similarly construed.
+
+    (B) Performance of certain functions in Guam or American Samoa
+    The term “delegate,” in relation to the performance of functions in Guam or American Samoa with respect to the taxes imposed by chapters 1, 2, and 21, also includes any officer or employee of any other department or agency of the United States, or of any possession thereof, duly authorized by the Secretary (directly, or indirectly by one or more redelegations of authority) to perform such functions.
+
+---
+It is difficult to determine what a delegate constitute because it is an officer that has been assigned to carry out the function. As to how that has been done determination is done is up to the department or the relevant person who redelegates the officer to carry out the function. Then there is a geographic exception or an extension made in case of Guam/American Samoa where one department can designate a delegate from another department. The question about what fields to surface is a judgement, I can surface geography, authorized by etc as boolean and create a scope that satisfies all those conditions, however those are my choices. As such I think Delegate should be base type the determination of which needs to be made based on the interpretation rather than computation.
+
+If we are speaking logically, we can determine certain input variables the knowledge of which can give us some answers, for instance
+
+T  = Referenced official is the Secretary of the Treasury
+O  = Referenced official is some other U.S. official
+D  = Person is duly authorized (directly OR via redelegation chain)
+R  = Authorization comes from the relevant official in context
+G  = Function is being performed in Guam or American Samoa
+C  = Tax function relates to Chapter 1, 2, or 21
+X  = Person belongs to a different dept/agency (outside Treasury)-
+
+IS_DELEGATE_A = (T ∨ O) ∧ D ∧ R
+IS_DELEGATE_B = G ∧ C ∧ D ∧ X ∧ R
+IS_DELEGATE = IS_DELEGATE_A ∨ IS_DELEGATE_B
+---
+
+```catala
+
+declaration scope IsDelegate:
+    input is_treasury_or_other_official content boolean
+    input is_duly_authorized content boolean
+    input authorization_traces_to_official content boolean
+    context in_guam_or_samoa content boolean
+    context is_chapter_1_2_21 content boolean
+    context is_different_dept content boolean
+    internal is_delegate_a content boolean
+    internal is_delegate_b content boolean
+    output determination content boolean
+
+scope IsDelegate:
+    definition in_guam_or_samoa equals false
+    definition is_chapter_1_2_21 equals false
+    definition is_different_dept equals false
+
+    definition is_delegate_a equals (
+        is_treasury_or_other_official and 
+        is_duly_authorized and 
+        authorization_traces_to_official
+    )
+
+    definition is_delegate_b equals (
+        in_guam_or_samoa and
+        is_chapter_1_2_21 and
+        is_duly_authorized and
+        is_different_dept and
+        authorization_traces_to_official
+    )
+
+    definition determination equals
+        is_delegate_a or is_delegate_b
+
+# I don't know if it is possible or not, but thinking back about is while writing tests scope it is possible to specify the content to be directy another scope so I thought it could be done here as well while defining a structure which forces you to evaluate the function and pass it. However, this will pass the entire function including all its variables - input, internal and output so it is not a full determination. Though one can think of this as match on enum if the field is_delegate inside IsDelegate function is used to check. I don't think this is a good method though. 
+
+declaration structure Delegate:
+    data is_delegate content IsDelegate
+```
+
+## (a)(13) Commissioner
+
+The term "Commissioner" means the Commissioner of Internal Revenue
+
+
+```catala
+# This is a bare type, a commissioner is a position, that is or isn't. 
+# No declaration
+```
+
 ## (a)(14) Taxpayer
 
 The term "taxpayer" means any person subject to any internal revenue tax.
 
 ```catala
+# two conditions are specified, one should be a person, and second subjected to tax. The second field is subject to intepretation as nothing has been specified about determination that can be formalized.
+# though it raises an interesting question, given these two conditions I can specify a scope for determination, earlier I have just created fields to surface the conditions however, it is possible to provide a single field. Though I don't know how useful that is going to be. This will same as what was done in case of delegate determination. The idea is the structure will carry the information needed for determination as well as the result, serving as determination, however the type as such is a Tag which is not yet determined. So if I specify TaxPayer as a matching field I will have to check the value inside the structure to truly know if that is a tax payer or not, which see wrong and circular. Essentially this makes the structure such as TaxPayer or Delegate an enum rather because it carries the result of being a TaxPayer and hides the true function underneath. 
+
 declaration structure TaxPayer:
   data person content Person
   data subject_to_tax content boolean

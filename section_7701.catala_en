@@ -461,6 +461,7 @@ declaration scope DetermineDomesticBuildingAndLoan:
     input business_is_savings_and_loans content boolean
     input total_assets content money
     input assets content list of Asset
+    input assets_at_close_of_taxable_year content boolean
     context election_to_use_average content boolean
     context average_assets_percent content decimal
     internal qualifying_assets content money
@@ -491,5 +492,12 @@ scope DetermineDomesticBuildingAndLoan:
     definition is_domestic_building_and_loan equals
         subject_to_supervision
         and business_is_savings_and_loans
+        and assets_at_close_of_taxable_year
         and effective_percent >= 60%
 ```
+After reading through this, I think that entire law can be formalized as logical operation over various provisions (conjunctions & disjunction). Take for example here i-ix are one structure, A, B, C are 3 conditions required to determine the outcome. i to ix are types of assests that are counted. Then there are exception which is an alternative logical computation. So rather than trying to encode line by line I can abstract away under structures the meaning which require heavy judgement and provide conjunction or disjunction or computation over those structure or data as required. This can be one way to resolve it, after all the best I can hope for is to surface the computational part and separate out the interpretational part. Those parts that are not questionable are conjunctions and disjunctions but the statements themselves can be interpreted differently. And then in each I can further subdivide. For example here, I can construct create more scopes for each of the i to ix if needed.
+
+I was just thinking, what is the income tax for? the simple answer is to compute how much tax you own, which essentially is measured in money. I don't know, but I think it would be rare at least here in US that you tax is measured in community service or 10 lashes on your back(maybe someone might get an equivalent). My point is the outcome of any tax computation is amount of money that you own on whatever can be considered an asset. Those assests and your information are inputs, and you are tax based on those. The tax isn
+t uniform either. Tax on income is different from tax on house, and that is still different from that tax that I pay while buying groceries. The computation is non-linear, however the basic principle seems to be you are categorized into a certain class and then there is a certain amount of tax which can be computed for these classes. 
+
+This provide a useful outlook in how am I supposed to formalize the tax law, that is by started bottom up, that is from the money portion, however the laws might span several functions before we get to the actual part where money is computed. Not to mention that the law it written top down, however using LLM I can do a structural analysis first and build out a plan rather even though the code itself is top to bottom. The decides at the bottom affect that should be created at the top. If there are section that do compute money, then I think that should be the starting point. Then decide upon the conjunctions and disjunction over the inputs. types and scopes are not just for numerical computation, they are also categories those I cannot explain computationally. But using these categories I can compute the taxes. That distinct should be maintained, abstract what cannot be explained and calculate what can be.

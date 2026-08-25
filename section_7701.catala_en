@@ -355,7 +355,6 @@ declaration structure Cash:
 
 declaration structure GovernmentObligations:
     data amount content money
-    data is_excludable_under_section_103 content boolean
 
 declaration structure StateInsuredDeposits:
     data amount content money
@@ -363,8 +362,25 @@ declaration structure StateInsuredDeposits:
 declaration structure MemberSecuredLoans:
     data amount content money
 
+declaration enumeration ResidentialRealPropertyType:
+    -- SingleFamilyDwelling
+    -- MultiFamilyDwelling
+    -- ResidentialDevelopmentPublicUseFacility
+    -- NonprofitBasisResidentProperty
+    -- MobileHomeNotTransient
+
+declaration enumeration PropertyType:
+    -- Residential content ResidentialRealPropertyType
+    -- Church
+
+declaration enumeration LoanPurpose:
+    -- Ownership
+    -- Improvement
+
 declaration structure ResidentialRealPropertyLoan:
     data amount content money
+    data property_type content PropertyType
+    data purpose content LoanPurpose
     data has_nonresidential_use content boolean
     data planned_residential_use_percent content decimal
     data reasonable_assurance_within_3_years content boolean
@@ -402,24 +418,15 @@ declaration enumeration Asset:
     -- BusinessUseProperty content BusinessUseProperty
     -- RemicInterest content RemicInterest
 
-declaration scope ClassifyGovernmentObligations:
-    input go content GovernmentObligations
-    output qualifying_amount content money
-
-scope ClassifyGovernmentObligations:
-    definition qualifying_amount equals
-        if go.is_excludable_under_section_103 then $ 0 else go.amount
-
 declaration scope ClassifyResidentialRealPropertyLoan:
     input rpl content ResidentialRealPropertyLoan
     output qualifying_amount content money
 
-scope ClassifyResidentialRealPropertyLoan:
+    scope ClassifyResidentialRealPropertyLoan:
     definition qualifying_amount equals
-        if (not rpl.has_nonresidential_use)
-           or rpl.planned_residential_use_percent > 80%
-           or (rpl.reasonable_assurance_within_3_years
-               and rpl.land_became_residential_within_3_years)
+        if rpl.property_type with pattern Residential content dwelling_type
+        and (dwelling_type with pattern MultiFamilyDwelling)
+        and ((not rpl.has_nonresidential_use) or rpl.planned_residential_use_percent > 80%)
         then rpl.amount else $ 0
 
 declaration scope ClassifyRemicInterest:
@@ -437,9 +444,6 @@ declaration scope GetAssetAmount:
 scope GetAssetAmount:
     definition amount equals
         match asset with pattern
-            -- GovernmentObligations content go :
-                (output of ClassifyGovernmentObligations
-                    with { -- go: go }).qualifying_amount
             -- ResidentialRealPropertyLoan content rpl :
                 (output of ClassifyResidentialRealPropertyLoan
                     with { -- rpl: rpl }).qualifying_amount
@@ -447,6 +451,7 @@ scope GetAssetAmount:
                 (output of ClassifyRemicInterest
                     with { -- ri: ri }).qualifying_amount
             -- Cash content c : c.amount
+            -- GovernmentObligations content go: go.amount
             -- StateInsuredDeposits content sd : sd.amount
             -- MemberSecuredLoans content ms : ms.amount
             -- UrbanRenewalRealPropertyLoans content urban : urban.amount
@@ -456,44 +461,53 @@ scope GetAssetAmount:
             -- BusinessUseProperty content bup : bup.amount
 
 declaration scope DetermineDomesticBuildingAndLoan:
-    input association_type content BuildingAndLoanType
+    # I just added this as output for refering to what type was being qualified 
+    input output association_type content BuildingAndLoanType
+    
+    # paragraph A
     input subject_to_supervision content boolean
+
+    # paragraph B
     input business_is_savings_and_loans content boolean
-    input total_assets content money
-    input assets content list of Asset
-    input assets_at_close_of_taxable_year content boolean
+
+    # paragraph C
+    input total_assets_at_close_of_taxable_year content money
+    input qualifying_assets_at_close_of_taxable_year content list of Asset
+
+    output is_domestic_building_and_loan content boolean
+
+    # Exception in case of taxpayer election given in continuation
+    # the law does not say anything about how the average_assets_percent is supposed to be calculated.
+    # It is based on whatever rules Treasury Secretary outlines
     context election_to_use_average content boolean
     context average_assets_percent content decimal
     internal qualifying_assets content money
     internal qualifying_assets_percent content decimal
-    internal effective_percent content decimal
-    output is_domestic_building_and_loan content boolean
 
 scope DetermineDomesticBuildingAndLoan:
+
+    # default values in case of no taxpayer election
     definition election_to_use_average equals false
     definition average_assets_percent equals 0%
 
     definition qualifying_assets equals
         Money.sum of
-            (map each asset among assets to
+            (map each asset among qualifying_assets_at_close_of_taxable_year to
                 (output of GetAssetAmount with { -- asset: asset }).amount)
 
-    definition qualifying_assets_percent equals
-        qualifying_assets / total_assets * 100%
-
     label base_assets
-    definition effective_percent equals qualifying_assets_percent
+    definition qualifying_assets_percent equals
+        qualifying_assets / total_assets_at_close_of_taxable_year * 100%
 
     exception base_assets
-    definition effective_percent
+    definition qualifying_assets_percent
         under condition election_to_use_average
         consequence equals average_assets_percent
 
     definition is_domestic_building_and_loan equals
         subject_to_supervision
         and business_is_savings_and_loans
-        and assets_at_close_of_taxable_year
-        and effective_percent >= 60%
+        and qualifying_assets_percent >= 60%
 ```
 After reading through this, I think that entire law can be formalized as logical operation over various provisions (conjunctions & disjunction). Take for example here i-ix are one structure, A, B, C are 3 conditions required to determine the outcome. i to ix are types of assests that are counted. Then there are exception which is an alternative logical computation. So rather than trying to encode line by line I can abstract away under structures the meaning which require heavy judgement and provide conjunction or disjunction or computation over those structure or data as required. This can be one way to resolve it, after all the best I can hope for is to surface the computational part and separate out the interpretational part. Those parts that are not questionable are conjunctions and disjunctions but the statements themselves can be interpreted differently. And then in each I can further subdivide. For example here, I can construct create more scopes for each of the i to ix if needed.
 

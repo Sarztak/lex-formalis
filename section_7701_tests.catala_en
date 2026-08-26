@@ -1,0 +1,23 @@
+> Using Section_7701 as S
+
+
+```catala
+
+declaration scope Test:
+    output computation content S.ClassifyResidentialRealPropertyLoan
+
+scope Test:
+    definition computation equals 
+    output of S.ClassifyResidentialRealPropertyLoan with {
+    -- rpl: S.ResidentialRealPropertyLoan {
+        -- amount: $10,000
+        -- property_type:  S.PropertyType.Residential content S.ResidentialRealPropertyType.MultiFamilyDwelling
+        -- purpose:  S.LoanPurpose.Ownership
+    -- has_nonresidential_use: true
+    -- planned_residential_use_percent: 90%
+    -- reasonable_assurance_within_3_years: true
+    -- land_became_residential_within_3_years: true
+    }
+}
+
+```

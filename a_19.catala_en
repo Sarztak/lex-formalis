@@ -43,18 +43,14 @@ declaration enumeration ResidentialRealPropertyType:
     -- NonprofitBasisResidentProperty
     -- MobileHomeNotTransient
 
-declaration enumeration PropertyType:
-    -- Residential content ResidentialRealPropertyType
-    -- Church
-
-declaration enumeration LoanPurpose:
-    -- Ownership
-    -- Improvement
+declaration enumeration RealPropertyStatus:
+    -- IsResidential content ResidentialRealPropertyType
+    -- WillBecomeResidential content ResidentialRealPropertyType
+    -- IsChurch
 
 declaration structure ResidentialRealPropertyLoan:
     data amount content money
-    data property_type content PropertyType
-    data purpose content LoanPurpose
+    data real_property_status content RealPropertyStatus
     data mixed_use_residential_percent content optional of decimal
     data reasonable_assurance_within_3_years content boolean
     data land_becomes_residential_within_3_years content optional of boolean
@@ -101,15 +97,17 @@ declaration scope ClassifyResidentialRealPropertyLoan:
     scope ClassifyResidentialRealPropertyLoan:
     label base_rule
     rule qualifies under condition 
-        rpl.mixed_use_residential_percent with pattern Absent
+        (rpl.real_property_status with pattern IsResidential 
+        or rpl.real_property_status with pattern IsChurch)
+        and rpl.mixed_use_residential_percent with pattern Absent
     consequence fulfilled
 
     label mixed_usage_rule
     rule qualifies under condition
-        (rpl.mixed_use_residential_percent with pattern Present content usage 
-        and usage > 80%)
-        and (rpl.property_type with pattern Residential content dwelling_type 
+        (rpl.real_property_status with pattern IsResidential content dwelling_type
         and dwelling_type with pattern MultiFamilyDwelling)
+        and (rpl.mixed_use_residential_percent with pattern Present content usage 
+        and usage > 80%)
     consequence fulfilled
     
     # I still cannot formalize the 3rd rule about the loan being provisionally qualified if there are sufficient reasons to believe so
@@ -118,8 +116,9 @@ declaration scope ClassifyResidentialRealPropertyLoan:
     # right now is to optionally have the input whether the residential property was build within 3 years or not.
     label land_rule
     rule qualifies under condition
-        rpl.reasonable_assurance_within_3_years and 
-        rpl.land_becomes_residential_within_3_years with pattern Present content is_residential and is_residential
+        rpl.real_property_status with pattern WillBecomeResidential
+        and rpl.reasonable_assurance_within_3_years
+        and rpl.land_becomes_residential_within_3_years with pattern Present content is_residential and is_residential
     consequence fulfilled
 
 
@@ -128,8 +127,14 @@ declaration scope ClassifyRemicInterest:
     output qualifying_amount content money
 
 scope ClassifyRemicInterest:
+    label base_rule
     definition qualifying_amount equals
         ri.amount * ri.qualifying_asset_proportion
+
+    exception base_rule
+    definition qualifying_amount under condition
+        ri.qualifying_asset_proportion >= 95%
+    consequence equals ri.amount
 
 declaration scope GetAssetAmount:
     input asset content Asset
@@ -214,11 +219,20 @@ scope Test:
     output of ClassifyResidentialRealPropertyLoan with {
     -- rpl: ResidentialRealPropertyLoan {
         -- amount: $10,000
-        -- property_type:  PropertyType.Residential content ResidentialRealPropertyType.MultiFamilyDwelling
-        -- purpose:  LoanPurpose.Ownership
+        -- real_property_status:  IsResidential content ResidentialRealPropertyType.MultiFamilyDwelling
     -- mixed_use_residential_percent : Present content 90%
+    -- reasonable_assurance_within_3_years: true
+    -- land_becomes_residential_within_3_years: Present content false
     }
 }
 
 ```
+I am still quite confused by the two additional rules, one seems to apply when you already have property and then another when you have loan but no property, and the base rule checks none of these except loans taken for development or "with an interest in" which I don't understand at all now. The problem is that base rule just fires. and it also raises question if this should really be split into 3 parts or just one condition like it was before, and even to apply the extra rules properly one needs to distinguish whether the loan was for existing property or for acquiring a new one.
 
+I realize that if there are exceptions or addition, the base rule needs to be broken down even further, the formalization of the base rule depends solely on the additional sub-rules and exceptions.
+
+Also exceptions may exists in the same clause, in fact even in the next line.
+
+Thinking further, the additional rules target different cases of loans -- those that are taking when property already exists and then those which are taken when proceeds from the loan will be used to build the property itself. The real property status is what is being targeted by the additional rules. So first of all the additions and exceptions needs to be read, the approach of going to to bottom is just an idealization when formalizing complex laws. Upstream break when additional things are specified that makes no sense without looking at the entire provision not just piece by piece as things get added.
+
+I think it is important to make test cases as the something as complex as a(19) is created because the branches and distinctions are not immediately clear unless you start thinking of different test cases based on what is given in the prose.

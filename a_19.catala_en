@@ -56,6 +56,8 @@ declaration structure ResidentialRealPropertyLoan:
     data property_type content PropertyType
     data purpose content LoanPurpose
     data mixed_use_residential_percent content optional of decimal
+    data reasonable_assurance_within_3_years content boolean
+    data land_becomes_residential_within_3_years content optional of boolean
 
 declaration structure UrbanRenewalRealPropertyLoans:
     data amount content money
@@ -104,8 +106,20 @@ declaration scope ClassifyResidentialRealPropertyLoan:
 
     label mixed_usage_rule
     rule qualifies under condition
-        rpl.mixed_use_residential_percent with pattern Present content usage and usage > 80%
-        and rpl.property_type with pattern Residential content dwelling_type and dwelling_type with pattern MultiFamilyDwelling
+        (rpl.mixed_use_residential_percent with pattern Present content usage 
+        and usage > 80%)
+        and (rpl.property_type with pattern Residential content dwelling_type 
+        and dwelling_type with pattern MultiFamilyDwelling)
+    consequence fulfilled
+    
+    # I still cannot formalize the 3rd rule about the loan being provisionally qualified if there are sufficient reasons to believe so
+    # however it get disqualified if the residential property is not build within 3 years, which raises the question when is this law
+    # even supposed to be applied. It seems that it cancels the qualification retroactively, for the past 3 years. The best I can do
+    # right now is to optionally have the input whether the residential property was build within 3 years or not.
+    label land_rule
+    rule qualifies under condition
+        rpl.reasonable_assurance_within_3_years and 
+        rpl.land_becomes_residential_within_3_years with pattern Present content is_residential and is_residential
     consequence fulfilled
 
 

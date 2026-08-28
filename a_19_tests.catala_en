@@ -10,10 +10,10 @@ scope TestBaseRuleSingleFamily:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: IsResidential content A_19.ResidentialInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- mixed_use_residential_percent: Absent
+                }
             }
         }
     assertion result.qualifies
@@ -27,10 +27,10 @@ scope TestBaseRuleMultiFamily:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialRealPropertyType.MultiFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: IsResidential content A_19.ResidentialInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                    -- mixed_use_residential_percent: Absent
+                }
             }
         }
     assertion result.qualifies
@@ -45,9 +45,6 @@ scope TestBaseRuleChurch:
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
                 -- real_property_status: IsChurch
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
             }
         }
     assertion result.qualifies
@@ -61,10 +58,10 @@ scope TestMixedUsageRulePass:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialRealPropertyType.MultiFamilyDwelling
-                -- mixed_use_residential_percent: Present content 90%
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: IsResidential content A_19.ResidentialInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                    -- mixed_use_residential_percent: Present content 90%
+                }
             }
         }
     assertion result.qualifies
@@ -78,10 +75,10 @@ scope TestMixedUsageRuleFail:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialRealPropertyType.MultiFamilyDwelling
-                -- mixed_use_residential_percent: Present content 60%
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: IsResidential content A_19.ResidentialInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                    -- mixed_use_residential_percent: Present content 60%
+                }
             }
         }
     assertion not result.qualifies
@@ -95,10 +92,10 @@ scope TestMixedUsageRuleSingleFamilyFail:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Present content 90%
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: IsResidential content A_19.ResidentialInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- mixed_use_residential_percent: Present content 90%
+                }
             }
         }
     assertion not result.qualifies
@@ -112,10 +109,11 @@ scope TestLandRulePass:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: true
-                -- land_becomes_residential_within_3_years: Present content true
+                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- reasonable_assurance_within_3_years: true
+                    -- land_becomes_residential_within_3_years: Present content true
+                }
             }
         }
     assertion result.qualifies
@@ -129,10 +127,11 @@ scope TestLandRuleProvisional:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: true
-                -- land_becomes_residential_within_3_years: Absent
+                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- reasonable_assurance_within_3_years: true
+                    -- land_becomes_residential_within_3_years: Absent
+                }
             }
         }
     assertion result.qualifies
@@ -146,10 +145,11 @@ scope TestLandRuleFailNoConversion:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: true
-                -- land_becomes_residential_within_3_years: Present content false
+                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- reasonable_assurance_within_3_years: true
+                    -- land_becomes_residential_within_3_years: Present content false
+                }
             }
         }
     assertion not result.qualifies
@@ -163,10 +163,11 @@ scope TestLandRuleFailNoAssurance:
         output of A_19.ClassifyResidentialRealPropertyLoan with {
             -- rpl: A_19.ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.ResidentialRealPropertyType.SingleFamilyDwelling
-                -- mixed_use_residential_percent: Absent
-                -- reasonable_assurance_within_3_years: false
-                -- land_becomes_residential_within_3_years: Present content true
+                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
+                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                    -- reasonable_assurance_within_3_years: false
+                    -- land_becomes_residential_within_3_years: Present content true
+                }
             }
         }
     assertion not result.qualifies

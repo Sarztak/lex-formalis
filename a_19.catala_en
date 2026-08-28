@@ -45,17 +45,23 @@ declaration enumeration ResidentialRealPropertyType:
     -- NonprofitBasisResidentProperty
     -- MobileHomeNotTransient
 
+declaration structure ResidentialInfo:
+    data property_type content ResidentialRealPropertyType
+    data mixed_use_residential_percent content optional of decimal
+
+declaration structure LoanInfo:
+    data property_type content ResidentialRealPropertyType
+    data reasonable_assurance_within_3_years content boolean
+    data land_becomes_residential_within_3_years content optional of boolean
+
 declaration enumeration RealPropertyStatus:
-    -- IsResidential content ResidentialRealPropertyType
-    -- WillBecomeResidential content ResidentialRealPropertyType
+    -- IsResidential content ResidentialInfo
+    -- WillBecomeResidential content LoanInfo
     -- IsChurch
 
 declaration structure ResidentialRealPropertyLoan:
     data amount content money
     data real_property_status content RealPropertyStatus
-    data mixed_use_residential_percent content optional of decimal
-    data reasonable_assurance_within_3_years content boolean
-    data land_becomes_residential_within_3_years content optional of boolean
 
 declaration structure UrbanRenewalRealPropertyLoans:
     data amount content money
@@ -99,17 +105,17 @@ declaration scope ClassifyResidentialRealPropertyLoan:
     scope ClassifyResidentialRealPropertyLoan:
     label base_rule
     rule qualifies under condition 
-        (rpl.real_property_status with pattern IsResidential 
-        or rpl.real_property_status with pattern IsChurch)
-        and rpl.mixed_use_residential_percent with pattern Absent
+        (rpl.real_property_status with pattern IsResidential content residential_info
+        and residential_info.mixed_use_residential_percent with pattern Absent)
+        or rpl.real_property_status with pattern IsChurch
     consequence fulfilled
 
     label mixed_usage_rule
     rule qualifies under condition
-        (rpl.real_property_status with pattern IsResidential content dwelling_type
-        and dwelling_type with pattern MultiFamilyDwelling)
-        and (rpl.mixed_use_residential_percent with pattern Present content usage 
-        and usage > 80%)
+        rpl.real_property_status with pattern IsResidential content residential_info
+        and residential_info.property_type with pattern MultiFamilyDwelling
+        and residential_info.mixed_use_residential_percent with pattern Present content usage 
+        and usage > 80%
     consequence fulfilled
 
     # I still cannot formalize the 3rd rule about the loan being provisionally qualified if there are sufficient reasons to believe so
@@ -119,9 +125,9 @@ declaration scope ClassifyResidentialRealPropertyLoan:
     # here the Absent condition mean the rule is applied when the loan is taken Present means after 3 years
     label land_rule
     rule qualifies under condition
-        rpl.real_property_status with pattern WillBecomeResidential
-        and rpl.reasonable_assurance_within_3_years
-        and match rpl.land_becomes_residential_within_3_years with pattern 
+        rpl.real_property_status with pattern WillBecomeResidential content loan_info
+        and loan_info.reasonable_assurance_within_3_years
+        and match loan_info.land_becomes_residential_within_3_years with pattern 
             -- Absent: true
             -- Present content is_residential: is_residential
     consequence fulfilled

@@ -1,0 +1,9 @@
+> Module Foo external
+
+```catala-metadata
+declaration type RemicAssets: external
+
+declaration enumeration Ultra:
+    -- Apple content integer
+
+```

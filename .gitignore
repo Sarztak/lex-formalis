@@ -34,3 +34,6 @@ notes/
 
 # catala & ocaml build
 _build/
+
+# ocp-indent for ocaml indentation
+.ocp-indent

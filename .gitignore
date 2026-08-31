@@ -1,5 +1,12 @@
 __pycache__
 
+# Rust build artifacts
+target/
+generated/
+
+# Dune build artifacts
+_build/
+
 # ocaml intermediate files
 *.cmi
 *.cmx
@@ -21,3 +28,8 @@ demo/
 # local tooling
 TASKS.md
 memory/
+
+# local notes
+exceptions_conversation.md
+sessions
+list_of_changes

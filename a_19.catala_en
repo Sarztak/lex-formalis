@@ -78,7 +78,10 @@ declaration structure BusinessUseProperty:
 
 declaration structure RemicInterest:
     data amount content money
-    data qualifying_asset_proportion content decimal
+    data assets content list of Asset
+
+declaration structure AssetsOutsideA19:
+    data amount content money
 
 declaration enumeration Asset:
     -- Cash content Cash
@@ -91,7 +94,7 @@ declaration enumeration Asset:
     -- LiquidatedDefaultProperty content LiquidatedDefaultProperty
     -- EducationExpenseLoans content EducationExpenseLoans
     -- BusinessUseProperty content BusinessUseProperty
-    -- RemicInterest content RemicInterest
+    -- AssetsOutsideA19 content AssetsOutsideA19
 
 declaration scope ClassifyResidentialRealPropertyLoan:
     input rpl content ResidentialRealPropertyLoan
@@ -133,16 +136,26 @@ declaration scope ClassifyResidentialRealPropertyLoan:
 
 declaration scope ClassifyRemicInterest:
     input ri content RemicInterest
-    output qualifying_amount content money
+    internal assets_calculation content GetTotalQualifyingAssets
+    internal qualifying_proportion content decimal
+    output qualifying_interest content money
 
 scope ClassifyRemicInterest:
+    definition assets_calculation equals
+        output of GetTotalQualifyingAssets with {
+            --assets: ri.assets
+        }
+
+    definition qualifying_proportion equals
+        assets_calculation.qualifying_amount / assets_calculation.total_amount
+
     label base_rule
-    definition qualifying_amount equals
-        ri.amount * ri.qualifying_asset_proportion
+    definition qualifying_interest equals
+        ri.amount * qualifying_proportion
 
     exception base_rule
-    definition qualifying_amount under condition
-        ri.qualifying_asset_proportion >= 95%
+    definition qualifying_interest under condition
+        qualifying_proportion >= 95%
     consequence equals ri.amount
 
 declaration scope GetAssetAmount:
@@ -160,7 +173,6 @@ scope GetAssetAmount:
         match asset with pattern
             -- ResidentialRealPropertyLoan content rpl:
                 if rpl_qualifies then rpl.amount else $ 0
-            -- RemicInterest content ri: ri.amount
             -- Cash content c : c.amount
             -- GovernmentObligations content go: go.amount
             -- StateInsuredDeposits content sd : sd.amount
@@ -170,6 +182,7 @@ scope GetAssetAmount:
             -- LiquidatedDefaultProperty content ldp : ldp.amount
             -- EducationExpenseLoans content eel : eel.amount
             -- BusinessUseProperty content bup : bup.amount
+            -- AssetsOutsideA19 content ao: ao.amount
 
 declaration scope DetermineDomesticBuildingAndLoan:
     # I just added this as output for refering to what type was being qualified 
@@ -223,8 +236,19 @@ scope DetermineDomesticBuildingAndLoan:
 declaration scope GetTotalQualifyingAssets:
     input assets content list of Asset
     output total_amount content money
+    output qualifying_amount content money
 
 scope GetTotalQualifyingAssets:
+    definition qualifying_amount equals
+        Money.sum of
+            map each asset among assets such that
+                match asset with pattern
+                    -- AssetsOutsideA19: false
+                    -- anything: true
+            to (output of GetAssetAmount with {
+                    -- asset: asset
+                }).amount
+
     definition total_amount equals
         Money.sum of
             map each asset among assets to (output of GetAssetAmount with {

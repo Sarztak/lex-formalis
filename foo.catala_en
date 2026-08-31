@@ -6,4 +6,7 @@ declaration type RemicAssets: external
 declaration enumeration Ultra:
     -- Apple content integer
 
+declaration total_qualifying content money depends on t content RemicAssets
+
 ```
+

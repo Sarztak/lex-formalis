@@ -1,0 +1,12 @@
+(executable
+ (name catala_backends_plugin)
+ (modules to_rust to_lean catala_backends_plugin)
+ (modes plugin)
+ (libraries
+  catala.catala_utils
+  catala.shared_ast
+  catala.runtime_ocaml
+  catala.lcalc
+  catala.scalc
+  catala.driver
+  cmdliner))

@@ -1,0 +1,40 @@
+## Article 1
+
+The income tax for an individual is defined as a fixed percentage of the
+individual's income over a year.
+
+```catala
+declaration structure Individual:
+    data income content money
+    data number_of_children content integer
+
+declaration scope IncomeTaxComputation:
+    input individual content Individual
+    internal tax_rate content decimal
+    output income_tax content money
+
+scope IncomeTaxComputation:
+    definition income_tax equals 
+        individual.income * tax_rate
+
+declaration scope TestTaxComputation:
+    internal individual content Individual
+    output result content IncomeTaxComputation
+
+scope IncomeTaxComputation:
+    definition tax_rate equals 20 %
+
+scope IncomeTaxComputation:
+    definition tax_rate
+    under condition individual.number_of_children >= 2
+    consequence equals 15%
+
+scope TestTaxComputation:
+    definition individual equals 
+    Individual {
+        -- income: $80,000.00
+        -- number_of_children: 2
+    }
+    definition result equals
+        output of IncomeTaxComputation with {-- individual: individual}
+```

@@ -30,6 +30,7 @@ TASKS.md
 memory/
 
 # local notes
-exceptions_conversation.md
-sessions
-list_of_changes
+notes/
+
+# catala & ocaml build
+_build/

@@ -1,0 +1,5 @@
+(dirs ())
+(library
+ (name remic)
+ (modules foo)
+ (libraries catala.runtime_ocaml yojson))

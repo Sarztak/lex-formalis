@@ -1,0 +1,51 @@
+> Using Foo
+
+```catala
+#[test]
+declaration scope TestTotalQualifying:
+    output total content money
+
+scope TestTotalQualifying:
+    definition total equals
+        Foo.total_qualifying of
+            #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true},{\"amount\":50.0,\"qualifies\":false},{\"amount\":75.0,\"qualifies\":true}],\"nested_remic\":[]}"] Foo.RemicAssets
+    assertion total = $ 175
+
+#[test]
+declaration scope TestFromJsonEmpty:
+    output result content Foo.RemicAssets
+
+scope TestFromJsonEmpty:
+    definition result equals
+        #[json = "{\"assets\":[],\"nested_remic\":[]}"] Foo.RemicAssets
+
+#[test]
+declaration scope TestFromJsonWithAssets:
+    output result content Foo.RemicAssets
+
+scope TestFromJsonWithAssets:
+    definition result equals
+        #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true}],\"nested_remic\":[]}"] Foo.RemicAssets
+
+#[test]
+declaration scope TestFromJsonNested:
+    output result content Foo.RemicAssets
+
+scope TestFromJsonNested:
+    definition result equals
+        #[json = "{\"assets\":[],\"nested_remic\":[{\"assets\":[{\"amount\":50.0,\"qualifies\":false}],\"nested_remic\":[]}]}"] Foo.RemicAssets
+
+#[test]
+declaration scope TestEquality:
+    output a content Foo.RemicAssets
+    output b content Foo.RemicAssets
+    output eq content boolean
+
+scope TestEquality:
+    definition a equals
+        #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true}],\"nested_remic\":[]}"] Foo.RemicAssets
+    definition b equals
+        #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true}],\"nested_remic\":[]}"] Foo.RemicAssets
+    definition eq equals a = b
+    assertion eq
+```

@@ -48,4 +48,14 @@ scope TestEquality:
         #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true}],\"nested_remic\":[]}"] Foo.RemicAssets
     definition eq equals a = b
     assertion eq
+
+#[test]
+declaration scope TestNestedTotalQualifying:
+    output total_assets content money
+
+scope TestNestedTotalQualifying:
+    definition total_assets equals 
+        Foo.total_qualifying of 
+        #[json = "{\"assets\":[{\"amount\":100.0,\"qualifies\":true},{\"amount\":50.0,\"qualifies\":true}],\"nested_remic\":[{\"assets\":[{\"amount\":45.0,\"qualifies\":true},{\"amount\":5.0,\"qualifies\":true}],\"nested_remic\":[]}]}"] Foo.RemicAssets
+    assertion total_assets = $ 200
 ```

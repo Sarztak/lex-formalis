@@ -54,13 +54,18 @@ module RemicAssets = struct
 end
 
 (* Top-level function that operates on the concrete record type *)
-let total_qualifying (t : remic_assets) : money =
-    List.fold_left
+let rec total_qualifying (t : remic_assets) : money =
+    let amt1 = List.fold_left
         (fun acc a ->
             if a.qualifies then o_add_mon_mon acc (money_of_decimal a.amount)
             else acc)
         (money_of_decimal (decimal_of_float 0.0))
-        t.assets
+        t.assets in
+    let amt2 = List.fold_left
+        (fun acc r -> o_add_mon_mon acc (total_qualifying r))
+        (money_of_decimal (decimal_of_float 0.0))
+        t.nested_remic in
+    o_add_mon_mon amt1 amt2
 
 let empty : remic_assets = { assets = []; nested_remic = [] }
 

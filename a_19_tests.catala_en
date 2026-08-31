@@ -1,17 +1,17 @@
-> Using A_19
+> Include: a_19.catala_en
 
 ```catala
 #[test]
 declaration scope TestBaseRuleSingleFamily:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestBaseRuleSingleFamily:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: IsResidential content ResidentialInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- mixed_use_residential_percent: Absent
                 }
             }
@@ -20,15 +20,15 @@ scope TestBaseRuleSingleFamily:
 
 #[test]
 declaration scope TestBaseRuleMultiFamily:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestBaseRuleMultiFamily:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                -- real_property_status: IsResidential content ResidentialInfo {
+                    -- property_type: ResidentialRealPropertyType.MultiFamilyDwelling
                     -- mixed_use_residential_percent: Absent
                 }
             }
@@ -37,12 +37,12 @@ scope TestBaseRuleMultiFamily:
 
 #[test]
 declaration scope TestBaseRuleChurch:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestBaseRuleChurch:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
                 -- real_property_status: IsChurch
             }
@@ -51,15 +51,15 @@ scope TestBaseRuleChurch:
 
 #[test]
 declaration scope TestMixedUsageRulePass:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestMixedUsageRulePass:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                -- real_property_status: IsResidential content ResidentialInfo {
+                    -- property_type: ResidentialRealPropertyType.MultiFamilyDwelling
                     -- mixed_use_residential_percent: Present content 90%
                 }
             }
@@ -68,15 +68,15 @@ scope TestMixedUsageRulePass:
 
 #[test]
 declaration scope TestMixedUsageRuleFail:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestMixedUsageRuleFail:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.MultiFamilyDwelling
+                -- real_property_status: IsResidential content ResidentialInfo {
+                    -- property_type: ResidentialRealPropertyType.MultiFamilyDwelling
                     -- mixed_use_residential_percent: Present content 60%
                 }
             }
@@ -85,15 +85,15 @@ scope TestMixedUsageRuleFail:
 
 #[test]
 declaration scope TestMixedUsageRuleSingleFamilyFail:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestMixedUsageRuleSingleFamilyFail:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: IsResidential content A_19.ResidentialInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: IsResidential content ResidentialInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- mixed_use_residential_percent: Present content 90%
                 }
             }
@@ -102,15 +102,15 @@ scope TestMixedUsageRuleSingleFamilyFail:
 
 #[test]
 declaration scope TestLandRulePass:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestLandRulePass:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: WillBecomeResidential content LoanInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- reasonable_assurance_within_3_years: true
                     -- land_becomes_residential_within_3_years: Present content true
                 }
@@ -120,15 +120,15 @@ scope TestLandRulePass:
 
 #[test]
 declaration scope TestLandRuleProvisional:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestLandRuleProvisional:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: WillBecomeResidential content LoanInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- reasonable_assurance_within_3_years: true
                     -- land_becomes_residential_within_3_years: Absent
                 }
@@ -138,15 +138,15 @@ scope TestLandRuleProvisional:
 
 #[test]
 declaration scope TestLandRuleFailNoConversion:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestLandRuleFailNoConversion:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: WillBecomeResidential content LoanInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- reasonable_assurance_within_3_years: true
                     -- land_becomes_residential_within_3_years: Present content false
                 }
@@ -156,19 +156,68 @@ scope TestLandRuleFailNoConversion:
 
 #[test]
 declaration scope TestLandRuleFailNoAssurance:
-    output result content A_19.ClassifyResidentialRealPropertyLoan
+    output result content ClassifyResidentialRealPropertyLoan
 
 scope TestLandRuleFailNoAssurance:
     definition result equals
-        output of A_19.ClassifyResidentialRealPropertyLoan with {
-            -- rpl: A_19.ResidentialRealPropertyLoan {
+        output of ClassifyResidentialRealPropertyLoan with {
+            -- rpl: ResidentialRealPropertyLoan {
                 -- amount: $ 100,000
-                -- real_property_status: WillBecomeResidential content A_19.LoanInfo {
-                    -- property_type: A_19.ResidentialRealPropertyType.SingleFamilyDwelling
+                -- real_property_status: WillBecomeResidential content LoanInfo {
+                    -- property_type: ResidentialRealPropertyType.SingleFamilyDwelling
                     -- reasonable_assurance_within_3_years: false
                     -- land_becomes_residential_within_3_years: Present content true
                 }
             }
         }
     assertion not result.qualifies
+
+#[test]
+declaration scope TestGetAssetAmountMultiFamily:
+    output result content GetAssetAmount
+
+scope TestGetAssetAmountMultiFamily:
+    definition result equals 
+        output of GetAssetAmount with {
+            -- asset: Asset.ResidentialRealPropertyLoan content
+                ResidentialRealPropertyLoan {
+                    -- amount: $ 100,000
+                    -- real_property_status: IsResidential content 
+                        ResidentialInfo {
+                            -- property_type: MultiFamilyDwelling
+                            -- mixed_use_residential_percent: Present content 70%
+                        }
+                }
+        }
+
+    assertion result.amount = $0
+
+#[test]
+declaration scope TestGetTotalQualifyingAssets:
+    output result content GetTotalQualifyingAssets
+
+scope TestGetTotalQualifyingAssets:
+    definition result equals output of GetTotalQualifyingAssets with {
+        -- assets: [
+            ResidentialRealPropertyLoan content
+                ResidentialRealPropertyLoan {
+                    -- amount: $ 100,000
+                    -- real_property_status: IsResidential content 
+                        ResidentialInfo {
+                            -- property_type: MultiFamilyDwelling
+                            -- mixed_use_residential_percent: Present content 90%
+                        }
+                };
+            ResidentialRealPropertyLoan content
+                ResidentialRealPropertyLoan {
+                    -- amount: $25,000.00
+                    -- real_property_status: IsResidential content 
+                        ResidentialInfo {
+                            -- property_type: MultiFamilyDwelling
+                            -- mixed_use_residential_percent: Present content 70%
+                        }
+                }
+        ]
+    }
+
 ```

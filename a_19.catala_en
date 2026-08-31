@@ -1,5 +1,3 @@
-> Module A_19
-
 ## (a)(19) Domestic building and loan association
 
 The term "domestic building and loan association" means a domestic building and loan association, a domestic savings and loan association, and a Federal savings and loan association—
@@ -149,17 +147,20 @@ scope ClassifyRemicInterest:
 
 declaration scope GetAssetAmount:
     input asset content Asset
+    internal rpl_qualifies content boolean
     output amount content money
 
 scope GetAssetAmount:
+    definition rpl_qualifies equals 
+        match asset with pattern
+            -- ResidentialRealPropertyLoan content rpl:
+                (output of ClassifyResidentialRealPropertyLoan with { -- rpl: rpl}).qualifies
+            -- anything: false
     definition amount equals
         match asset with pattern
-            -- ResidentialRealPropertyLoan content rpl :
-                if output of ClassifyResidentialRealPropertyLoan
-                    with { -- rpl: rpl }.qualifies then rpl.amount else $0
-            -- RemicInterest content ri :
-                (output of ClassifyRemicInterest
-                    with { -- ri: ri }).qualifying_amount
+            -- ResidentialRealPropertyLoan content rpl:
+                if rpl_qualifies then rpl.amount else $ 0
+            -- RemicInterest content ri: ri.amount
             -- Cash content c : c.amount
             -- GovernmentObligations content go: go.amount
             -- StateInsuredDeposits content sd : sd.amount
@@ -218,6 +219,17 @@ scope DetermineDomesticBuildingAndLoan:
         subject_to_supervision
         and business_is_savings_and_loans
         and qualifying_assets_percent >= 60%
+
+declaration scope GetTotalQualifyingAssets:
+    input assets content list of Asset
+    output total_amount content money
+
+scope GetTotalQualifyingAssets:
+    definition total_amount equals
+        Money.sum of
+            map each asset among assets to (output of GetAssetAmount with {
+                -- asset: asset
+            }).amount
 ```
 
 I am still quite confused by the two additional rules, one seems to apply when you already have property and then another when you have loan but no property, and the base rule checks none of these except loans taken for development or "with an interest in" which I don't understand at all now. The problem is that base rule just fires. and it also raises question if this should really be split into 3 parts or just one condition like it was before, and even to apply the extra rules properly one needs to distinguish whether the loan was for existing property or for acquiring a new one.

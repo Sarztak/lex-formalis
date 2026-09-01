@@ -136,8 +136,8 @@ declaration scope ClassifyResidentialRealPropertyLoan:
 
 declaration scope ClassifyRemicInterest:
     input ri content RemicInterest
-    internal assets_calculation content GetTotalQualifyingAssets
-    internal qualifying_proportion content decimal
+    output assets_calculation content GetTotalQualifyingAssets
+    output qualifying_proportion content decimal
     output qualifying_interest content money
 
 scope ClassifyRemicInterest:

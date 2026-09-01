@@ -1,0 +1,33 @@
+{
+  "amount": 50000.0,
+  "remic_assets": [
+    { "Cash": { "amount": 20000.0 } },
+    { "GovernmentObligations": { "amount": 10000.0 } },
+    { "ResidentialRealPropertyLoan": {
+        "amount": 25000.0,
+        "real_property_status": { "IsResidential": { "property_type": "SingleFamilyDwelling" } }
+    }},
+    { "ResidentialRealPropertyLoan": {
+        "amount": 15000.0,
+        "real_property_status": { "IsResidential": { "property_type": "MultiFamilyDwelling", "mixed_use_residential_percent": 0.7 } }
+    }},
+    { "AssetsOutsideA19": { "amount": 8000.0 } },
+    { "Remic": {
+        "assets": [
+          { "StateInsuredDeposits": { "amount": 5000.0 } },
+          { "BusinessUseProperty": { "amount": 10000.0 } },
+          { "AssetsOutsideA19": { "amount": 3000.0 } },
+          { "Remic": {
+              "assets": [
+                { "Cash": { "amount": 12000.0 } },
+                { "AssetsOutsideA19": { "amount": 2000.0 } },
+                { "ResidentialRealPropertyLoan": {
+                    "amount": 3000.0,
+                    "real_property_status": { "IsResidential": { "property_type": "MultiFamilyDwelling", "mixed_use_residential_percent": 0.5 } }
+                }}
+              ]
+          }}
+        ]
+    }}
+  ]
+}

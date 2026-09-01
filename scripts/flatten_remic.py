@@ -19,9 +19,8 @@ def flatten_assets(assets: list) -> list:
         if not isinstance(asset, dict) or len(asset) != 1:
             raise ValueError(f"Expected single-key dict, got: {asset}")
         [name, data] = next(iter(asset.items()))
-        if name == "RemicInterest":
-            # Descend into the REMIC's underlying assets, losing REMIC identity
-            underlying = data.get("underlying_assets", [])
+        if name == "Remic":
+            underlying = data.get("assets", [])
             flat.extend(flatten_assets(underlying))
         else:
             flat.append(asset)
@@ -41,7 +40,10 @@ def main():
     flat = flatten_assets(nested)
 
     output = {
-        "assets": flat
+        "ri": {
+            "amount": data.get("amount"),
+            "assets": flat
+        }
     }
 
     if len(sys.argv) >= 3:

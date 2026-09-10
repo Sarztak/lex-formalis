@@ -1,0 +1,87 @@
+> Using A_21_22
+
+```catala
+#[test]
+declaration scope TestFiscalYearValidJan:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearValidJan:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-02-01|
+                -- end: |2021-01-31|
+            }
+        }
+    assertion result.result
+
+#[test]
+declaration scope TestFiscalYearValidFebLeap:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearValidFebLeap:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-03-01|
+                -- end: |2021-02-28|
+            }
+        }
+    assertion result.result
+
+#[test]
+declaration scope TestFiscalYearEndsInDecember:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearEndsInDecember:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-01-01|
+                -- end: |2020-12-31|
+            }
+        }
+    assertion not result.result
+
+#[test]
+declaration scope TestFiscalYearNotStartingFirst:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearNotStartingFirst:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-01-15|
+                -- end: |2021-01-31|
+            }
+        }
+    assertion not result.result
+
+#[test]
+declaration scope TestFiscalYearNotEndingLastDay:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearNotEndingLastDay:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-01-01|
+                -- end: |2021-01-30|
+            }
+        }
+    assertion not result.result
+
+#[test]
+declaration scope TestFiscalYearTooShort:
+    output result content A_21_22.IsFiscalYear
+
+scope TestFiscalYearTooShort:
+    definition result equals
+        output of A_21_22.IsFiscalYear with {
+            -- period: Period {
+                -- begin: |2020-02-01|
+                -- end: |2020-12-31|
+            }
+        }
+    assertion not result.result
+```

@@ -1,0 +1,69 @@
+> Module A_21_22
+
+(21) Levy
+The term "levy" includes the power of distraint and seizure by any means.
+
+(22) Attorney General
+The term "Attorney General" means the Attorney General of the United States.
+
+These are short definition, there are no input variables or computation to be done. Going by my own presidence, I have tired to frame these as an enum or struct so that I can use them for type matching if needed for some other definition. However, the best I can do in these cases is the following, which is still incomplete
+
+```catala-metadata
+
+declaration enumeration LevyMeans:
+    -- Distraint
+    -- Seizure
+    -- OtherMeans
+
+# id is provided because catala structure must have some data
+# alternatively I was thinking if I can frame these as external type
+declaration structure AttorneyGeneral:
+    data id content integer
+
+```
+
+(23) Taxable year
+
+The term "taxable year" means the calendar year, or the fiscal year ending during such calendar year, upon the basis of which the taxable income is computed under subtitle A. "Taxable year" means, in the case of a return made for a fractional part of a year under the provisions of subtitle A or under regulations prescribed by the Secretary, the period for which such return is made.
+
+(24) Fiscal year
+The term "fiscal year" means an accounting period of 12 months ending on the last day of any month other than December.
+
+```catala-metadata
+
+declaration scope IsFiscalYear:
+    input period content Period
+    output result content boolean
+
+```
+
+```catala
+
+# this function will return false if period ends in december.
+# the early return is necessary because period.end + 1 = 13 is invalid month number
+scope IsFiscalYear:
+    definition result equals
+    if Date.get_month of period.end = 12 then false
+    else
+    let start_month equals ((Date.get_month of period.end) + 1) in
+    let start_year equals ((Date.get_year of period.end) - 1) in
+    (Date.of_year_month_day of start_year, start_month, 1) = period.begin and period.end = Date.last_day_of_month of period.end
+
+# two functions to get the calender year & fiscal year
+
+# this just wraps Period.of_year buildin function
+declaration get_calender_year content Period depends on
+    yr content integer
+    equals Period.of_year of yr
+
+# given a year to end the period and a month give a period of 12 month that is the fiscal year
+# this will fail if mt = 12 is provided.
+declaration get_fiscal_year content Period depends on
+    end_yr content integer,
+    mt content integer
+    equals Period {
+        -- begin: Date.of_year_month_day of (end_yr - 1), (mt + 1), 1
+        -- end: Date.last_day_of_month of (Date.of_year_month_day of end_yr, mt, 1)
+    }
+
+```

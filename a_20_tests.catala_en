@@ -1,0 +1,94 @@
+> Using A_20
+
+```catala
+#[test]
+declaration scope TestIsEmployeeAllConditionsMet:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeAllConditionsMet:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: true
+            -- employee_under_chapter_21: true
+            -- provision: Present content Section79_GroupTermLifeInsuranceForEmployees
+        }
+    assertion result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeNotSalesman:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeNotSalesman:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: false
+            -- employee_under_chapter_21: true
+            -- provision: Present content Section79_GroupTermLifeInsuranceForEmployees
+        }
+    assertion not result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeNotChapter21:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeNotChapter21:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: true
+            -- employee_under_chapter_21: false
+            -- provision: Present content Section79_GroupTermLifeInsuranceForEmployees
+        }
+    assertion not result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeProvisionAbsent:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeProvisionAbsent:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: true
+            -- employee_under_chapter_21: true
+            -- provision: Absent
+        }
+    assertion not result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeAllFalse:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeAllFalse:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: false
+            -- employee_under_chapter_21: false
+            -- provision: Absent
+        }
+    assertion not result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeSubtitleA:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeSubtitleA:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: true
+            -- employee_under_chapter_21: true
+            -- provision: Present content SubtitleA content ContributionsToOrUnder content Pension
+        }
+    assertion result.is_employee
+
+#[test]
+declaration scope TestIsEmployeeSection125:
+    output result content A_20.IsEmployee
+
+scope TestIsEmployeeSection125:
+    definition result equals
+        output of A_20.IsEmployee with {
+            -- full_time_life_insurance_salesman: true
+            -- employee_under_chapter_21: true
+            -- provision: Present content Section125_CafeteriaPlan
+        }
+    assertion result.is_employee
+```

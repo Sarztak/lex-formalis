@@ -1,0 +1,64 @@
+> Module A_20
+
+(20) Employee
+
+For the purpose of applying the provisions of section 79 with respect to group-term life insurance purchased for employees, for the purpose of applying the provisions of sections 104, 105, and 106 with respect to accident and health insurance or accident and health plans, and for the purpose of applying the provisions of subtitle A with respect to contributions to or under a stock bonus, pension, profit-sharing, or annuity plan, and with respect to distributions under such a plan, or by a trust forming part of such a plan, and for purposes of applying section 125 with respect to cafeteria plans, the term "employee" shall include a full-time life insurance salesman who is considered an employee for the purpose of chapter 21.
+
+Now the main question here is how to formalize this which has so many cross references and what is formalizable here. There are two things to be identified what can be taken as variables input or otherwise and what is the logic or computation on these variables.
+
+The provision says "the term X includes..." that is the conclusion working backwards from it we can identify the conditions that gate the conclusion. What stops the full-time insurance sales man from becoming an employee for the purpose of section named? 
+1. He should be an employee as defined in chapter 21
+2. provision should be those that are defined. 
+
+This is an interesting case where the definition is expanded for specific section, the formalization is mimimal, the best I can do is to surface explicitly the conditions that enable the application and where it is applicable. Perhaps all the scope should carry where they are applicable and under what conditions. This is know because we can just split the files according to provision, sections or subsection, but a(20) is a peculiar case where it is not applied in the 7701 itself but is defined in advanced to be used somewhere else.
+
+The computation is something like this:
+
+if full_time_life_insurance_salesman 
+   and employee_under_chapter_21
+   and provision in [79, 104, 105, 106, 125, subtitle_A_benefit_plans]
+then is_employee = true
+
+The method is 
+1. Find conclusion
+2. Find what gates it
+3. make the gates into variable (they may be user provided or external dependencies)
+
+```catala-metadata
+
+declaration enumeration BenefitPlanType:
+    -- StockBonus
+    -- Pension
+    -- ProfitSharing
+    -- Annuity
+
+declaration enumeration SubtitleAPurpose:
+    -- ContributionsToOrUnder content BenefitPlanType
+    -- DistributionUnderPlan content BenefitPlanType
+    -- DistributionByTrustFormingPartOfPlan content BenefitPlanType
+
+declaration enumeration A20Provision:
+    -- Section79_GroupTermLifeInsuranceForEmployees
+    -- Sections104_105_106_AccidentAndHealthInsurance
+    -- SubtitleA content SubtitleAPurpose
+    -- Section125_CafeteriaPlan
+
+declaration scope IsEmployee:
+    input full_time_life_insurance_salesman content boolean
+    input employee_under_chapter_21 content boolean
+    input provision content optional of A20Provision
+    output is_employee condition
+
+```
+
+```catala
+
+# I don't have to do anything with the content or the provision
+# further, hence pattern match is just on Present
+scope IsEmployee:
+    rule is_employee under condition
+        full_time_life_insurance_salesman
+        and employee_under_chapter_21
+        and provision with pattern Present
+    consequence fulfilled
+```

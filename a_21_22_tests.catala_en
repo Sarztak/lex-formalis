@@ -84,4 +84,64 @@ scope TestFiscalYearTooShort:
             }
         }
     assertion not result.result
+
+#[test]
+declaration scope TestTaxableYearCalendarYear:
+    output result content A_21_22.IsTaxableYear
+
+scope TestTaxableYearCalendarYear:
+    definition result equals
+        output of A_21_22.IsTaxableYear with {
+            -- period: Period {
+                -- begin: |2020-01-01|
+                -- end: |2020-12-31|
+            }
+            -- fractional_override: Absent
+        }
+    assertion result.result
+
+#[test]
+declaration scope TestTaxableYearFiscalYear:
+    output result content A_21_22.IsTaxableYear
+
+scope TestTaxableYearFiscalYear:
+    definition result equals
+        output of A_21_22.IsTaxableYear with {
+            -- period: Period {
+                -- begin: |2020-02-01|
+                -- end: |2021-01-31|
+            }
+            -- fractional_override: Absent
+        }
+    assertion result.result
+
+#[test]
+declaration scope TestTaxableYearFractionalOverride:
+    output result content A_21_22.IsTaxableYear
+
+scope TestTaxableYearFractionalOverride:
+    definition result equals
+        output of A_21_22.IsTaxableYear with {
+            -- period: Period {
+                -- begin: |2020-03-01|
+                -- end: |2020-06-30|
+            }
+            -- fractional_override: Present content SubtitleA
+        }
+    assertion result.result
+
+#[test]
+declaration scope TestTaxableYearNotValid:
+    output result content A_21_22.IsTaxableYear
+
+scope TestTaxableYearNotValid:
+    definition result equals
+        output of A_21_22.IsTaxableYear with {
+            -- period: Period {
+                -- begin: |2020-03-01|
+                -- end: |2020-06-30|
+            }
+            -- fractional_override: Absent
+        }
+    assertion not result.result
 ```

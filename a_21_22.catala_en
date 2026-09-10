@@ -31,14 +31,27 @@ The term "fiscal year" means an accounting period of 12 months ending on the las
 
 ```catala-metadata
 
+declaration enumeration FractionalOverrideCause:
+    -- SubtitleA
+    -- Secretary
+
+# TODO: I wanted to write this as output result condition
+# but the problem is that verifying that month is less than 12 
+# doesn't prevent wrong date from being computed. Even if mt (end month ) = 12
+# and mt + 1 = 13, it will still try to create a date and fail
+# though the first condition is false given mt = 12
+
 declaration scope IsFiscalYear:
     input period content Period
     output result content boolean
 
+declaration scope IsTaxableYear:
+    input period content Period
+    input fractional_override content optional of FractionalOverrideCause
+    output result condition
 ```
 
 ```catala
-
 # this function will return false if period ends in december.
 # the early return is necessary because period.end + 1 = 13 is invalid month number
 scope IsFiscalYear:
@@ -66,4 +79,28 @@ declaration get_fiscal_year content Period depends on
         -- end: Date.last_day_of_month of (Date.of_year_month_day of end_yr, mt, 1)
     }
 
+# a calender year check if the given period equals the full year or not.
+# There is no defined provision for calender year so I just created a function to check it.
+declaration is_calender_year content boolean 
+    depends on period content Period
+    equals Period.of_year of (Date.get_year of period.end) = period
+
+# there is an extension to the rule in case of an override 
+scope IsTaxableYear:
+    rule result under condition 
+    (output of IsFiscalYear with {-- period: period}).result
+    or (
+        (Date.get_year of period.begin) = (Date.get_year of period.end)
+        and (is_calender_year of period)
+    )
+    consequence fulfilled
+
+    rule result under condition
+        fractional_override with pattern Present
+    consequence fulfilled
 ```
+
+There are still a few thing that I should add, for instance period validation
+1. being should not be greater than end
+2. robust check for 12 months period if possible
+

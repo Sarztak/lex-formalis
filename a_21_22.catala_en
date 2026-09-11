@@ -104,3 +104,57 @@ There are still a few thing that I should add, for instance period validation
 1. being should not be greater than end
 2. robust check for 12 months period if possible
 
+
+
+(25) Paid or incurred, paid or accrued
+The terms “paid or incurred” and “paid or accrued” shall be construed according to the method of accounting upon the basis of which the taxable income is computed under subtitle A.
+
+(26) Trade or business
+The term “trade or business” includes the performance of the functions of a public office.
+
+(27) Tax Court
+The term “Tax Court” means the United States Tax Court.
+
+(28) Other terms
+Any term used in this subtitle with respect to the application of, or in connection with, the provisions of any other subtitle of this title shall have the same meaning as in such provisions.
+
+25-28 don't have much to formalize, these are just definitions in themselves. Paid/incurred/accured depends on the specific method that is used in a certain provision. The decision is just deferred
+Same with 26 or 27, these are terms by themselves. 26 could have been an enum but what constitutes the performance is not given. 
+
+
+(29) Internal Revenue Code
+The term “Internal Revenue Code of 1986” means this title, and the term “Internal Revenue Code of 1939” means the Internal Revenue Code enacted February 10, 1939, as amended.
+
+This is tells that Internal Revenue Code of 1939 is actually the one from 1939, yes I can see that. 
+
+Still, I should take a note, perhaps it is not as trivial as I am thinking.
+
+---
+
+(30) United States person
+The term “United States person” means—
+    (A) a citizen or resident of the United States,
+    (B) a domestic partnership,
+    (C) a domestic corporation,
+    (D) any estate (other than a foreign estate, within the meaning of paragraph (31)), and
+    (E) any trust if—
+        (i) a court within the United States is able to exercise primary supervision over the administration of the trust, and
+        (ii) one or more United States persons have the authority to control all substantial decisions of the trust.
+
+now this definition is self referential because the determination of the trust itself depends on being United States Person and Catala doesn't allow recursive types. One solution to cast it as a External Type but it there problems with that as well because they all the data needs to be provided externally.
+
+how do I formalize this? being a trust for the purpose depends on the control itself being in hands of united states persons. If I define this as a or the trust as some determination from some input that itself will need the type united states person to be determined. Further B, C, and D are determinations in themselves.
+
+Furthermore, the determination of which trust qualifies depends on "substantial control" under one or more United States person. Suppose that one trust is controlled by another, then it such a case the parent trust would have to be a qualified. This will lead to recursion until a trust is no longer controlled by another trust by rather by any one of A, B, C, or D and then based on that we have to walk back towards. 
+
+Other problem is there is not definition or declaration of what "the authority to control all substantial decisions of the trust." mean? There is no method to compute this. At best if I am willing to formalize this as some external type then I can have a function that can flatten the Trust structure and determine if it qualifies or not based on its ancestors or else the best I can think of is just an enum and we leave it to the user to choose whatever applies. 
+
+```catala-metadata
+declaration enumeration UnitedStatesPerson:
+  -- CitizenOrResident
+  -- DomesticPartnership
+  -- DomesticCorporation
+  -- QualifiedEstate
+  -- QualifiedTrust
+```
+

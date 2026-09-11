@@ -1,4 +1,5 @@
 > Using A_21_22
+> Using A_19
 
 ```catala
 #[test]
@@ -144,4 +145,94 @@ scope TestTaxableYearNotValid:
             -- fractional_override: Absent
         }
     assertion not result.result
+
+#[test]
+declaration scope TestCooperativeBankAllConditionsMet:
+    output result content A_21_22.IsCooperativeBank
+
+scope TestCooperativeBankAllConditionsMet:
+    definition result equals
+        output of A_21_22.IsCooperativeBank with {
+            -- no_capital_stock: true
+            -- mutual_purposes: true
+            -- nonprofit: true
+            -- association_type: A_19.BuildingAndLoanType.DomesticBuildingAndLoan
+            -- subject_to_supervision: true
+            -- business_is_savings_and_loans: true
+            -- total_assets_at_close_of_taxable_year: $100,000
+            -- qualifying_assets_at_close_of_taxable_year: [A_19.Asset.Cash content A_19.Cash { -- amount: $100,000 }]
+        }
+    assertion result.is_cooperative_bank
+
+#[test]
+declaration scope TestCooperativeBankHasCapitalStock:
+    output result content A_21_22.IsCooperativeBank
+
+scope TestCooperativeBankHasCapitalStock:
+    definition result equals
+        output of A_21_22.IsCooperativeBank with {
+            -- no_capital_stock: false
+            -- mutual_purposes: true
+            -- nonprofit: true
+            -- association_type: A_19.BuildingAndLoanType.DomesticBuildingAndLoan
+            -- subject_to_supervision: true
+            -- business_is_savings_and_loans: true
+            -- total_assets_at_close_of_taxable_year: $100,000
+            -- qualifying_assets_at_close_of_taxable_year: [A_19.Asset.Cash content A_19.Cash { -- amount: $100,000 }]
+        }
+    assertion not result.is_cooperative_bank
+
+#[test]
+declaration scope TestCooperativeBankNotMutual:
+    output result content A_21_22.IsCooperativeBank
+
+scope TestCooperativeBankNotMutual:
+    definition result equals
+        output of A_21_22.IsCooperativeBank with {
+            -- no_capital_stock: true
+            -- mutual_purposes: false
+            -- nonprofit: true
+            -- association_type: A_19.BuildingAndLoanType.DomesticBuildingAndLoan
+            -- subject_to_supervision: true
+            -- business_is_savings_and_loans: true
+            -- total_assets_at_close_of_taxable_year: $100,000
+            -- qualifying_assets_at_close_of_taxable_year: [A_19.Asset.Cash content A_19.Cash { -- amount: $100,000 }]
+        }
+    assertion not result.is_cooperative_bank
+
+#[test]
+declaration scope TestCooperativeBankForProfit:
+    output result content A_21_22.IsCooperativeBank
+
+scope TestCooperativeBankForProfit:
+    definition result equals
+        output of A_21_22.IsCooperativeBank with {
+            -- no_capital_stock: true
+            -- mutual_purposes: true
+            -- nonprofit: false
+            -- association_type: A_19.BuildingAndLoanType.DomesticBuildingAndLoan
+            -- subject_to_supervision: true
+            -- business_is_savings_and_loans: true
+            -- total_assets_at_close_of_taxable_year: $100,000
+            -- qualifying_assets_at_close_of_taxable_year: [A_19.Asset.Cash content A_19.Cash { -- amount: $100,000 }]
+        }
+    assertion not result.is_cooperative_bank
+
+#[test]
+declaration scope TestCooperativeBankFailsA19:
+    output result content A_21_22.IsCooperativeBank
+
+scope TestCooperativeBankFailsA19:
+    definition result equals
+        output of A_21_22.IsCooperativeBank with {
+            -- no_capital_stock: true
+            -- mutual_purposes: true
+            -- nonprofit: true
+            -- association_type: A_19.BuildingAndLoanType.DomesticBuildingAndLoan
+            -- subject_to_supervision: true
+            -- business_is_savings_and_loans: true
+            -- total_assets_at_close_of_taxable_year: $100,000
+            -- qualifying_assets_at_close_of_taxable_year: []
+        }
+    assertion not result.is_cooperative_bank
 ```

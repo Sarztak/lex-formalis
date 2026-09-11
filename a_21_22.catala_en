@@ -1,5 +1,7 @@
 > Module A_21_22
 
+> Using A_19
+
 (21) Levy
 The term "levy" includes the power of distraint and seizure by any means.
 
@@ -11,15 +13,14 @@ These are short definition, there are no input variables or computation to be do
 ```catala-metadata
 
 declaration enumeration LevyMeans:
-    -- Distraint
-    -- Seizure
-    -- OtherMeans
+  -- Distraint
+  -- Seizure
+  -- OtherMeans
 
 # id is provided because catala structure must have some data
 # alternatively I was thinking if I can frame these as external type
 declaration structure AttorneyGeneral:
-    data id content integer
-
+  data id content integer
 ```
 
 (23) Taxable year
@@ -32,72 +33,80 @@ The term "fiscal year" means an accounting period of 12 months ending on the las
 ```catala-metadata
 
 declaration enumeration FractionalOverrideCause:
-    -- SubtitleA
-    -- Secretary
+  -- SubtitleA
+  -- Secretary
 
 # TODO: I wanted to write this as output result condition
-# but the problem is that verifying that month is less than 12 
+# but the problem is that verifying that month is less than 12
 # doesn't prevent wrong date from being computed. Even if mt (end month ) = 12
 # and mt + 1 = 13, it will still try to create a date and fail
 # though the first condition is false given mt = 12
 
 declaration scope IsFiscalYear:
-    input period content Period
-    output result content boolean
+  input period content Period
+  output result content boolean
 
 declaration scope IsTaxableYear:
-    input period content Period
-    input fractional_override content optional of FractionalOverrideCause
-    output result condition
+  input period content Period
+  input fractional_override content optional of FractionalOverrideCause
+  output result condition
 ```
 
 ```catala
 # this function will return false if period ends in december.
 # the early return is necessary because period.end + 1 = 13 is invalid month number
 scope IsFiscalYear:
-    definition result equals
+  definition result equals
     if Date.get_month of period.end = 12 then false
     else
-    let start_month equals ((Date.get_month of period.end) + 1) in
-    let start_year equals ((Date.get_year of period.end) - 1) in
-    (Date.of_year_month_day of start_year, start_month, 1) = period.begin and period.end = Date.last_day_of_month of period.end
+      let start_month equals ((Date.get_month of period.end) + 1) in
+      let start_year equals ((Date.get_year of period.end) - 1) in
+      (Date.of_year_month_day of start_year, start_month, 1) = period.begin and period.end = Date.last_day_of_month of period.end
 
 # two functions to get the calender year & fiscal year
 
 # this just wraps Period.of_year buildin function
-declaration get_calender_year content Period depends on
-    yr content integer
-    equals Period.of_year of yr
+declaration get_calender_year
+  content Period
+  depends on yr content integer
+  equals
+    Period.of_year of yr
 
 # given a year to end the period and a month give a period of 12 month that is the fiscal year
 # this will fail if mt = 12 is provided.
-declaration get_fiscal_year content Period depends on
+declaration get_fiscal_year
+  content Period
+  depends on
     end_yr content integer,
     mt content integer
-    equals Period {
-        -- begin: Date.of_year_month_day of (end_yr - 1), (mt + 1), 1
-        -- end: Date.last_day_of_month of (Date.of_year_month_day of end_yr, mt, 1)
+  equals
+    Period {
+      -- begin: Date.of_year_month_day of (end_yr - 1), (mt + 1), 1
+      -- end: Date.last_day_of_month of (Date.of_year_month_day of end_yr, mt, 1)
     }
 
 # a calender year check if the given period equals the full year or not.
 # There is no defined provision for calender year so I just created a function to check it.
-declaration is_calender_year content boolean 
-    depends on period content Period
-    equals Period.of_year of (Date.get_year of period.end) = period
+declaration is_calender_year
+  content boolean
+  depends on period content Period
+  equals
+    Period.of_year of (Date.get_year of period.end) = period
 
-# there is an extension to the rule in case of an override 
+# there is an extension to the rule in case of an override
 scope IsTaxableYear:
-    rule result under condition 
-    (output of IsFiscalYear with {-- period: period}).result
+  rule result
+  under condition
+    (output of IsFiscalYear with { -- period: period }).result
     or (
-        (Date.get_year of period.begin) = (Date.get_year of period.end)
-        and (is_calender_year of period)
+      (Date.get_year of period.begin) = (Date.get_year of period.end)
+      and (is_calender_year of period)
     )
-    consequence fulfilled
+  consequence fulfilled
 
-    rule result under condition
-        fractional_override with pattern Present
-    consequence fulfilled
+  rule result
+  under condition fractional_override with pattern Present
+  consequence fulfilled
 ```
 
 There are still a few thing that I should add, for instance period validation
@@ -119,13 +128,13 @@ The term “Tax Court” means the United States Tax Court.
 Any term used in this subtitle with respect to the application of, or in connection with, the provisions of any other subtitle of this title shall have the same meaning as in such provisions.
 
 25-28 don't have much to formalize, these are just definitions in themselves. Paid/incurred/accured depends on the specific method that is used in a certain provision. The decision is just deferred
-Same with 26 or 27, these are terms by themselves. 26 could have been an enum but what constitutes the performance is not given. 
+Same with 26 or 27, these are terms by themselves. 26 could have been an enum but what constitutes the performance is not given.
 
 
 (29) Internal Revenue Code
 The term “Internal Revenue Code of 1986” means this title, and the term “Internal Revenue Code of 1939” means the Internal Revenue Code enacted February 10, 1939, as amended.
 
-This is tells that Internal Revenue Code of 1939 is actually the one from 1939, yes I can see that. 
+This is tells that Internal Revenue Code of 1939 is actually the one from 1939, yes I can see that.
 
 Still, I should take a note, perhaps it is not as trivial as I am thinking.
 
@@ -145,9 +154,9 @@ now this definition is self referential because the determination of the trust i
 
 how do I formalize this? being a trust for the purpose depends on the control itself being in hands of united states persons. If I define this as a or the trust as some determination from some input that itself will need the type united states person to be determined. Further B, C, and D are determinations in themselves.
 
-Furthermore, the determination of which trust qualifies depends on "substantial control" under one or more United States person. Suppose that one trust is controlled by another, then it such a case the parent trust would have to be a qualified. This will lead to recursion until a trust is no longer controlled by another trust by rather by any one of A, B, C, or D and then based on that we have to walk back towards. 
+Furthermore, the determination of which trust qualifies depends on "substantial control" under one or more United States person. Suppose that one trust is controlled by another, then it such a case the parent trust would have to be a qualified. This will lead to recursion until a trust is no longer controlled by another trust by rather by any one of A, B, C, or D and then based on that we have to walk back towards.
 
-Other problem is there is not definition or declaration of what "the authority to control all substantial decisions of the trust." mean? There is no method to compute this. At best if I am willing to formalize this as some external type then I can have a function that can flatten the Trust structure and determine if it qualifies or not based on its ancestors or else the best I can think of is just an enum and we leave it to the user to choose whatever applies. 
+Other problem is there is not definition or declaration of what "the authority to control all substantial decisions of the trust." mean? There is no method to compute this. At best if I am willing to formalize this as some external type then I can have a function that can flatten the Trust structure and determine if it qualifies or not based on its ancestors or else the best I can think of is just an enum and we leave it to the user to choose whatever applies.
 
 ```catala-metadata
 declaration enumeration UnitedStatesPerson:
@@ -158,3 +167,79 @@ declaration enumeration UnitedStatesPerson:
   -- QualifiedTrust
 ```
 
+(31) Foreign estate or trust
+(A) Foreign estate
+The term “foreign estate” means an estate the income of which, from sources without the United States which is not effectively connected with the conduct of a trade or business within the United States, is not includible in gross income under subtitle A.
+
+There are 3 conditions - 2 filters for the income and one check
+Filters: foreign source AND not effectively connected with a US trade/business
+Check: that income is excluded from the gross income under subtitle A?
+
+Note: This seems to be a general pattern, narrowing and checking condition on the narrow portion
+
+```catala-metadata
+declaration scope IsForeignEstate:
+  input is_income_source_us content boolean
+  input is_income_connected_with_us_business content boolean
+  input is_income_included_in_gross_income content boolean
+  output result condition
+
+scope IsForeignEstate:
+  rule result
+  under condition
+    not is_income_source_us
+    and not is_income_connected_with_us_business
+    and not is_income_included_in_gross_income
+  consequence fulfilled
+```
+
+(B) Foreign trust
+The term “foreign trust” means any trust other than a trust described in subparagraph (E) of paragraph (30).
+
+This requires defining 30(E) which is determined is not straight forward to do. So I will leave it for now.
+
+
+---
+
+(32) Cooperative bank
+The term “cooperative bank” means an institution without capital stock organized and operated for mutual purposes and without profit, which—
+    (A) is subject by law to supervision and examination by State or Federal authority having supervision over such institutions, and
+    (B) meets the requirements of subparagraphs (B) and (C) of paragraph (19) of this subsection (relating to definition of domestic building and loan association).
+In determining whether an institution meets the requirements referred to in subparagraph (B) of this paragraph, any reference to an association or to a domestic building and loan association contained in paragraph (19) shall be deemed to be a reference to such institution.
+
+§19 defines domestic building and loan association with conditions A, B, C.
+§32 says cooperative bank — a specific type of institution — also qualifies under §19's B and C conditions, with the substitution that wherever §19 says "association" read "cooperative bank" instead.
+So §32 is a subtype declaration. Cooperative bank is a subtype of the §19 entity class, satisfying the same asset and business conditions, just with a different organizational form — no capital stock, mutual purposes, nonprofit.
+The formalization consequence is that IsCooperativeBank doesn't need to reimplement §19's B and C conditions. It calls IsDomesticBuildingAndLoan with a substitution — pass the cooperative bank where the scope expects an association.
+However, this requies going back anc adding one more type to the BuildingAndLoanType or the associations that are considered (the enums don't hole cooperative bank as a type which needs to be fixed.)
+
+```catala-metadata
+declaration scope IsCooperativeBank:
+
+    # narrowing conditions on institutions
+    input no_capital_stock content boolean
+    input mutual_purposes content boolean
+    input nonprofit content boolean
+
+    # extra inputs required to determine domestic building per a(19)
+    input output association_type content A_19.BuildingAndLoanType
+    input subject_to_supervision content boolean
+    input business_is_savings_and_loans content boolean
+    input total_assets_at_close_of_taxable_year content money
+    input qualifying_assets_at_close_of_taxable_year content list of A_19.Asset
+    output is_cooperative_bank content boolean
+
+scope IsCooperativeBank:
+    definition is_cooperative_bank equals
+    no_capital_stock
+    and mutual_purposes
+    and nonprofit 
+    and subject_to_supervision
+    and (output of A_19.DetermineDomesticBuildingAndLoan with {
+            -- association_type: association_type
+            -- subject_to_supervision: subject_to_supervision
+            -- business_is_savings_and_loans: business_is_savings_and_loans
+            -- total_assets_at_close_of_taxable_year: total_assets_at_close_of_taxable_year
+            -- qualifying_assets_at_close_of_taxable_year: qualifying_assets_at_close_of_taxable_year
+        }).is_domestic_building_and_loan
+```

@@ -1,0 +1,181 @@
+(33) Regulated public utilityThe term “regulated public utility” means—
+    (A) A corporation engaged in the furnishing or sale of—
+        (i) electric energy, gas, water, or sewerage disposal services, or
+        (ii) transportation (not included in subparagraph (C)) on an intrastate, suburban, municipal, or interurban electric railroad, on an intrastate, municipal, or suburban trackless trolley system, or on a municipal or suburban bus system, or
+        (iii) transportation (not included in clause (ii)) by motor vehicle—
+    if the rates for such furnishing or sale, as the case may be, have been established or approved by a State or political subdivision thereof, by an agency or instrumentality of the United States, by a public service or public utility commission or other similar body of the District of Columbia or of any State or political subdivision thereof, or by a foreign country or an agency or instrumentality or political subdivision thereof.
+    (B) A corporation engaged as a common carrier in the furnishing or sale of transportation of gas by pipe line, if subject to the jurisdiction of the Federal Energy Regulatory Commission.
+    (C) A corporation engaged as a common carrier (i) in the furnishing or sale of transportation by railroad, if subject to the jurisdiction of the Surface Transportation Board, or (ii) in the furnishing or sale of transportation of oil or other petroleum products (including shale oil) by pipe line, if subject to the jurisdiction of the Federal Energy Regulatory Commission or if the rates for such furnishing or sale are subject to the jurisdiction of a public service or public utility commission or other similar body of the District of Columbia or of any State.
+    (D) A corporation engaged in the furnishing or sale of telephone or telegraph service, if the rates for such furnishing or sale meet the requirements of subparagraph (A).
+    (E) A corporation engaged in the furnishing or sale of transportation as a common carrier by air, subject to the jurisdiction of the Secretary of Transportation.
+    (F) A corporation engaged in the furnishing or sale of transportation by a water carrier subject to jurisdiction under subchapter II of chapter 135 of title 49.
+    (G) A rail carrier subject to part A of subtitle IV of title 49, if (i) substantially all of its railroad properties have been leased to another such railroad corporation or corporations by an agreement or agreements entered into before January 1, 1954, (ii) each lease is for a term of more than 20 years, and (iii) at least 80 percent or more of its gross income (computed without regard to dividends and capital gains and losses) for the taxable year is derived from such leases and from sources described in subparagraphs (A) through (F), inclusive. For purposes of the preceding sentence, an agreement for lease of railroad properties entered into before January 1, 1954, shall be considered to be a lease including such term as the total number of years of such agreement may, unless sooner terminated, be renewed or continued under the terms of the agreement, and any such renewal or continuance under such agreement shall be considered part of the lease entered into before January 1, 1954.
+    (H) A common parent corporation which is a common carrier by railroad subject to part A of subtitle IV of title 49 if at least 80 percent of its gross income (computed without regard to capital gains or losses) is derived directly or indirectly from sources described in subparagraphs (A) through (F), inclusive. For purposes of the preceding sentence, dividends and interest, and income from leases described in subparagraph (G), received from a regulated public utility shall be considered as derived from sources described in subparagraphs (A) through (F), inclusive, if the regulated public utility is a member of an affiliated group (as defined in section 1504) which includes the common parent corporation.
+The term “regulated public utility” does not (except as provided in subparagraphs (G) and (H)) include a corporation described in subparagraphs (A) through (F), inclusive, unless 80 percent or more of its gross income (computed without regard to dividends and capital gains and losses) for the taxable year is derived from sources described in subparagraphs (A) through (F), inclusive. If the taxpayer establishes to the satisfaction of the Secretary that (i) its revenue from regulated rates described in subparagraph (A) or (D) and its revenue derived from unregulated rates are derived from the operation of a single interconnected and coordinated system or from the operation of more than one such system, and (ii) the unregulated rates have been and are substantially as favorable to users and consumers as are the regulated rates, then such revenue from such unregulated rates shall be considered, for purposes of the preceding sentence, as income derived from sources described in subparagraph (A) or (D).
+
+```catala-metadata
+declaration enumeration Jurisdiction:
+    -- Intrastate
+    -- Suburban
+    -- Municipal
+    -- Interurban
+    -- FederalEnergyRegulatoryCommission
+    -- SurfaceTransportationBoard
+    -- SecretaryOfTransportation
+    -- Title49Chapter135Subchapter2
+
+declaration structure ElectricRailroad:
+    data jurisdiction content Jurisdiction
+
+declaration structure TracklessTrolleySystem:
+    data jurisdiction content Jurisdiction
+
+declaration structure BusSystem:
+    data jurisdiction content Jurisdiction
+
+declaration enumeration TransportMedium:
+    -- PipeLine
+    -- Railroad
+    -- ElectricRailroad content ElectricRailroad
+    -- TracklessTrolleySystem content TracklessTrolleySystem
+    -- BusSystem content BusSystem
+    -- MotorVehicle
+    -- Air
+    -- Water
+
+declaration enumeration TransportGoods:
+    -- Gas
+    -- Oil
+    -- ShaleOil
+    -- OtherPetroleum
+    -- GeneralFreight
+
+declaration structure Transportation:
+    data medium content TransportMedium
+    data goods content TransportGoods
+
+declaration enumeration ServicesAndGoods:
+    -- ElectricEnergy
+    -- Gas
+    -- Water
+    -- SewerageDisposal
+    -- Telephone
+    -- Telegraph
+    -- Transportation content Transportation
+
+# the rate approval bodies given in the subparagraph A include "political subdivision thereof" statement which mean that 
+# any competent body authorized by the state, agency or instrumentality of us, public service or public utility commissions, district of columbia or foreign country are also eligible. 
+# However the determination of the competent subdivision is not a matter of this statue and it outside of it.
+# Hence, formalization of this case is partial, I will specify a boolean condition for rate approval but this following incomplete enumeration.
+declaration enumeration RateApprovalBody:
+    -- State
+    -- AgencyOrInstrumentalityUS
+    -- PublicServiceCommission
+    -- PublicUtilityCommission
+    -- DistrictOfColumbia
+    -- ForeignCountry
+
+declaration scope IsRegulatedPublicUtility:
+    input is_engaged_in_furnishing_or_sale content boolean
+    input services_and_goods content ServicesAndGoods
+    input rate_approved content boolean
+    input is_common_carrier content boolean
+    input is_subject_to_jurisdiction content Jurisdiction
+    output result condition
+
+scope IsRegulatedPublicUtility:
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and match services_and_goods with pattern 
+            -- ElectricEnergy content ee: true
+            -- ServicesAndGoods.Gas content g: true
+            -- ServicesAndGoods.Water content w: true
+            -- SewerageDisposal content sd: true
+            -- Transportation content t:
+            (
+                match t.medium with pattern
+                    -- ElectricRailroad content er:
+                    (
+                        match er.jurisdiction with pattern
+                            -- Intrastate content i: true
+                            -- Suburban content s: true
+                            -- Municipal content m: true
+                            -- Interurban content i: true
+                            -- anything: false
+                    )
+                    -- TracklessTrolleySystem content tts:
+                    (
+                        match tts.jurisdiction with pattern
+                            -- Intrastate content i: true
+                            -- Suburban content s: true
+                            -- Municipal content m: true
+                            -- Interurban content i: true
+                            -- anything: false
+                    )
+                    -- BusSystem content bs:
+                    (
+                        match bs.jurisdiction with pattern
+                            -- Municipal content m: true
+                            -- Suburban content s: true
+                            -- anything: false
+                    )
+                    -- MotorVehicle content mv: true
+                    -- anything: false
+            )
+            -- anything: false
+        and rate_approved
+        consequence fulfilled
+
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and is_common_carrier
+        and services_and_goods with pattern Transportation content t
+            and t.medium with pattern PipeLine 
+            and t.goods with pattern TransportGoods.Gas
+        and is_subject_to_jurisdiction with pattern FederalEnergyRegulatoryCommission
+    consequence fulfilled
+
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and is_common_carrier
+        and ((services_and_goods with pattern Transportation content t
+                    and t.medium with pattern Railroad
+                and is_subject_to_jurisdiction with pattern SurfaceTransportationBoard)
+                or (services_and_goods with pattern Transportation content t
+                    and t.medium with pattern PipeLine
+                    and match t.goods with pattern
+                        -- TransportGoods.Oil content o: true
+                        -- OtherPetroleum content op: true
+                        -- ShaleOil content so: true
+                        -- anything: false
+                    and (
+                        is_subject_to_jurisdiction with pattern FederalEnergyRegulatoryCommission
+                        or rate_approved))
+        )
+    consequence fulfilled
+
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and match services_and_goods with pattern 
+            -- Telephone content tp: true
+            -- Telegraph content tg: true
+            -- anything: false
+        and rate_approved
+    consequence fulfilled
+
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and is_common_carrier 
+        and services_and_goods with pattern Transportation content t
+            and t.medium with pattern Air
+        and is_subject_to_jurisdiction with pattern SecretaryOfTransportation
+    consequence fulfilled
+
+    rule result under condition
+        is_engaged_in_furnishing_or_sale
+        and is_common_carrier 
+        and services_and_goods with pattern Transportation content t
+            and t.medium with pattern TransportMedium.Water
+        and is_subject_to_jurisdiction with pattern Title49Chapter135Subchapter2
+    consequence fulfilled
+```
